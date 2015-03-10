@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Montserrat.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-dROP-CCMPopup.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-dROP-FormatterKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-dROP-Montserrat.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-dROP.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>21A97382CC345D6467A52E71</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>24AF3B79AC047D6E9842F3AA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>585E5F208EFA9FA66296934B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BCD8A60A3212778DF63E2AF0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F28FC8C807E30064FB48D5CC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

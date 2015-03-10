@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "_default": {
+            "link": "dROP"
+        }, 
+        "dROP": {
+            "applicationId": "EWaIsQHXV8prkWHfFi2tHXBoFdx71pe8azI00afS", 
+            "masterKey": "3AcBGyK2JvyNrAvY4rjDZ8595K62gXmZPDu5LMgX"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.3.5"
+    }
+}
