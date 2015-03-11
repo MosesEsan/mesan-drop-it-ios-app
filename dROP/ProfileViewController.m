@@ -117,20 +117,28 @@
 {
     if ([Config checkInternetConnection])
     {
-        PFQuery *query = [PFQuery queryWithClassName:POSTS_CLASS_NAME];
-        [query whereKey:@"deviceId" equalTo:[Config deviceId]];
-        [query orderByDescending:@"createdAt"];
-        
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (error) {
-                NSLog(@"error in geo query!"); // todo why is this ever happening?
-            } else {
-                
-                _allPosts = [Config filterPosts:objects];
-                
-                [self.tableView reloadData];
-            }
-        }];
+        dispatch_queue_t userPostQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(userPostQueue, ^{
+            
+            PFQuery *query = [PFQuery queryWithClassName:POSTS_CLASS_NAME];
+            [query whereKey:@"deviceId" equalTo:[Config deviceId]];
+            [query orderByDescending:@"createdAt"];
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error) {
+                    NSLog(@"error in geo query!");
+                } else {
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        _allPosts = [Config filterPosts:objects];
+                        
+                        [self.tableView reloadData];
+                    });
+                }
+            }];
+            
+        });
     }else{
         
         [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
@@ -141,28 +149,33 @@
 {
     if ([Config checkInternetConnection])
     {
-        PFQuery *query = [PFQuery queryWithClassName:USERS_CLASS_NAME];
-        [query whereKey:@"deviceId" equalTo:[Config deviceId]];
-        
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (error) {
-                NSLog(@"error in geo query!"); // todo why is this ever happening?
-            } else {
-                
-                lastUpdated = [NSDate date];
-                
-                if ([objects count] > 0)
-                {
-                    NSInteger points = [objects[0][@"points"] integerValue];
+        dispatch_queue_t usersPointsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(usersPointsQueue, ^{
+            PFQuery *query = [PFQuery queryWithClassName:USERS_CLASS_NAME];
+            [query whereKey:@"deviceId" equalTo:[Config deviceId]];
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error) {
+                    NSLog(@"error in geo query!"); // todo why is this ever happening?
+                } else {
                     
-                    NSDictionary *usersInfo  = [Config updateUserPoints:points];
-                    
-                    rankLabel.text = [NSString stringWithFormat:@"%@ (%@)",usersInfo[@"Rank"],usersInfo[@"Points"]];
-                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        lastUpdated = [NSDate date];
+                        
+                        if ([objects count] > 0)
+                        {
+                            NSInteger points = [objects[0][@"points"] integerValue];
+                            
+                            NSDictionary *usersInfo  = [Config updateUserPoints:points];
+                            
+                            rankLabel.text = [NSString stringWithFormat:@"%@ (%@)",usersInfo[@"Rank"],usersInfo[@"Points"]];
+                            
+                        }
+                    });
                 }
-            }
-        }];
-        
+            }];
+            
+        });
     }else{
         
         [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];

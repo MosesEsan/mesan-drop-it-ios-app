@@ -371,7 +371,7 @@
 		27A334651AA63525008188FC = {
 			isa = PBXGroup;
 			children = (
-				27A334701AA63525008188FC /* dROP */,
+				27A334701AA63525008188FC /* Drop It! */,
 				27A3348A1AA63525008188FC /* dROPTests */,
 				27A3346F1AA63525008188FC /* Products */,
 				6576E8180E3735258E8D97BB /* Pods */,
@@ -388,7 +388,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		27A334701AA63525008188FC /* dROP */ = {
+		27A334701AA63525008188FC /* Drop It! */ = {
 			isa = PBXGroup;
 			children = (
 				27B404381AA6605E007DC137 /* Config.h */,
@@ -402,6 +402,7 @@
 				27A3347E1AA63525008188FC /* Images.xcassets */,
 				27A334711AA63525008188FC /* Supporting Files */,
 			);
+			name = "Drop It!";
 			path = dROP;
 			sourceTree = "<group>";
 		};

@@ -51,32 +51,38 @@
     {
         if ([Config checkInternetConnection])
         {
-            PFQuery *query = [PFQuery queryWithClassName:LOCATIONS_CLASS_NAME];
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (error) {
-                    NSLog(@"error in geo query!"); // todo why is this ever happening?
-                } else {
-                    if ([objects count] > 0)
-                    {
-                        NSMutableArray *availableLocations = [[NSMutableArray alloc] init];
+            dispatch_queue_t locationQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_async(locationQueue, ^{
+                PFQuery *query = [PFQuery queryWithClassName:LOCATIONS_CLASS_NAME];
+                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    if (error) {
+                        NSLog(@"error in geo query!"); // todo why is this ever happening?
+                    } else {
                         
-                        for (PFObject *location in objects)
-                        {
-                            NSString *college = location[@"college"];
-                            PFGeoPoint *locationGeo = location[@"location"];
-                            NSArray *locationInfo = @[college,
-                                                      [NSNumber numberWithDouble:locationGeo.latitude],
-                                                      [NSNumber numberWithDouble:locationGeo.longitude],
-                                                      location[@"distance"]];
-                            
-                            [availableLocations addObject:locationInfo];
-                        }
-                        
-                        [[NSUserDefaults standardUserDefaults] setObject:availableLocations forKey:@"AvailableLocations"];
-                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            if ([objects count] > 0)
+                            {
+                                NSMutableArray *availableLocations = [[NSMutableArray alloc] init];
+                                
+                                for (PFObject *location in objects)
+                                {
+                                    NSString *college = location[@"college"];
+                                    PFGeoPoint *locationGeo = location[@"location"];
+                                    NSArray *locationInfo = @[college,
+                                                              [NSNumber numberWithDouble:locationGeo.latitude],
+                                                              [NSNumber numberWithDouble:locationGeo.longitude],
+                                                              location[@"distance"]];
+                                    
+                                    [availableLocations addObject:locationInfo];
+                                }
+                                
+                                [[NSUserDefaults standardUserDefaults] setObject:availableLocations forKey:@"AvailableLocations"];
+                                [[NSUserDefaults standardUserDefaults] synchronize];
+                            }
+                        });
                     }
-                }
-            }];
+                }];
+            });
             
         }else{
             
@@ -120,30 +126,34 @@
     {
         if ([Config checkInternetConnection])
         {
-            PFQuery *query = [PFQuery queryWithClassName:REWARDS_CLASS_NAME];
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (error) {
-                    NSLog(@"error in geo query!"); // todo why is this ever happening?
-                } else {
-                    if ([objects count] > 0)
-                    {
-                        NSMutableArray *rewards = [[NSMutableArray alloc] init];
-                        
-                        for (PFObject *location in objects)
-                        {
-                            NSString *points = [NSString stringWithFormat:@"%@ Points",location[@"points"]];
-                            NSString *reward = location[@"reward"];
-                            NSArray *pointInfo = @[points,reward];
-                            
-                            [rewards addObject:pointInfo];
-                        }
-                        
-                        [[NSUserDefaults standardUserDefaults] setObject:rewards forKey:@"Rewards"];
-                        [[NSUserDefaults standardUserDefaults] synchronize];
+            dispatch_queue_t rewardsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_async(rewardsQueue, ^{
+                PFQuery *query = [PFQuery queryWithClassName:REWARDS_CLASS_NAME];
+                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    if (error) {
+                        NSLog(@"error in geo query!"); // todo why is this ever happening?
+                    } else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            if ([objects count] > 0)
+                            {
+                                NSMutableArray *rewards = [[NSMutableArray alloc] init];
+                                
+                                for (PFObject *location in objects)
+                                {
+                                    NSString *points = [NSString stringWithFormat:@"%@ Points",location[@"points"]];
+                                    NSString *reward = location[@"reward"];
+                                    NSArray *pointInfo = @[points,reward];
+                                    
+                                    [rewards addObject:pointInfo];
+                                }
+                                
+                                [[NSUserDefaults standardUserDefaults] setObject:rewards forKey:@"Rewards"];
+                                [[NSUserDefaults standardUserDefaults] synchronize];
+                            }
+                        });
                     }
-                }
-            }];
-            
+                }];
+            });
         }else{
             
             [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];

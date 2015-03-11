@@ -481,28 +481,37 @@
 {
     if ([Config checkInternetConnection])
     {
-        PFObject *parseObject = _postObject[@"parseObject"];
-        
-        PFQuery *query = [PFQuery queryWithClassName:COMMENTS_CLASS_NAME];
-        [query whereKey:@"postId" equalTo:parseObject.objectId];
-        [query orderByAscending:@"createdAt"];
-        
-        // If no objects are loaded in memory, we look to the cache first to fill the table
-        // and then subsequently do a query against the network.
-        if ([allComments count] == 0)
-        {
-            query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-        }
-        query.limit = 20;
-        
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (error) {
-                NSLog(@"error in geo query!"); // todo why is this ever happening?
-            } else {
-                allComments = objects.mutableCopy;
-                [_tableView reloadData];
+        dispatch_queue_t commentsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(commentsQueue, ^{
+            
+            PFObject *parseObject = _postObject[@"parseObject"];
+            
+            PFQuery *query = [PFQuery queryWithClassName:COMMENTS_CLASS_NAME];
+            [query whereKey:@"postId" equalTo:parseObject.objectId];
+            [query orderByAscending:@"createdAt"];
+            
+            // If no objects are loaded in memory, we look to the cache first to fill the table
+            // and then subsequently do a query against the network.
+            if ([allComments count] == 0)
+            {
+                query.cachePolicy = kPFCachePolicyCacheThenNetwork;
             }
-        }];
+            query.limit = 20;
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error) {
+                    NSLog(@"error in geo query!"); // todo why is this ever happening?
+                } else {
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        allComments = objects.mutableCopy;
+                        [_tableView reloadData];
+                    });
+                }
+            }];
+            
+        });
+        
     }else{
         
         [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];

@@ -13,6 +13,9 @@
 #ifndef dROP_Config_h
 #define dROP_Config_h
 
+#define PARSE_APPICATION_ID @"EWaIsQHXV8prkWHfFi2tHXBoFdx71pe8azI00afS"
+#define PARSE_CLIENT_KEY @"KqXsbByx3UrGsxsbrSzhbnfUz60twTwXJgGRp2yC"
+
 //#44B7C7
 #define BAR_TINT_COLOR [UIColor colorWithRed:68/255.0f green:183/255.0f blue:199/255.0f alpha:1.0f]
 #define BAR_TINT_COLOR2 [UIColor colorWithRed:103/255.0f green:199/255.0f blue:237/255.0f alpha:1.0f]

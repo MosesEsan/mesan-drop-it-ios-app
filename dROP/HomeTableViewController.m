@@ -341,30 +341,37 @@
 {
     if ([Config checkInternetConnection])
     {
-        PFQuery *query = [PFQuery queryWithClassName:POSTS_CLASS_NAME];
-        [query orderByDescending:@"createdAt"];
-        
-        
-        if (currentLocation == nil) {
-            NSLog(@"%s got a nil location!", __PRETTY_FUNCTION__);
-        }
-        
-        // Query for posts sort of kind of near our current location.
-        PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:currentLocation.coordinate.latitude
-                                                   longitude:currentLocation.coordinate.longitude];
-        
-        [query whereKey:@"location" nearGeoPoint:point withinKilometers:8];
-        query.limit = 20;
-        
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (error) {
-                NSLog(@"error in geo query!"); // todo why is this ever happening?
-            } else {
-                //[self filterPost:objects];
-                _allPosts = [Config filterPosts:objects];
-                [self.tableView reloadData];
+        dispatch_queue_t postsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(postsQueue, ^{
+            
+
+            PFQuery *query = [PFQuery queryWithClassName:POSTS_CLASS_NAME];
+            [query orderByDescending:@"createdAt"];
+            
+            
+            if (currentLocation == nil) {
+                NSLog(@"%s got a nil location!", __PRETTY_FUNCTION__);
             }
-        }];
+            
+            // Query for posts sort of kind of near our current location.
+            PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:currentLocation.coordinate.latitude
+                                                       longitude:currentLocation.coordinate.longitude];
+            
+            [query whereKey:@"location" nearGeoPoint:point withinKilometers:8];
+            query.limit = 20;
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error) {
+                    NSLog(@"error in geo query!"); // todo why is this ever happening?
+                } else {
+                    //[self filterPost:objects];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        _allPosts = [Config filterPosts:objects];
+                        [self.tableView reloadData];
+                        
+                    });
+                }
+            }];
+        });
     }else{
         
         [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];

@@ -257,66 +257,70 @@
 {
     if ([Config checkInternetConnection])
     {
-        // 1. Get Users Current Location
-        CLLocation *currentLocation = [self.dataSource getUserCurrentLocation];
-        CLLocationCoordinate2D currentCoordinate = currentLocation.coordinate;
-        PFGeoPoint *currentPoint = [PFGeoPoint geoPointWithLatitude:currentCoordinate.latitude
-                                                          longitude:currentCoordinate.longitude];
-        
-        if (currentLocation != nil)
-        {
-            // 2.Create Parse Objec
-            PFObject *postObject = [PFObject objectWithClassName:POSTS_CLASS_NAME];
-            postObject[@"text"] = messageTextView.text;
-            postObject[@"deviceId"] = [Config deviceId];
-            postObject[@"location"] = currentPoint;
-            postObject[@"type"] = NEW_POST_TYPE;
+        dispatch_queue_t addQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(addQueue, ^{
             
-            // Use PFACL to restrict future modifications to this object.
-            PFACL *readOnlyACL = [PFACL ACL];
-            [readOnlyACL setPublicReadAccess:YES];
-            [readOnlyACL setPublicWriteAccess:YES];
-            postObject.ACL = readOnlyACL;
+            // 1. Get Users Current Location
+            CLLocation *currentLocation = [self.dataSource getUserCurrentLocation];
+            CLLocationCoordinate2D currentCoordinate = currentLocation.coordinate;
+            PFGeoPoint *currentPoint = [PFGeoPoint geoPointWithLatitude:currentCoordinate.latitude
+                                                              longitude:currentCoordinate.longitude];
             
-            [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (error) {
-                    NSLog(@"Couldn't save!");
-                    NSLog(@"%@", error);
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error userInfo][@"error"]
-                                                                        message:nil
-                                                                       delegate:self
-                                                              cancelButtonTitle:nil
-                                                              otherButtonTitles:@"Ok", nil];
-                    [alertView show];
-                    return;
-                }
-                if (succeeded) {
-                    NSLog(@"Successfully saved!");
-                    NSLog(@"%@", postObject);
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
+            if (currentLocation != nil)
+            {
+                // 2.Create Parse Objec
+                PFObject *postObject = [PFObject objectWithClassName:POSTS_CLASS_NAME];
+                postObject[@"text"] = messageTextView.text;
+                postObject[@"deviceId"] = [Config deviceId];
+                postObject[@"location"] = currentPoint;
+                postObject[@"type"] = NEW_POST_TYPE;
+                
+                // Use PFACL to restrict future modifications to this object.
+                PFACL *readOnlyACL = [PFACL ACL];
+                [readOnlyACL setPublicReadAccess:YES];
+                [readOnlyACL setPublicWriteAccess:YES];
+                postObject.ACL = readOnlyACL;
+                
+                [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (error) {
+                        NSLog(@"Couldn't save!");
+                        NSLog(@"%@", error);
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error userInfo][@"error"]
+                                                                            message:nil
+                                                                           delegate:self
+                                                                  cancelButtonTitle:nil
+                                                                  otherButtonTitles:@"Ok", nil];
+                        [alertView show];
+                        return;
+                    }
+                    if (succeeded) {
+                        NSLog(@"Successfully saved!");
+                        NSLog(@"%@", postObject);
                         
-                        [Config incrementUserPoints];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [Config incrementUserPoints];
+                            
+                            //Create Notification Object
+                            NSDictionary * dict =[NSDictionary dictionaryWithObject:postObject forKey:@"newObject"];
+                            NSNotification * notification =[[ NSNotification alloc]
+                                                            initWithName:NEW_POST_NOTIFICATION object:nil userInfo:dict];
+                            
+                            //Post Notification
+                            [[NSNotificationCenter defaultCenter] postNotification:notification];
+                            
+                        });
                         
-                        //Create Notification Object
-                        NSDictionary * dict =[NSDictionary dictionaryWithObject:postObject forKey:@"newObject"];
-                        NSNotification * notification =[[ NSNotification alloc]
-                                                        initWithName:NEW_POST_NOTIFICATION object:nil userInfo:dict];
-                        
-                        //Post Notification
-                        [[NSNotificationCenter defaultCenter] postNotification:notification];
-                        
-                    });
-                    
-                } else {
-                    NSLog(@"Failed to save.");
-                }
-            }];
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }else{
-            //Display error message
-        }
+                    } else {
+                        NSLog(@"Failed to save.");
+                    }
+                }];
+                
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }else{
+                //Display error message
+            }
+        });
     }else{
         
         [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
