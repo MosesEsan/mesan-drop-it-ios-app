@@ -38,9 +38,11 @@
     [Parse setApplicationId:PARSE_APPICATION_ID
                   clientKey:PARSE_CLIENT_KEY];
     
-    // [Optional] Track statistics around application opens.
-    //[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions]
-    
+    if ([Config checkInternetConnection])
+    {
+        // [Optional] Track statistics around application opens.
+        [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    }
     
    // self.homeViewController = [[HomeViewController alloc] initWithNibName:nil bundle:nil];
     self.homeTableViewController = [[HomeTableViewController alloc] initWithStyle:UITableViewStylePlain];
