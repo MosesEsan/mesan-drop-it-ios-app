@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A27B434CD4052CF5983285C /* libPods-dROP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9660BC7CDFAED3A7A9DE949 /* libPods-dROP.a */; };
+		273E1AC51AB0B13200D41694 /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 273E1AC41AB0B13200D41694 /* TimelineTableViewCell.m */; };
 		278CF73A1AACFD0E00A13D4B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278CF7391AACFD0E00A13D4B /* ProfileViewController.m */; };
 		278CF73F1AAD113A00A13D4B /* User-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 278CF73C1AAD113A00A13D4B /* User-Small.png */; };
 		278CF7401AAD113A00A13D4B /* User-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 278CF73D1AAD113A00A13D4B /* User-Small@2x.png */; };
@@ -34,7 +35,7 @@
 		27A334741AA63525008188FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A334731AA63525008188FC /* main.m */; };
 		27A334771AA63525008188FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A334761AA63525008188FC /* AppDelegate.m */; };
 		27A3347F1AA63525008188FC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A3347E1AA63525008188FC /* Images.xcassets */; };
-		27A3348E1AA63525008188FC /* dROPTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A3348D1AA63525008188FC /* dROPTests.m */; };
+		27A3348E1AA63525008188FC /* DropItTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A3348D1AA63525008188FC /* DropItTests.m */; };
 		27A334991AA6367F008188FC /* HomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A334981AA6367F008188FC /* HomeTableViewController.m */; };
 		27B4041B1AA64057007DC137 /* PostTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B4041A1AA64057007DC137 /* PostTextTableViewCell.m */; };
 		27B4041F1AA64EBB007DC137 /* SmileyGray-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B4041C1AA64EBB007DC137 /* SmileyGray-Small.png */; };
@@ -103,6 +104,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		273E1AC31AB0B13200D41694 /* TimelineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineTableViewCell.h; sourceTree = "<group>"; };
+		273E1AC41AB0B13200D41694 /* TimelineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineTableViewCell.m; sourceTree = "<group>"; };
 		278CF7381AACFD0E00A13D4B /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		278CF7391AACFD0E00A13D4B /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		278CF73C1AAD113A00A13D4B /* User-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "User-Small.png"; sourceTree = "<group>"; };
@@ -149,7 +152,7 @@
 		27A3347E1AA63525008188FC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		27A334871AA63525008188FC /* Drop It!Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Drop It!Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A3348C1AA63525008188FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		27A3348D1AA63525008188FC /* dROPTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dROPTests.m; sourceTree = "<group>"; };
+		27A3348D1AA63525008188FC /* DropItTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DropItTests.m; sourceTree = "<group>"; };
 		27A334971AA6367F008188FC /* HomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewController.h; sourceTree = "<group>"; };
 		27A334981AA6367F008188FC /* HomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewController.m; sourceTree = "<group>"; };
 		27B404191AA64057007DC137 /* PostTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTextTableViewCell.h; sourceTree = "<group>"; };
@@ -299,6 +302,8 @@
 				27B404DA1AABBEEC007DC137 /* CommentTableViewCell.m */,
 				27B404321AA65F51007DC137 /* PostTextPhotoTableViewCell.h */,
 				27B404331AA65F51007DC137 /* PostTextPhotoTableViewCell.m */,
+				273E1AC31AB0B13200D41694 /* TimelineTableViewCell.h */,
+				273E1AC41AB0B13200D41694 /* TimelineTableViewCell.m */,
 			);
 			name = "Table View Cells";
 			sourceTree = "<group>";
@@ -418,7 +423,7 @@
 		27A3348A1AA63525008188FC /* dROPTests */ = {
 			isa = PBXGroup;
 			children = (
-				27A3348D1AA63525008188FC /* dROPTests.m */,
+				27A3348D1AA63525008188FC /* DropItTests.m */,
 				27A3348B1AA63525008188FC /* Supporting Files */,
 			);
 			path = dROPTests;
@@ -524,9 +529,9 @@
 			productReference = 27A3346E1AA63525008188FC /* Drop It!.app */;
 			productType = "com.apple.product-type.application";
 		};
-		27A334861AA63525008188FC /* Drop It!Tests */ = {
+		27A334861AA63525008188FC /* DropItTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 27A334941AA63525008188FC /* Build configuration list for PBXNativeTarget "Drop It!Tests" */;
+			buildConfigurationList = 27A334941AA63525008188FC /* Build configuration list for PBXNativeTarget "DropItTests" */;
 			buildPhases = (
 				27A334831AA63525008188FC /* Sources */,
 				27A334841AA63525008188FC /* Frameworks */,
@@ -537,7 +542,7 @@
 			dependencies = (
 				27A334891AA63525008188FC /* PBXTargetDependency */,
 			);
-			name = "Drop It!Tests";
+			name = DropItTests;
 			productName = dROPTests;
 			productReference = 27A334871AA63525008188FC /* Drop It!Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -575,7 +580,7 @@
 			projectRoot = "";
 			targets = (
 				27A3346D1AA63525008188FC /* Drop It! */,
-				27A334861AA63525008188FC /* Drop It!Tests */,
+				27A334861AA63525008188FC /* DropItTests */,
 			);
 		};
 /* End PBXProject section */
@@ -675,6 +680,7 @@
 				27B96AA31AAFBD1300AC4120 /* MCSwipeTableViewCell.m in Sources */,
 				278CF77A1AAD415100A13D4B /* CameraFocalReticule.m in Sources */,
 				278CF77E1AAD415100A13D4B /* CameraToggleButton.m in Sources */,
+				273E1AC51AB0B13200D41694 /* TimelineTableViewCell.m in Sources */,
 				278CF7781AAD415100A13D4B /* CameraDismissButton.m in Sources */,
 				27A334991AA6367F008188FC /* HomeTableViewController.m in Sources */,
 				278CF7821AAD415100A13D4B /* Constants.m in Sources */,
@@ -705,7 +711,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27A3348E1AA63525008188FC /* dROPTests.m in Sources */,
+				27A3348E1AA63525008188FC /* DropItTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -873,7 +879,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "Drop It!Tests";
 				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dROP.app/dROP";
+				TEST_HOST = "";
 			};
 			name = Debug;
 		};
@@ -891,7 +897,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "Drop It!Tests";
 				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dROP.app/dROP";
+				TEST_HOST = "";
 			};
 			name = Release;
 		};
@@ -916,7 +922,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		27A334941AA63525008188FC /* Build configuration list for PBXNativeTarget "Drop It!Tests" */ = {
+		27A334941AA63525008188FC /* Build configuration list for PBXNativeTarget "DropItTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				27A334951AA63525008188FC /* Debug */,

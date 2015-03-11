@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "27A3346D1AA63525008188FC"
-               BuildableName = "Drop It.app"
+               BuildableName = "Drop It!.app"
                BlueprintName = "Drop It!"
                ReferencedContainer = "container:Drop It!.xcodeproj">
             </BuildableReference>
@@ -29,8 +29,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "27A334861AA63525008188FC"
-               BuildableName = "Drop ItTests.xctest"
-               BlueprintName = "Drop It!Tests"
+               BuildableName = "Drop It!Tests.xctest"
+               BlueprintName = "DropItTests"
                ReferencedContainer = "container:Drop It!.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,8 +47,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "27A334861AA63525008188FC"
-               BuildableName = "Drop ItTests.xctest"
-               BlueprintName = "Drop It!Tests"
+               BuildableName = "Drop It!Tests.xctest"
+               BlueprintName = "DropItTests"
                ReferencedContainer = "container:Drop It!.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "27A3346D1AA63525008188FC"
-            BuildableName = "Drop It.app"
+            BuildableName = "Drop It!.app"
             BlueprintName = "Drop It!"
             ReferencedContainer = "container:Drop It!.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "27A3346D1AA63525008188FC"
-            BuildableName = "Drop It.app"
+            BuildableName = "Drop It!.app"
             BlueprintName = "Drop It!"
             ReferencedContainer = "container:Drop It!.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "27A3346D1AA63525008188FC"
-            BuildableName = "Drop It.app"
+            BuildableName = "Drop It!.app"
             BlueprintName = "Drop It!"
             ReferencedContainer = "container:Drop It!.xcodeproj">
          </BuildableReference>

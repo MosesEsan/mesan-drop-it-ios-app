@@ -111,6 +111,7 @@
 + (NSString *)repliesCount:(NSInteger)repliesCount;
 
 + (NSDictionary *)subViewFrames:(NSDictionary *)postObject;
++ (NSDictionary *)subViewFrames2:(NSDictionary *)postObject;
 
 
 + (NSDictionary *)userPoints;

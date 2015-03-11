@@ -41,7 +41,7 @@
     if ([Config checkInternetConnection])
     {
         // [Optional] Track statistics around application opens.
-        [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+        //[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     }
     
    // self.homeViewController = [[HomeViewController alloc] initWithNibName:nil bundle:nil];

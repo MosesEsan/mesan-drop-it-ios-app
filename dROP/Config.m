@@ -403,6 +403,61 @@
     return subViewframes;
 }
 
++ (NSDictionary *)subViewFrames2:(NSDictionary *)postObject
+{
+    CGFloat postTextHeight = [Config calculateHeightForText:postObject[@"text"] withWidth:TEXT_WIDTH - (LEFT_PADDING * 2) withFont:TEXT_FONT];
+    
+    
+    CGFloat cellHeight = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT;
+    CGRect lineFrame = CGRectMake(LEFT_PADDING - 5, 0, LEFT_PADDING * 2, cellHeight);
+    CGRect lineBorderFrame = CGRectMake(LEFT_PADDING - 1, 0, 2.0, cellHeight);
+
+    
+    CGFloat y = TOP_PADDING;
+    if (postTextHeight > (LEFT_PADDING * 2)) y = (cellHeight / 2) - LEFT_PADDING;
+    CGRect bubbleFrame = CGRectMake(5, y, (LEFT_PADDING * 2) - 10, (LEFT_PADDING * 2) - 10);
+
+
+    
+    //Set Label Frame
+    CGRect labelFrame = CGRectMake(LEFT_PADDING * 3, TOP_PADDING, TEXT_WIDTH - (LEFT_PADDING * 2), 0);
+    
+    
+    labelFrame.size.height = postTextHeight;
+    
+    CGRect imageFrame = CGRectMake(LEFT_PADDING, 0, TEXT_WIDTH, IMAGEVIEW_HEIGHT);
+    CGRect actionViewframe = CGRectMake(LEFT_PADDING * 3, 0, WIDTH - (LEFT_PADDING * 3), ACTIONS_VIEW_HEIGHT);
+    
+    if (postObject[@"parseObject"][@"picture"])
+    {
+        //Set Image View Frame
+        imageFrame.origin.y = labelFrame.origin.y + postTextHeight + 5;
+        imageFrame.size.height = IMAGEVIEW_HEIGHT;
+        
+        //Set Action View Frame
+        actionViewframe.origin.y = imageFrame.origin.y + imageFrame.size.height + 10;
+    }else{
+        
+        //Set Image View Frame
+        imageFrame.origin.y = 0;
+        imageFrame.size.height = 0;
+        
+        //Set Action View Frame
+        actionViewframe.origin.y = labelFrame.origin.y + postTextHeight + 10;
+    }
+    
+    NSDictionary *subViewframes =   @{
+                                      @"lineFrame" : [NSValue valueWithCGRect:lineFrame],
+                                      @"lineBorderFrame" : [NSValue valueWithCGRect:lineBorderFrame],
+                                      @"bubbleFrame" : [NSValue valueWithCGRect:bubbleFrame],
+                                      @"postTextFrame" : [NSValue valueWithCGRect:labelFrame],
+                                      @"imageFrame" : [NSValue valueWithCGRect:imageFrame],
+                                      @"actionViewframe" : [NSValue valueWithCGRect:actionViewframe]
+                                      };
+    
+    return subViewframes;
+}
+
 + (void)incrementUserPoints
 {
     if (![[NSUserDefaults standardUserDefaults] integerForKey:@"Points"])

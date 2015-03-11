@@ -12,6 +12,8 @@
 #import <CoreLocation/CoreLocation.h>
 
 #import "PostTextTableViewCell.h"
+#import "TimelineTableViewCell.h"
+
 #import "AddPostViewController.h"
 #import "ViewPostTableViewController.h"
 #import "ProfileViewController.h"
@@ -88,7 +90,9 @@
     
     //Configure TableView
     self.tableView.backgroundColor = [UIColor whiteColor];
-    [self.tableView registerClass:[PostTextTableViewCell class] forCellReuseIdentifier:@"BoxCell"];
+    //[self.tableView registerClass:[PostTextTableViewCell class] forCellReuseIdentifier:@"BoxCell"];
+    [self.tableView registerClass:[TimelineTableViewCell class] forCellReuseIdentifier:@"BoxCell"];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     if(availableLocations == nil) availableLocations = [Config availableLocations];
     
@@ -162,10 +166,15 @@
     NSInteger repliesCount = [postObject[@"totalReplies"] integerValue];
     NSString *postDate = [Config calculateTime:postObject[@"date"]];
     NSString *cellIdentifier = [NSString stringWithFormat:@"BoxCell%ld",(long)indexPath.row];
-    
+    /*
     PostTextTableViewCell *_cell = (PostTextTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!_cell)
         _cell = [[PostTextTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    _cell.selectionStyle= UITableViewCellSelectionStyleNone;
+    */
+    TimelineTableViewCell *_cell = (TimelineTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!_cell)
+        _cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     _cell.selectionStyle= UITableViewCellSelectionStyleNone;
     
     // Configure the cell...
@@ -175,7 +184,10 @@
     [_cell.smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
     
     //Set Frames
-    NSDictionary *subViewframes = [Config subViewFrames:postObject];
+    NSDictionary *subViewframes = [Config subViewFrames2:postObject];
+    _cell.line.frame = [subViewframes[@"lineFrame"] CGRectValue];
+    _cell.lineBorder.frame = [subViewframes[@"lineBorderFrame"] CGRectValue];
+    _cell.bubble.frame = [subViewframes[@"bubbleFrame"] CGRectValue];
     _cell.postText.frame = [subViewframes[@"postTextFrame"] CGRectValue];
     _cell.postImage.frame = [subViewframes[@"imageFrame"] CGRectValue];
     _cell.actionsView.frame = [subViewframes[@"actionViewframe"] CGRectValue];
@@ -221,6 +233,9 @@
                                  }];
     }
     
+    _cell.bottomBorder.backgroundColor = [tableView separatorColor].CGColor;
+    
+    
     return _cell;
 }
 
@@ -229,13 +244,13 @@
     NSDictionary *postObject = _allPosts[indexPath.row];
     NSString *postText = postObject[@"text"];
     
-    CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
+    CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:TEXT_WIDTH - (LEFT_PADDING * 2) withFont:TEXT_FONT];
     
     if (postObject[@"parseObject"][@"picture"])
     {
-        return TOP_PADDING + postTextHeight + 10 + IMAGEVIEW_HEIGHT + 12 + ACTIONS_VIEW_HEIGHT + 2;
+        return TOP_PADDING + postTextHeight + 10 + IMAGEVIEW_HEIGHT + 12 + ACTIONS_VIEW_HEIGHT;
     }else{
-        return TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 2;
+        return TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT;
     }
 }
 
