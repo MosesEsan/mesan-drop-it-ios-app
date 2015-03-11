@@ -12,6 +12,21 @@
 
 @implementation Config
 
++ (NSMutableArray *)introsInfo
+{
+    NSMutableArray *introsInfo =
+    [[NSMutableArray alloc] initWithObjects:
+     @{@"title" : @"Be Part Of The Conversation", @"description" : @"Find out what everyone around you is saying.",
+       @"image" : @"Time"},
+     @{@"title" : @"Join the Conversation", @"description" : @"Join the conversation ANONYMOUSLY. Receive points everytime you add a new post and when your posts are liked.", @"image" : @"Add"},
+     @{@"title" : @"Dislike / Report", @"description" : @"Swipe Right to dislike or report a post.", @"image" : @"Dislike"},
+     @{@"title" : @"Elevate The Conversation", @"description" : @"Let you voice be heard by leaving comments.", @"image" : @"Comment"},
+     @{@"title" : @"Review Your Contribution", @"description" : @"Keep track of your posts, points and know your rank.", @"image" : @"Profile"},
+     nil];
+    
+    return introsInfo;
+}
+
 + (void)updateAvailableLocations:(NSDate *)lastUpdated
 {
     //Get the current locations

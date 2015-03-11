@@ -19,13 +19,16 @@
 #import "UIFont+Montserrat.h"
 #import "CCMBorderView.h"
 #import "CCMPopupTransitioning.h"
+#import "ABCIntroView.h"
 
-@interface HomeTableViewController ()<AddPostViewControllerDataSource, ViewPostViewControllerDelegate, CLLocationManagerDelegate>
+@interface HomeTableViewController ()<AddPostViewControllerDataSource, ViewPostViewControllerDelegate, CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource>
 {
     NSMutableArray *availableLocations;
     UIButton *addNew;
     
     ProfileViewController *profileViewController;
+    
+    ABCIntroView *introView;
 }
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -67,7 +70,7 @@
     //TitleView
     UILabel *layoutLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 60, 37)];
     layoutLabel.textAlignment = NSTextAlignmentCenter;
-    layoutLabel.text = @"drop";
+    layoutLabel.text = @"dropit";
     layoutLabel.textColor = [UIColor colorWithRed:235/255.0f green:237/255.0f blue:236/255.0f alpha:1.0f];
     //layoutLabel.font =  [UIFont systemFontOfSize:21];
     layoutLabel.font = [UIFont montserratFontOfSize:20.0f];
@@ -113,6 +116,12 @@
               forControlEvents:UIControlEventValueChanged];
     
     [self.tableView addSubview:refreshControl];
+    
+    
+    //Check if Intro View has to be shown
+    [self showIntroView];
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -560,6 +569,42 @@
     [refresh endRefreshing];
     
     [self queryForAllPostsNearLocation:self.currentLocation];
+}
+
+
+- (void)showIntroView
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"intro_screen_viewed"])
+    {
+        introView = [[ABCIntroView alloc]initWithNibName:nil bundle:nil];
+        introView.delegate = self;
+        introView.datasource = self;
+        introView.buttonText = @"Okay, I Got It!";
+        
+        CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
+        popup.destinationBounds = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 20);
+        popup.presentedController = introView;
+        popup.presentingController = self;
+        
+        [self presentViewController:introView animated:YES completion:nil];
+    }
+}
+
+
+-(void)onDoneButtonPressed{
+    
+    //Uncomment so that the IntroView does not show after the user clicks "DONE"
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"YES"forKey:@"intro_screen_viewed"];
+    [defaults synchronize];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (NSDictionary *)detailsForIndex:(NSInteger)index
+{
+    return [Config introsInfo][index];
 }
 
 

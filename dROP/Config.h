@@ -120,6 +120,8 @@
 + (BOOL)checkInternetConnection;
 + (UIAlertView *)alertViewWithTitle:(NSString *)title withMessage:(NSString *)message;
 
++ (NSMutableArray *)introsInfo;
+
 @end
 
 
