@@ -163,7 +163,7 @@
     CGFloat postTextHeight = [self calculateHeightForText:postText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
     CGFloat height;
     
-    if (_postObject[@"parseObject"][@"picture"])
+    if (_postObject[@"parseObject"][@"pic"])
     {
         height = TOP_PADDING + postTextHeight + 10 + IMAGEVIEW_HEIGHT + 12 + ACTIONS_VIEW_HEIGHT + 2;        
     }else{
@@ -195,7 +195,7 @@
     [headerView addSubview:_postText];
     
     
-    if (_postObject[@"parseObject"][@"picture"])
+    if (_postObject[@"parseObject"][@"pic"])
     {
         //Set Image View Frame
         _postImage = [[PFImageView alloc] initWithFrame:[subViewframes[@"imageFrame"] CGRectValue]];
@@ -206,7 +206,7 @@
         _postImage.contentMode = UIViewContentModeScaleAspectFill;
         [headerView addSubview:_postImage];
         
-        _postImage.file = _postObject[@"parseObject"][@"picture"];
+        _postImage.file = _postObject[@"parseObject"][@"pic"];
         [_postImage loadInBackground];
     }
     

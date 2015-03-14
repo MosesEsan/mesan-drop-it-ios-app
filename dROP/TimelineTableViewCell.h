@@ -11,11 +11,17 @@
 #import "Config.h"
 #import "MCSwipeTableViewCell.h"
 
+#import "MHFacebookImageViewer.h"
+
 @interface TimelineTableViewCell : MCSwipeTableViewCell
 
 @property (nonatomic, strong) UIView *line;
 @property (nonatomic, strong) CALayer *lineBorder;
 @property (nonatomic, strong) UIImageView *bubble;
+
+@property (nonatomic, strong) UIView *postContainer;
+
+@property (nonatomic, strong) UIImageView *triangle;
 
 @property (nonatomic, strong) UILabel *postText;
 @property (nonatomic, strong) PFImageView *postImage;

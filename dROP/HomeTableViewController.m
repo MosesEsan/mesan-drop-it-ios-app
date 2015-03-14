@@ -23,6 +23,9 @@
 #import "CCMPopupTransitioning.h"
 #import "ABCIntroView.h"
 
+
+#import "FullScreenViewController.h"
+
 @interface HomeTableViewController ()<AddPostViewControllerDataSource, ViewPostViewControllerDelegate, CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource>
 {
     NSMutableArray *availableLocations;
@@ -31,6 +34,8 @@
     ProfileViewController *profileViewController;
     
     ABCIntroView *introView;
+    
+    BOOL showAlert;
 }
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -58,7 +63,7 @@
     
     _allPosts = [[NSMutableArray alloc] init];
     _likes = [[NSMutableArray alloc] init];
-    
+    showAlert = YES;
     
     UIButton *profile = [UIButton buttonWithType:UIButtonTypeCustom];
     profile.frame = CGRectMake(0, 0, 24, 24);
@@ -90,6 +95,8 @@
     
     //Configure TableView
     self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = TABLEVIEW_COLOR;
+
     //[self.tableView registerClass:[PostTextTableViewCell class] forCellReuseIdentifier:@"BoxCell"];
     [self.tableView registerClass:[TimelineTableViewCell class] forCellReuseIdentifier:@"BoxCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -125,12 +132,14 @@
     //Check if Intro View has to be shown
     [self showIntroView];
     
-    
+    //Table header
+    [self tableHeader];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.locationManager startUpdatingLocation];
+    showAlert = YES;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -143,6 +152,34 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)tableHeader
+{
+    UIView *tableHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 10.0f)];
+    tableHeader.backgroundColor = [UIColor clearColor];
+    self.tableView.tableHeaderView = tableHeader;
+    
+    UIView *_line = [[UIView alloc] initWithFrame:CGRectMake(7.5f, 0, 33, CGRectGetHeight(tableHeader.frame))];
+    _line.backgroundColor = [UIColor clearColor];
+    //[tableHeader addSubview:_line];
+    
+    CALayer *_lineBorder = [CALayer layer];
+    _lineBorder.frame = CGRectMake(LEFT_PADDING - 1, CGRectGetHeight(tableHeader.frame) / 2, 2.0, CGRectGetHeight(tableHeader.frame) / 2);
+    _lineBorder.backgroundColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:1].CGColor;
+    [_line.layer addSublayer:_lineBorder];
+    
+    CGFloat y = (CGRectGetHeight(tableHeader.frame) / 2) - (13/2);
+    
+    UIView *_bubble = [[UIView alloc] initWithFrame:CGRectMake((33/2) - (13/2), y, 13, 13)];
+    _bubble.clipsToBounds = YES;
+    _bubble.layer.cornerRadius = _bubble.frame.size.width / 2;
+    //_bubble.layer.borderWidth = 4.0f;
+    _bubble.backgroundColor = [Config getBubbleColor];
+    _bubble.layer.masksToBounds = YES;
+    _bubble.layer.borderColor = [UIColor whiteColor].CGColor;
+    [_line addSubview:_bubble];
 }
 
 #pragma mark - Table view data source
@@ -166,12 +203,7 @@
     NSInteger repliesCount = [postObject[@"totalReplies"] integerValue];
     NSString *postDate = [Config calculateTime:postObject[@"date"]];
     NSString *cellIdentifier = [NSString stringWithFormat:@"BoxCell%ld",(long)indexPath.row];
-    /*
-    PostTextTableViewCell *_cell = (PostTextTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!_cell)
-        _cell = [[PostTextTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    _cell.selectionStyle= UITableViewCellSelectionStyleNone;
-    */
+
     TimelineTableViewCell *_cell = (TimelineTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!_cell)
         _cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
@@ -188,14 +220,24 @@
     _cell.line.frame = [subViewframes[@"lineFrame"] CGRectValue];
     _cell.lineBorder.frame = [subViewframes[@"lineBorderFrame"] CGRectValue];
     _cell.bubble.frame = [subViewframes[@"bubbleFrame"] CGRectValue];
+    _cell.triangle.frame = [subViewframes[@"triangleFrame"] CGRectValue];
+
+    _cell.postContainer.frame = [subViewframes[@"containerFrame"] CGRectValue];
     _cell.postText.frame = [subViewframes[@"postTextFrame"] CGRectValue];
     _cell.postImage.frame = [subViewframes[@"imageFrame"] CGRectValue];
     _cell.actionsView.frame = [subViewframes[@"actionViewframe"] CGRectValue];
     
-    if (postObject[@"parseObject"][@"picture"])
+    UIColor *rColor = [Config getBubbleColor];
+    _cell.bubble.layer.borderColor = rColor.CGColor;
+
+   // _cell.postContainer.backgroundColor = [rColor colorWithAlphaComponent:0.5];
+    
+    if (postObject[@"parseObject"][@"pic"])
     {
-        _cell.postImage.file = postObject[@"parseObject"][@"picture"];
+        _cell.postImage.file = postObject[@"parseObject"][@"pic"];
+        _cell.postImage.tag = 1;//indexPath.row;
         [_cell.postImage loadInBackground];
+        [_cell.postImage setupImageViewerWithPFFile:_cell.postImage.file onOpen:nil onClose:nil];
     }
     
     if (![postObject[@"disliked"] boolValue]){
@@ -244,13 +286,13 @@
     NSDictionary *postObject = _allPosts[indexPath.row];
     NSString *postText = postObject[@"text"];
     
-    CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:TEXT_WIDTH - (LEFT_PADDING * 2) withFont:TEXT_FONT];
+    CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:WIDTH - 55.5f withFont:TEXT_FONT];
     
-    if (postObject[@"parseObject"][@"picture"])
+    if (postObject[@"parseObject"][@"pic"])
     {
-        return TOP_PADDING + postTextHeight + 10 + IMAGEVIEW_HEIGHT + 12 + ACTIONS_VIEW_HEIGHT;
+        return TOP_PADDING + postTextHeight + 10 + IMAGEVIEW_HEIGHT + 12 + ACTIONS_VIEW_HEIGHT + 8;
     }else{
-        return TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT;
+        return TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 8;
     }
 }
 
@@ -272,7 +314,7 @@
     addNewPost.dataSource = self;
     
     CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
-    popup.destinationBounds = CGRectMake(0, 0, ADD_POST_WIDTH, ADD_POST_HEIGHT);
+    popup.destinationBounds = [[UIScreen mainScreen] bounds];
     //popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     popup.presentedController = addNewPost;
     popup.presentingController = self;
@@ -372,7 +414,7 @@
             PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:currentLocation.coordinate.latitude
                                                        longitude:currentLocation.coordinate.longitude];
             
-            [query whereKey:@"location" nearGeoPoint:point withinKilometers:8];
+            [query whereKey:@"location" nearGeoPoint:point withinKilometers:ONE_HALF_MILE_RADIUS];
             query.limit = 20;
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 if (error) {
@@ -389,7 +431,11 @@
         });
     }else{
         
-        [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
+        if (showAlert == YES)
+        {
+            [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
+            showAlert = NO;
+        }
     }
 }
 
@@ -680,8 +726,31 @@
     UIImage *image = [UIImage imageNamed:imageName];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     imageView.contentMode = UIViewContentModeCenter;
+    imageView.backgroundColor = [UIColor clearColor];
     
     return imageView;
+}
+
+- (void)showFullScreen:(UITapGestureRecognizer *)gesture
+{
+    NSInteger tag = gesture.view.tag;
+    NSDictionary *postObject = _allPosts[tag];
+    PFFile *file = postObject[@"parseObject"][@"pic"];
+    
+    FullScreenViewController *fullScreen = [[FullScreenViewController alloc] initWithFile:file];
+    
+    CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
+    popup.destinationBounds = [[UIScreen mainScreen] bounds];
+    //popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+    popup.presentedController = fullScreen;
+    popup.presentingController = self;
+    
+    [self presentViewController:fullScreen animated:YES completion:nil];
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
 }
 
 

@@ -176,9 +176,6 @@
             }];
             
         });
-    }else{
-        
-        [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
     }
 }
 
@@ -226,9 +223,9 @@
     _cell.postImage.frame = [subViewframes[@"imageFrame"] CGRectValue];
     _cell.actionsView.frame = [subViewframes[@"actionViewframe"] CGRectValue];
     
-    if (postObject[@"parseObject"][@"picture"])
+    if (postObject[@"parseObject"][@"pic"])
     {
-        _cell.postImage.file = postObject[@"parseObject"][@"picture"];
+        _cell.postImage.file = postObject[@"parseObject"][@"pic"];
         [_cell.postImage loadInBackground];
     }
     
@@ -252,7 +249,7 @@
     
     CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
     
-    if (postObject[@"parseObject"][@"picture"])
+    if (postObject[@"parseObject"][@"pic"])
     {
         return TOP_PADDING + postTextHeight + 10 + IMAGEVIEW_HEIGHT + 12 + ACTIONS_VIEW_HEIGHT + 2;
     }else{

@@ -22,7 +22,7 @@
     if (self)
     {
         // Initialization code
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
         
         _line = [[UIView alloc] initWithFrame:CGRectMake(LEFT_PADDING, 0, LEFT_PADDING, 0)];
         _line.backgroundColor = [UIColor clearColor];
@@ -34,13 +34,24 @@
         [_line.layer addSublayer:_lineBorder];
         
         
-         _bubble = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, (LEFT_PADDING * 2) - 10, (LEFT_PADDING * 2) - 10)];
-        _bubble.backgroundColor = [UIColor purpleColor];
+         _bubble = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 14, 14)];
+        _bubble.clipsToBounds = YES;
         _bubble.layer.cornerRadius = _bubble.frame.size.width / 2;
-        //_bubble.layer.borderWidth = 4.0f;
-        //_bubble.layer.borderColor = [UIColor whiteColor].CGColor;//_lineBorder.backgroundColor;
+        _bubble.layer.borderWidth = 2.5f;
+        _bubble.layer.masksToBounds = YES;
+        _bubble.backgroundColor = [UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1.0f];
+        //[UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.8f];
+        //[UIColor whiteColor];
         [_line addSubview:_bubble];
+
         
+        _postContainer = [[UIView alloc] initWithFrame:CGRectMake(LEFT_PADDING * 2, 0, WIDTH - (LEFT_PADDING * 2), 0)];
+        _postContainer.backgroundColor = [UIColor whiteColor];
+        _postContainer.layer.borderWidth = .4f;
+        _postContainer.layer.borderColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.6f].CGColor;
+        _postContainer.layer.cornerRadius = 4.0f;
+        _postContainer.clipsToBounds = YES;
+        [self.contentView addSubview:_postContainer];
         
         _postText = [[UILabel alloc] initWithFrame:CGRectMake(LEFT_PADDING * 2, TOP_PADDING, TEXT_WIDTH - LEFT_PADDING, 0)];
         _postText.backgroundColor = [UIColor clearColor];
@@ -50,7 +61,7 @@
         _postText.font = TEXT_FONT;
         _postText.clipsToBounds = YES;
         _postText.userInteractionEnabled = YES;
-        [self.contentView addSubview:_postText];
+        [_postContainer addSubview:_postText];
         
         _postImage = [[PFImageView alloc] initWithFrame:CGRectMake(LEFT_PADDING, 0, TEXT_WIDTH, IMAGEVIEW_HEIGHT)];
         _postImage.backgroundColor = [UIColor clearColor];
@@ -58,17 +69,17 @@
         _postImage.image = [UIImage imageNamed:@"CoverPhotoPH.JPG"];
         _postImage.clipsToBounds = YES;
         _postImage.contentMode = UIViewContentModeScaleAspectFill;
-        [self.contentView addSubview:_postImage];
+        _postImage.userInteractionEnabled = YES;
+        [_postContainer addSubview:_postImage];
+        
         
         _actionsView = [[UIView alloc] initWithFrame:CGRectMake(LEFT_PADDING * 3, 0, WIDTH - (LEFT_PADDING * 3), ACTIONS_VIEW_HEIGHT)];
-
-        
         _actionsView.backgroundColor = [UIColor clearColor];
-        [self.contentView addSubview:_actionsView];
+        [_postContainer addSubview:_actionsView];
         
         _bottomBorder = [CALayer layer];
         _bottomBorder.frame = CGRectMake(0, ACTIONS_VIEW_HEIGHT - .5f, CGRectGetWidth(_actionsView.frame), .5f);
-        [_actionsView.layer addSublayer:_bottomBorder];
+       // [_actionsView.layer addSublayer:_bottomBorder];
         
         
         _date = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, ACTIONS_VIEW_HEIGHT)];
@@ -96,13 +107,31 @@
         [_smiley setTitleColor:BAR_TINT_COLOR forState:UIControlStateSelected];
         _smiley.titleLabel.font = LIKES_FONT;
         _smiley.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        _smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 33, 5.2f, 0);
-        _smiley.titleEdgeInsets = UIEdgeInsetsMake(2, -50, 0, 20);
         
-        _smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 33, 5.2f, 15);
-        _smiley.titleEdgeInsets = UIEdgeInsetsMake(2, -65, 0, 35);
+        _smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 39, 5.2f, 8);
+        _smiley.titleEdgeInsets = UIEdgeInsetsMake(2, -60, 0, 30);
         
         [_actionsView addSubview:_smiley];
+        
+        
+        _triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 10, 20)];
+        _triangle.backgroundColor = [UIColor whiteColor];
+        [self.contentView addSubview:_triangle];
+        
+        CAShapeLayer *mask = [[CAShapeLayer alloc] init];
+        mask.frame = _triangle.layer.bounds;
+        
+        CGMutablePathRef path = CGPathCreateMutable();
+        CGPathMoveToPoint(path, nil, 0, 0);
+        CGPathAddLineToPoint(path, nil, 0, 10.0f);
+        CGPathAddLineToPoint(path, nil, 10, 0.0f);
+        CGPathAddLineToPoint(path, nil, 10.0f, 20.0f);
+        CGPathAddLineToPoint(path, nil, 0.0f, 10.0f);
+        CGPathCloseSubpath(path);
+        mask.path = path;
+        CGPathRelease(path);
+        
+        _triangle.layer.mask = mask;
     }
     
     return self;

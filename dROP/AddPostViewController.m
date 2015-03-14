@@ -11,19 +11,25 @@
 #import "UIFont+Montserrat.h"
 #import "LPlaceholderTextView.h"
 #import <Parse/Parse.h>
-#import "CameraViewController.h"
+#import "PSSnapViewController.h"
 
-@interface AddPostViewController ()<UITextViewDelegate>
+@interface AddPostViewController ()<UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
 {
     int characterCount;
     UILabel *characterCountLabel;
     
     LPlaceholderTextView *messageTextView;
-    UIImageView *photoPreview;
     
     CGRect currentPosition;
+    
+    UIView *addDialog;
+    UIButton *removePicture;
 
 }
+
+@property (nonatomic, strong) UIImageView *photoPreview;
+@property (nonatomic, strong) UIImage *previewPhoto;
 
 @end
 
@@ -33,22 +39,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //self.view.backgroundColor = [UIColor greenColor];
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.view.layer.cornerRadius = 8.0f;
-    self.view.clipsToBounds = YES;
-    
-    //self.view.layer.borderWidth = 0.1f;
-    self.view.layer.borderColor = [UIColor colorWithRed:129/255.0f green:129/255.0f blue:129/255.0f alpha:1.0f].CGColor;
+    addDialog = [[UIView alloc] initWithFrame:CGRectMake(10, 20 + 64.0f, ADD_POST_WIDTH, ADD_POST_HEIGHT)];
+    addDialog.backgroundColor = [UIColor redColor];
+    addDialog.backgroundColor = [UIColor whiteColor];
+    addDialog.layer.cornerRadius = 8.0f;
+    addDialog.clipsToBounds = YES;
+    //addDialog.layer.borderWidth = 0.1f;
+    addDialog.layer.borderColor = [UIColor colorWithRed:129/255.0f green:129/255.0f blue:129/255.0f alpha:1.0f].CGColor;
+    [self.view addSubview:addDialog];
     
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ADD_POST_WIDTH, 40.0f)];
-    header.backgroundColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.8f];
-    [self.view addSubview:header];
+    header.backgroundColor = [UIColor colorWithRed:186/255.0f green:188/255.0f blue:191/255.0f alpha:.4f];
+    //[UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:0.5f];
+    [addDialog addSubview:header];
     
     UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, CGRectGetHeight(header.frame))];
     closeButton.backgroundColor = [UIColor clearColor];
-    [closeButton setImage:[UIImage imageNamed:@"Close-Small"] forState:UIControlStateNormal];
-    [closeButton setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 20)];
+    [closeButton setImage:[UIImage imageNamed:@"Close2-Small"] forState:UIControlStateNormal];
+    [closeButton setImageEdgeInsets:UIEdgeInsetsMake(0, 3, 0, 6)];
     [closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
     [header addSubview:closeButton];
     
@@ -69,26 +79,38 @@
     [messageTextView setTextColor:TEXT_COLOR];
     messageTextView.delegate = self;
     [messageTextView setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:15.0f]];
-    [self.view addSubview:messageTextView];
+    [addDialog addSubview:messageTextView];
     
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, ADD_POST_HEIGHT - 40, ADD_POST_WIDTH, 40.0f)];
     footer.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:footer];
+    [addDialog addSubview:footer];
     
     UIButton *cameraButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, CGRectGetHeight(footer.frame))];
     cameraButton.backgroundColor = [UIColor clearColor];
     [cameraButton setImage:[UIImage imageNamed:@"Camera-Small"] forState:UIControlStateNormal];
-    [cameraButton setImageEdgeInsets:UIEdgeInsetsMake(11, 10, 8, 18)];
+    [cameraButton setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 7, 18)];
     [cameraButton addTarget:self action:@selector(addPhoto:) forControlEvents:UIControlEventTouchUpInside];
-    //[footer addSubview:cameraButton];
+    [footer addSubview:cameraButton];
     
-    photoPreview = [[UIImageView alloc] initWithFrame:CGRectMake(55, 10, CGRectGetHeight(footer.frame) - 20, CGRectGetHeight(footer.frame) - 20)];
-    photoPreview.backgroundColor = [UIColor clearColor];
-    photoPreview.layer.cornerRadius = 1.0f;
-    photoPreview.image = [UIImage imageNamed:@"CoverPhotoPH.JPG"];
-    photoPreview.clipsToBounds = YES;
-    photoPreview.contentMode = UIViewContentModeScaleAspectFill;
-    //[footer addSubview:photoPreview];
+    _photoPreview = [[UIImageView alloc] initWithFrame:CGRectMake(55, 5, CGRectGetHeight(footer.frame) - 10, CGRectGetHeight(footer.frame) - 10)];
+    _photoPreview.backgroundColor = [UIColor clearColor];
+    _photoPreview.layer.cornerRadius = 1.0f;
+    _photoPreview.image = [UIImage imageNamed:@"CoverPhotoPH.JPG"];
+    _photoPreview.clipsToBounds = YES;
+    _photoPreview.contentMode = UIViewContentModeScaleAspectFill;
+    _photoPreview.hidden = YES;
+    [footer addSubview:_photoPreview];
+    
+    removePicture = [[UIButton alloc] initWithFrame:CGRectMake(_photoPreview.frame.origin.x + CGRectGetWidth(_photoPreview.frame) + 10, 10, 100, CGRectGetHeight(footer.frame) - 20)];
+    removePicture.backgroundColor = [UIColor clearColor];
+    [removePicture setTitle:@"Remove" forState:UIControlStateNormal];
+    [removePicture setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    removePicture.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Medium" size:14.5f];
+    removePicture.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [removePicture addTarget:self action:@selector(removePhoto:) forControlEvents:UIControlEventTouchUpInside];
+    removePicture.hidden = YES;
+    [footer addSubview:removePicture];
+    
     
     // Set the max character count
     characterCount = kMaxCharacterCount;
@@ -102,6 +124,29 @@
     [characterCountLabel setText:[NSString stringWithFormat:@"%d", characterCount]];
     [characterCountLabel setTextColor:DATE_COLOR];
     [footer addSubview:characterCountLabel];
+}
+
+- (void)setPreviewPhoto:(UIImage *)previewPhoto
+{
+    if (previewPhoto != nil)
+    {
+        //show
+        self.photoPreview.image = previewPhoto;
+        _photoPreview.hidden = NO;
+        removePicture.hidden = NO;
+    }else{
+        //remove
+        self.photoPreview.image = [UIImage imageNamed:@"CoverPhotoPH.JPG"];
+        
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+        
+        _photoPreview.hidden = YES;
+        removePicture.hidden = YES;
+        
+        [UIView commitAnimations];
+
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -187,7 +232,7 @@
 - (void)keyboardWillShow:(NSNotification*)aNotification
 {
     //Get and save the current caption location
-    currentPosition = self.view.frame;
+    currentPosition = addDialog.frame;
     
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
@@ -198,9 +243,9 @@
     // [UIView beginAnimations:nil context:NULL];
     // [UIView setAnimationDuration:0.3]; // if you want to slide up the view
     
-    CGRect rect = self.view.frame;
+    CGRect rect = addDialog.frame;
     rect.origin.y = newY; //Set the new Y position
-    self.view.frame = rect;
+    addDialog.frame = rect;
     
     //[UIView commitAnimations];
     
@@ -213,7 +258,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3]; // if you want to slide up the view
     
-    self.view.frame = currentPosition;
+    addDialog.frame = currentPosition;
     
     [UIView commitAnimations];
     
@@ -268,12 +313,21 @@
             
             if (currentLocation != nil)
             {
-                // 2.Create Parse Objec
+                // 2.Create Parse Object
                 PFObject *postObject = [PFObject objectWithClassName:POSTS_CLASS_NAME];
                 postObject[@"text"] = messageTextView.text;
                 postObject[@"deviceId"] = [Config deviceId];
                 postObject[@"location"] = currentPoint;
                 postObject[@"type"] = NEW_POST_TYPE;
+                
+                if (_photoPreview.image != nil)
+                {
+                    NSData *imageData = UIImagePNGRepresentation(_photoPreview.image);
+                    
+                    //Create a PFFile
+                    NSString *fileName = [NSString stringWithFormat:@"%@.png",[Config deviceId]];
+                    postObject[@"pic"] = [PFFile fileWithName:fileName data:imageData];
+                }
                 
                 // Use PFACL to restrict future modifications to this object.
                 PFACL *readOnlyACL = [PFACL ACL];
@@ -330,10 +384,82 @@
 
 - (void)addPhoto:(UIButton *)sender
 {
-    //CameraViewController *cameraviewController = [[CameraViewController alloc] initWithNibName:nil bundle:nil];
+    //Create the action sheet
+    UIActionSheet* sheet = [[UIActionSheet alloc]
+                            initWithTitle:@"What would you like to do?"
+                            delegate:self
+                            cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
+                            otherButtonTitles:@"Take Photo", @"Choose From Library", nil];
     
-    //[self presentViewController:cameraviewController animated:YES completion:nil];
+    //Display the action sheet
+    [sheet showInView: self.navigationController.view];
 }
+
+#pragma mark - UIActionSheet Delegate
+- (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)index
+{
+    NSString *title = [actionSheet buttonTitleAtIndex:index];
+
+    if ([title isEqualToString:@"Take Photo"])
+    {
+        /*
+        PSSnapViewController *snapViewController = [[PSSnapViewController alloc] initWithNibName:nil bundle:nil];
+        UINavigationController *snapNavigationController = [[UINavigationController alloc] initWithRootViewController:snapViewController ];
+        
+        [self presentViewController:snapNavigationController animated:YES completion:nil];
+        */
+        
+        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        {
+            
+            UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                  message:@"Device has no camera"
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"OK"
+                                                        otherButtonTitles: nil];
+            
+            [myAlertView show];
+            
+        }else{
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            
+            [self presentViewController:picker animated:YES completion:NULL];
+        }
+    }else if ([title isEqualToString:@"Choose From Library"]){
+        
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    self.previewPhoto = chosenImage;
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+
+- (void)removePhoto:(UIButton *)sender
+{
+    self.previewPhoto = nil;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

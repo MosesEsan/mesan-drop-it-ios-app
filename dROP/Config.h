@@ -24,6 +24,9 @@
 #define TRANSLUCENT NO;
 #define CLIPS_TO_BOUNDS YES;
 
+
+#define TABLEVIEW_COLOR [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.4f]
+
 #define TEXT_FONT [UIFont fontWithName:@"AvenirNext-Medium" size:14.0f]
 #define DATE_FONT [UIFont fontWithName:@"AvenirNext-Regular" size:13.0f]
 #define LIKES_FONT [UIFont fontWithName:@"AvenirNext-DemiBold" size:12.5f]
@@ -34,7 +37,7 @@
 #define LEFT_PADDING 16.5f
 
 #define TEXT_WIDTH WIDTH - (LEFT_PADDING * 2)
-#define IMAGEVIEW_HEIGHT 170
+#define IMAGEVIEW_HEIGHT 160
 #define ACTIONS_VIEW_HEIGHT 28
 
 
@@ -42,8 +45,8 @@
 #define MESSAGE_COLOR [UIColor colorWithRed:85/255.0f green:85/255.0f blue:85/255.0f alpha:1.0f]
 #define TEXT_COLOR [UIColor colorWithRed:34/255.0f green:34/255.0f blue:34/255.0f alpha:1.0f]
 
-#define ADD_POST_WIDTH WIDTH - 40
-#define ADD_POST_HEIGHT 250
+#define ADD_POST_WIDTH WIDTH - 20
+#define ADD_POST_HEIGHT 240
 
 #define INFO_VIEW_WIDTH WIDTH - 40
 #define INFO_VIEW_HEIGHT 320
@@ -78,10 +81,12 @@
 #define NUMBER_OF_PAGES 4
 
 
-//DEFAULT LOCATIONS
+//Colours
 
 
-//#define ONE_MILE_RADIUS 1609.34
+
+//#define ONE_MILE_RADIUS 1609.34km
+#define ONE_HALF_MILE_RADIUS 2.4140
 //#define FIVE_MILE_RADIUS 8046.72
 
 @interface Config : NSObject
@@ -125,6 +130,8 @@
 + (UIAlertView *)alertViewWithTitle:(NSString *)title withMessage:(NSString *)message;
 
 + (NSMutableArray *)introsInfo;
+
++ (UIColor *)getBubbleColor;
 
 @end
 

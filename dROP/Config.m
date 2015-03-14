@@ -84,9 +84,6 @@
                 }];
             });
             
-        }else{
-            
-            [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
         }
     }
 }
@@ -154,9 +151,6 @@
                     }
                 }];
             });
-        }else{
-            
-            [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
         }
     }
 }
@@ -340,6 +334,33 @@
     return isAllowedToAdd;
 }
 
++ (BOOL)getClosestLocation:(CLLocation *)currentLocation
+{
+    //Get the current location
+    BOOL isAllowedToAdd = NO;
+    
+    for (NSInteger i = 0; i < [[Config availableLocations] count]; i++)
+    {
+        //Create a cllocation object
+        CLLocation *availablePoint = [[CLLocation alloc] initWithLatitude:[[Config availableLocations][i][1] floatValue]
+                                                                longitude:[[Config availableLocations][i][2] floatValue]];
+        
+        CLLocationDistance delta = [currentLocation distanceFromLocation:availablePoint];
+        
+        //If the user distance from the main location is less than or equal to the allowed distance
+        if (delta != 0 && delta <= [[Config availableLocations][i][3] floatValue])
+        {
+            isAllowedToAdd = YES;
+            
+            //NSString *college = [NSString stringWithFormat:@"%@",availableLocations[i][0]];
+            // NSLog(college);
+            i = [[Config availableLocations] count];
+        }
+    }
+    
+    return isAllowedToAdd;
+}
+
 
 + (NSString *)deviceId
 {
@@ -376,7 +397,7 @@
     CGRect imageFrame = CGRectMake(LEFT_PADDING, 0, TEXT_WIDTH, IMAGEVIEW_HEIGHT);
     CGRect actionViewframe = CGRectMake(LEFT_PADDING, 0, TEXT_WIDTH + LEFT_PADDING, ACTIONS_VIEW_HEIGHT);
     
-    if (postObject[@"parseObject"][@"picture"])
+    if (postObject[@"parseObject"][@"pic"])
     {
         //Set Image View Frame
         imageFrame.origin.y = labelFrame.origin.y + postTextHeight + 5;
@@ -405,30 +426,35 @@
 
 + (NSDictionary *)subViewFrames2:(NSDictionary *)postObject
 {
-    CGFloat postTextHeight = [Config calculateHeightForText:postObject[@"text"] withWidth:TEXT_WIDTH - (LEFT_PADDING * 2) withFont:TEXT_FONT];
-    
+    CGFloat postTextHeight = [Config calculateHeightForText:postObject[@"text"] withWidth:WIDTH - 55.5f withFont:TEXT_FONT];
     
     CGFloat cellHeight = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT;
-    CGRect lineFrame = CGRectMake(LEFT_PADDING - 5, 0, LEFT_PADDING * 2, cellHeight);
+
+    if (postObject[@"parseObject"][@"pic"])
+        cellHeight =  cellHeight + 10 + IMAGEVIEW_HEIGHT;
+    
+    CGRect lineFrame = CGRectMake(0, 0, 33, cellHeight);
     CGRect lineBorderFrame = CGRectMake(LEFT_PADDING - 1, 0, 2.0, cellHeight);
 
     
-    CGFloat y = TOP_PADDING;
-    if (postTextHeight > (LEFT_PADDING * 2)) y = (cellHeight / 2) - LEFT_PADDING;
-    CGRect bubbleFrame = CGRectMake(5, y, (LEFT_PADDING * 2) - 10, (LEFT_PADDING * 2) - 10);
+    CGFloat y = (cellHeight / 2) - (14/2);
+    CGRect bubbleFrame = CGRectMake((33/2) - (14/2), y, 14, 14);
+    
+    CGRect triangleFrame = CGRectMake(26, (cellHeight / 2) - (20/2), 10, 20);
 
-
     
-    //Set Label Frame
-    CGRect labelFrame = CGRectMake(LEFT_PADDING * 3, TOP_PADDING, TEXT_WIDTH - (LEFT_PADDING * 2), 0);
+    //Set container Frame
+    CGRect containerFrame = CGRectMake(lineFrame.origin.x + CGRectGetWidth(lineFrame),
+                                       0,
+                                       WIDTH - 41.5f,
+                                       cellHeight);
     
     
-    labelFrame.size.height = postTextHeight;
+    CGRect labelFrame = CGRectMake(8, TOP_PADDING, CGRectGetWidth(containerFrame) - 14, postTextHeight);
+    CGRect imageFrame = CGRectMake(8, 0, CGRectGetWidth(containerFrame) - 14, IMAGEVIEW_HEIGHT);
+    CGRect actionViewframe = CGRectMake(8, 0, CGRectGetWidth(containerFrame) - 8, ACTIONS_VIEW_HEIGHT);
     
-    CGRect imageFrame = CGRectMake(LEFT_PADDING, 0, TEXT_WIDTH, IMAGEVIEW_HEIGHT);
-    CGRect actionViewframe = CGRectMake(LEFT_PADDING * 3, 0, WIDTH - (LEFT_PADDING * 3), ACTIONS_VIEW_HEIGHT);
-    
-    if (postObject[@"parseObject"][@"picture"])
+    if (postObject[@"parseObject"][@"pic"])
     {
         //Set Image View Frame
         imageFrame.origin.y = labelFrame.origin.y + postTextHeight + 5;
@@ -450,6 +476,8 @@
                                       @"lineFrame" : [NSValue valueWithCGRect:lineFrame],
                                       @"lineBorderFrame" : [NSValue valueWithCGRect:lineBorderFrame],
                                       @"bubbleFrame" : [NSValue valueWithCGRect:bubbleFrame],
+                                      @"triangleFrame" : [NSValue valueWithCGRect:triangleFrame],
+                                      @"containerFrame" : [NSValue valueWithCGRect:containerFrame],
                                       @"postTextFrame" : [NSValue valueWithCGRect:labelFrame],
                                       @"imageFrame" : [NSValue valueWithCGRect:imageFrame],
                                       @"actionViewframe" : [NSValue valueWithCGRect:actionViewframe]
@@ -584,6 +612,80 @@
                                               otherButtonTitles:@"Ok", nil];
     
     return alertView;
+}
+
++ (NSArray *)colours
+{
+    NSArray *colours =
+    @[
+    [UIColor colorWithRed:163/255.0f green:77/255.0f blue:60/255.0f alpha:1.0f],
+    [UIColor colorWithRed:233/255.0f green:115/255.0f blue:91/255.0f alpha:1.0f],
+    [UIColor colorWithRed:100/255.0f green:153/255.0f blue:112/255.0f alpha:1.0f],
+    [UIColor colorWithRed:253/255.0f green:208/255.0f blue:68/255.0f alpha:1.0f],
+    [UIColor colorWithRed:49/255.0f green:148/255.0f blue:207/255.0f alpha:1.0f],
+    [UIColor colorWithRed:100/255.0f green:185/255.0f blue:99/255.0f alpha:1.0f],
+    [UIColor colorWithRed:71/255.0f green:157/255.0f blue:200/255.0f alpha:1.0f],
+    [UIColor colorWithRed:243/255.0f green:137/255.0f blue:120/255.0f alpha:1.0f],
+    [UIColor colorWithRed:62/255.0f green:159/255.0f blue:211/255.0f alpha:1.0f],
+    [UIColor colorWithRed:252/255.0f green:203/255.0f blue:131/255.0f alpha:1.0f],
+    [UIColor colorWithRed:224/255.0f green:133/255.0f blue:105/255.0f alpha:1.0f],
+    [UIColor colorWithRed:166/255.0f green:238/255.0f blue:152/255.0f alpha:1.0f],
+    [UIColor colorWithRed:160/255.0f green:241/255.0f blue:247/255.0f alpha:1.0f],
+    [UIColor colorWithRed:192/255.0f green:91/255.0f blue:105/255.0f alpha:1.0f],
+    [UIColor colorWithRed:209/255.0f green:12/255.0f blue:81/255.0f alpha:1.0f],
+    [UIColor colorWithRed:159/255.0f green:1/255.0f blue:117/255.0f alpha:1.0f],
+    [UIColor colorWithRed:239/255.0f green:22/255.0f blue:46/255.0f alpha:1.0f],
+    [UIColor colorWithRed:159/255.0f green:1/255.0f blue:117/255.0f alpha:1.0f],
+    [UIColor colorWithRed:220/255.0f green:131/255.0f blue:169/255.0f alpha:1.0f]
+    ];
+    
+    return colours;
+}
+
+
++ (NSMutableArray *) generateRandomNumbers:(NSInteger)total withMin:(NSInteger)min withMax:(NSInteger)max
+{
+    NSInteger lastGenerated = -1;
+    NSMutableArray *generatedNumbers = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < total; i++)
+    {
+        BOOL done = NO; //Set the done value to NO
+        
+        while (done == NO)
+        {
+            int randNum = rand() % ((max - min) + min); //generate a random number.
+            
+            //Check if the number has been previously generated
+            BOOL found = [generatedNumbers containsObject:[NSNumber numberWithInt: randNum]];
+            
+            //If the number is not the last number generated and is not in the generate numbers array
+            //Add it to the array
+            if(randNum != lastGenerated &&  found == NO)
+            {
+                lastGenerated = randNum;
+                [generatedNumbers addObject:[NSNumber numberWithInt: randNum]];
+                done = YES; //set the done value to YES to indicate that the while loop can be exited
+            }
+        }
+    }
+    
+    return generatedNumbers;
+}
+
++ (UIColor *)getBubbleColor
+{
+    NSArray *colours = [Config colours];
+    
+    NSInteger max = [colours count];
+    NSInteger min = 0;
+    
+    int randNum = rand() % ((max - min) + min); //generate a random number.
+    
+    //Get color
+    UIColor *randomColor = colours[randNum];
+    
+    return randomColor;
 }
 
 
