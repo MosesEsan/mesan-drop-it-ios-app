@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0A27B434CD4052CF5983285C /* libPods-dROP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9660BC7CDFAED3A7A9DE949 /* libPods-dROP.a */; };
 		273E1AC51AB0B13200D41694 /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 273E1AC41AB0B13200D41694 /* TimelineTableViewCell.m */; };
-		273E1ACB1AB3687000D41694 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 273E1ACA1AB3687000D41694 /* 1.png */; };
 		273E1ACE1AB36CF900D41694 /* FullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 273E1ACD1AB36CF900D41694 /* FullScreenViewController.m */; };
 		278CF73A1AACFD0E00A13D4B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278CF7391AACFD0E00A13D4B /* ProfileViewController.m */; };
 		278CF73F1AAD113A00A13D4B /* User-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 278CF73C1AAD113A00A13D4B /* User-Small.png */; };
@@ -103,10 +102,7 @@
 		27EC53D11AB40FF600CC2A10 /* camera-switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27EC53CB1AB40FF600CC2A10 /* camera-switch@2x.png */; };
 		27EC53D71AB4163400CC2A10 /* LLSimpleCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EC53D41AB4163400CC2A10 /* LLSimpleCamera.m */; };
 		27EC53D81AB4163400CC2A10 /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EC53D61AB4163400CC2A10 /* UIImage+FixOrientation.m */; };
-		27EC53DB1AB4167A00CC2A10 /* PSSnapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EC53DA1AB4167A00CC2A10 /* PSSnapViewController.m */; };
 		27EC53DE1AB4183400CC2A10 /* ViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EC53DD1AB4183400CC2A10 /* ViewUtils.m */; };
-		27EC53E11AB41BB400CC2A10 /* PSPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EC53E01AB41BB400CC2A10 /* PSPreview.m */; };
-		27EC53E41AB41BE200CC2A10 /* DIImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EC53E31AB41BE200CC2A10 /* DIImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,7 +118,6 @@
 /* Begin PBXFileReference section */
 		273E1AC31AB0B13200D41694 /* TimelineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineTableViewCell.h; sourceTree = "<group>"; };
 		273E1AC41AB0B13200D41694 /* TimelineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineTableViewCell.m; sourceTree = "<group>"; };
-		273E1ACA1AB3687000D41694 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		273E1ACC1AB36CF900D41694 /* FullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenViewController.h; sourceTree = "<group>"; };
 		273E1ACD1AB36CF900D41694 /* FullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenViewController.m; sourceTree = "<group>"; };
 		278CF7381AACFD0E00A13D4B /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -249,14 +244,8 @@
 		27EC53D41AB4163400CC2A10 /* LLSimpleCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLSimpleCamera.m; sourceTree = "<group>"; };
 		27EC53D51AB4163400CC2A10 /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
 		27EC53D61AB4163400CC2A10 /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
-		27EC53D91AB4167A00CC2A10 /* PSSnapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSSnapViewController.h; path = LLSimpleCamera/PSSnapViewController.h; sourceTree = "<group>"; };
-		27EC53DA1AB4167A00CC2A10 /* PSSnapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSSnapViewController.m; path = LLSimpleCamera/PSSnapViewController.m; sourceTree = "<group>"; };
 		27EC53DC1AB4183400CC2A10 /* ViewUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUtils.h; sourceTree = "<group>"; };
 		27EC53DD1AB4183400CC2A10 /* ViewUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewUtils.m; sourceTree = "<group>"; };
-		27EC53DF1AB41BB400CC2A10 /* PSPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSPreview.h; sourceTree = "<group>"; };
-		27EC53E01AB41BB400CC2A10 /* PSPreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPreview.m; sourceTree = "<group>"; };
-		27EC53E21AB41BE200CC2A10 /* DIImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIImageView.h; sourceTree = "<group>"; };
-		27EC53E31AB41BE200CC2A10 /* DIImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIImageView.m; sourceTree = "<group>"; };
 		39C11CF79E8FBB5E252EBBA2 /* Pods-dROP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dROP.release.xcconfig"; path = "Pods/Target Support Files/Pods-dROP/Pods-dROP.release.xcconfig"; sourceTree = "<group>"; };
 		5B45C3F4981671AD7FFC8629 /* Pods-dROP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dROP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-dROP/Pods-dROP.debug.xcconfig"; sourceTree = "<group>"; };
 		C9660BC7CDFAED3A7A9DE949 /* libPods-dROP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dROP.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -366,15 +355,8 @@
 				27B404A11AA9F3FF007DC137 /* ViewPostTableViewController.m */,
 				278CF7381AACFD0E00A13D4B /* ProfileViewController.h */,
 				278CF7391AACFD0E00A13D4B /* ProfileViewController.m */,
-				27EC53D91AB4167A00CC2A10 /* PSSnapViewController.h */,
-				27EC53DA1AB4167A00CC2A10 /* PSSnapViewController.m */,
-				27EC53DF1AB41BB400CC2A10 /* PSPreview.h */,
-				27EC53E01AB41BB400CC2A10 /* PSPreview.m */,
-				27EC53E21AB41BE200CC2A10 /* DIImageView.h */,
-				27EC53E31AB41BE200CC2A10 /* DIImageView.m */,
 				278CF78C1AAE49EA00A13D4B /* InfoViewController.h */,
 				278CF78D1AAE49EA00A13D4B /* InfoViewController.m */,
-				273E1ACA1AB3687000D41694 /* 1.png */,
 				273E1ACC1AB36CF900D41694 /* FullScreenViewController.h */,
 				273E1ACD1AB36CF900D41694 /* FullScreenViewController.m */,
 				27EC53A31AB3F80000CC2A10 /* AFNetworking */,
@@ -719,7 +701,6 @@
 				27B404261AA65059007DC137 /* SmileyBluish-Small@2x.png in Resources */,
 				27A3347F1AA63525008188FC /* Images.xcassets in Resources */,
 				27B4041F1AA64EBB007DC137 /* SmileyGray-Small.png in Resources */,
-				273E1ACB1AB3687000D41694 /* 1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,9 +758,7 @@
 				27EC53B91AB3F83000CC2A10 /* AFImageRequestOperation.m in Sources */,
 				273E1AC51AB0B13200D41694 /* TimelineTableViewCell.m in Sources */,
 				27A334991AA6367F008188FC /* HomeTableViewController.m in Sources */,
-				27EC53E11AB41BB400CC2A10 /* PSPreview.m in Sources */,
 				27EC53BE1AB3F83000CC2A10 /* AFXMLRequestOperation.m in Sources */,
-				27EC53DB1AB4167A00CC2A10 /* PSSnapViewController.m in Sources */,
 				27B404D81AAB9570007DC137 /* LPlaceholderTextView.m in Sources */,
 				273E1ACE1AB36CF900D41694 /* FullScreenViewController.m in Sources */,
 				27EC53BA1AB3F83000CC2A10 /* AFJSONRequestOperation.m in Sources */,
@@ -803,7 +782,6 @@
 				27EC53A01AB3F68500CC2A10 /* MHFacebookImageViewer.m in Sources */,
 				27B404DB1AABBEEC007DC137 /* CommentTableViewCell.m in Sources */,
 				27B404341AA65F51007DC137 /* PostTextPhotoTableViewCell.m in Sources */,
-				27EC53E41AB41BE200CC2A10 /* DIImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

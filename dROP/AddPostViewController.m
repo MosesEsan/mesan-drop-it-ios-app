@@ -11,7 +11,6 @@
 #import "UIFont+Montserrat.h"
 #import "LPlaceholderTextView.h"
 #import <Parse/Parse.h>
-#import "PSSnapViewController.h"
 
 @interface AddPostViewController ()<UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 

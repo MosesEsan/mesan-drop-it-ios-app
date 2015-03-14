@@ -23,6 +23,7 @@
 }
 
 @property (nonatomic, strong) NSMutableArray *allPosts;
+@property (nonatomic, strong) NSMutableArray *likedPosts;
 
 @end
 
@@ -35,8 +36,10 @@
     if (self)
     {
         _allPosts = [[NSMutableArray alloc] init];
+        _likedPosts = [[NSMutableArray alloc] init];
         
         [self queryForUsersPosts];
+        [self queryForLikedPosts];
         [self queryForUsersPoints];
     }
     
@@ -145,6 +148,40 @@
     }
 }
 
+- (void)queryForLikedPosts
+{
+    if ([Config checkInternetConnection])
+    {
+        dispatch_queue_t userPostQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(userPostQueue, ^{
+            
+            NSArray *deviceId = @[[Config deviceId]];
+            
+            PFQuery *query = [PFQuery queryWithClassName:POSTS_CLASS_NAME];
+            [query whereKey:@"likes" containedIn:deviceId];
+            [query orderByDescending:@"createdAt"];
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error) {
+                    NSLog(@"error in geo query!");
+                } else {
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        _likedPosts = [Config filterPosts:objects];
+                        
+                        [self.tableView reloadData];
+                    });
+                }
+            }];
+            
+        });
+    }else{
+        
+        [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
+    }
+}
+
 - (void)queryForUsersPoints
 {
     if ([Config checkInternetConnection])
@@ -188,18 +225,24 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [_allPosts count];
+    
+    if (section == 0) return [_allPosts count];
+    else return [_likedPosts count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *postObject = _allPosts[indexPath.row];
+    NSDictionary *postObject;
+    
+    if (indexPath.section == 0) postObject = _allPosts[indexPath.row];
+    else postObject = _likedPosts[indexPath.row];
+    
     NSString *postText = postObject[@"text"];
     NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
     NSInteger repliesCount = [postObject[@"totalReplies"] integerValue];
@@ -242,9 +285,50 @@
     return _cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 31.0f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *sectionHeaderView = [[UIView alloc] initWithFrame:
+                                 CGRectMake(0, 0, tableView.frame.size.width, 31.0)];
+    sectionHeaderView.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:
+                            CGRectMake(15, 8.0f, sectionHeaderView.frame.size.width, 14.0f)];
+    
+    headerLabel.backgroundColor = [UIColor clearColor];
+    headerLabel.textAlignment = NSTextAlignmentLeft;
+    headerLabel.textColor = BAR_TINT_COLOR;
+    [headerLabel setFont:[UIFont montserratFontOfSize:12.5f]];
+    [sectionHeaderView addSubview:headerLabel];
+    
+    switch (section) {
+        case 0:
+            headerLabel.text = @"MY POSTS";
+            return sectionHeaderView;
+            break;
+        case 1:
+            headerLabel.text = @"LIKED POSTS";
+            return sectionHeaderView;
+            break;
+        default:
+            break;
+    }
+    
+    return sectionHeaderView;
+}
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *postObject = _allPosts[indexPath.row];
+    NSDictionary *postObject;
+    
+    if (indexPath.section == 0) postObject = _allPosts[indexPath.row];
+    else postObject = _likedPosts[indexPath.row];
+    
     NSString *postText = postObject[@"text"];
     
     CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
@@ -259,8 +343,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDictionary *postObject;
+    
+    if (indexPath.section == 0) postObject = _allPosts[indexPath.row];
+    else postObject = _likedPosts[indexPath.row];
+    
     ViewPostTableViewController *viewPost = [[ViewPostTableViewController alloc] initWithNibName:nil bundle:nil];
-    viewPost.postObject = _allPosts[indexPath.row];
+    viewPost.postObject = postObject;
     viewPost.delegate = nil;
     viewPost.view.tag = indexPath.row;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
