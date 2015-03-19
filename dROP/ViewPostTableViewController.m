@@ -12,6 +12,7 @@
 #import "LPlaceholderTextView.h"
 #import "UIFont+Montserrat.h"
 #import "CommentTableViewCell.h"
+#import "MHFacebookImageViewer.h"
 
 @interface ViewPostTableViewController ()<UITextViewDelegate>
 {
@@ -28,9 +29,7 @@
     UIButton *postButton;
     
     NSMutableArray *allComments;
-    
-    BOOL isKeyboardShown;
-
+    NSInteger likesCount;
 }
 
 @property (nonatomic, strong) UILabel *postText;
@@ -65,6 +64,31 @@
     
     allComments = [[NSMutableArray alloc] init];
     
+    //If the user is not the post authour
+    //They can report the post
+    if (![Config isPostAuthor:_postObject])
+    {
+        //Report Button
+        UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        reportButton.frame = CGRectMake(0, 0, 44, 44);
+        reportButton.backgroundColor = [UIColor clearColor];
+        [reportButton addTarget:self action:@selector(reportPost:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIImageView *reportImageview =
+        [Config imageViewFrame:CGRectMake(20.0f, 10.0f, 24, 24)
+                     withImage:[UIImage imageNamed:@"Report"]
+                     withColor:[UIColor whiteColor]];
+        reportImageview.userInteractionEnabled = YES;
+        reportImageview.backgroundColor = [UIColor clearColor];
+        [reportButton addSubview:reportImageview];
+        
+        UITapGestureRecognizer *report = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reportPost:)];
+        [reportImageview addGestureRecognizer:report];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:reportButton];
+    }
+    
+    //Main View - Tableview, Textfield etc
     subviewContainer = [[UIView alloc] initWithFrame:self.view.bounds];
     subviewContainer.clipsToBounds = YES;
     [self.view addSubview:subviewContainer];
@@ -102,7 +126,7 @@
     [postButton setTitle:@"Post" forState:UIControlStateNormal];
     [postButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     postButton.titleLabel.font = [UIFont montserratFontOfSize:15.0f];
-    postButton.backgroundColor = BAR_TINT_COLOR;
+    postButton.backgroundColor = BAR_TINT_COLOR2;
     postButton.layer.cornerRadius = 4.0f;
     postButton.enabled = NO;
     [postButton addTarget:self action:@selector(addComment:) forControlEvents:UIControlEventTouchUpInside];
@@ -113,16 +137,12 @@
     
     [self.tableView registerClass:[CommentTableViewCell class] forCellReuseIdentifier:@"CommentCell"];
     
-    isKeyboardShown = NO;
-
-
+    _showCloseButton = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [self queryForAllComments];
     
     [self tableHeader];
     
@@ -136,6 +156,35 @@
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (_showCloseButton == YES)
+    {
+        UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        closeButton.frame = CGRectMake(0, 0, 44, 44);
+        closeButton.backgroundColor = [UIColor clearColor];
+        [closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIImageView *closeImageview =
+        [Config imageViewFrame:CGRectMake(0, 12.0f, 20, 20)
+                     withImage:[UIImage imageNamed:@"Close2"]
+                     withColor:[UIColor whiteColor]];
+        closeImageview.userInteractionEnabled = YES;
+        closeImageview.backgroundColor = [UIColor clearColor];
+        [closeButton addSubview:closeImageview];
+        
+        UITapGestureRecognizer *close = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(close:)];
+        [closeImageview addGestureRecognizer:close];
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
+    }
+        
+    [self queryForAllComments];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -155,7 +204,7 @@
 - (void)tableHeader
 {
     NSString *postText = _postObject[@"text"];
-    NSInteger likesCount = [_postObject[@"totalLikes"] integerValue];
+    likesCount = [_postObject[@"totalLikes"] integerValue];
     NSInteger repliesCount = [_postObject[@"totalReplies"] integerValue];
     NSString *postDate = [Config calculateTime:_postObject[@"date"]];
     
@@ -208,7 +257,10 @@
         
         _postImage.file = _postObject[@"parseObject"][@"pic"];
         [_postImage loadInBackground];
+        _postImage.tag = 1;//indexPath.row;
+        [_postImage setupImageViewerWithPFFile:_postImage.file onOpen:nil onClose:nil];
     }
+    
     
     _actionsView = [[UIView alloc] initWithFrame:[subViewframes[@"actionViewframe"] CGRectValue]];
     _actionsView.backgroundColor = [UIColor clearColor];
@@ -233,11 +285,11 @@
     _smiley = [UIButton buttonWithType:UIButtonTypeCustom];
     _smiley.frame = CGRectMake((CGRectGetWidth(_actionsView.frame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
     _smiley.backgroundColor = [UIColor clearColor];
-    [_smiley setImage:[UIImage imageNamed:@"SmileyGray-Small"] forState:UIControlStateNormal];
-    [_smiley setImage:[UIImage imageNamed:@"SmileyBluish-Small"] forState:UIControlStateSelected];
-    [_smiley setImage:[UIImage imageNamed:@"Sad-Small"] forState:UIControlStateHighlighted];
+    [_smiley setImage:[UIImage imageNamed:@"SmileyGray"] forState:UIControlStateNormal];
+    [_smiley setImage:[UIImage imageNamed:@"SmileyBluish"] forState:UIControlStateSelected];
+    [_smiley setImage:[UIImage imageNamed:@"Sad"] forState:UIControlStateHighlighted];
     [_smiley setTitleColor:DATE_COLOR forState:UIControlStateNormal];
-    [_smiley setTitleColor:BAR_TINT_COLOR forState:UIControlStateSelected];
+    [_smiley setTitleColor:BAR_TINT_COLOR2 forState:UIControlStateSelected];
     _smiley.titleLabel.font = LIKES_FONT;
     _smiley.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     _smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 33, 5.2f, 15);
@@ -250,7 +302,7 @@
     //They can like, dislike and report the post
     if (![Config isPostAuthor:_postObject])
     {
-        [_smiley addTarget:_delegate action:@selector(likePost:) forControlEvents:UIControlEventTouchUpInside];
+        [_smiley addTarget:self action:@selector(likePost:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     if (![_postObject[@"disliked"] boolValue]){
@@ -380,26 +432,21 @@
 
 - (void)keyboardWillShow:(NSNotification*)aNotification
 {
+    //Get and save the current caption location
+    currentPosition = subviewContainer.frame;
     
-    if (isKeyboardShown == NO)
-    {
-        //Get and save the current caption location
-        currentPosition = subviewContainer.frame;
-        
-        NSDictionary* info = [aNotification userInfo];
-        CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-        
-        //Move caption on top of view
-        CGFloat newHeight = subviewContainer.frame.size.height - kbSize.height;
-        
-        CGRect rect = subviewContainer.frame;
-        rect.size.height = newHeight; //Set the new Y position
-        subviewContainer.frame = rect;
-        
-        isKeyboardShown = YES;
-        
-        [self resetSubView];
-    }
+    NSDictionary* info = [aNotification userInfo];
+    
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    //Move caption on top of view
+    CGFloat newHeight = subviewContainer.frame.size.height - kbSize.height;
+    
+    CGRect rect = subviewContainer.frame;
+    rect.size.height = newHeight; //Set the new Y position
+    subviewContainer.frame = rect;
+    
+    [self resetSubView];
 }
 
 
@@ -408,8 +455,6 @@
 {
     //Move caption to original position
     subviewContainer.frame = currentPosition;
-    
-    isKeyboardShown = NO;
     
     [self resetSubView];
 }
@@ -426,7 +471,6 @@
 
         NSInteger repliesCount = [_postObject[@"totalReplies"] integerValue];
         repliesCount++;
-        [_postObject setValue:[NSNumber numberWithInteger:repliesCount] forKey:@"totalReplies"];
         
         PFObject *parseObject = _postObject[@"parseObject"];
         
@@ -444,7 +488,8 @@
         
         [allComments addObject:commentObject];
         
-        //Update main array
+        //Update main array with new replies count value
+        [_postObject setValue:[NSNumber numberWithInteger:repliesCount] forKey:@"totalReplies"];
         [_delegate updateAllPostsArray:self.view.tag withPostObject:_postObject];
         
         [_tableView reloadData];
@@ -479,23 +524,24 @@
 
 - (void)queryForAllComments
 {
-    if ([Config checkInternetConnection])
-    {
-        dispatch_queue_t commentsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_async(commentsQueue, ^{
-            
+    dispatch_queue_t commentsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(commentsQueue, ^{
+        
+        if ([Config checkInternetConnection])
+        {
             PFObject *parseObject = _postObject[@"parseObject"];
             
             PFQuery *query = [PFQuery queryWithClassName:COMMENTS_CLASS_NAME];
             [query whereKey:@"postId" equalTo:parseObject.objectId];
             [query orderByAscending:@"createdAt"];
-            
-            // If no objects are loaded in memory, we look to the cache first to fill the table
-            // and then subsequently do a query against the network.
-            if ([allComments count] == 0)
-            {
-                query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-            }
+            /*
+             // If no objects are loaded in memory, we look to the cache first to fill the table
+             // and then subsequently do a query against the network.
+             if ([allComments count] == 0)
+             {
+             query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+             }
+             */
             query.limit = 20;
             
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -510,12 +556,12 @@
                 }
             }];
             
-        });
-        
-    }else{
-        
-        [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
-    }
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
+            });
+        }
+    });
 }
 
 - (void)resetSubView
@@ -567,6 +613,32 @@
     commentTextView.frame = CGRectMake(10, 10, CGRectGetWidth(composeContainer.frame) - 85, CGRectGetHeight(composeContainer.frame) - 20);
     
     [UIView commitAnimations];
+}
+
+- (void)likePost:(UIButton *)sender
+{
+    //figure out the new likes count value
+    if (sender.selected == YES) likesCount--;
+    else likesCount++;
+    
+    [self.delegate likePost:sender];
+    
+    //increment or decrement total likes
+    [sender setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
+}
+
+- (void)reportPost:(id)sender
+{    
+    //update array and database
+    [self.delegate reportPost:self.view.tag];
+    
+    ///close
+    [self.navigationController popViewControllerAnimated:TRUE];
+}
+
+- (void)close:(UITapGestureRecognizer *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

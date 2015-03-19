@@ -50,11 +50,11 @@
         _smiley = [UIButton buttonWithType:UIButtonTypeCustom];
         _smiley.frame = CGRectMake((CGRectGetWidth(_actionsView.frame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
         _smiley.backgroundColor = [UIColor clearColor];
-        [_smiley setImage:[UIImage imageNamed:@"SmileyGray-Small"] forState:UIControlStateNormal];
-        [_smiley setImage:[UIImage imageNamed:@"SmileyBluish-Small"] forState:UIControlStateSelected];
-        [_smiley setImage:[UIImage imageNamed:@"Sad-Small"] forState:UIControlStateHighlighted];
+        [_smiley setImage:[UIImage imageNamed:@"SmileyGray"] forState:UIControlStateNormal];
+        [_smiley setImage:[UIImage imageNamed:@"SmileyBluish"] forState:UIControlStateSelected];
+        [_smiley setImage:[UIImage imageNamed:@"Sad"] forState:UIControlStateHighlighted];
         [_smiley setTitleColor:DATE_COLOR forState:UIControlStateNormal];
-        [_smiley setTitleColor:BAR_TINT_COLOR forState:UIControlStateSelected];
+        [_smiley setTitleColor:BAR_TINT_COLOR2 forState:UIControlStateSelected];
         _smiley.titleLabel.font = LIKES_FONT;
         _smiley.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         _smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 33, 5.2f, 0);

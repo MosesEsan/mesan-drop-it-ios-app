@@ -24,7 +24,7 @@
 
 
 #import "MHFacebookImageViewer.h"
-#import "UIImageView+AFNetworking.h"
+//#import "UIImageView+AFNetworking.h"
 static const CGFloat kMinBlackMaskAlpha = 0.3f;
 static const CGFloat kMaxImageScale = 2.5f;
 static const CGFloat kMinImageScale = 1.0f;

@@ -10,8 +10,7 @@
 #import <ParseUI/ParseUI.h>
 #import "Config.h"
 #import "MCSwipeTableViewCell.h"
-
-#import "MHFacebookImageViewer.h"
+//#import "STTweetLabel.h"
 
 @interface TimelineTableViewCell : MCSwipeTableViewCell
 

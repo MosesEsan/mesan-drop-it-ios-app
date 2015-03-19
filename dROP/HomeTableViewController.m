@@ -22,18 +22,31 @@
 #import "CCMBorderView.h"
 #import "CCMPopupTransitioning.h"
 #import "ABCIntroView.h"
-
+//#import "FBShimmeringView.h"
 
 #import "FullScreenViewController.h"
+#import "MapViewController.h"
+#import "MHFacebookImageViewer.h"
+#import "RTSpinKitView.h"
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface HomeTableViewController ()<AddPostViewControllerDataSource, ViewPostViewControllerDelegate, CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource>
+//Ad
+#import <AvocarrotSDK/AvocarrotInstream.h>
+
+
+
+@interface HomeTableViewController ()<AddPostViewControllerDataSource, ViewPostViewControllerDelegate, MapViewControllerDataSource, MapViewControllerDelegate, CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, AVInstreamAdDelegate>
 {
-    NSMutableArray *availableLocations;
+    //FBShimmeringView *shimmeringView;
+    UIButton *profile;
+    UIButton *mapButton;
     UIButton *addNew;
+    UIBarButtonItem *negativeSpacer;
     
     ProfileViewController *profileViewController;
     
     ABCIntroView *introView;
+    RTSpinKitView *spinner;
     
     BOOL showAlert;
 }
@@ -52,56 +65,79 @@
 
 @implementation HomeTableViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
     _allPosts = [[NSMutableArray alloc] init];
     _likes = [[NSMutableArray alloc] init];
-    showAlert = YES;
-    
-    UIButton *profile = [UIButton buttonWithType:UIButtonTypeCustom];
-    profile.frame = CGRectMake(0, 0, 24, 24);
-    [profile setImage:[UIImage imageNamed:@"User-Small.png"] forState:UIControlStateNormal];
-    [profile setClipsToBounds:YES];
-    profile.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    profile.imageEdgeInsets = UIEdgeInsetsMake(1, 1, 1, 1);
-    [profile addTarget:self action:@selector(viewProfile:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:profile];
+    showAlert = NO;
     
     //TitleView
-    UILabel *layoutLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 60, 37)];
-    layoutLabel.textAlignment = NSTextAlignmentCenter;
-    layoutLabel.text = @"dropit";
+    //shimmeringView = [[FBShimmeringView alloc] initWithFrame:CGRectMake(0, 2, 90, 37)];
+    //[self.view addSubview:shimmeringView];
+    
+    UILabel *layoutLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 90, 37)];
+    layoutLabel.textAlignment = NSTextAlignmentLeft;//NSTextAlignmentCenter;
+    layoutLabel.text = @"DropIt";
     layoutLabel.textColor = [UIColor colorWithRed:235/255.0f green:237/255.0f blue:236/255.0f alpha:1.0f];
     //layoutLabel.font =  [UIFont systemFontOfSize:21];
     layoutLabel.font = [UIFont montserratFontOfSize:20.0f];
-    self.navigationItem.titleView = layoutLabel;
+    layoutLabel.backgroundColor = [UIColor clearColor];
+    layoutLabel.textColor = [UIColor whiteColor];
+    //layoutLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0f];
+    
+    //shimmeringView.contentView = layoutLabel;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:layoutLabel];
+    //self.navigationItem.titleView = layoutLabel;
+
+    
+    //Profile and New
+    profile = [UIButton buttonWithType:UIButtonTypeCustom];
+    profile.frame = CGRectMake(0, 0, 23, 23);
+    [profile setImage:[UIImage imageNamed:@"User"] forState:UIControlStateNormal];
+    [profile setClipsToBounds:YES];
+    profile.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    profile.imageEdgeInsets = UIEdgeInsetsMake(2, 2, 2, 2);
+    [profile addTarget:self action:@selector(viewProfile:) forControlEvents:UIControlEventTouchUpInside];
+    
+    mapButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    mapButton.frame = CGRectMake(0, 0, 23, 23);
+    [mapButton setImage:[UIImage imageNamed:@"Map"] forState:UIControlStateNormal];
+    [mapButton setClipsToBounds:YES];
+    mapButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    mapButton.imageEdgeInsets = UIEdgeInsetsMake(1, 1, 1, 1);
+    [mapButton addTarget:self action:@selector(viewMap:) forControlEvents:UIControlEventTouchUpInside];
     
     addNew = [UIButton buttonWithType:UIButtonTypeCustom];
-    addNew.frame = CGRectMake(0, 0, 24, 24);
-    [addNew setImage:[UIImage imageNamed:@"Add2-Small.png"] forState:UIControlStateNormal];
+    addNew.frame = CGRectMake(0, 0, 23, 23);
+    [addNew setImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
     [addNew setClipsToBounds:YES];
     addNew.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    ///addNew.imageEdgeInsets = UIEdgeInsetsMake(1, 1, 1, 1);
     [addNew addTarget:self action:@selector(addNewPost:) forControlEvents:UIControlEventTouchUpInside];
+    
+    negativeSpacer = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                       target:nil action:nil];
+    negativeSpacer.width = 14;
+    
+    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:profile],
+                                                negativeSpacer,
+                                                [[UIBarButtonItem alloc] initWithCustomView:mapButton]
+                                                ];
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     //Configure TableView
     self.tableView.backgroundColor = [UIColor whiteColor];
-    self.tableView.backgroundColor = TABLEVIEW_COLOR;
+    self.tableView.backgroundColor = TABLEVIEW2_COLOR;
 
     //[self.tableView registerClass:[PostTextTableViewCell class] forCellReuseIdentifier:@"BoxCell"];
     [self.tableView registerClass:[TimelineTableViewCell class] forCellReuseIdentifier:@"BoxCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    if(availableLocations == nil) availableLocations = [Config availableLocations];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(newPostAdded:)
@@ -128,12 +164,34 @@
     
     [self.tableView addSubview:refreshControl];
     
-    
     //Check if Intro View has to be shown
     [self showIntroView];
     
     //Table header
     [self tableHeader];
+    
+    //Add Loading View
+    spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleWanderingCubes color:BAR_TINT_COLOR2];
+    spinner.center = CGPointMake(CGRectGetWidth(self.view.frame) / 2, (CGRectGetHeight(self.view.frame) / 2) - 40);
+    //spinner.backgroundColor = [UIColor clearColor];
+    [spinner startAnimating];
+    [self.view addSubview:spinner];
+    
+    
+    //If app is not in testing mode, take the current location into consideration
+    if ([Config appMode] == PRODUCTION)
+    {
+        // Initialize the Avocarrot SDK and start loading an ad
+        AvocarrotInstream *myAd = [[AvocarrotInstream alloc] initWithController:self minHeightForRow:100.0f tableView:self.tableView];
+        [myAd setApiKey: AVOCARROT_API_KEY];
+        [myAd setSandbox:YES];
+        [myAd setDelegate:self];
+        [myAd setLogger:YES withLevel:@"ALL"];
+        [myAd setFrequency:5 startPosition:3];
+        
+        // Show ad
+        [myAd loadAdForPlacement: @"7ba813875be128917a7afe4f9550b23f1523fba2"];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -147,6 +205,14 @@
     [super viewDidDisappear:animated];
     
     [self.locationManager stopUpdatingLocation];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // Start shimmering.
+    //shimmeringView.shimmering = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -204,6 +270,10 @@
     NSString *postDate = [Config calculateTime:postObject[@"date"]];
     NSString *cellIdentifier = [NSString stringWithFormat:@"BoxCell%ld",(long)indexPath.row];
 
+    
+    //Check the type in other to know which type of cell to display
+    PostCellType type = [Config cellType];
+    
     TimelineTableViewCell *_cell = (TimelineTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!_cell)
         _cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
@@ -229,8 +299,11 @@
     
     UIColor *rColor = [Config getBubbleColor];
     _cell.bubble.layer.borderColor = rColor.CGColor;
-
-   // _cell.postContainer.backgroundColor = [rColor colorWithAlphaComponent:0.5];
+    /*
+    _cell.bubble.layer.borderWidth = 0;
+    _cell.bubble.image = [UIImage imageNamed:[Config fruits]];
+     */
+    
     
     if (postObject[@"parseObject"][@"pic"])
     {
@@ -248,12 +321,12 @@
     }
     
     _cell.tag = indexPath.row;
-    _cell.smiley.tag = indexPath.row;
     
     //If the user is not the post authour
     //They can like, dislike and report the post
     if (![Config isPostAuthor:postObject])
     {
+        _cell.smiley.tag = indexPath.row;
         [_cell.smiley addTarget:self action:@selector(likePost:) forControlEvents:UIControlEventTouchUpInside];
         
         __weak typeof(_cell) weakSelf = _cell;
@@ -296,6 +369,41 @@
     }
 }
 
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"No Post To Display";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
+    
+    NSString *text = @"No post has been added to this location.";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
+    
+    return [UIImage imageNamed:@"Empty"];
+}
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
+    
+    return [UIColor whiteColor];
+}
+
 #pragma mark - View Transitions
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -315,13 +423,11 @@
     
     CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
     popup.destinationBounds = [[UIScreen mainScreen] bounds];
-    //popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     popup.presentedController = addNewPost;
+    
+    popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+    popup.backgroundViewAlpha = 3.0f;
     popup.presentingController = self;
-    
-    
-    //UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addNewPost];
-    //navigationController.navigationBarHidden = YES;
     
     [self presentViewController:addNewPost animated:YES completion:nil];
 }
@@ -331,7 +437,23 @@
     [self.navigationController pushViewController:profileViewController animated:YES];
 }
 
-#pragma marlk - Location Manager
+- (void)viewMap:(UIButton *)sender
+{
+    MapViewController *mapView = [[MapViewController alloc] initWithNibName:nil bundle:nil];
+    mapView.dataSource = self;
+    mapView.delegate = self;
+    /*
+    UINavigationController *mapNavController = [[UINavigationController alloc] initWithRootViewController:mapView];
+    mapNavController.navigationBar.barStyle = BAR_STYLE;
+    mapNavController.navigationBar.barTintColor = BAR_TINT_COLOR2;
+    mapNavController.navigationBar.tintColor = [UIColor colorWithRed:235/255.0f green:237/255.0f blue:236/255.0f alpha:1.0f];
+    mapNavController.navigationBar.translucent = NO;
+    */
+    
+    [self.navigationController presentViewController:mapView animated:YES completion:nil];
+}
+
+#pragma mark - Location Manager
 
 - (CLLocationManager *)locationManager
 {
@@ -366,19 +488,32 @@
     
     _currentLocation = currentLocation;
     
-    [self queryForAllPostsNearLocation:self.currentLocation];
+    [self queryForAllPostsNearLocation];
     
     if ([Config checkAddPermission:_currentLocation] == YES)
     {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addNew];
+        self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:profile],
+                                                    negativeSpacer,
+                                                    [[UIBarButtonItem alloc] initWithCustomView:mapButton],
+                                                    negativeSpacer,
+                                                    [[UIBarButtonItem alloc] initWithCustomView:addNew]
+                                                    ];
     }else{
-        self.navigationItem.rightBarButtonItem = nil;
+        self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:profile],
+                                                    negativeSpacer,
+                                                    [[UIBarButtonItem alloc] initWithCustomView:mapButton]
+                                                    ];
     }
 }
 
 - (CLLocation *)getUserCurrentLocation
 {
     return self.currentLocation;
+}
+
+- (NSMutableArray *)getAllPosts
+{
+    return self.allPosts;
 }
 
 - (void)newPostAdded:(NSNotification *)notification
@@ -391,52 +526,66 @@
     
     [self.tableView reloadData];
     
-    [self queryForAllPostsNearLocation:self.currentLocation];
+    [self queryForAllPostsNearLocation];
 }
 
-- (void)queryForAllPostsNearLocation:(CLLocation *)currentLocation
+- (void)queryForAllPostsNearLocation
 {
-    if ([Config checkInternetConnection])
-    {
-        dispatch_queue_t postsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_async(postsQueue, ^{
-            
-
+    //NSLog(@"%@",[NSDate date]);
+    
+    dispatch_queue_t postsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(postsQueue, ^{
+        
+        if ([Config checkInternetConnection])
+        {
             PFQuery *query = [PFQuery queryWithClassName:POSTS_CLASS_NAME];
             [query orderByDescending:@"createdAt"];
             
-            
-            if (currentLocation == nil) {
-                NSLog(@"%s got a nil location!", __PRETTY_FUNCTION__);
+            //If app is not in testing mode, take the current location into consideration
+            if ([Config appMode] != TESTING)
+            {
+                if (self.currentLocation == nil) {
+                    NSLog(@"%s got a nil location!", __PRETTY_FUNCTION__);
+                }
+                
+                // Query for posts sort of kind of near users current location.
+                PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:_currentLocation.coordinate.latitude
+                                                           longitude:_currentLocation.coordinate.longitude];
+                
+                [query whereKey:@"location" nearGeoPoint:point withinKilometers:ONE_HALF_MILE_RADIUS_KM];
+                
             }
             
-            // Query for posts sort of kind of near our current location.
-            PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:currentLocation.coordinate.latitude
-                                                       longitude:currentLocation.coordinate.longitude];
-            
-            [query whereKey:@"location" nearGeoPoint:point withinKilometers:ONE_HALF_MILE_RADIUS];
+            //[query whereKey:@"objectId" equalTo:@"vc4OtBkcUN"];
             query.limit = 20;
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 if (error) {
                     NSLog(@"error in geo query!"); // todo why is this ever happening?
                 } else {
                     //[self filterPost:objects];
+                    
+                    [self setEmptyDatasetDelegate];
+                    NSMutableArray *filteredPost = [Config filterPosts:objects];
+                    
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        _allPosts = [Config filterPosts:objects];
+                        _allPosts = filteredPost;
+                        [spinner stopAnimating];
                         [self.tableView reloadData];
                         
                     });
                 }
             }];
-        });
-    }else{
-        
-        if (showAlert == YES)
-        {
-            [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
-            showAlert = NO;
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [spinner stopAnimating];
+                if (showAlert == YES)
+                {
+                    [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
+                    showAlert = NO;
+                }
+            });
         }
-    }
+    });
 }
 
 - (void)filterPost:(NSArray *)newPost
@@ -538,9 +687,9 @@
     }];
 }
 
-- (void)dislikePost
+- (void)dislikePost:(NSInteger)tag
 {
-    NSDictionary *postObject = _allPosts[_cellToDelete.tag];
+    NSDictionary *postObject = _allPosts[tag];
     
     BOOL highlighted = [postObject[@"disliked"] boolValue];
     
@@ -571,18 +720,19 @@
         [postObject setValue:[NSNumber numberWithBool:NO] forKey:@"liked"];
     }
     
-    [self updateAllPostsArray:_cellToDelete.tag withPostObject:postObject];
+    [self updateAllPostsArray:tag withPostObject:postObject];
     
     [parseObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if(error)
-            _cellToDelete.highlighted = highlighted; //return it to its previous state
+            //_cellToDelete.highlighted = highlighted; //return it to its previous state
+            NSLog(@"Notdisliked");
         /****attn*/
     }];
 }
 
-- (void)reportPost
+- (void)reportPost:(NSInteger)tag
 {
-    NSDictionary *postObject = _allPosts[_cellToDelete.tag];
+    NSDictionary *postObject = _allPosts[tag];
     
     //get the Parse Object and Report Post
     PFObject *parseObject = postObject[@"parseObject"];
@@ -593,11 +743,11 @@
     [parseObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if(error)
             //_cellToDelete.highlighted = highlighted; //return it to its previous state
-            NSLog(@"Reported");
+            NSLog(@"NotReported");
         /****attn*/
     }];
     
-    [_allPosts removeObjectAtIndex:_cellToDelete.tag];
+    [_allPosts removeObjectAtIndex:tag];
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -609,13 +759,13 @@
     if([title isEqualToString:@"Dislike"]) {
 
         [_cellToDelete swipeToOriginWithCompletion:^{
-            [self dislikePost];
+            [self dislikePost:_cellToDelete.tag];
             _cellToDelete = nil;
         }];
         
     }else if([title isEqualToString:@"Report"]) {
         
-        [self reportPost];
+        [self reportPost:_cellToDelete.tag];
         [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
     }else{
         [_cellToDelete swipeToOriginWithCompletion:^{
@@ -624,6 +774,8 @@
         _cellToDelete = nil;
     }
 }
+
+#pragma mark - ViewPostViewControllerDelegate
 
 - (void)updateAllPostsArray:(NSInteger)index withPostObject:(NSDictionary *)postObject
 {
@@ -636,9 +788,8 @@
 {
     [refresh endRefreshing];
     
-    [self queryForAllPostsNearLocation:self.currentLocation];
+    [self queryForAllPostsNearLocation];
 }
-
 
 - (void)showIntroView
 {
@@ -720,6 +871,20 @@
 }
 */
 
+- (void)setEmptyDatasetDelegate
+{
+    //Empty dataset
+    if (self.tableView.emptyDataSetSource == nil)
+        self.tableView.emptyDataSetSource = self;
+    
+    if (self.tableView.emptyDataSetDelegate == nil)
+        self.tableView.emptyDataSetDelegate = self;
+    
+    // A little trick for removing the cell separators
+    //self.tableView.tableFooterView = [UIView new];
+    
+}
+
 
 - (UIView *)viewWithImageName:(NSString *)imageName
 {
@@ -753,5 +918,111 @@
     return NO;
 }
 
+
+#pragma mark - AVInstreamAdDelegate
+
+/**
+ * Sent when an ad is not available along with the reason why.
+ *
+ * @param reason The reason why an ad was not returned.
+ */
+- (void)adDidNotLoad:(NSString *)reason
+{
+    //Log failure in parse
+    //Create Parse Object
+    PFObject *adObject = [PFObject objectWithClassName:ADS_CLASS_NAME];
+    adObject[@"type"] = @"unavailable";
+    adObject[@"reason"] = reason;
+}
+
+/**
+ * Sent when an ad is loaded.
+*/
+- (void)adDidLoad
+{
+    //Log load in parse
+    //Create Parse Object
+    PFObject *adObject = [PFObject objectWithClassName:ADS_CLASS_NAME];
+    adObject[@"type"] = @"loaded";
+    
+    [self logAdEvent:adObject];
+}
+
+/**
+ * Sent when a error occurs while loading an ad.
+ *
+ * @param error The error.
+ */
+- (void)adDidFailToLoad:(NSError *)error
+{
+    //Log failure in parse
+    //Create Parse Object
+    PFObject *adObject = [PFObject objectWithClassName:ADS_CLASS_NAME];
+    adObject[@"type"] = @"failed";
+    adObject[@"error"] = [error description];
+    
+    [self logAdEvent:adObject];
+}
+
+/**
+ * Sent immediately before the user will leave the app because of a ad click. Use this to
+ * pause or save the app state before the user leaves the app.
+ */
+-(void)userWillLeaveApp
+{
+    //Log click in parse
+    //Create Parse Object
+    PFObject *adObject = [PFObject objectWithClassName:ADS_CLASS_NAME];
+    adObject[@"type"] = @"click";
+    
+    [self logAdEvent:adObject];
+}
+
+
+- (void)logAdEvent:(PFObject *)adObject
+{
+    //Log click in parse
+    dispatch_queue_t adsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(adsQueue, ^{
+        
+        if ([Config checkInternetConnection])
+        {
+            //Get Users Current Location
+            CLLocation *currentLocation = [self getUserCurrentLocation];
+            
+            //Create Parse Object
+            adObject[@"deviceId"] = [Config deviceId];
+            adObject[@"college"] = [Config getClosestLocation:currentLocation];
+            
+            if (currentLocation != nil)
+            {
+                CLLocationCoordinate2D currentCoordinate = currentLocation.coordinate;
+                PFGeoPoint *currentPoint = [PFGeoPoint geoPointWithLatitude:currentCoordinate.latitude
+                                                                  longitude:currentCoordinate.longitude];
+                adObject[@"location"] = currentPoint;
+            }
+            
+            // Use PFACL to restrict future modifications to this object.
+            PFACL *readOnlyACL = [PFACL ACL];
+            [readOnlyACL setPublicReadAccess:YES];
+            [readOnlyACL setPublicWriteAccess:NO];
+            adObject.ACL = readOnlyACL;
+            
+            [adObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (error) {
+                    NSLog(@"Couldn't save!");
+                    return;
+                }
+                if (succeeded) {
+                    NSLog(@"Successfully saved!");
+                } else {
+                    NSLog(@"Failed to save.");
+                }
+            }];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    });
+}
 
 @end

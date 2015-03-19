@@ -12,6 +12,8 @@
 #import "LPlaceholderTextView.h"
 #import <Parse/Parse.h>
 
+#define ADD_BOX_FRAME CGRectMake(10, 20 + 64.0f, ADD_POST_WIDTH, ADD_POST_HEIGHT)
+
 @interface AddPostViewController ()<UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 {
@@ -19,8 +21,6 @@
     UILabel *characterCountLabel;
     
     LPlaceholderTextView *messageTextView;
-    
-    CGRect currentPosition;
     
     UIView *addDialog;
     UIButton *removePicture;
@@ -40,7 +40,7 @@
     
     //self.view.backgroundColor = [UIColor greenColor];
     
-    addDialog = [[UIView alloc] initWithFrame:CGRectMake(10, 20 + 64.0f, ADD_POST_WIDTH, ADD_POST_HEIGHT)];
+    addDialog = [[UIView alloc] initWithFrame:ADD_BOX_FRAME];
     addDialog.backgroundColor = [UIColor redColor];
     addDialog.backgroundColor = [UIColor whiteColor];
     addDialog.layer.cornerRadius = 8.0f;
@@ -56,13 +56,13 @@
     
     UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, CGRectGetHeight(header.frame))];
     closeButton.backgroundColor = [UIColor clearColor];
-    [closeButton setImage:[UIImage imageNamed:@"Close2-Small"] forState:UIControlStateNormal];
+    [closeButton setImage:[UIImage imageNamed:@"Close"] forState:UIControlStateNormal];
     [closeButton setImageEdgeInsets:UIEdgeInsetsMake(0, 3, 0, 6)];
     [closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
     [header addSubview:closeButton];
     
     UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(header.frame)- 80, 0, 80, CGRectGetHeight(header.frame))];
-    postButton.backgroundColor = BAR_TINT_COLOR;
+    postButton.backgroundColor = BAR_TINT_COLOR2;
     [postButton setTitle:@"Drop" forState:UIControlStateNormal];
     [postButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     postButton.titleLabel.font = [UIFont montserratFontOfSize:17.0f];
@@ -86,7 +86,7 @@
     
     UIButton *cameraButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, CGRectGetHeight(footer.frame))];
     cameraButton.backgroundColor = [UIColor clearColor];
-    [cameraButton setImage:[UIImage imageNamed:@"Camera-Small"] forState:UIControlStateNormal];
+    [cameraButton setImage:[UIImage imageNamed:@"Camera"] forState:UIControlStateNormal];
     [cameraButton setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 7, 18)];
     [cameraButton addTarget:self action:@selector(addPhoto:) forControlEvents:UIControlEventTouchUpInside];
     [footer addSubview:cameraButton];
@@ -135,6 +135,7 @@
         removePicture.hidden = NO;
     }else{
         //remove
+        previewPhoto = nil;
         self.photoPreview.image = [UIImage imageNamed:@"CoverPhotoPH.JPG"];
         
         [UIView beginAnimations:nil context:NULL];
@@ -230,11 +231,10 @@
 
 - (void)keyboardWillShow:(NSNotification*)aNotification
 {
-    //Get and save the current caption location
-    currentPosition = addDialog.frame;
-    
     NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+
+    
     
     CGFloat newY = [[UIScreen mainScreen] bounds].size.height - kbSize.height - ADD_POST_HEIGHT - 15;
 
@@ -257,7 +257,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3]; // if you want to slide up the view
     
-    addDialog.frame = currentPosition;
+    addDialog.frame = ADD_BOX_FRAME;
     
     [UIView commitAnimations];
     
@@ -299,11 +299,11 @@
 
 - (void)dropPost
 {
-    if ([Config checkInternetConnection])
-    {
-        dispatch_queue_t addQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_async(addQueue, ^{
-            
+    dispatch_queue_t addQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(addQueue, ^{
+        
+        if ([Config checkInternetConnection])
+        {
             // 1. Get Users Current Location
             CLLocation *currentLocation = [self.dataSource getUserCurrentLocation];
             CLLocationCoordinate2D currentCoordinate = currentLocation.coordinate;
@@ -318,8 +318,9 @@
                 postObject[@"deviceId"] = [Config deviceId];
                 postObject[@"location"] = currentPoint;
                 postObject[@"type"] = NEW_POST_TYPE;
+                postObject[@"college"] = [Config getClosestLocation:currentLocation];
                 
-                if (_photoPreview.image != nil)
+                if (_previewPhoto != nil)
                 {
                     NSData *imageData = UIImagePNGRepresentation(_photoPreview.image);
                     
@@ -372,13 +373,20 @@
                 [self dismissViewControllerAnimated:YES completion:nil];
             }else{
                 //Display error message
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Location error"
+                                                                    message:@"Unable to determine current location. Please make sure you have enabled location sharing for this app."
+                                                                   delegate:self
+                                                          cancelButtonTitle:nil
+                                                          otherButtonTitles:@"Ok", nil];
+                [alertView show];
             }
-        });
-    }else{
-        
-        [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
-    }
-    
+        }else{
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
+            });
+        }
+    });
 }
 
 - (void)addPhoto:(UIButton *)sender
@@ -445,7 +453,6 @@
     self.previewPhoto = chosenImage;
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

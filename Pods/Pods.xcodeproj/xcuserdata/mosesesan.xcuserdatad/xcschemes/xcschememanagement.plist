@@ -9,22 +9,27 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-dROP-CCMPopup.xcscheme</key>
+		<key>Pods-Drop It!-CCMPopup.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-dROP-FormatterKit.xcscheme</key>
+		<key>Pods-Drop It!-DZNEmptyDataSet.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-dROP-Montserrat.xcscheme</key>
+		<key>Pods-Drop It!-FormatterKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-dROP.xcscheme</key>
+		<key>Pods-Drop It!-Montserrat.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Drop It!.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,27 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>21A97382CC345D6467A52E71</key>
+		<key>3749B058080FE766A7E442D2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>24AF3B79AC047D6E9842F3AA</key>
+		<key>3FFA445F3AA71764442E8C84</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>585E5F208EFA9FA66296934B</key>
+		<key>9C782EF458C079F402A1F38B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BCD8A60A3212778DF63E2AF0</key>
+		<key>B9FE2DE1CED74E5D7819C6C4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F28FC8C807E30064FB48D5CC</key>
+		<key>D8AE0610169C383365F04258</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F818C180CB71C1F9E8B9E6B6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

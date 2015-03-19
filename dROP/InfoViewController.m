@@ -32,7 +32,7 @@
     self.view.layer.borderColor = [UIColor colorWithRed:129/255.0f green:129/255.0f blue:129/255.0f alpha:1.0f].CGColor;
     
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, INFO_VIEW_WIDTH, 50.0f)];
-    header.backgroundColor = BAR_TINT_COLOR;
+    header.backgroundColor = BAR_TINT_COLOR2;
     //[UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.8f];
     [self.view addSubview:header];
     
@@ -57,7 +57,7 @@
     pageControl.numberOfPages = NUMBER_OF_PAGES;
     pageControl.currentPage = 0;
     pageControl.backgroundColor = [UIColor clearColor];
-    pageControl.currentPageIndicatorTintColor = BAR_TINT_COLOR;
+    pageControl.currentPageIndicatorTintColor = BAR_TINT_COLOR2;
     pageControl.pageIndicatorTintColor = DATE_COLOR;
     [self.view addSubview:pageControl];
     
@@ -67,7 +67,7 @@
     
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     closeButton.frame = CGRectMake(10, 10, CGRectGetWidth(footer.frame) - 20, CGRectGetHeight(footer.frame) - 20);
-    closeButton.backgroundColor = BAR_TINT_COLOR;
+    closeButton.backgroundColor = BAR_TINT_COLOR2;
     [closeButton setTitle:@"Close" forState:UIControlStateNormal];
     [closeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     closeButton.titleLabel.font = [UIFont montserratFontOfSize:18.0f];

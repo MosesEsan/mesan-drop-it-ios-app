@@ -49,7 +49,7 @@
     self.homeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.homeTableViewController];
     
     self.homeNavigationController.navigationBar.barStyle = BAR_STYLE;
-    self.homeNavigationController.navigationBar.barTintColor = BAR_TINT_COLOR;
+    self.homeNavigationController.navigationBar.barTintColor = BAR_TINT_COLOR2;
     self.homeNavigationController.navigationBar.tintColor = [UIColor colorWithRed:235/255.0f green:237/255.0f blue:236/255.0f alpha:1.0f];
     self.homeNavigationController.navigationBar.translucent = NO;
     
@@ -118,6 +118,7 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
+    [Config setConfiguration];
     [Config updateAvailableLocations:lastUpdated];
     [Config updateRewards:lastUpdated];
     

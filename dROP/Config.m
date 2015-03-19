@@ -10,6 +10,7 @@
 #import "TTTTimeIntervalFormatter.h"
 #import "Reachability.h"
 
+
 @implementation Config
 
 + (NSMutableArray *)introsInfo
@@ -25,6 +26,91 @@
      nil];
     
     return introsInfo;
+}
+
++ (void)setConfiguration
+{
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"])
+    {
+        NSLog(@"Config not set");
+        
+        NSDictionary *config = @{@"Installation Date" : [NSDate date],
+                                 @"App Mode" : @(TESTING),
+                                 @"Mode Configured" : [NSNumber numberWithBool:NO],
+                                 @"Last Active" : [NSDate date],
+                                 @"Cell Type" : @(TIMELINE)
+                                 };
+        
+        [[NSUserDefaults standardUserDefaults] setObject:config forKey:@"DIConfig"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        //get the mode
+        dispatch_queue_t modeQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(modeQueue, ^{
+            
+            if ([Config checkInternetConnection])
+            {
+                PFQuery *query = [PFQuery queryWithClassName:CONFIGURATION_CLASS_NAME];
+                query.limit = 1;
+                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    if (error) {
+                        NSLog(@"error in geo query!"); // todo why is this ever happening?
+                    } else {
+                        
+                        NSDictionary *newConfig = [[NSDictionary alloc] init];
+                        if ([objects count] > 0)
+                        {
+                            for (PFObject *config in objects)
+                            {
+                                AppMode mode = (AppMode)[config[@"modeValue"] intValue];
+                                
+                                newConfig = @{@"Installation Date" : [NSDate date],
+                                                         @"App Mode" : @(mode),
+                                                         @"Mode Configured" : [NSNumber numberWithBool:YES],
+                                                         @"Last Active" : [NSDate date],
+                                                         @"Cell Type" : @(TIMELINE)
+                                                         };
+                            }
+                        }
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            if ([objects count] > 0)
+                            {
+                                [[NSUserDefaults standardUserDefaults] setObject:newConfig forKey:@"DIConfig"];
+                                [[NSUserDefaults standardUserDefaults] synchronize];
+                            }
+                        });
+                    }
+                }];
+            }
+        });
+        
+    }
+}
+
++ (AppMode)appMode
+{
+    AppMode mode = DEVELOPMENT;
+    
+    //Set Default Locations
+    NSDictionary *config = [[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"];
+    
+    mode = (AppMode)[config[@"App Mode"] intValue];
+    
+    return mode;
+}
+
++ (PostCellType)cellType
+{
+    PostCellType type = LIST;
+    
+    //Set Default Locations
+    NSDictionary *config = [[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"];
+    
+    type = (PostCellType)[config[@"Cell Type"] intValue];
+    
+    return type;
 }
 
 + (void)updateAvailableLocations:(NSDate *)lastUpdated
@@ -49,42 +135,45 @@
     //call query to retrieve new ones, if the last updated date is > 60 or its nil
     if (lastUpdated == nil || [Config checkLastUpdated:lastUpdated withMaxDifference:60])
     {
-        if ([Config checkInternetConnection])
-        {
-            dispatch_queue_t locationQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-            dispatch_async(locationQueue, ^{
+        dispatch_queue_t locationQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(locationQueue, ^{
+            
+            if ([Config checkInternetConnection])
+            {
                 PFQuery *query = [PFQuery queryWithClassName:LOCATIONS_CLASS_NAME];
                 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                     if (error) {
                         NSLog(@"error in geo query!"); // todo why is this ever happening?
                     } else {
                         
+                        NSMutableArray *availableLocations = [[NSMutableArray alloc] init];
+                        if ([objects count] > 0)
+                        {
+                            for (PFObject *location in objects)
+                            {
+                                NSString *college = location[@"college"];
+                                PFGeoPoint *locationGeo = location[@"location"];
+                                NSArray *locationInfo = @[college,
+                                                          [NSNumber numberWithDouble:locationGeo.latitude],
+                                                          [NSNumber numberWithDouble:locationGeo.longitude],
+                                                          location[@"distance"]];
+                                
+                                [availableLocations addObject:locationInfo];
+                            }
+                        }
+                        
                         dispatch_async(dispatch_get_main_queue(), ^{
+                            
                             if ([objects count] > 0)
                             {
-                                NSMutableArray *availableLocations = [[NSMutableArray alloc] init];
-                                
-                                for (PFObject *location in objects)
-                                {
-                                    NSString *college = location[@"college"];
-                                    PFGeoPoint *locationGeo = location[@"location"];
-                                    NSArray *locationInfo = @[college,
-                                                              [NSNumber numberWithDouble:locationGeo.latitude],
-                                                              [NSNumber numberWithDouble:locationGeo.longitude],
-                                                              location[@"distance"]];
-                                    
-                                    [availableLocations addObject:locationInfo];
-                                }
-                                
                                 [[NSUserDefaults standardUserDefaults] setObject:availableLocations forKey:@"AvailableLocations"];
                                 [[NSUserDefaults standardUserDefaults] synchronize];
                             }
                         });
                     }
                 }];
-            });
-            
-        }
+            }
+        });
     }
 }
 
@@ -121,37 +210,41 @@
     //call query to retrieve new ones, if the last updated date is > 1440 (1 Day) or its nil
     if (lastUpdated == nil || [Config checkLastUpdated:lastUpdated withMaxDifference:1440])
     {
-        if ([Config checkInternetConnection])
-        {
-            dispatch_queue_t rewardsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-            dispatch_async(rewardsQueue, ^{
+        dispatch_queue_t rewardsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(rewardsQueue, ^{
+            
+            if ([Config checkInternetConnection])
+            {
                 PFQuery *query = [PFQuery queryWithClassName:REWARDS_CLASS_NAME];
                 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                     if (error) {
                         NSLog(@"error in geo query!"); // todo why is this ever happening?
                     } else {
+                        
+                        NSMutableArray *rewards = [[NSMutableArray alloc] init];
+                        if ([objects count] > 0)
+                        {
+                            for (PFObject *location in objects)
+                            {
+                                NSString *points = [NSString stringWithFormat:@"%@ Points",location[@"points"]];
+                                NSString *reward = location[@"reward"];
+                                NSArray *pointInfo = @[points,reward];
+                                
+                                [rewards addObject:pointInfo];
+                            }
+                        }
+                        
                         dispatch_async(dispatch_get_main_queue(), ^{
                             if ([objects count] > 0)
                             {
-                                NSMutableArray *rewards = [[NSMutableArray alloc] init];
-                                
-                                for (PFObject *location in objects)
-                                {
-                                    NSString *points = [NSString stringWithFormat:@"%@ Points",location[@"points"]];
-                                    NSString *reward = location[@"reward"];
-                                    NSArray *pointInfo = @[points,reward];
-                                    
-                                    [rewards addObject:pointInfo];
-                                }
-                                
                                 [[NSUserDefaults standardUserDefaults] setObject:rewards forKey:@"Rewards"];
                                 [[NSUserDefaults standardUserDefaults] synchronize];
                             }
                         });
                     }
                 }];
-            });
-        }
+            }
+        });
     }
 }
 
@@ -320,32 +413,11 @@
                                                                 longitude:[[Config availableLocations][i][2] floatValue]];
         
         CLLocationDistance delta = [currentLocation distanceFromLocation:availablePoint];
+        /*
+        NSString *text = [NSString stringWithFormat:@"The College is %@ - The Allowed Distance is %f and the users distance is %f.", [NSString stringWithFormat:@"%@",[Config availableLocations][i][0]],[[Config availableLocations][i][3] floatValue],delta];
         
-        if (delta != 0 && delta <= [[Config availableLocations][i][3] floatValue])
-        {
-            isAllowedToAdd = YES;
-            
-            //NSString *college = [NSString stringWithFormat:@"%@",availableLocations[i][0]];
-            // NSLog(college);
-            i = [[Config availableLocations] count];
-        }
-    }
-    
-    return isAllowedToAdd;
-}
-
-+ (BOOL)getClosestLocation:(CLLocation *)currentLocation
-{
-    //Get the current location
-    BOOL isAllowedToAdd = NO;
-    
-    for (NSInteger i = 0; i < [[Config availableLocations] count]; i++)
-    {
-        //Create a cllocation object
-        CLLocation *availablePoint = [[CLLocation alloc] initWithLatitude:[[Config availableLocations][i][1] floatValue]
-                                                                longitude:[[Config availableLocations][i][2] floatValue]];
-        
-        CLLocationDistance delta = [currentLocation distanceFromLocation:availablePoint];
+        NSLog(text);
+        */
         
         //If the user distance from the main location is less than or equal to the allowed distance
         if (delta != 0 && delta <= [[Config availableLocations][i][3] floatValue])
@@ -359,6 +431,44 @@
     }
     
     return isAllowedToAdd;
+}
+
++ (NSString *)getClosestLocation:(CLLocation *)currentLocation
+{
+    //Get the current location
+    CLLocationDistance minDistance = 0;
+    NSString *college = @"";
+    
+    for (NSInteger i = 0; i < [[Config availableLocations] count]; i++)
+    {
+        //Create a cllocation object
+        CLLocation *availablePoint = [[CLLocation alloc] initWithLatitude:[[Config availableLocations][i][1] floatValue]
+                                                                longitude:[[Config availableLocations][i][2] floatValue]];
+        
+        CLLocationDistance delta = [currentLocation distanceFromLocation:availablePoint];
+        
+        //If the user distance from the main location is less than or equal to the allowed distance
+        if (delta != 0 && delta <= [[Config availableLocations][i][3] floatValue])
+        {
+            NSLog([NSString stringWithFormat:@"%@",[Config availableLocations][i][0]]);
+            //check against the current least distance
+            if (minDistance == 0) {
+                minDistance = delta;
+                college = [NSString stringWithFormat:@"%@",[Config availableLocations][i][0]];
+            }else{
+                if (delta < minDistance)
+                {
+                    //Save the distance and college
+                    minDistance = delta;
+                    college = [NSString stringWithFormat:@"%@",[Config availableLocations][i][0]];
+                }
+            }
+        }
+    }
+    
+    NSLog([NSString stringWithFormat:@"Final is -> %@",college]);
+
+    return college;
 }
 
 
@@ -433,14 +543,16 @@
     if (postObject[@"parseObject"][@"pic"])
         cellHeight =  cellHeight + 10 + IMAGEVIEW_HEIGHT;
     
-    CGRect lineFrame = CGRectMake(0, 0, 33, cellHeight);
+
+    
+    CGRect lineFrame = CGRectMake(3, 0, LINE_FRAME_WIDTH, cellHeight);
     CGRect lineBorderFrame = CGRectMake(LEFT_PADDING - 1, 0, 2.0, cellHeight);
 
     
-    CGFloat y = (cellHeight / 2) - (14/2);
-    CGRect bubbleFrame = CGRectMake((33/2) - (14/2), y, 14, 14);
+    CGFloat y = (cellHeight / 2) - (BUBBLE_FRAME_WIDTH/2);
+    CGRect bubbleFrame = CGRectMake((LINE_FRAME_WIDTH/2) - (BUBBLE_FRAME_WIDTH/2), y, BUBBLE_FRAME_WIDTH, BUBBLE_FRAME_WIDTH);
     
-    CGRect triangleFrame = CGRectMake(26, (cellHeight / 2) - (20/2), 10, 20);
+    CGRect triangleFrame = CGRectMake(LINE_FRAME_WIDTH - 4, (cellHeight / 2) - (20/2), 10, 20);
 
     
     //Set container Frame
@@ -448,8 +560,6 @@
                                        0,
                                        WIDTH - 41.5f,
                                        cellHeight);
-    
-    
     CGRect labelFrame = CGRectMake(8, TOP_PADDING, CGRectGetWidth(containerFrame) - 14, postTextHeight);
     CGRect imageFrame = CGRectMake(8, 0, CGRectGetWidth(containerFrame) - 14, IMAGEVIEW_HEIGHT);
     CGRect actionViewframe = CGRectMake(8, 0, CGRectGetWidth(containerFrame) - 8, ACTIONS_VIEW_HEIGHT);
@@ -457,7 +567,7 @@
     if (postObject[@"parseObject"][@"pic"])
     {
         //Set Image View Frame
-        imageFrame.origin.y = labelFrame.origin.y + postTextHeight + 5;
+        imageFrame.origin.y = labelFrame.origin.y + postTextHeight + 7;
         imageFrame.size.height = IMAGEVIEW_HEIGHT;
         
         //Set Action View Frame
@@ -618,18 +728,30 @@
 {
     NSArray *colours =
     @[
-    [UIColor colorWithRed:163/255.0f green:77/255.0f blue:60/255.0f alpha:1.0f],
-    [UIColor colorWithRed:233/255.0f green:115/255.0f blue:91/255.0f alpha:1.0f],
-    [UIColor colorWithRed:100/255.0f green:153/255.0f blue:112/255.0f alpha:1.0f],
-    [UIColor colorWithRed:253/255.0f green:208/255.0f blue:68/255.0f alpha:1.0f],
-    [UIColor colorWithRed:49/255.0f green:148/255.0f blue:207/255.0f alpha:1.0f],
-    [UIColor colorWithRed:100/255.0f green:185/255.0f blue:99/255.0f alpha:1.0f],
-    [UIColor colorWithRed:71/255.0f green:157/255.0f blue:200/255.0f alpha:1.0f],
-    [UIColor colorWithRed:243/255.0f green:137/255.0f blue:120/255.0f alpha:1.0f],
-    [UIColor colorWithRed:62/255.0f green:159/255.0f blue:211/255.0f alpha:1.0f],
-    [UIColor colorWithRed:252/255.0f green:203/255.0f blue:131/255.0f alpha:1.0f],
-    [UIColor colorWithRed:224/255.0f green:133/255.0f blue:105/255.0f alpha:1.0f],
-    [UIColor colorWithRed:166/255.0f green:238/255.0f blue:152/255.0f alpha:1.0f],
+    [UIColor colorWithRed:163/255.0f green:77/255.0f blue:60/255.0f alpha:1.0f]//A34D3C
+    ,
+    [UIColor colorWithRed:233/255.0f green:115/255.0f blue:91/255.0f alpha:1.0f]//E9735B
+    ,
+    [UIColor colorWithRed:100/255.0f green:153/255.0f blue:112/255.0f alpha:1.0f]//649970
+    ,
+    [UIColor colorWithRed:253/255.0f green:208/255.0f blue:68/255.0f alpha:1.0f]//FDD044
+    ,
+    [UIColor colorWithRed:49/255.0f green:148/255.0f blue:207/255.0f alpha:1.0f]//3194C9
+    ,
+    [UIColor colorWithRed:100/255.0f green:185/255.0f blue:99/255.0f alpha:1.0f]//64B963
+    ,
+    [UIColor colorWithRed:71/255.0f green:157/255.0f blue:200/255.0f alpha:1.0f]//479DC8
+    ,
+    [UIColor colorWithRed:243/255.0f green:137/255.0f blue:120/255.0f alpha:1.0f]//F38978
+    ,
+    [UIColor colorWithRed:62/255.0f green:159/255.0f blue:211/255.0f alpha:1.0f]//3E9FD3
+    ,
+    [UIColor colorWithRed:252/255.0f green:203/255.0f blue:131/255.0f alpha:1.0f]//FCCB83
+    ,
+    [UIColor colorWithRed:224/255.0f green:133/255.0f blue:105/255.0f alpha:1.0f]//E08569
+    ,
+    [UIColor colorWithRed:166/255.0f green:238/255.0f blue:152/255.0f alpha:1.0f]//
+    ,
     [UIColor colorWithRed:160/255.0f green:241/255.0f blue:247/255.0f alpha:1.0f],
     [UIColor colorWithRed:192/255.0f green:91/255.0f blue:105/255.0f alpha:1.0f],
     [UIColor colorWithRed:209/255.0f green:12/255.0f blue:81/255.0f alpha:1.0f],
@@ -641,6 +763,24 @@
     
     return colours;
 }
+
++ (NSString *)fruits
+{
+    NSArray *fruits =
+    @[@"apple", @"apple2", @"banana2", @"cherries", @"coconut",@"grapes", @"grapes2", @"kiwi", @"lemon", @"papaya", @"pineapple", @"lime", @"orange", @"orange2", @"peach", @"peach2", @"strawberry", @"strawberry2", @"watermelon", @"watermelon2"];
+    
+    NSInteger max = [fruits count];
+    NSInteger min = 0;
+    
+    int randNum = rand() % ((max - min) + min); //generate a random number.
+    
+    //Get color
+    NSString *randomFruit = fruits[randNum];
+    
+    return randomFruit;
+}
+
+
 
 
 + (NSMutableArray *) generateRandomNumbers:(NSInteger)total withMin:(NSInteger)min withMax:(NSInteger)max
@@ -686,6 +826,29 @@
     UIColor *randomColor = colours[randNum];
     
     return randomColor;
+}
+
+
++ (PFImageView *)imageViewFrame:(CGRect)frame withImage:(UIImage *)image withColor:(UIColor *)color
+{
+    PFImageView *imageView = [[PFImageView alloc] initWithFrame:frame];
+    imageView.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [imageView setTintColor:color];
+    
+    return imageView;
+}
+
+- (void)unUsedCodes
+{
+    // Label Shadow
+    /*
+     [layoutLabel sizeToFit];
+     [layoutLabel setClipsToBounds:NO];
+     [layoutLabel.layer setShadowOffset:CGSizeMake(0, 0)];
+     [layoutLabel.layer setShadowColor:[[UIColor blackColor] CGColor]];
+     [layoutLabel.layer setShadowRadius:1.0];
+     [layoutLabel.layer setShadowOpacity:0.6];
+     */
 }
 
 

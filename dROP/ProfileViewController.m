@@ -15,11 +15,16 @@
 #import "CCMBorderView.h"
 #import "CCMPopupTransitioning.h"
 
+#import "MHFacebookImageViewer.h"
+
+
 
 @interface ProfileViewController ()
 {
     UILabel *rankLabel;
     NSDate *lastUpdated;
+    
+    BOOL showAlert;
 }
 
 @property (nonatomic, strong) NSMutableArray *allPosts;
@@ -29,32 +34,27 @@
 
 @implementation ProfileViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    if (self)
-    {
-        _allPosts = [[NSMutableArray alloc] init];
-        _likedPosts = [[NSMutableArray alloc] init];
-        
-        [self queryForUsersPosts];
-        [self queryForLikedPosts];
-        [self queryForUsersPoints];
-    }
-    
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.title = @"Profile";
     
+    showAlert = NO;
+    
+    _allPosts = [[NSMutableArray alloc] init];
+    _likedPosts = [[NSMutableArray alloc] init];
+    
+    dispatch_queue_t queriesQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queriesQueue, ^{
+        [self queryForUsersPosts];
+        [self queryForLikedPosts];
+        [self queryForUsersPoints];
+    });
+    
     UIButton *info = [UIButton buttonWithType:UIButtonTypeCustom];
     info.frame = CGRectMake(0, 0, 22, 22);
-    [info setImage:[UIImage imageNamed:@"Info-Small.png"] forState:UIControlStateNormal];
+    [info setImage:[UIImage imageNamed:@"Info"] forState:UIControlStateNormal];
     [info setClipsToBounds:YES];
     info.imageView.contentMode = UIViewContentModeScaleAspectFill;
     info.imageEdgeInsets = UIEdgeInsetsMake(1, 1, 1, 1);
@@ -102,6 +102,11 @@
     [self.tableView addSubview:refreshControl];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    showAlert = YES;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -118,11 +123,11 @@
 
 - (void)queryForUsersPosts
 {
-    if ([Config checkInternetConnection])
-    {
-        dispatch_queue_t userPostQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_async(userPostQueue, ^{
-            
+    dispatch_queue_t userPostQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(userPostQueue, ^{
+        
+        if ([Config checkInternetConnection])
+        {
             PFQuery *query = [PFQuery queryWithClassName:POSTS_CLASS_NAME];
             [query whereKey:@"deviceId" equalTo:[Config deviceId]];
             [query orderByDescending:@"createdAt"];
@@ -132,29 +137,36 @@
                     NSLog(@"error in geo query!");
                 } else {
                     
+                    NSMutableArray *filteredPost = [Config filterPosts:objects];
+                    
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
-                        _allPosts = [Config filterPosts:objects];
+                        _allPosts = filteredPost;
                         
                         [self.tableView reloadData];
                     });
                 }
             }];
+        }else{
             
-        });
-    }else{
-        
-        [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
-    }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (showAlert == YES)
+                {
+                    [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
+                    showAlert = NO;
+                }
+            });
+        }
+    });
 }
 
 - (void)queryForLikedPosts
 {
-    if ([Config checkInternetConnection])
-    {
-        dispatch_queue_t userPostQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_async(userPostQueue, ^{
-            
+    dispatch_queue_t userPostQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(userPostQueue, ^{
+        
+        if ([Config checkInternetConnection])
+        {
             NSArray *deviceId = @[[Config deviceId]];
             
             PFQuery *query = [PFQuery queryWithClassName:POSTS_CLASS_NAME];
@@ -166,28 +178,36 @@
                     NSLog(@"error in geo query!");
                 } else {
                     
+                    NSMutableArray *filteredPost = [Config filterPosts:objects];
+                    
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
-                        _likedPosts = [Config filterPosts:objects];
+                        _likedPosts = filteredPost;
                         
                         [self.tableView reloadData];
                     });
                 }
             }];
+        }else{
             
-        });
-    }else{
-        
-        [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
-    }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (showAlert == YES)
+                {
+                    [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
+                    showAlert = NO;
+                }
+            });
+        }
+    });
 }
 
 - (void)queryForUsersPoints
 {
-    if ([Config checkInternetConnection])
-    {
-        dispatch_queue_t usersPointsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_async(usersPointsQueue, ^{
+    dispatch_queue_t usersPointsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(usersPointsQueue, ^{
+        
+        if ([Config checkInternetConnection])
+        {
             PFQuery *query = [PFQuery queryWithClassName:USERS_CLASS_NAME];
             [query whereKey:@"deviceId" equalTo:[Config deviceId]];
             
@@ -211,9 +231,8 @@
                     });
                 }
             }];
-            
-        });
-    }
+        }
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -269,7 +288,9 @@
     if (postObject[@"parseObject"][@"pic"])
     {
         _cell.postImage.file = postObject[@"parseObject"][@"pic"];
+        _cell.postImage.tag = 1;//indexPath.row;
         [_cell.postImage loadInBackground];
+        [_cell.postImage setupImageViewerWithPFFile:_cell.postImage.file onOpen:nil onClose:nil];
     }
     
     if (![postObject[@"disliked"] boolValue]){
@@ -301,7 +322,7 @@
     
     headerLabel.backgroundColor = [UIColor clearColor];
     headerLabel.textAlignment = NSTextAlignmentLeft;
-    headerLabel.textColor = BAR_TINT_COLOR;
+    headerLabel.textColor = BAR_TINT_COLOR2;
     [headerLabel setFont:[UIFont montserratFontOfSize:12.5f]];
     [sectionHeaderView addSubview:headerLabel];
     
@@ -375,6 +396,11 @@
     popup.destinationBounds = CGRectMake(0, 0, INFO_VIEW_WIDTH, INFO_VIEW_HEIGHT);
     popup.presentedController = pointsInfo;
     popup.presentingController = self;
+    
+    
+    popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+    popup.backgroundViewAlpha = 3.0f;
+    
     [self presentViewController:pointsInfo animated:YES completion:nil];
 }
 

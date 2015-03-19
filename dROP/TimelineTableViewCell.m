@@ -24,19 +24,18 @@
         // Initialization code
         self.backgroundColor = [UIColor clearColor];
         
-        _line = [[UIView alloc] initWithFrame:CGRectMake(LEFT_PADDING, 0, LEFT_PADDING, 0)];
+        _line = [[UIView alloc] init];
         _line.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_line];
         
         _lineBorder = [CALayer layer];
-        _lineBorder.frame = CGRectMake(LEFT_PADDING - 1, 0, 2.0, 0);
-        _lineBorder.backgroundColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:1].CGColor;
+        _lineBorder.backgroundColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:1].CGColor;//D8D8D8
         [_line.layer addSublayer:_lineBorder];
         
         
-         _bubble = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 14, 14)];
+         _bubble = [[UIImageView alloc] init];
         _bubble.clipsToBounds = YES;
-        _bubble.layer.cornerRadius = _bubble.frame.size.width / 2;
+        _bubble.layer.cornerRadius =  BUBBLE_FRAME_WIDTH / 2;
         _bubble.layer.borderWidth = 2.5f;
         _bubble.layer.masksToBounds = YES;
         _bubble.backgroundColor = [UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1.0f];
@@ -45,7 +44,7 @@
         [_line addSubview:_bubble];
 
         
-        _postContainer = [[UIView alloc] initWithFrame:CGRectMake(LEFT_PADDING * 2, 0, WIDTH - (LEFT_PADDING * 2), 0)];
+        _postContainer = [[UIView alloc] init];
         _postContainer.backgroundColor = [UIColor whiteColor];
         _postContainer.layer.borderWidth = .4f;
         _postContainer.layer.borderColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.6f].CGColor;
@@ -53,7 +52,7 @@
         _postContainer.clipsToBounds = YES;
         [self.contentView addSubview:_postContainer];
         
-        _postText = [[UILabel alloc] initWithFrame:CGRectMake(LEFT_PADDING * 2, TOP_PADDING, TEXT_WIDTH - LEFT_PADDING, 0)];
+        _postText = [[UILabel alloc] init];
         _postText.backgroundColor = [UIColor clearColor];
         _postText.numberOfLines = 0;
         _postText.textColor = TEXT_COLOR;
@@ -61,9 +60,14 @@
         _postText.font = TEXT_FONT;
         _postText.clipsToBounds = YES;
         _postText.userInteractionEnabled = YES;
+        /*
+        _postText.attributesText = @{NSForegroundColorAttributeName: TEXT_COLOR, NSFontAttributeName: TEXT_FONT};
+        _postText.attributesHashtag = @{NSForegroundColorAttributeName: BAR_TINT_COLOR2, NSFontAttributeName: TEXT_FONT};
+        */
         [_postContainer addSubview:_postText];
+    
         
-        _postImage = [[PFImageView alloc] initWithFrame:CGRectMake(LEFT_PADDING, 0, TEXT_WIDTH, IMAGEVIEW_HEIGHT)];
+        _postImage = [[PFImageView alloc] init];
         _postImage.backgroundColor = [UIColor clearColor];
         _postImage.layer.cornerRadius = 5.0f;
         _postImage.image = [UIImage imageNamed:@"CoverPhotoPH.JPG"];
@@ -71,7 +75,6 @@
         _postImage.contentMode = UIViewContentModeScaleAspectFill;
         _postImage.userInteractionEnabled = YES;
         [_postContainer addSubview:_postImage];
-        
         
         _actionsView = [[UIView alloc] initWithFrame:CGRectMake(LEFT_PADDING * 3, 0, WIDTH - (LEFT_PADDING * 3), ACTIONS_VIEW_HEIGHT)];
         _actionsView.backgroundColor = [UIColor clearColor];
@@ -100,11 +103,11 @@
         _smiley = [UIButton buttonWithType:UIButtonTypeCustom];
         _smiley.frame = CGRectMake((CGRectGetWidth(_actionsView.frame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
         _smiley.backgroundColor = [UIColor clearColor];
-        [_smiley setImage:[UIImage imageNamed:@"SmileyGray-Small"] forState:UIControlStateNormal];
-        [_smiley setImage:[UIImage imageNamed:@"SmileyBluish-Small"] forState:UIControlStateSelected];
-        [_smiley setImage:[UIImage imageNamed:@"Sad-Small"] forState:UIControlStateHighlighted];
+        [_smiley setImage:[UIImage imageNamed:@"SmileyGray"] forState:UIControlStateNormal];
+        [_smiley setImage:[UIImage imageNamed:@"SmileyBluish"] forState:UIControlStateSelected];
+        [_smiley setImage:[UIImage imageNamed:@"Sad"] forState:UIControlStateHighlighted];
         [_smiley setTitleColor:DATE_COLOR forState:UIControlStateNormal];
-        [_smiley setTitleColor:BAR_TINT_COLOR forState:UIControlStateSelected];
+        [_smiley setTitleColor:BAR_TINT_COLOR2 forState:UIControlStateSelected];
         _smiley.titleLabel.font = LIKES_FONT;
         _smiley.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         

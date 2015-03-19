@@ -12,6 +12,7 @@
 @protocol ViewPostViewControllerDelegate <NSObject>
 
 - (void)likePost:(UIButton *)sender;
+- (void)reportPost:(NSInteger)tag;
 - (void)updateAllPostsArray:(NSInteger)index withPostObject:(NSDictionary *)postObject;
 
 @end
@@ -19,6 +20,8 @@
 @interface ViewPostTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSDictionary *postObject;
+
+@property (nonatomic) BOOL showCloseButton;
 
 @property (nonatomic, weak) id<ViewPostViewControllerDelegate> delegate;
 
