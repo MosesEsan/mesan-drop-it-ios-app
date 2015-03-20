@@ -37,7 +37,7 @@ Drop It is an anonymous social media app that allows you to anonymously find out
 </ul>
 
 
-<b>Screenshots</b>
+<b>Screenshots (All screenshot available at https://www.dropbox.com/sh/8mok74atxnyrtmq/AAAOqMBqMMAhgsPX5RMq9IpIa?dl=0)</b> 
 
 <img src="https://github.com/d08115858/DropIt/blob/master/Screenshot/App%20Store/4%20(640%20x%201096)/Timeline(4).png" alt="Smiley face" height="500" width="300" align="left">
 
