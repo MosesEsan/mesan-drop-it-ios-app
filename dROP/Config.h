@@ -13,14 +13,6 @@
 
 #ifndef dROP_Config_h
 #define dROP_Config_h
-/*
-enum PostCellType{
-    LIST,
-    TIMELINE,
-    COLOURED
-};
-*/
-
 
 typedef NS_ENUM(NSInteger, AppMode) {
     DEVELOPMENT,
@@ -38,6 +30,10 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define PARSE_CLIENT_KEY @"KqXsbByx3UrGsxsbrSzhbnfUz60twTwXJgGRp2yC"
 
 #define AVOCARROT_API_KEY @"ff01c005d9ff11d4e37456bcfd5dba75aac7e411"
+
+#define APPSFIRE_CLIENT_KEY @"E2AA41E624CEF2A92F9FA86501D0EA30"
+#define APPSFIRE_CLIENT_SECRET @"226b76189b85d2bbad5905024da9cfd2"
+
 
 
 //#44B7C7 -- //1ABEC3
@@ -76,6 +72,9 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 
 #define LINE_FRAME_WIDTH 33
 #define BUBBLE_FRAME_WIDTH 14
+
+#define CONTAINER_FRAME_X 6.5f
+#define LINE_FRAME_WIDTH2 3.5f
 
 
 #define DATE_COLOR [UIColor colorWithRed:137/255.0f green:143/255.0f blue:156/255.0f alpha:1.0f]
@@ -166,6 +165,7 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 
 + (NSDictionary *)subViewFrames:(NSDictionary *)postObject;
 + (NSDictionary *)subViewFrames2:(NSDictionary *)postObject;
++ (NSDictionary *)colouredCellFrames:(NSDictionary *)postObject;
 
 
 + (NSDictionary *)userPoints;
@@ -182,6 +182,7 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 
 + (NSString *)fruits;
 + (UIColor *)getBubbleColor;
++ (UIColor *)getSideColor:(NSInteger)index;
 + (PFImageView *)imageViewFrame:(CGRect)frame withImage:(UIImage *)image withColor:(UIColor *)color;
 
 @end

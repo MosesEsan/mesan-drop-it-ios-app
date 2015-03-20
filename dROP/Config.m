@@ -103,12 +103,12 @@
 
 + (PostCellType)cellType
 {
-    PostCellType type = LIST;
+    PostCellType type = COLOURED;
     
     //Set Default Locations
     NSDictionary *config = [[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"];
     
-    type = (PostCellType)[config[@"Cell Type"] intValue];
+    //type = (PostCellType)[config[@"Cell Type"] intValue];
     
     return type;
 }
@@ -450,7 +450,7 @@
         //If the user distance from the main location is less than or equal to the allowed distance
         if (delta != 0 && delta <= [[Config availableLocations][i][3] floatValue])
         {
-            NSLog([NSString stringWithFormat:@"%@",[Config availableLocations][i][0]]);
+            //NSLog([NSString stringWithFormat:@"%@",[Config availableLocations][i][0]]);
             //check against the current least distance
             if (minDistance == 0) {
                 minDistance = delta;
@@ -466,7 +466,7 @@
         }
     }
     
-    NSLog([NSString stringWithFormat:@"Final is -> %@",college]);
+    //NSLog([NSString stringWithFormat:@"Final is -> %@",college]);
 
     return college;
 }
@@ -558,7 +558,7 @@
     //Set container Frame
     CGRect containerFrame = CGRectMake(lineFrame.origin.x + CGRectGetWidth(lineFrame),
                                        0,
-                                       WIDTH - 41.5f,
+                                       WIDTH - (3 + LINE_FRAME_WIDTH + 5.5f),
                                        cellHeight);
     CGRect labelFrame = CGRectMake(8, TOP_PADDING, CGRectGetWidth(containerFrame) - 14, postTextHeight);
     CGRect imageFrame = CGRectMake(8, 0, CGRectGetWidth(containerFrame) - 14, IMAGEVIEW_HEIGHT);
@@ -591,6 +591,59 @@
                                       @"postTextFrame" : [NSValue valueWithCGRect:labelFrame],
                                       @"imageFrame" : [NSValue valueWithCGRect:imageFrame],
                                       @"actionViewframe" : [NSValue valueWithCGRect:actionViewframe]
+                                      };
+    
+    return subViewframes;
+}
+
++ (NSDictionary *)colouredCellFrames:(NSDictionary *)postObject
+{
+    CGFloat postTextHeight = [Config calculateHeightForText:postObject[@"text"] withWidth:WIDTH - 55.5f withFont:TEXT_FONT];
+    
+    CGFloat cellHeight = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT;
+    
+    if (postObject[@"parseObject"][@"pic"])
+        cellHeight =  cellHeight + 10 + IMAGEVIEW_HEIGHT;
+    
+    
+    
+    //Set container Frame
+    CGRect containerFrame = CGRectMake(CONTAINER_FRAME_X, 0,
+                                       WIDTH - (CONTAINER_FRAME_X * 2), cellHeight);
+    
+    CGRect lineFrame = CGRectMake(0, 0, LINE_FRAME_WIDTH2, cellHeight);
+    
+    CGFloat width = CGRectGetWidth(containerFrame) - (LINE_FRAME_WIDTH2 + 8 + 8);
+    CGRect labelFrame = CGRectMake(LINE_FRAME_WIDTH2 + 8, TOP_PADDING, width, postTextHeight);
+    CGRect imageFrame = CGRectMake(LINE_FRAME_WIDTH2 + 8, 0, width, IMAGEVIEW_HEIGHT);
+    CGRect actionViewFrame = CGRectMake(LINE_FRAME_WIDTH2 + 8, 0, width + 8, ACTIONS_VIEW_HEIGHT);
+    CGRect smileyFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
+    
+    if (postObject[@"parseObject"][@"pic"])
+    {
+        //Set Image View Frame
+        imageFrame.origin.y = labelFrame.origin.y + postTextHeight + 7;
+        imageFrame.size.height = IMAGEVIEW_HEIGHT;
+        
+        //Set Action View Frame
+        actionViewFrame.origin.y = imageFrame.origin.y + imageFrame.size.height + 10;
+    }else{
+        
+        //Set Image View Frame
+        imageFrame.origin.y = 0;
+        imageFrame.size.height = 0;
+        
+        //Set Action View Frame
+        actionViewFrame.origin.y = labelFrame.origin.y + postTextHeight + 10;
+    }
+    
+    NSDictionary *subViewframes =   @{
+                                      @"lineFrame" : [NSValue valueWithCGRect:lineFrame],
+                                      @"containerFrame" : [NSValue valueWithCGRect:containerFrame],
+                                      @"postTextFrame" : [NSValue valueWithCGRect:labelFrame],
+                                      @"imageFrame" : [NSValue valueWithCGRect:imageFrame],
+                                      @"actionViewFrame" : [NSValue valueWithCGRect:actionViewFrame],
+                                      @"smileyFrame" : [NSValue valueWithCGRect:smileyFrame]
                                       };
     
     return subViewframes;
@@ -758,7 +811,8 @@
     [UIColor colorWithRed:159/255.0f green:1/255.0f blue:117/255.0f alpha:1.0f],
     [UIColor colorWithRed:239/255.0f green:22/255.0f blue:46/255.0f alpha:1.0f],
     [UIColor colorWithRed:159/255.0f green:1/255.0f blue:117/255.0f alpha:1.0f],
-    [UIColor colorWithRed:220/255.0f green:131/255.0f blue:169/255.0f alpha:1.0f]
+    [UIColor colorWithRed:220/255.0f green:131/255.0f blue:169/255.0f alpha:1.0f],
+    [UIColor colorWithRed:51/255.0f green:51/255.0f blue:83/255.0f alpha:1.0f]
     ];
     
     return colours;
@@ -828,6 +882,13 @@
     return randomColor;
 }
 
++ (UIColor *)getSideColor:(NSInteger)index
+{
+    NSArray *colours = [Config colours];
+    
+    //Get color
+    return colours[index];
+}
 
 + (PFImageView *)imageViewFrame:(CGRect)frame withImage:(UIImage *)image withColor:(UIColor *)color
 {

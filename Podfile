@@ -13,6 +13,7 @@ pod 'FormatterKit'
 #pod 'STTweetLabel'
 #pod 'LNBRippleEffect'
 pod 'DZNEmptyDataSet'
+#pod 'AppsfireSDK'
 
 end
 

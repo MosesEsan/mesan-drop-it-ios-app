@@ -7,28 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ParseUI/ParseUI.h>
-#import "Config.h"
-#import "MCSwipeTableViewCell.h"
-//#import "STTweetLabel.h"
+#import "DITableViewCell.h"
 
-@interface TimelineTableViewCell : MCSwipeTableViewCell
+@interface TimelineTableViewCell : DITableViewCell
 
-@property (nonatomic, strong) UIView *line;
 @property (nonatomic, strong) CALayer *lineBorder;
 @property (nonatomic, strong) UIImageView *bubble;
 
-@property (nonatomic, strong) UIView *postContainer;
-
 @property (nonatomic, strong) UIImageView *triangle;
-
-@property (nonatomic, strong) UILabel *postText;
-@property (nonatomic, strong) PFImageView *postImage;
-@property (nonatomic, strong) UIView *actionsView;
-@property (nonatomic, strong)CALayer *bottomBorder;
-
-@property (nonatomic, strong) UILabel *date;
-@property (nonatomic, strong) UIButton *smiley;
-@property (nonatomic, strong) UILabel *comments;
 
 @end

@@ -1,3679 +1,1381 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>008032C7A10E0DC67FDC0FF8</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>86F1269A1211D086B23C7AC1</string>
-			<key>buildPhases</key>
-			<array>
-				<string>6B751D00C4C35D670B988E84</string>
-				<string>C3F7FEFC792F4AE0E436026A</string>
-				<string>723DF6B5C214D01D46570BBE</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-Drop It!-CCMPopup</string>
-			<key>productName</key>
-			<string>Pods-Drop It!-CCMPopup</string>
-			<key>productReference</key>
-			<string>61B5337CBC257AA50F73CFAB</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>02D6605BD42E3B7938EDFD6C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>UIFont+Montserrat.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>03CB06F69650533FB83D30A5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D513EFF8BE7AADB92E818D77</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>05256676F3914C8B8B00CD91</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>it.lproj</string>
-			<key>path</key>
-			<string>Localizations/it.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>05B81007FCBF65AF1E15DF96</key>
-		<dict>
-			<key>fileRef</key>
-			<string>94F65EACA20EFF4918E37CC9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>05C34D71FA2A6FD238419800</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Pods-Drop It!-DZNEmptyDataSet-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>071EDC76065D1EBF47E507CB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>2B6BC68CA9E9B88175BA5552</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>078C5340D92A53347872DC9C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>D513EFF8BE7AADB92E818D77</string>
-				<string>B3A34F6D879EBEEAEE335010</string>
-				<string>7C822A0ECA140C35B3008B79</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>TimeIntervalFormatter</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>081F7C7AEF0E3914BDFA0399</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>pt.lproj</string>
-			<key>path</key>
-			<string>Localizations/pt.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>08226C857CC836AE1B6BCB8C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TTTNameFormatter.m</string>
-			<key>path</key>
-			<string>FormatterKit/TTTNameFormatter.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>084913B58108D10AA0E90531</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>09110480406A340C2FBD244C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TTTURLRequestFormatter.h</string>
-			<key>path</key>
-			<string>FormatterKit/TTTURLRequestFormatter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>09FD0420F31169EEF42AFC56</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C420187D3ADA6CB990A13867</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0B097F67C8C9DA4495169E6F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>547713D6D5DBD66DCC172A46</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0C2F5C7C6A32E2BC22AEAF08</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Drop It!-FormatterKit-Private.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0CE06A1B7905BAB596F9DC21</key>
-		<dict>
-			<key>fileRef</key>
-			<string>645AB325E4F3B04F1CE201E7</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0D12CC6A21F3FCC5EF25D571</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BF82CF656A4DB1711ED3685A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0E186AEA2761265A823D4B74</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57D0A64F0CC51AB8EA1E0113</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0EBFEAFCF46DFB666EC78305</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>21448C76ED787F722F65E3FF</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>8A8357409E64FB8B0963B76B</string>
-			<key>remoteInfo</key>
-			<string>Pods-Drop It!-Montserrat</string>
-		</dict>
-		<key>0EC8937EF4339FE51ED04F81</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>ja.lproj</string>
-			<key>path</key>
-			<string>Localizations/ja.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0F67B9C5D40165ACE3126406</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4268E8BE41088A8BF00EB432</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>103E8142756F1FB3DA872021</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>name</key>
-			<string>Pods-Drop It!-FormatterKit</string>
-			<key>target</key>
-			<string>DD0A37C53A0683717D509538</string>
-			<key>targetProxy</key>
-			<string>94C49F04DCEADA57F15527B6</string>
-		</dict>
-		<key>1043BB5550698AA068111AE8</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCMPopupSegue.h</string>
-			<key>path</key>
-			<string>CCMPopup/CCMPopupSegue.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>10DE4D35EA668CA6043C0881</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UIImage+ImageEffects.m</string>
-			<key>path</key>
-			<string>CCMPopup/UIImage+ImageEffects/UIImage+ImageEffects.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>10FD5E8BBD23CFD95C2B9682</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCMPopupTransitioning.m</string>
-			<key>path</key>
-			<string>CCMPopup/CCMPopupTransitioning.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>13FD11816C7B58A781213CD3</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>7907391FE7E95F28FBD3AAC0</string>
-				<string>BF82CF656A4DB1711ED3685A</string>
-				<string>D7748C8B6883DA9A807F99EE</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>DZNEmptyDataSet</string>
-			<key>path</key>
-			<string>DZNEmptyDataSet</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>14363E8E827D80B4E8813FC3</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>vi.lproj</string>
-			<key>path</key>
-			<string>Localizations/vi.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1822C5F7935A9B75B4E39BF0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>9B87F52858F5CDEDE2C0C240</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>191DE0316C042D5B5AE8CC2E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>08226C857CC836AE1B6BCB8C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>1EEDFEF3D92A501E6B1C214D</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>D88224AFCB55BFB33A123AA4</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>1F88D48C2DEB76DFFEC01F79</key>
-		<dict>
-			<key>fileRef</key>
-			<string>10FD5E8BBD23CFD95C2B9682</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>20BD0CF2D0D5BDC6CA7326E6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Pods-Drop It!-acknowledgements.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>211B1E99679144A102EE313F</key>
-		<dict>
-			<key>children</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Resources</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>21448C76ED787F722F65E3FF</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastUpgradeCheck</key>
-				<string>0510</string>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>4281228CB8CCFFAFB727C63A</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-			</array>
-			<key>mainGroup</key>
-			<string>383AE360FD6CDEB25395A5BA</string>
-			<key>productRefGroup</key>
-			<string>8A8E1851C705BFD63615F029</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>E38DF2F117B331DEE09A0FFC</string>
-				<string>B25CEFAB5561F14CEAAE62AC</string>
-				<string>008032C7A10E0DC67FDC0FF8</string>
-				<string>DC8A0BF78232F2A983A3FCC1</string>
-				<string>DD0A37C53A0683717D509538</string>
-				<string>8A8357409E64FB8B0963B76B</string>
-			</array>
-		</dict>
-		<key>2263260E9362517BB6042BCC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>AC630E0EAB3697D5F0448F3C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>23CB5E49A0C7BCEEF139C9F5</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>STRIP_INSTALLED_PRODUCT</key>
-				<string>NO</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>24E0CE43086D31E528FADD00</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCMCustomAnimation.m</string>
-			<key>path</key>
-			<string>CCMPopup/CCMCustomAnimation.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>260BF479F146DEFBF3777E5B</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>60847CC8B6FD82D39FDC6157</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/Pods-Drop It!-Montserrat/Pods-Drop It!-Montserrat-prefix.pch</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>26816F27AAE8CCBD70405E0D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>24E0CE43086D31E528FADD00</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>280109819394CAB23C438E8A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1043BB5550698AA068111AE8</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>2A85685ADBBBF798020ACCCF</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>76017B133C103892E93AC5BD</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/Pods-Drop It!-CCMPopup/Pods-Drop It!-CCMPopup-prefix.pch</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_CFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_CPLUSPLUSFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>2A8F57C6C89A4B9089306493</key>
-		<dict>
-			<key>fileRef</key>
-			<string>97588608B0821731A57FE11D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>2B6BC68CA9E9B88175BA5552</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreLocation.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreLocation.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>2DFDFA67FBCC328B077F7676</key>
-		<dict>
-			<key>fileRef</key>
-			<string>9A5AD092474A6BAA6C1B96A9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>2E6872CD05EA8E743DDD1DB5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DF48182F0FC119459D559E33</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>2EE15F36798285B67662E6FE</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-Drop It!-FormatterKit.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>2F2ABEF0FDF7278565EFC1E8</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIImage+ImageEffects.h</string>
-			<key>path</key>
-			<string>CCMPopup/UIImage+ImageEffects/UIImage+ImageEffects.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>2FFD110C32862AFEA8A29F8F</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>5C212B76F4994167BE0701A9</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/Pods-Drop It!-DZNEmptyDataSet/Pods-Drop It!-DZNEmptyDataSet-prefix.pch</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_CFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_CPLUSPLUSFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>3022D735FA17F4A16AA08619</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BDFA0644AA78FA12594F01F0</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>31E4FC66566455E0A6FEF237</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>0C2F5C7C6A32E2BC22AEAF08</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/Pods-Drop It!-FormatterKit/Pods-Drop It!-FormatterKit-prefix.pch</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_CFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_CPLUSPLUSFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>323A432923D7DDE9F51F9913</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>21448C76ED787F722F65E3FF</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>DC8A0BF78232F2A983A3FCC1</string>
-			<key>remoteInfo</key>
-			<string>Pods-Drop It!-DZNEmptyDataSet</string>
-		</dict>
-		<key>323F58BB867E1618EA6C20C3</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>D59F715B65FF1017C5AF73C0</string>
-				<string>8BED84BC76FB3A86B1FF1219</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>32D2A2BF301236D59911D579</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Pods-Drop It!-Montserrat-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>346531D7CE26B3FD23C655A7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B98F8897CF6428EF1F6AA74C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>35DA663E79F784216BA50754</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TTTColorFormatter.h</string>
-			<key>path</key>
-			<string>FormatterKit/TTTColorFormatter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>383AE360FD6CDEB25395A5BA</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>B6B3485B2C386782F8560000</string>
-				<string>3022D735FA17F4A16AA08619</string>
-				<string>D03BFB6466712DABAFFFE20E</string>
-				<string>8A8E1851C705BFD63615F029</string>
-				<string>6C33F2D3BC33B9A73A93AF7D</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>38D6DE44B943EA1BD14C563A</key>
-		<dict>
-			<key>children</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Resources</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>396784E300BC133E4828FF23</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>sv.lproj</string>
-			<key>path</key>
-			<string>Localizations/sv.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3A9B8F759CA420642BFF840E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TTTLocationFormatter.m</string>
-			<key>path</key>
-			<string>FormatterKit/TTTLocationFormatter.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>40867CCDFD15065FA837BB9F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>ko.lproj</string>
-			<key>path</key>
-			<string>Localizations/ko.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>40A3FEE819AB403CAC98455D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>de.lproj</string>
-			<key>path</key>
-			<string>Localizations/de.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>414A2CAD6A835AE4C5C20DAE</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>416B9F0CC0774BE2A143030B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>09110480406A340C2FBD244C</string>
-				<string>DBE36A6CED15A78FCE6B0A62</string>
-				<string>6A796E1B9AFDFFE2E6175D67</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>URLRequestFormatter</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4268E8BE41088A8BF00EB432</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>4281228CB8CCFFAFB727C63A</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>23CB5E49A0C7BCEEF139C9F5</string>
-				<string>E60D623846C1E158B10448FC</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>445C94520499CAB6739429A1</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>bundle</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>47C2A816F5F6A5BB23C59D7D</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>21448C76ED787F722F65E3FF</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>E38DF2F117B331DEE09A0FFC</string>
-			<key>remoteInfo</key>
-			<string>Montserrat</string>
-		</dict>
-		<key>4904B8814FA6654C0900B2D5</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>zh-Hant.lproj</string>
-			<key>path</key>
-			<string>Localizations/zh-Hant.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4C82B878C35BC5D85EEBB483</key>
-		<dict>
-			<key>fileRef</key>
-			<string>35DA663E79F784216BA50754</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4C9127E8C8FD31164483998B</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>445C94520499CAB6739429A1</string>
-				<string>EF0CA7E986A6A6D733165E72</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>4DE6189FCBA8E0E4340FCE5B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>name</key>
-			<string>Montserrat</string>
-			<key>target</key>
-			<string>E38DF2F117B331DEE09A0FFC</string>
-			<key>targetProxy</key>
-			<string>47C2A816F5F6A5BB23C59D7D</string>
-		</dict>
-		<key>4E6D6DFBABA81C69B046A46C</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Montserrat.bundle</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>4EA99E88571427EA135E585E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>547713D6D5DBD66DCC172A46</string>
-				<string>D68A5851700F72A34D229365</string>
-				<string>6DCED6A006E062D00E7C7F10</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>ArrayFormatter</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5021BBD50F8F7BDDF90AA265</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>da.lproj</string>
-			<key>path</key>
-			<string>Localizations/da.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>50F6812C2E283E007D47EF8A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>533A3403FA8A2873B2FE75D2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>519C6A3BF4AB61152062DD01</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>fr.lproj</string>
-			<key>path</key>
-			<string>Localizations/fr.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>533A3403FA8A2873B2FE75D2</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>UIKit.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>5428F10AA7D83E63A4FDC158</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>60847CC8B6FD82D39FDC6157</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/Pods-Drop It!-Montserrat/Pods-Drop It!-Montserrat-prefix.pch</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_CFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_CPLUSPLUSFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>5461112372B3210B5BD80B74</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>76017B133C103892E93AC5BD</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/Pods-Drop It!-CCMPopup/Pods-Drop It!-CCMPopup-prefix.pch</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>547713D6D5DBD66DCC172A46</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TTTArrayFormatter.h</string>
-			<key>path</key>
-			<string>FormatterKit/TTTArrayFormatter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5688E2EA1AEDBEA49E7BA22E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>pl.lproj</string>
-			<key>path</key>
-			<string>Localizations/pl.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>574C38B821F13C126DDF698F</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>816AC900EB86E280177D2F8F</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>57D0A64F0CC51AB8EA1E0113</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCMPopupSegue.m</string>
-			<key>path</key>
-			<string>CCMPopup/CCMPopupSegue.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5C212B76F4994167BE0701A9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5CBB77B4121B8EB6142C133F</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>0C2F5C7C6A32E2BC22AEAF08</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/Pods-Drop It!-FormatterKit/Pods-Drop It!-FormatterKit-prefix.pch</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>5D12B424391934FAB0CB9B03</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Pods-Drop It!-CCMPopup-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5DDBFCF25AE93C0BB9BF0352</key>
-		<dict>
-			<key>children</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Resources</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5E8ED2C8EFE019004B98B418</key>
-		<dict>
-			<key>children</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Resources</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5FA8C3E0B42F67ABDEBD83FC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4268E8BE41088A8BF00EB432</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>60847CC8B6FD82D39FDC6157</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Drop It!-Montserrat-Private.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>61B5337CBC257AA50F73CFAB</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-Drop It!-CCMPopup.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>62D809E560A33274E4BAE7C2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D68A5851700F72A34D229365</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>645AB325E4F3B04F1CE201E7</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TTTLocationFormatter.h</string>
-			<key>path</key>
-			<string>FormatterKit/TTTLocationFormatter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>67F3859FA518B58BD693B6DA</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>95B65472AEA46EC9FE761919</string>
-				<string>50F6812C2E283E007D47EF8A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>6A796E1B9AFDFFE2E6175D67</key>
-		<dict>
-			<key>children</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Resources</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6AF1EB6F2FD33743F59959BA</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>CCMPopupAnimation.m</string>
-			<key>path</key>
-			<string>CCMPopup/CCMPopupAnimation.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6B751D00C4C35D670B988E84</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>26816F27AAE8CCBD70405E0D</string>
-				<string>E8795758DB516552591F8E0B</string>
-				<string>0E186AEA2761265A823D4B74</string>
-				<string>1F88D48C2DEB76DFFEC01F79</string>
-				<string>F865A917E7FA3E186421F787</string>
-				<string>CA08D63EB1DBF6FAF85A7F21</string>
-				<string>DE4DD3A30CE25E2E52A5AA5D</string>
-				<string>F80866A1FE006A5A1AE551A0</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>6C33F2D3BC33B9A73A93AF7D</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CC834516856BBE99B2DD5124</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Targets Support Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C3A8B9B2EED58D430E606B0</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>574C38B821F13C126DDF698F</string>
-				<string>841DC939E2BEEC5723ED04DA</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>6DCED6A006E062D00E7C7F10</key>
-		<dict>
-			<key>children</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Resources</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6E3606FBB93E1BD6B82539B1</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>BB653160CB2E69691EA03CD6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>7041A3590C0FAA0A2D684258</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>es.lproj</string>
-			<key>path</key>
-			<string>Localizations/es.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>70A422B2AE46E48BBEAEE72E</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>260BF479F146DEFBF3777E5B</string>
-				<string>5428F10AA7D83E63A4FDC158</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>70A61D8D2139D7F0BAEBA294</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Pods-Drop It!-environment.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>71B77AE8988C097D657FD090</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>2E6872CD05EA8E743DDD1DB5</string>
-				<string>0F67B9C5D40165ACE3126406</string>
-				<string>95499E9901DE72B313F54246</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>723DF6B5C214D01D46570BBE</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>D12F291560C0FB71880D51E9</string>
-				<string>F453850480AB198A19426169</string>
-				<string>280109819394CAB23C438E8A</string>
-				<string>09FD0420F31169EEF42AFC56</string>
-				<string>7A289257CDFDB544E01E65BA</string>
-				<string>346531D7CE26B3FD23C655A7</string>
-				<string>F93E5A3D3F9F1834F54DD0B0</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>727E0381F76ADE6C575A1A7D</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-Drop It!.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>76017B133C103892E93AC5BD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Drop It!-CCMPopup-Private.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>76E88E15B832208DFC2B852F</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EDBA12BFE682A1FEC8AED6DF</string>
-				<string>4EA99E88571427EA135E585E</string>
-				<string>B5A939A94F583FA69075A465</string>
-				<string>EF8491E87B04A526A8E2033E</string>
-				<string>ACCCEF5F5FC4CFB6F76C5BF1</string>
-				<string>84782C884A24806554D3B01E</string>
-				<string>DE1BE866EB8D94270A88EF96</string>
-				<string>078C5340D92A53347872DC9C</string>
-				<string>416B9F0CC0774BE2A143030B</string>
-				<string>8BD6A2B46FF129CE00C54908</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>FormatterKit</string>
-			<key>path</key>
-			<string>FormatterKit</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7907391FE7E95F28FBD3AAC0</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIScrollView+EmptyDataSet.h</string>
-			<key>path</key>
-			<string>Source/UIScrollView+EmptyDataSet.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>798DBEEC8A571A6DB33FCC23</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>2DFDFA67FBCC328B077F7676</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>7A289257CDFDB544E01E65BA</key>
-		<dict>
-			<key>fileRef</key>
-			<string>2F2ABEF0FDF7278565EFC1E8</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>7A8FFB46F47DF5D85B53CCD2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIViewController+CCMPopupAnimation.h</string>
-			<key>path</key>
-			<string>CCMPopup/UIViewController+CCMPopupAnimation.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7B6705BE7FE778B3D7E5DD0F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>984B012FF3826F4F51CF35C2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>7C822A0ECA140C35B3008B79</key>
-		<dict>
-			<key>children</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Resources</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>816AC900EB86E280177D2F8F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Drop It!.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8358A112ED309FE47A105292</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>nl.lproj</string>
-			<key>path</key>
-			<string>Localizations/nl.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>841DC939E2BEEC5723ED04DA</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>857AD2D9A00EEC2EF851F0C8</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_CFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_CPLUSPLUSFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>84425B14AC2A66DA59107199</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>AddressBookUI.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AddressBookUI.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>84782C884A24806554D3B01E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>984B012FF3826F4F51CF35C2</string>
-				<string>D667447DA3B9F4E3DE5CD69C</string>
-				<string>5DDBFCF25AE93C0BB9BF0352</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>OrdinalNumberFormatter</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>857AD2D9A00EEC2EF851F0C8</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Drop It!.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>86030EA801A23EB58EFA5EF4</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>Pods-Drop It!-acknowledgements.markdown</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>86F1269A1211D086B23C7AC1</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>5461112372B3210B5BD80B74</string>
-				<string>2A85685ADBBBF798020ACCCF</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>8806A1E0566C414181A04C56</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>21448C76ED787F722F65E3FF</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>008032C7A10E0DC67FDC0FF8</string>
-			<key>remoteInfo</key>
-			<string>Pods-Drop It!-CCMPopup</string>
-		</dict>
-		<key>88843DF6EE2B96AB38FCD0CF</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>AD075890761471B606D882F6</string>
-				<string>2FFD110C32862AFEA8A29F8F</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>89966A8B909C8527BFFB2831</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DBE36A6CED15A78FCE6B0A62</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>89BDC6FF10E074B4510FB15C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCMPopupAnimation.h</string>
-			<key>path</key>
-			<string>CCMPopup/CCMPopupAnimation.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8A8357409E64FB8B0963B76B</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>70A422B2AE46E48BBEAEE72E</string>
-			<key>buildPhases</key>
-			<array>
-				<string>323F58BB867E1618EA6C20C3</string>
-				<string>71B77AE8988C097D657FD090</string>
-				<string>1EEDFEF3D92A501E6B1C214D</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>4DE6189FCBA8E0E4340FCE5B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-Drop It!-Montserrat</string>
-			<key>productName</key>
-			<string>Pods-Drop It!-Montserrat</string>
-			<key>productReference</key>
-			<string>ABBE559AD773A2FB63DD9DBF</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>8A8E1851C705BFD63615F029</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>4E6D6DFBABA81C69B046A46C</string>
-				<string>727E0381F76ADE6C575A1A7D</string>
-				<string>61B5337CBC257AA50F73CFAB</string>
-				<string>FA5F10AA3AE22D8D45CF4529</string>
-				<string>2EE15F36798285B67662E6FE</string>
-				<string>ABBE559AD773A2FB63DD9DBF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8BD6A2B46FF129CE00C54908</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CF9D164040CEF34FD96089FA</string>
-				<string>CB2D308B158B98CE2CBF9155</string>
-				<string>CC912124D5AC64CF6DC708D9</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>UnitOfInformationFormatter</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8BED84BC76FB3A86B1FF1219</key>
-		<dict>
-			<key>fileRef</key>
-			<string>97591C953F5A7BFCAC0807E6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>903F77C497794B655FA844DA</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>cs.lproj</string>
-			<key>path</key>
-			<string>Localizations/cs.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9131BFA4EBB2789056D1F80D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>uk.lproj</string>
-			<key>path</key>
-			<string>Localizations/uk.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>91A0D284DC3177FC6F65FD93</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>DD34A076577835C7F6F602D2</string>
-				<string>C7C1A7D1C1F04905170A15A2</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>91DAC03FC6D88842869ADD5E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B3A34F6D879EBEEAEE335010</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>940E141EFD00CABBB38D0316</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4268E8BE41088A8BF00EB432</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>94C49F04DCEADA57F15527B6</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>21448C76ED787F722F65E3FF</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>DD0A37C53A0683717D509538</string>
-			<key>remoteInfo</key>
-			<string>Pods-Drop It!-FormatterKit</string>
-		</dict>
-		<key>94F65EACA20EFF4918E37CC9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TTTColorFormatter.m</string>
-			<key>path</key>
-			<string>FormatterKit/TTTColorFormatter.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>95499E9901DE72B313F54246</key>
-		<dict>
-			<key>fileRef</key>
-			<string>533A3403FA8A2873B2FE75D2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>9571E678A6B4F323B8C47555</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3A9B8F759CA420642BFF840E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>95B65472AEA46EC9FE761919</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4268E8BE41088A8BF00EB432</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>95F27E252544AB4FC508E676</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CF9D164040CEF34FD96089FA</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>97588608B0821731A57FE11D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Pods-Drop It!-DZNEmptyDataSet-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>97591C953F5A7BFCAC0807E6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>UIFont+Montserrat.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>984B012FF3826F4F51CF35C2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TTTOrdinalNumberFormatter.h</string>
-			<key>path</key>
-			<string>FormatterKit/TTTOrdinalNumberFormatter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>992199686618E7B8945BF794</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>pt_BR.lproj</string>
-			<key>path</key>
-			<string>Localizations/pt_BR.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9A5AD092474A6BAA6C1B96A9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Pods-Drop It!-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9B87F52858F5CDEDE2C0C240</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TTTAddressFormatter.m</string>
-			<key>path</key>
-			<string>FormatterKit/TTTAddressFormatter.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9C29B6F8E7647438F4D0C273</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>ca.lproj</string>
-			<key>path</key>
-			<string>Localizations/ca.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9E14EEB92775DF97945BF95C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C60248227DAC83C37C236760</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>9EED25D544C5CA47248D4006</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CA8DFDDA2EF33D25E960E388</string>
-				<string>24E0CE43086D31E528FADD00</string>
-				<string>89BDC6FF10E074B4510FB15C</string>
-				<string>6AF1EB6F2FD33743F59959BA</string>
-				<string>1043BB5550698AA068111AE8</string>
-				<string>57D0A64F0CC51AB8EA1E0113</string>
-				<string>C420187D3ADA6CB990A13867</string>
-				<string>10FD5E8BBD23CFD95C2B9682</string>
-				<string>2F2ABEF0FDF7278565EFC1E8</string>
-				<string>10DE4D35EA668CA6043C0881</string>
-				<string>B98F8897CF6428EF1F6AA74C</string>
-				<string>BDBE8795D3973B821F2F34BF</string>
-				<string>7A8FFB46F47DF5D85B53CCD2</string>
-				<string>E995A568B841A447EB1F5802</string>
-				<string>B27E7A373ACAD786DEB06E31</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>CCMPopup</string>
-			<key>path</key>
-			<string>CCMPopup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A3B2EC280FAC114AB5B5145B</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-Drop It!-resources.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A4F5653313219E4874EB5434</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>name</key>
-			<string>Pods-Drop It!-CCMPopup</string>
-			<key>target</key>
-			<string>008032C7A10E0DC67FDC0FF8</string>
-			<key>targetProxy</key>
-			<string>8806A1E0566C414181A04C56</string>
-		</dict>
-		<key>A90D4588C3A0F1A966D8DEAC</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>E0784307A3E82A6D64D3405E</string>
-				<string>60847CC8B6FD82D39FDC6157</string>
-				<string>32D2A2BF301236D59911D579</string>
-				<string>FD3522693EE92B1A92025D78</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>../Target Support Files/Pods-Drop It!-Montserrat</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A99B58B72CB6A75AC4C3BE08</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>5CBB77B4121B8EB6142C133F</string>
-				<string>31E4FC66566455E0A6FEF237</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>ABBE559AD773A2FB63DD9DBF</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-Drop It!-Montserrat.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>ABD2E77C6ECB7D020C75314C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CB2D308B158B98CE2CBF9155</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>AC630E0EAB3697D5F0448F3C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TTTNameFormatter.h</string>
-			<key>path</key>
-			<string>FormatterKit/TTTNameFormatter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>ACCCEF5F5FC4CFB6F76C5BF1</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>AC630E0EAB3697D5F0448F3C</string>
-				<string>08226C857CC836AE1B6BCB8C</string>
-				<string>38D6DE44B943EA1BD14C563A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>NameFormatter</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>AD075890761471B606D882F6</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>5C212B76F4994167BE0701A9</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/Pods-Drop It!-DZNEmptyDataSet/Pods-Drop It!-DZNEmptyDataSet-prefix.pch</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>ADEBBB43F1C694F738B39CA6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>nn.lproj</string>
-			<key>path</key>
-			<string>Localizations/nn.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>AE7C73CB118E1C342C82203D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Drop It!-DZNEmptyDataSet.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B25CEFAB5561F14CEAAE62AC</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>6C3A8B9B2EED58D430E606B0</string>
-			<key>buildPhases</key>
-			<array>
-				<string>798DBEEC8A571A6DB33FCC23</string>
-				<string>6E3606FBB93E1BD6B82539B1</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>A4F5653313219E4874EB5434</string>
-				<string>B91FDD637B718D4A60F7ACDB</string>
-				<string>103E8142756F1FB3DA872021</string>
-				<string>F1DF418C756E81D91E0564EF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-Drop It!</string>
-			<key>productName</key>
-			<string>Pods-Drop It!</string>
-			<key>productReference</key>
-			<string>727E0381F76ADE6C575A1A7D</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>B27E7A373ACAD786DEB06E31</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>FA148AE685A848F9CB8B79C0</string>
-				<string>76017B133C103892E93AC5BD</string>
-				<string>FC799E77A0AF72BA4AE67A33</string>
-				<string>5D12B424391934FAB0CB9B03</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>../Target Support Files/Pods-Drop It!-CCMPopup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B3A34F6D879EBEEAEE335010</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TTTTimeIntervalFormatter.m</string>
-			<key>path</key>
-			<string>FormatterKit/TTTTimeIntervalFormatter.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B3B63A7335CE204CF4779504</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>nb.lproj</string>
-			<key>path</key>
-			<string>Localizations/nb.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B5A939A94F583FA69075A465</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>35DA663E79F784216BA50754</string>
-				<string>94F65EACA20EFF4918E37CC9</string>
-				<string>5E8ED2C8EFE019004B98B418</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>ColorFormatter</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B6B3485B2C386782F8560000</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>name</key>
-			<string>Podfile</string>
-			<key>path</key>
-			<string>../Podfile</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-			<key>xcLanguageSpecificationIdentifier</key>
-			<string>xcode.lang.ruby</string>
-		</dict>
-		<key>B6DC2015937B5E0DB376ACCA</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D667447DA3B9F4E3DE5CD69C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>B80FE5F64C64736C1EB4DAD3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>7907391FE7E95F28FBD3AAC0</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>B8DF268379D4475D5152CF44</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>AddressBook.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AddressBook.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>B905C3CFFAD1584E558DAEE4</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>9E14EEB92775DF97945BF95C</string>
-				<string>0B097F67C8C9DA4495169E6F</string>
-				<string>4C82B878C35BC5D85EEBB483</string>
-				<string>0CE06A1B7905BAB596F9DC21</string>
-				<string>2263260E9362517BB6042BCC</string>
-				<string>7B6705BE7FE778B3D7E5DD0F</string>
-				<string>03CB06F69650533FB83D30A5</string>
-				<string>E1C7E7DB03344AA07AF511D0</string>
-				<string>95F27E252544AB4FC508E676</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>B91FDD637B718D4A60F7ACDB</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>name</key>
-			<string>Pods-Drop It!-DZNEmptyDataSet</string>
-			<key>target</key>
-			<string>DC8A0BF78232F2A983A3FCC1</string>
-			<key>targetProxy</key>
-			<string>323A432923D7DDE9F51F9913</string>
-		</dict>
-		<key>B9869D3F1EB368AB5B220FA5</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CA27AF1CB54DA8626FFF5DE1</string>
-				<string>C5099BD7402744937830A179</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Resources</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B98F8897CF6428EF1F6AA74C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIImage+screenshot.h</string>
-			<key>path</key>
-			<string>CCMPopup/UIImage+screenshot/UIImage+screenshot.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA5DE71649CE6F67CC284ECA</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>zh-Hans.lproj</string>
-			<key>path</key>
-			<string>Localizations/zh-Hans.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BB653160CB2E69691EA03CD6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4268E8BE41088A8BF00EB432</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BDBE8795D3973B821F2F34BF</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UIImage+screenshot.m</string>
-			<key>path</key>
-			<string>CCMPopup/UIImage+screenshot/UIImage+screenshot.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDFA0644AA78FA12594F01F0</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>B8DF268379D4475D5152CF44</string>
-				<string>84425B14AC2A66DA59107199</string>
-				<string>2B6BC68CA9E9B88175BA5552</string>
-				<string>DF48182F0FC119459D559E33</string>
-				<string>4268E8BE41088A8BF00EB432</string>
-				<string>533A3403FA8A2873B2FE75D2</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>iOS</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BF82CF656A4DB1711ED3685A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UIScrollView+EmptyDataSet.m</string>
-			<key>path</key>
-			<string>Source/UIScrollView+EmptyDataSet.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3F7FEFC792F4AE0E436026A</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>940E141EFD00CABBB38D0316</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>C420187D3ADA6CB990A13867</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCMPopupTransitioning.h</string>
-			<key>path</key>
-			<string>CCMPopup/CCMPopupTransitioning.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C465BC5B936F23C8224C473A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Drop It!-FormatterKit.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C5099BD7402744937830A179</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>Montserrat-Regular.ttf</string>
-			<key>path</key>
-			<string>Fonts/Montserrat-Regular.ttf</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C60248227DAC83C37C236760</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TTTAddressFormatter.h</string>
-			<key>path</key>
-			<string>FormatterKit/TTTAddressFormatter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C7C1A7D1C1F04905170A15A2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C5099BD7402744937830A179</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C905FB08FF78A76AC960BB8F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>id.lproj</string>
-			<key>path</key>
-			<string>Localizations/id.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CA08D63EB1DBF6FAF85A7F21</key>
-		<dict>
-			<key>fileRef</key>
-			<string>10DE4D35EA668CA6043C0881</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CA27AF1CB54DA8626FFF5DE1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>Montserrat-Bold.ttf</string>
-			<key>path</key>
-			<string>Fonts/Montserrat-Bold.ttf</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CA41D55989DA17E7638DF6B7</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Pods-Drop It!-FormatterKit-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CA8DFDDA2EF33D25E960E388</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>CCMCustomAnimation.h</string>
-			<key>path</key>
-			<string>CCMPopup/CCMCustomAnimation.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CB2D308B158B98CE2CBF9155</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TTTUnitOfInformationFormatter.m</string>
-			<key>path</key>
-			<string>FormatterKit/TTTUnitOfInformationFormatter.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CC834516856BBE99B2DD5124</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>86030EA801A23EB58EFA5EF4</string>
-				<string>20BD0CF2D0D5BDC6CA7326E6</string>
-				<string>9A5AD092474A6BAA6C1B96A9</string>
-				<string>70A61D8D2139D7F0BAEBA294</string>
-				<string>A3B2EC280FAC114AB5B5145B</string>
-				<string>816AC900EB86E280177D2F8F</string>
-				<string>857AD2D9A00EEC2EF851F0C8</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods-Drop It!</string>
-			<key>path</key>
-			<string>Target Support Files/Pods-Drop It!</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CC912124D5AC64CF6DC708D9</key>
-		<dict>
-			<key>children</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Resources</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CF9D164040CEF34FD96089FA</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TTTUnitOfInformationFormatter.h</string>
-			<key>path</key>
-			<string>FormatterKit/TTTUnitOfInformationFormatter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CFF6D17CF92EC4ACB1935E8D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CA41D55989DA17E7638DF6B7</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>D03BFB6466712DABAFFFE20E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>9EED25D544C5CA47248D4006</string>
-				<string>13FD11816C7B58A781213CD3</string>
-				<string>76E88E15B832208DFC2B852F</string>
-				<string>DCE872A1D8A5A01A5BE77560</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D12F291560C0FB71880D51E9</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CA8DFDDA2EF33D25E960E388</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>D513EFF8BE7AADB92E818D77</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TTTTimeIntervalFormatter.h</string>
-			<key>path</key>
-			<string>FormatterKit/TTTTimeIntervalFormatter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D57C5480A7D73B00DAD235AC</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>E1E8A1E5BE0CC41F2E5AC308</string>
-				<string>E9153BFB7E23B9A3EBF1BEF9</string>
-				<string>071EDC76065D1EBF47E507CB</string>
-				<string>5FA8C3E0B42F67ABDEBD83FC</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>D59F715B65FF1017C5AF73C0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>32D2A2BF301236D59911D579</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>D667447DA3B9F4E3DE5CD69C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TTTOrdinalNumberFormatter.m</string>
-			<key>path</key>
-			<string>FormatterKit/TTTOrdinalNumberFormatter.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D66963A85B9789440557B301</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>ru.lproj</string>
-			<key>path</key>
-			<string>Localizations/ru.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D68A5851700F72A34D229365</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TTTArrayFormatter.m</string>
-			<key>path</key>
-			<string>FormatterKit/TTTArrayFormatter.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D6E10FB0E2FB9BB48E55A2E7</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>9C29B6F8E7647438F4D0C273</string>
-				<string>903F77C497794B655FA844DA</string>
-				<string>5021BBD50F8F7BDDF90AA265</string>
-				<string>40A3FEE819AB403CAC98455D</string>
-				<string>F961C51DDD02D4560A807193</string>
-				<string>FC8A798BD31A1020200D05AC</string>
-				<string>7041A3590C0FAA0A2D684258</string>
-				<string>519C6A3BF4AB61152062DD01</string>
-				<string>C905FB08FF78A76AC960BB8F</string>
-				<string>05256676F3914C8B8B00CD91</string>
-				<string>0EC8937EF4339FE51ED04F81</string>
-				<string>40867CCDFD15065FA837BB9F</string>
-				<string>B3B63A7335CE204CF4779504</string>
-				<string>8358A112ED309FE47A105292</string>
-				<string>ADEBBB43F1C694F738B39CA6</string>
-				<string>5688E2EA1AEDBEA49E7BA22E</string>
-				<string>081F7C7AEF0E3914BDFA0399</string>
-				<string>992199686618E7B8945BF794</string>
-				<string>D66963A85B9789440557B301</string>
-				<string>396784E300BC133E4828FF23</string>
-				<string>EE9CED99001EE1AD6E1DC7CD</string>
-				<string>9131BFA4EBB2789056D1F80D</string>
-				<string>14363E8E827D80B4E8813FC3</string>
-				<string>BA5DE71649CE6F67CC284ECA</string>
-				<string>4904B8814FA6654C0900B2D5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Resources</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D7748C8B6883DA9A807F99EE</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>AE7C73CB118E1C342C82203D</string>
-				<string>5C212B76F4994167BE0701A9</string>
-				<string>97588608B0821731A57FE11D</string>
-				<string>05C34D71FA2A6FD238419800</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>../Target Support Files/Pods-Drop It!-DZNEmptyDataSet</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D88224AFCB55BFB33A123AA4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>02D6605BD42E3B7938EDFD6C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DBE36A6CED15A78FCE6B0A62</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TTTURLRequestFormatter.m</string>
-			<key>path</key>
-			<string>FormatterKit/TTTURLRequestFormatter.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DC8A0BF78232F2A983A3FCC1</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>88843DF6EE2B96AB38FCD0CF</string>
-			<key>buildPhases</key>
-			<array>
-				<string>E2C53B12B2CB18C01DAF283D</string>
-				<string>67F3859FA518B58BD693B6DA</string>
-				<string>E57CF7919ED40F2392DDA18F</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-Drop It!-DZNEmptyDataSet</string>
-			<key>productName</key>
-			<string>Pods-Drop It!-DZNEmptyDataSet</string>
-			<key>productReference</key>
-			<string>FA5F10AA3AE22D8D45CF4529</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>DCE872A1D8A5A01A5BE77560</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>02D6605BD42E3B7938EDFD6C</string>
-				<string>97591C953F5A7BFCAC0807E6</string>
-				<string>B9869D3F1EB368AB5B220FA5</string>
-				<string>A90D4588C3A0F1A966D8DEAC</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Montserrat</string>
-			<key>path</key>
-			<string>Montserrat</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD0A37C53A0683717D509538</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>A99B58B72CB6A75AC4C3BE08</string>
-			<key>buildPhases</key>
-			<array>
-				<string>E647D644983A53609F6BAE33</string>
-				<string>D57C5480A7D73B00DAD235AC</string>
-				<string>B905C3CFFAD1584E558DAEE4</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-Drop It!-FormatterKit</string>
-			<key>productName</key>
-			<string>Pods-Drop It!-FormatterKit</string>
-			<key>productReference</key>
-			<string>2EE15F36798285B67662E6FE</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>DD34A076577835C7F6F602D2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CA27AF1CB54DA8626FFF5DE1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DE1BE866EB8D94270A88EF96</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C465BC5B936F23C8224C473A</string>
-				<string>0C2F5C7C6A32E2BC22AEAF08</string>
-				<string>CA41D55989DA17E7638DF6B7</string>
-				<string>E2608C5B2ACE77BD78656434</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>../Target Support Files/Pods-Drop It!-FormatterKit</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DE4DD3A30CE25E2E52A5AA5D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BDBE8795D3973B821F2F34BF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DF48182F0FC119459D559E33</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreText.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreText.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>E0784307A3E82A6D64D3405E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Drop It!-Montserrat.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E1C7E7DB03344AA07AF511D0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>09110480406A340C2FBD244C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E1E8A1E5BE0CC41F2E5AC308</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B8DF268379D4475D5152CF44</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E2608C5B2ACE77BD78656434</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Pods-Drop It!-FormatterKit-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E2C53B12B2CB18C01DAF283D</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>2A8F57C6C89A4B9089306493</string>
-				<string>0D12CC6A21F3FCC5EF25D571</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>E38DF2F117B331DEE09A0FFC</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>4C9127E8C8FD31164483998B</string>
-			<key>buildPhases</key>
-			<array>
-				<string>084913B58108D10AA0E90531</string>
-				<string>414A2CAD6A835AE4C5C20DAE</string>
-				<string>91A0D284DC3177FC6F65FD93</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Montserrat</string>
-			<key>productName</key>
-			<string>Montserrat</string>
-			<key>productReference</key>
-			<string>4E6D6DFBABA81C69B046A46C</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle</string>
-		</dict>
-		<key>E57CF7919ED40F2392DDA18F</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>B80FE5F64C64736C1EB4DAD3</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>E60D623846C1E158B10448FC</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>RELEASE=1</string>
-				</array>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>STRIP_INSTALLED_PRODUCT</key>
-				<string>NO</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>E647D644983A53609F6BAE33</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>CFF6D17CF92EC4ACB1935E8D</string>
-				<string>1822C5F7935A9B75B4E39BF0</string>
-				<string>62D809E560A33274E4BAE7C2</string>
-				<string>05B81007FCBF65AF1E15DF96</string>
-				<string>9571E678A6B4F323B8C47555</string>
-				<string>191DE0316C042D5B5AE8CC2E</string>
-				<string>B6DC2015937B5E0DB376ACCA</string>
-				<string>91DAC03FC6D88842869ADD5E</string>
-				<string>89966A8B909C8527BFFB2831</string>
-				<string>ABD2E77C6ECB7D020C75314C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>E8795758DB516552591F8E0B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6AF1EB6F2FD33743F59959BA</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E9153BFB7E23B9A3EBF1BEF9</key>
-		<dict>
-			<key>fileRef</key>
-			<string>84425B14AC2A66DA59107199</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E995A568B841A447EB1F5802</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UIViewController+CCMPopupAnimation.m</string>
-			<key>path</key>
-			<string>CCMPopup/UIViewController+CCMPopupAnimation.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDBA12BFE682A1FEC8AED6DF</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C60248227DAC83C37C236760</string>
-				<string>9B87F52858F5CDEDE2C0C240</string>
-				<string>D6E10FB0E2FB9BB48E55A2E7</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>AddressFormatter</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EE9CED99001EE1AD6E1DC7CD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>tr.lproj</string>
-			<key>path</key>
-			<string>Localizations/tr.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EF0CA7E986A6A6D733165E72</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>bundle</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>EF8491E87B04A526A8E2033E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>645AB325E4F3B04F1CE201E7</string>
-				<string>3A9B8F759CA420642BFF840E</string>
-				<string>211B1E99679144A102EE313F</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>LocationFormatter</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F1DF418C756E81D91E0564EF</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>name</key>
-			<string>Pods-Drop It!-Montserrat</string>
-			<key>target</key>
-			<string>8A8357409E64FB8B0963B76B</string>
-			<key>targetProxy</key>
-			<string>0EBFEAFCF46DFB666EC78305</string>
-		</dict>
-		<key>F453850480AB198A19426169</key>
-		<dict>
-			<key>fileRef</key>
-			<string>89BDC6FF10E074B4510FB15C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>F80866A1FE006A5A1AE551A0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E995A568B841A447EB1F5802</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>F865A917E7FA3E186421F787</key>
-		<dict>
-			<key>fileRef</key>
-			<string>FC799E77A0AF72BA4AE67A33</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>F93E5A3D3F9F1834F54DD0B0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>7A8FFB46F47DF5D85B53CCD2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>F961C51DDD02D4560A807193</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>el.lproj</string>
-			<key>path</key>
-			<string>Localizations/el.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FA148AE685A848F9CB8B79C0</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Drop It!-CCMPopup.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FA5F10AA3AE22D8D45CF4529</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-Drop It!-DZNEmptyDataSet.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>FC799E77A0AF72BA4AE67A33</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Pods-Drop It!-CCMPopup-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FC8A798BD31A1020200D05AC</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>en.lproj</string>
-			<key>path</key>
-			<string>Localizations/en.lproj</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FD3522693EE92B1A92025D78</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Pods-Drop It!-Montserrat-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>21448C76ED787F722F65E3FF</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		09CBC88E1C515736257EBF6A /* UIImage+screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 046EFA09B37E6A7B8D22B2AA /* UIImage+screenshot.m */; };
+		0B44F282C1217739BC2B5BE2 /* TTTURLRequestFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E33AB456A3A08B297269F54 /* TTTURLRequestFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		1301BE801EDAD6A114C1A049 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C6E645DBFC97117A231700 /* UIKit.framework */; };
+		19A691858B9D21AFE39AB569 /* Pods-Drop It!-FormatterKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591E5593CD2D03DB8E55969 /* Pods-Drop It!-FormatterKit-dummy.m */; };
+		1A41826390F9D614C27ECA60 /* UIFont+Montserrat.m in Sources */ = {isa = PBXBuildFile; fileRef = 43701D6CA370EEA8EA69B273 /* UIFont+Montserrat.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		1CC685F136A28184CCDE4E39 /* TTTColorFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = A1CFB6016344D50A74586C20 /* TTTColorFormatter.h */; };
+		2437EFB4AA02687BBD28F032 /* TTTNameFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E18B4A5DCC691B80A8349C0E /* TTTNameFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2729250D1ABC4D3000A271D4 /* FXBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2729250B1ABC4D3000A271D4 /* FXBlurView.h */; };
+		2729250E1ABC4D3000A271D4 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2729250C1ABC4D3000A271D4 /* FXBlurView.m */; };
+		2A69D9B496081AE7DF3E18F1 /* TTTOrdinalNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B4FFD1DFB25911DA96F6A433 /* TTTOrdinalNumberFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2BE59B6D47DD2587DFDE7484 /* TTTAddressFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2A3FB2706DFEFD5A81B257 /* TTTAddressFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2BF118E3C9B707F407C64759 /* CCMPopupAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E3F89B895119423D971DDD7 /* CCMPopupAnimation.h */; };
+		34F52DB11D630212F757835E /* UIFont+Montserrat.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B1D1A5FC4A9A93FC698B8A /* UIFont+Montserrat.h */; };
+		381E284C5CC566EF9D015193 /* Pods-Drop It!-Montserrat-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F0C502FAAE4EE5325B098 /* Pods-Drop It!-Montserrat-dummy.m */; };
+		3F12C8C5E7974BC939BB6707 /* CCMCustomAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD74F1BBFDA1476CC4DB23F /* CCMCustomAnimation.m */; };
+		408DE51C4FA3158935422453 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D17E2794AA8D7AE898D3DE /* Foundation.framework */; };
+		42F84C134ABCE41AC2653BB6 /* TTTTimeIntervalFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E9878776E2F716D51200138 /* TTTTimeIntervalFormatter.h */; };
+		44E13BAF5FBC7DBCCC40B1AD /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EEFEF719A7CD408E75099DB /* AddressBook.framework */; };
+		4CBE60AFECA12F57CABC7B68 /* Pods-Drop It!-CCMPopup-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231C4975C9168A8BDF10DA2 /* Pods-Drop It!-CCMPopup-dummy.m */; };
+		525D4AF3FD5C1D0D55AFA492 /* TTTUnitOfInformationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E36CD4A252539C0D4407D78A /* TTTUnitOfInformationFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		602F3071A42524D18BDFB477 /* UIViewController+CCMPopupAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEE25FE53228DE07BA65EA3 /* UIViewController+CCMPopupAnimation.m */; };
+		619CFF5C71A901FF205C959C /* TTTNameFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D41232352DAA8B7A842AAB9 /* TTTNameFormatter.h */; };
+		669FC7DD31A82F7B7020DE68 /* CCMPopupSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B93441DE72169331490BA86 /* CCMPopupSegue.h */; };
+		76DD36909432E7A0D099A52F /* CCMCustomAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 78D99E3F54C41A56BB455003 /* CCMCustomAnimation.h */; };
+		796308EA0207250BD4FDC880 /* TTTAddressFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AD9E4B06F0F049939AF2215 /* TTTAddressFormatter.h */; };
+		7C2718B40CA68525E96BCF09 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6377A5AADCB2FBC09892E36E /* Montserrat-Regular.ttf */; };
+		7F5D7D3E23686199BBA620CD /* TTTLocationFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 07F0B9FDA7EE247DE6C57469 /* TTTLocationFormatter.h */; };
+		8015C00F52FD8F3136DF6D0C /* TTTOrdinalNumberFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = CA99D2B7E2166A21A4522A43 /* TTTOrdinalNumberFormatter.h */; };
+		8286B395C710EA19939EB4E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C6E645DBFC97117A231700 /* UIKit.framework */; };
+		902698C9CCD9FCF7C7D3F60F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D17E2794AA8D7AE898D3DE /* Foundation.framework */; };
+		90EE5378E6F799871DA315B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D17E2794AA8D7AE898D3DE /* Foundation.framework */; };
+		91F56B6DE7FB5B8C25DC2379 /* TTTTimeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B8654B5F7A3944B0DAC7D24E /* TTTTimeIntervalFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		942A64AD2C13E277F399F39E /* CCMPopupSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9894C95ECD4B3E9BF5AE2C70 /* CCMPopupSegue.m */; };
+		99B2DC14579140ED94B29269 /* TTTArrayFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = E8C655AD170A92452CE95D59 /* TTTArrayFormatter.h */; };
+		A52A1BE2734EBCE9FA3C1AB4 /* TTTColorFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9959FA233544081CA7EC5 /* TTTColorFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		A5D3171FF437C9C4449C69ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D17E2794AA8D7AE898D3DE /* Foundation.framework */; };
+		A764EBF5F869ECB5D23E301C /* TTTArrayFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5820E0774ECA7303F3A68322 /* TTTArrayFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		A8204086FE36680ECCE389EC /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD432FDFFB5C2484FBC6FB51 /* AddressBookUI.framework */; };
+		AAAA1F0F350D4579CB3D16AA /* TTTLocationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 644101712C9AEBA2BE125144 /* TTTLocationFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B64EF86767F8C0CDD02680BB /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BA94FA7C9415026582DB01 /* UIScrollView+EmptyDataSet.m */; };
+		B93B08B55639D9206ACF9BB8 /* CCMPopupTransitioning.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C7CF0ECA7C69AE57F0D57AE /* CCMPopupTransitioning.h */; };
+		BDC8DCEA14F2205454219B75 /* TTTUnitOfInformationFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 56E65B2507C4E2D82148D517 /* TTTUnitOfInformationFormatter.h */; };
+		BF65B9A1A587F5AE6758A93A /* Pods-Drop It!-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 92717AE3C2AC67E6BAD8B016 /* Pods-Drop It!-dummy.m */; };
+		C76BABE1C7FFE2194BEBF9E2 /* TTTURLRequestFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 828C33D5D2B755A20C4C0F8B /* TTTURLRequestFormatter.h */; };
+		C8074A2068D63CEE6C77B970 /* Pods-Drop It!-DZNEmptyDataSet-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A4B392051C592581A18ABC /* Pods-Drop It!-DZNEmptyDataSet-dummy.m */; };
+		C88DC50BE40233E3B3E7BE13 /* CCMPopupAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = CA23615752C65D81778CF557 /* CCMPopupAnimation.m */; };
+		CBF77891E0EE71E6B0EC765C /* UIImage+screenshot.h in Headers */ = {isa = PBXBuildFile; fileRef = E0C8A3E812E838E08A100748 /* UIImage+screenshot.h */; };
+		D71C0A8B8C8F77893F629170 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9483FCEAB62FEC9A0A066B9F /* Montserrat-Bold.ttf */; };
+		DE44FBCC952579D254098795 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B98026023DE5F423DDB47427 /* UIImage+ImageEffects.m */; };
+		E0A15620B966D9A1978BCC69 /* UIImage+ImageEffects.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA859800CB094E3AA0E2C27 /* UIImage+ImageEffects.h */; };
+		E7BED4EC12065F50BAFF92EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D17E2794AA8D7AE898D3DE /* Foundation.framework */; };
+		EF66E6DCFDFDD120112D91E7 /* UIViewController+CCMPopupAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 17A91F9737EF0EB94CDD7482 /* UIViewController+CCMPopupAnimation.h */; };
+		F089E736C0D3327115D5326F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B13273E1A802BCE090D5C163 /* CoreLocation.framework */; };
+		F47090F2E430F57D4A418ABC /* UIScrollView+EmptyDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 71C072388A49C87899E41CA4 /* UIScrollView+EmptyDataSet.h */; };
+		FCC579DBF7CDE41EF66347B4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E83A5474E68691736F83AF /* CoreText.framework */; };
+		FE9991BDCBE0C772F8F15258 /* CCMPopupTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 853E628E1D5B953819566143 /* CCMPopupTransitioning.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3C7475D0C174EED599102A43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F61A1C162BCD0104FCA8ADF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B3402B0ED3E308A90F7F4946;
+			remoteInfo = "Pods-Drop It!-DZNEmptyDataSet";
+		};
+		6FD9BE5A585E078AFF0F303E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F61A1C162BCD0104FCA8ADF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 472370995044B12C2AE3C040;
+			remoteInfo = "Pods-Drop It!-FormatterKit";
+		};
+		837EA427EC1F32BA7850F4BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F61A1C162BCD0104FCA8ADF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F6F65BB601365851C1927D60;
+			remoteInfo = "Pods-Drop It!-Montserrat";
+		};
+		B0A5BB4394DAC7474232904B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F61A1C162BCD0104FCA8ADF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AFB912B4316D8E0F4DD4764E;
+			remoteInfo = Montserrat;
+		};
+		E921D1A2E357D29130C94F51 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F61A1C162BCD0104FCA8ADF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27E35F05E5875720A1EDB421;
+			remoteInfo = "Pods-Drop It!-CCMPopup";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0013D911A563D2D8257E5133 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		046EFA09B37E6A7B8D22B2AA /* UIImage+screenshot.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+screenshot.m"; path = "CCMPopup/UIImage+screenshot/UIImage+screenshot.m"; sourceTree = "<group>"; };
+		07F0B9FDA7EE247DE6C57469 /* TTTLocationFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTLocationFormatter.h; path = FormatterKit/TTTLocationFormatter.h; sourceTree = "<group>"; };
+		0BBFDB09D70568921764105E /* Pods-Drop It!-FormatterKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-FormatterKit.xcconfig"; sourceTree = "<group>"; };
+		0BEC240196F873E99B91E05A /* id.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = id.lproj; path = Localizations/id.lproj; sourceTree = "<group>"; };
+		138BE9A864200AB23E34D04A /* ja.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ja.lproj; path = Localizations/ja.lproj; sourceTree = "<group>"; };
+		144BA9A5B612126AA2EED575 /* pl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = pl.lproj; path = Localizations/pl.lproj; sourceTree = "<group>"; };
+		1591E5593CD2D03DB8E55969 /* Pods-Drop It!-FormatterKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-FormatterKit-dummy.m"; sourceTree = "<group>"; };
+		1711A7AB619A056A9246AD29 /* Pods-Drop It!-CCMPopup-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-CCMPopup-prefix.pch"; sourceTree = "<group>"; };
+		17A91F9737EF0EB94CDD7482 /* UIViewController+CCMPopupAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+CCMPopupAnimation.h"; path = "CCMPopup/UIViewController+CCMPopupAnimation.h"; sourceTree = "<group>"; };
+		1FFD0CF477DB3AEBCD2AF4D8 /* Pods-Drop It!-Montserrat-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-Montserrat-prefix.pch"; sourceTree = "<group>"; };
+		20958B3E4C43ABD6B5752D6E /* Pods-Drop It!-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Drop It!-resources.sh"; sourceTree = "<group>"; };
+		2729250B1ABC4D3000A271D4 /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
+		2729250C1ABC4D3000A271D4 /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
+		27B772990F9733E144A772EC /* Pods-Drop It!-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Drop It!-acknowledgements.plist"; sourceTree = "<group>"; };
+		2808EEB693C36A2012C51DFB /* tr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = tr.lproj; path = Localizations/tr.lproj; sourceTree = "<group>"; };
+		2AD9E4B06F0F049939AF2215 /* TTTAddressFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTAddressFormatter.h; path = FormatterKit/TTTAddressFormatter.h; sourceTree = "<group>"; };
+		3821DDA9C8EFE483C16BB1F2 /* nb.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = nb.lproj; path = Localizations/nb.lproj; sourceTree = "<group>"; };
+		39CB7DB208437245CCBFC1FB /* libPods-Drop It!-Montserrat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!-Montserrat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ABAB4C015D8159D95544C01 /* libPods-Drop It!.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C1F0C502FAAE4EE5325B098 /* Pods-Drop It!-Montserrat-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-Montserrat-dummy.m"; sourceTree = "<group>"; };
+		3E1CBB2AEAE4F08119CAC14E /* vi.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = vi.lproj; path = Localizations/vi.lproj; sourceTree = "<group>"; };
+		3E33AB456A3A08B297269F54 /* TTTURLRequestFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTURLRequestFormatter.m; path = FormatterKit/TTTURLRequestFormatter.m; sourceTree = "<group>"; };
+		3E3F89B895119423D971DDD7 /* CCMPopupAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CCMPopupAnimation.h; path = CCMPopup/CCMPopupAnimation.h; sourceTree = "<group>"; };
+		3EEFEF719A7CD408E75099DB /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AddressBook.framework; sourceTree = DEVELOPER_DIR; };
+		43701D6CA370EEA8EA69B273 /* UIFont+Montserrat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Montserrat.m"; sourceTree = "<group>"; };
+		4DCE6EF7D774C1CF4DA69B54 /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = en.lproj; path = Localizations/en.lproj; sourceTree = "<group>"; };
+		52B1D1A5FC4A9A93FC698B8A /* UIFont+Montserrat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIFont+Montserrat.h"; sourceTree = "<group>"; };
+		533FE3C09B1CF4EA8D554E57 /* Pods-Drop It!-FormatterKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-FormatterKit-prefix.pch"; sourceTree = "<group>"; };
+		56E65B2507C4E2D82148D517 /* TTTUnitOfInformationFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTUnitOfInformationFormatter.h; path = FormatterKit/TTTUnitOfInformationFormatter.h; sourceTree = "<group>"; };
+		581734AD88AE1D3B723FB86F /* libPods-Drop It!-CCMPopup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!-CCMPopup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5820E0774ECA7303F3A68322 /* TTTArrayFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTArrayFormatter.m; path = FormatterKit/TTTArrayFormatter.m; sourceTree = "<group>"; };
+		5C4F04A55AF171B82ACC6FCF /* libPods-Drop It!-FormatterKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!-FormatterKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C7CF0ECA7C69AE57F0D57AE /* CCMPopupTransitioning.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CCMPopupTransitioning.h; path = CCMPopup/CCMPopupTransitioning.h; sourceTree = "<group>"; };
+		5E9878776E2F716D51200138 /* TTTTimeIntervalFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTTimeIntervalFormatter.h; path = FormatterKit/TTTTimeIntervalFormatter.h; sourceTree = "<group>"; };
+		5ED9959FA233544081CA7EC5 /* TTTColorFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTColorFormatter.m; path = FormatterKit/TTTColorFormatter.m; sourceTree = "<group>"; };
+		6231C4975C9168A8BDF10DA2 /* Pods-Drop It!-CCMPopup-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-CCMPopup-dummy.m"; sourceTree = "<group>"; };
+		6377A5AADCB2FBC09892E36E /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "Fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		644101712C9AEBA2BE125144 /* TTTLocationFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTLocationFormatter.m; path = FormatterKit/TTTLocationFormatter.m; sourceTree = "<group>"; };
+		64D17E2794AA8D7AE898D3DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		650ED7EF1063BAB0C9C35033 /* Pods-Drop It!-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-environment.h"; sourceTree = "<group>"; };
+		6B93441DE72169331490BA86 /* CCMPopupSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CCMPopupSegue.h; path = CCMPopup/CCMPopupSegue.h; sourceTree = "<group>"; };
+		6D10F3B1F9B2E2B3C6A4B973 /* pt_BR.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = pt_BR.lproj; path = Localizations/pt_BR.lproj; sourceTree = "<group>"; };
+		6F2A3FB2706DFEFD5A81B257 /* TTTAddressFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTAddressFormatter.m; path = FormatterKit/TTTAddressFormatter.m; sourceTree = "<group>"; };
+		6FA2213A2E29BA7ECFE56D73 /* zh-Hans.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = "zh-Hans.lproj"; path = "Localizations/zh-Hans.lproj"; sourceTree = "<group>"; };
+		71C072388A49C87899E41CA4 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EmptyDataSet.h"; path = "Source/UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
+		71D20237B0CBC6FE0E9B3D61 /* Pods-Drop It!-DZNEmptyDataSet.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-DZNEmptyDataSet.xcconfig"; sourceTree = "<group>"; };
+		7441B353CB1E18FD173B4CF5 /* nn.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = nn.lproj; path = Localizations/nn.lproj; sourceTree = "<group>"; };
+		75BF2AC5A13D73C0DC2D9000 /* Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig"; sourceTree = "<group>"; };
+		76BA94FA7C9415026582DB01 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EmptyDataSet.m"; path = "Source/UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
+		78D99E3F54C41A56BB455003 /* CCMCustomAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CCMCustomAnimation.h; path = CCMPopup/CCMCustomAnimation.h; sourceTree = "<group>"; };
+		7D41232352DAA8B7A842AAB9 /* TTTNameFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTNameFormatter.h; path = FormatterKit/TTTNameFormatter.h; sourceTree = "<group>"; };
+		828C33D5D2B755A20C4C0F8B /* TTTURLRequestFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTURLRequestFormatter.h; path = FormatterKit/TTTURLRequestFormatter.h; sourceTree = "<group>"; };
+		83C6E645DBFC97117A231700 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		853E628E1D5B953819566143 /* CCMPopupTransitioning.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CCMPopupTransitioning.m; path = CCMPopup/CCMPopupTransitioning.m; sourceTree = "<group>"; };
+		8C75536C74BF14EB16B5B31A /* de.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = de.lproj; path = Localizations/de.lproj; sourceTree = "<group>"; };
+		8CE37C9D8804BCDD580823ED /* es.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = es.lproj; path = Localizations/es.lproj; sourceTree = "<group>"; };
+		92717AE3C2AC67E6BAD8B016 /* Pods-Drop It!-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-dummy.m"; sourceTree = "<group>"; };
+		92B70696E3409B946A6B9750 /* Pods-Drop It!-Montserrat-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-Montserrat-Private.xcconfig"; sourceTree = "<group>"; };
+		9483FCEAB62FEC9A0A066B9F /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "Fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		9894C95ECD4B3E9BF5AE2C70 /* CCMPopupSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CCMPopupSegue.m; path = CCMPopup/CCMPopupSegue.m; sourceTree = "<group>"; };
+		9CA859800CB094E3AA0E2C27 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "CCMPopup/UIImage+ImageEffects/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		9CE541E3FCC7FBED46E6577E /* Pods-Drop It!-CCMPopup.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-CCMPopup.xcconfig"; sourceTree = "<group>"; };
+		A1CFB6016344D50A74586C20 /* TTTColorFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTColorFormatter.h; path = FormatterKit/TTTColorFormatter.h; sourceTree = "<group>"; };
+		A3C54178565ADD26B8784BC0 /* Pods-Drop It!.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!.release.xcconfig"; sourceTree = "<group>"; };
+		A7FA57417209664244583AD3 /* it.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = it.lproj; path = Localizations/it.lproj; sourceTree = "<group>"; };
+		A8A4B392051C592581A18ABC /* Pods-Drop It!-DZNEmptyDataSet-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-DZNEmptyDataSet-dummy.m"; sourceTree = "<group>"; };
+		AB73CD8AC56DF13FE439C128 /* ru.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ru.lproj; path = Localizations/ru.lproj; sourceTree = "<group>"; };
+		ABB4F269BD4912D7A7DC0825 /* sv.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = sv.lproj; path = Localizations/sv.lproj; sourceTree = "<group>"; };
+		AE91B257789640F69BDD13A7 /* nl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = nl.lproj; path = Localizations/nl.lproj; sourceTree = "<group>"; };
+		AEEA37896A789A8E4BB18245 /* ko.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ko.lproj; path = Localizations/ko.lproj; sourceTree = "<group>"; };
+		AF59B249C5B86CA80273C874 /* ca.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ca.lproj; path = Localizations/ca.lproj; sourceTree = "<group>"; };
+		B13273E1A802BCE090D5C163 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
+		B4DA8B0C1A658934B6218419 /* da.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = da.lproj; path = Localizations/da.lproj; sourceTree = "<group>"; };
+		B4E83A5474E68691736F83AF /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
+		B4FFD1DFB25911DA96F6A433 /* TTTOrdinalNumberFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTOrdinalNumberFormatter.m; path = FormatterKit/TTTOrdinalNumberFormatter.m; sourceTree = "<group>"; };
+		B5645CDE0996CFD01DB3301A /* Pods-Drop It!-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Drop It!-acknowledgements.markdown"; sourceTree = "<group>"; };
+		B8654B5F7A3944B0DAC7D24E /* TTTTimeIntervalFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTTimeIntervalFormatter.m; path = FormatterKit/TTTTimeIntervalFormatter.m; sourceTree = "<group>"; };
+		B98026023DE5F423DDB47427 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "CCMPopup/UIImage+ImageEffects/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		BD432FDFFB5C2484FBC6FB51 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AddressBookUI.framework; sourceTree = DEVELOPER_DIR; };
+		BFD74F1BBFDA1476CC4DB23F /* CCMCustomAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CCMCustomAnimation.m; path = CCMPopup/CCMCustomAnimation.m; sourceTree = "<group>"; };
+		C8C1B1AB5DE75C1C463640A4 /* Montserrat.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Montserrat.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA23615752C65D81778CF557 /* CCMPopupAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CCMPopupAnimation.m; path = CCMPopup/CCMPopupAnimation.m; sourceTree = "<group>"; };
+		CA99D2B7E2166A21A4522A43 /* TTTOrdinalNumberFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTOrdinalNumberFormatter.h; path = FormatterKit/TTTOrdinalNumberFormatter.h; sourceTree = "<group>"; };
+		CC6C19EAD870E8D4150004B1 /* uk.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = uk.lproj; path = Localizations/uk.lproj; sourceTree = "<group>"; };
+		D1227F899A4F02A43C33F213 /* Pods-Drop It!-DZNEmptyDataSet-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-DZNEmptyDataSet-prefix.pch"; sourceTree = "<group>"; };
+		D2FDA136C491B41FF7722EA8 /* pt.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = pt.lproj; path = Localizations/pt.lproj; sourceTree = "<group>"; };
+		D6373B4CB5AEC0F49C232507 /* libPods-Drop It!-DZNEmptyDataSet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!-DZNEmptyDataSet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6F82735B13F74B7E803EB96 /* Pods-Drop It!-CCMPopup-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-CCMPopup-Private.xcconfig"; sourceTree = "<group>"; };
+		D92897CA71149694488CC8F6 /* el.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = el.lproj; path = Localizations/el.lproj; sourceTree = "<group>"; };
+		DC21682F5059129DE2DECE9E /* Pods-Drop It!.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!.debug.xcconfig"; sourceTree = "<group>"; };
+		E0C8A3E812E838E08A100748 /* UIImage+screenshot.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+screenshot.h"; path = "CCMPopup/UIImage+screenshot/UIImage+screenshot.h"; sourceTree = "<group>"; };
+		E124B6D7D412282C5C2CD4C7 /* cs.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = cs.lproj; path = Localizations/cs.lproj; sourceTree = "<group>"; };
+		E18B4A5DCC691B80A8349C0E /* TTTNameFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTNameFormatter.m; path = FormatterKit/TTTNameFormatter.m; sourceTree = "<group>"; };
+		E36CD4A252539C0D4407D78A /* TTTUnitOfInformationFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTUnitOfInformationFormatter.m; path = FormatterKit/TTTUnitOfInformationFormatter.m; sourceTree = "<group>"; };
+		E53B3A4E420F8056D6811B24 /* Pods-Drop It!-Montserrat.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-Montserrat.xcconfig"; sourceTree = "<group>"; };
+		E8C655AD170A92452CE95D59 /* TTTArrayFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTArrayFormatter.h; path = FormatterKit/TTTArrayFormatter.h; sourceTree = "<group>"; };
+		EDEE25FE53228DE07BA65EA3 /* UIViewController+CCMPopupAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+CCMPopupAnimation.m"; path = "CCMPopup/UIViewController+CCMPopupAnimation.m"; sourceTree = "<group>"; };
+		F208AF15434822DBC0281F12 /* zh-Hant.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = "zh-Hant.lproj"; path = "Localizations/zh-Hant.lproj"; sourceTree = "<group>"; };
+		F81B7A41BE2C1B8818EF5890 /* fr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = fr.lproj; path = Localizations/fr.lproj; sourceTree = "<group>"; };
+		FD6CE3BE241FE4FCFE84220F /* Pods-Drop It!-FormatterKit-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-FormatterKit-Private.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0381704FEB23228529C05F0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DDA98F3142F77D43220125E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5D3171FF437C9C4449C69ED /* Foundation.framework in Frameworks */,
+				1301BE801EDAD6A114C1A049 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		445BD5339C26B90919D5F03D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				902698C9CCD9FCF7C7D3F60F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E148A0102A7ACA079499218 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90EE5378E6F799871DA315B8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		777820ADE6AE6732F0D95990 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44E13BAF5FBC7DBCCC40B1AD /* AddressBook.framework in Frameworks */,
+				A8204086FE36680ECCE389EC /* AddressBookUI.framework in Frameworks */,
+				F089E736C0D3327115D5326F /* CoreLocation.framework in Frameworks */,
+				E7BED4EC12065F50BAFF92EA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E990E8B3AD8B63951D8BCD61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCC579DBF7CDE41EF66347B4 /* CoreText.framework in Frameworks */,
+				408DE51C4FA3158935422453 /* Foundation.framework in Frameworks */,
+				8286B395C710EA19939EB4E1 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		016FA80D34CF62441EC049F2 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3EEFEF719A7CD408E75099DB /* AddressBook.framework */,
+				BD432FDFFB5C2484FBC6FB51 /* AddressBookUI.framework */,
+				B13273E1A802BCE090D5C163 /* CoreLocation.framework */,
+				B4E83A5474E68691736F83AF /* CoreText.framework */,
+				64D17E2794AA8D7AE898D3DE /* Foundation.framework */,
+				83C6E645DBFC97117A231700 /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		02D58655CB0D034DBA899B7D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08955C41AA8CC05D62A630B7 /* Montserrat */ = {
+			isa = PBXGroup;
+			children = (
+				52B1D1A5FC4A9A93FC698B8A /* UIFont+Montserrat.h */,
+				43701D6CA370EEA8EA69B273 /* UIFont+Montserrat.m */,
+				AE17107BF464C6DDDDFC303E /* Resources */,
+				143B33ED2BA0FDB45D595419 /* Support Files */,
+			);
+			path = Montserrat;
+			sourceTree = "<group>";
+		};
+		0FF859242507155A76CD482B /* OrdinalNumberFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				CA99D2B7E2166A21A4522A43 /* TTTOrdinalNumberFormatter.h */,
+				B4FFD1DFB25911DA96F6A433 /* TTTOrdinalNumberFormatter.m */,
+				75D8815310D76B003A4F133E /* Resources */,
+			);
+			name = OrdinalNumberFormatter;
+			sourceTree = "<group>";
+		};
+		123210E6DAD0C5E69D3D0AF4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		143B33ED2BA0FDB45D595419 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E53B3A4E420F8056D6811B24 /* Pods-Drop It!-Montserrat.xcconfig */,
+				92B70696E3409B946A6B9750 /* Pods-Drop It!-Montserrat-Private.xcconfig */,
+				3C1F0C502FAAE4EE5325B098 /* Pods-Drop It!-Montserrat-dummy.m */,
+				1FFD0CF477DB3AEBCD2AF4D8 /* Pods-Drop It!-Montserrat-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-Drop It!-Montserrat";
+			sourceTree = "<group>";
+		};
+		205F6DFC6085937D10C0F1BC /* ArrayFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				E8C655AD170A92452CE95D59 /* TTTArrayFormatter.h */,
+				5820E0774ECA7303F3A68322 /* TTTArrayFormatter.m */,
+				BF9FE9F64A9A47424E969014 /* Resources */,
+			);
+			name = ArrayFormatter;
+			sourceTree = "<group>";
+		};
+		3234961E906E6E9ADB954425 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9CE541E3FCC7FBED46E6577E /* Pods-Drop It!-CCMPopup.xcconfig */,
+				D6F82735B13F74B7E803EB96 /* Pods-Drop It!-CCMPopup-Private.xcconfig */,
+				6231C4975C9168A8BDF10DA2 /* Pods-Drop It!-CCMPopup-dummy.m */,
+				1711A7AB619A056A9246AD29 /* Pods-Drop It!-CCMPopup-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-Drop It!-CCMPopup";
+			sourceTree = "<group>";
+		};
+		34105367703A270BB935A5F2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0BBFDB09D70568921764105E /* Pods-Drop It!-FormatterKit.xcconfig */,
+				FD6CE3BE241FE4FCFE84220F /* Pods-Drop It!-FormatterKit-Private.xcconfig */,
+				1591E5593CD2D03DB8E55969 /* Pods-Drop It!-FormatterKit-dummy.m */,
+				533FE3C09B1CF4EA8D554E57 /* Pods-Drop It!-FormatterKit-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-Drop It!-FormatterKit";
+			sourceTree = "<group>";
+		};
+		3634BBAB2B016B6F25E0C7BF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		442C615CFF290D7581502E08 /* ColorFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				A1CFB6016344D50A74586C20 /* TTTColorFormatter.h */,
+				5ED9959FA233544081CA7EC5 /* TTTColorFormatter.m */,
+				BC8D4B0FA90E0FE6EA61EC0C /* Resources */,
+			);
+			name = ColorFormatter;
+			sourceTree = "<group>";
+		};
+		4D4EE2F65B5F4407760BC474 /* LocationFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				07F0B9FDA7EE247DE6C57469 /* TTTLocationFormatter.h */,
+				644101712C9AEBA2BE125144 /* TTTLocationFormatter.m */,
+				83CF71CCE167FF125F4B89B9 /* Resources */,
+			);
+			name = LocationFormatter;
+			sourceTree = "<group>";
+		};
+		61F2A4DD2A2A17B1DFA7BBC0 /* UnitOfInformationFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				56E65B2507C4E2D82148D517 /* TTTUnitOfInformationFormatter.h */,
+				E36CD4A252539C0D4407D78A /* TTTUnitOfInformationFormatter.m */,
+				3634BBAB2B016B6F25E0C7BF /* Resources */,
+			);
+			name = UnitOfInformationFormatter;
+			sourceTree = "<group>";
+		};
+		6D93B48F3433DE944EFC98B8 /* TimeIntervalFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				5E9878776E2F716D51200138 /* TTTTimeIntervalFormatter.h */,
+				B8654B5F7A3944B0DAC7D24E /* TTTTimeIntervalFormatter.m */,
+				D469E98BA1668A9C47FBA210 /* Resources */,
+			);
+			name = TimeIntervalFormatter;
+			sourceTree = "<group>";
+		};
+		75D8815310D76B003A4F133E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		80CBDFC8658F349BD46005FA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E54B2B123CA7CE871757D494 /* CCMPopup */,
+				AA9D41DB4A6AF228F959BE38 /* DZNEmptyDataSet */,
+				8F1705D0B0816B3ABC71C682 /* FormatterKit */,
+				08955C41AA8CC05D62A630B7 /* Montserrat */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		81B1F296C2AF99B89B6818CA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AF59B249C5B86CA80273C874 /* ca.lproj */,
+				E124B6D7D412282C5C2CD4C7 /* cs.lproj */,
+				B4DA8B0C1A658934B6218419 /* da.lproj */,
+				8C75536C74BF14EB16B5B31A /* de.lproj */,
+				D92897CA71149694488CC8F6 /* el.lproj */,
+				4DCE6EF7D774C1CF4DA69B54 /* en.lproj */,
+				8CE37C9D8804BCDD580823ED /* es.lproj */,
+				F81B7A41BE2C1B8818EF5890 /* fr.lproj */,
+				0BEC240196F873E99B91E05A /* id.lproj */,
+				A7FA57417209664244583AD3 /* it.lproj */,
+				138BE9A864200AB23E34D04A /* ja.lproj */,
+				AEEA37896A789A8E4BB18245 /* ko.lproj */,
+				3821DDA9C8EFE483C16BB1F2 /* nb.lproj */,
+				AE91B257789640F69BDD13A7 /* nl.lproj */,
+				7441B353CB1E18FD173B4CF5 /* nn.lproj */,
+				144BA9A5B612126AA2EED575 /* pl.lproj */,
+				D2FDA136C491B41FF7722EA8 /* pt.lproj */,
+				6D10F3B1F9B2E2B3C6A4B973 /* pt_BR.lproj */,
+				AB73CD8AC56DF13FE439C128 /* ru.lproj */,
+				ABB4F269BD4912D7A7DC0825 /* sv.lproj */,
+				2808EEB693C36A2012C51DFB /* tr.lproj */,
+				CC6C19EAD870E8D4150004B1 /* uk.lproj */,
+				3E1CBB2AEAE4F08119CAC14E /* vi.lproj */,
+				6FA2213A2E29BA7ECFE56D73 /* zh-Hans.lproj */,
+				F208AF15434822DBC0281F12 /* zh-Hant.lproj */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		83CF71CCE167FF125F4B89B9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		89E1C961078135514763956A /* AddressFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				2AD9E4B06F0F049939AF2215 /* TTTAddressFormatter.h */,
+				6F2A3FB2706DFEFD5A81B257 /* TTTAddressFormatter.m */,
+				81B1F296C2AF99B89B6818CA /* Resources */,
+			);
+			name = AddressFormatter;
+			sourceTree = "<group>";
+		};
+		8A9B10858D2A5FC0170D766A /* URLRequestFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				828C33D5D2B755A20C4C0F8B /* TTTURLRequestFormatter.h */,
+				3E33AB456A3A08B297269F54 /* TTTURLRequestFormatter.m */,
+				123210E6DAD0C5E69D3D0AF4 /* Resources */,
+			);
+			name = URLRequestFormatter;
+			sourceTree = "<group>";
+		};
+		8EB666465105899D329DEAD7 /* Pods-Drop It! */ = {
+			isa = PBXGroup;
+			children = (
+				B5645CDE0996CFD01DB3301A /* Pods-Drop It!-acknowledgements.markdown */,
+				27B772990F9733E144A772EC /* Pods-Drop It!-acknowledgements.plist */,
+				92717AE3C2AC67E6BAD8B016 /* Pods-Drop It!-dummy.m */,
+				650ED7EF1063BAB0C9C35033 /* Pods-Drop It!-environment.h */,
+				20958B3E4C43ABD6B5752D6E /* Pods-Drop It!-resources.sh */,
+				DC21682F5059129DE2DECE9E /* Pods-Drop It!.debug.xcconfig */,
+				A3C54178565ADD26B8784BC0 /* Pods-Drop It!.release.xcconfig */,
+			);
+			name = "Pods-Drop It!";
+			path = "Target Support Files/Pods-Drop It!";
+			sourceTree = "<group>";
+		};
+		8F1705D0B0816B3ABC71C682 /* FormatterKit */ = {
+			isa = PBXGroup;
+			children = (
+				89E1C961078135514763956A /* AddressFormatter */,
+				205F6DFC6085937D10C0F1BC /* ArrayFormatter */,
+				442C615CFF290D7581502E08 /* ColorFormatter */,
+				4D4EE2F65B5F4407760BC474 /* LocationFormatter */,
+				BDEE5F9D73EDF2315A4E7E8A /* NameFormatter */,
+				0FF859242507155A76CD482B /* OrdinalNumberFormatter */,
+				34105367703A270BB935A5F2 /* Support Files */,
+				6D93B48F3433DE944EFC98B8 /* TimeIntervalFormatter */,
+				8A9B10858D2A5FC0170D766A /* URLRequestFormatter */,
+				61F2A4DD2A2A17B1DFA7BBC0 /* UnitOfInformationFormatter */,
+			);
+			path = FormatterKit;
+			sourceTree = "<group>";
+		};
+		A47E84BFE1C66E9A985B75EB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C8C1B1AB5DE75C1C463640A4 /* Montserrat.bundle */,
+				3ABAB4C015D8159D95544C01 /* libPods-Drop It!.a */,
+				581734AD88AE1D3B723FB86F /* libPods-Drop It!-CCMPopup.a */,
+				D6373B4CB5AEC0F49C232507 /* libPods-Drop It!-DZNEmptyDataSet.a */,
+				5C4F04A55AF171B82ACC6FCF /* libPods-Drop It!-FormatterKit.a */,
+				39CB7DB208437245CCBFC1FB /* libPods-Drop It!-Montserrat.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA9D41DB4A6AF228F959BE38 /* DZNEmptyDataSet */ = {
+			isa = PBXGroup;
+			children = (
+				71C072388A49C87899E41CA4 /* UIScrollView+EmptyDataSet.h */,
+				76BA94FA7C9415026582DB01 /* UIScrollView+EmptyDataSet.m */,
+				C72293E43A5193CA720E2967 /* Support Files */,
+			);
+			path = DZNEmptyDataSet;
+			sourceTree = "<group>";
+		};
+		AE17107BF464C6DDDDFC303E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9483FCEAB62FEC9A0A066B9F /* Montserrat-Bold.ttf */,
+				6377A5AADCB2FBC09892E36E /* Montserrat-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		BC8D4B0FA90E0FE6EA61EC0C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		BDEE5F9D73EDF2315A4E7E8A /* NameFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				7D41232352DAA8B7A842AAB9 /* TTTNameFormatter.h */,
+				E18B4A5DCC691B80A8349C0E /* TTTNameFormatter.m */,
+				02D58655CB0D034DBA899B7D /* Resources */,
+			);
+			name = NameFormatter;
+			sourceTree = "<group>";
+		};
+		BF9FE9F64A9A47424E969014 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		C72293E43A5193CA720E2967 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				71D20237B0CBC6FE0E9B3D61 /* Pods-Drop It!-DZNEmptyDataSet.xcconfig */,
+				75BF2AC5A13D73C0DC2D9000 /* Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig */,
+				A8A4B392051C592581A18ABC /* Pods-Drop It!-DZNEmptyDataSet-dummy.m */,
+				D1227F899A4F02A43C33F213 /* Pods-Drop It!-DZNEmptyDataSet-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-Drop It!-DZNEmptyDataSet";
+			sourceTree = "<group>";
+		};
+		C9A0513F49669B6E4F0390CE = {
+			isa = PBXGroup;
+			children = (
+				0013D911A563D2D8257E5133 /* Podfile */,
+				E1B6C2062E8394FA6A95B71F /* Frameworks */,
+				80CBDFC8658F349BD46005FA /* Pods */,
+				A47E84BFE1C66E9A985B75EB /* Products */,
+				D9FCB97C59BBD776FB81B65B /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D469E98BA1668A9C47FBA210 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		D9FCB97C59BBD776FB81B65B /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8EB666465105899D329DEAD7 /* Pods-Drop It! */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		E1B6C2062E8394FA6A95B71F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				016FA80D34CF62441EC049F2 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E54B2B123CA7CE871757D494 /* CCMPopup */ = {
+			isa = PBXGroup;
+			children = (
+				2729250B1ABC4D3000A271D4 /* FXBlurView.h */,
+				2729250C1ABC4D3000A271D4 /* FXBlurView.m */,
+				78D99E3F54C41A56BB455003 /* CCMCustomAnimation.h */,
+				BFD74F1BBFDA1476CC4DB23F /* CCMCustomAnimation.m */,
+				3E3F89B895119423D971DDD7 /* CCMPopupAnimation.h */,
+				CA23615752C65D81778CF557 /* CCMPopupAnimation.m */,
+				6B93441DE72169331490BA86 /* CCMPopupSegue.h */,
+				9894C95ECD4B3E9BF5AE2C70 /* CCMPopupSegue.m */,
+				5C7CF0ECA7C69AE57F0D57AE /* CCMPopupTransitioning.h */,
+				853E628E1D5B953819566143 /* CCMPopupTransitioning.m */,
+				9CA859800CB094E3AA0E2C27 /* UIImage+ImageEffects.h */,
+				B98026023DE5F423DDB47427 /* UIImage+ImageEffects.m */,
+				E0C8A3E812E838E08A100748 /* UIImage+screenshot.h */,
+				046EFA09B37E6A7B8D22B2AA /* UIImage+screenshot.m */,
+				17A91F9737EF0EB94CDD7482 /* UIViewController+CCMPopupAnimation.h */,
+				EDEE25FE53228DE07BA65EA3 /* UIViewController+CCMPopupAnimation.m */,
+				3234961E906E6E9ADB954425 /* Support Files */,
+			);
+			path = CCMPopup;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1BFEDDA70FF8DCAA1EB21EB9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				796308EA0207250BD4FDC880 /* TTTAddressFormatter.h in Headers */,
+				99B2DC14579140ED94B29269 /* TTTArrayFormatter.h in Headers */,
+				1CC685F136A28184CCDE4E39 /* TTTColorFormatter.h in Headers */,
+				7F5D7D3E23686199BBA620CD /* TTTLocationFormatter.h in Headers */,
+				619CFF5C71A901FF205C959C /* TTTNameFormatter.h in Headers */,
+				8015C00F52FD8F3136DF6D0C /* TTTOrdinalNumberFormatter.h in Headers */,
+				42F84C134ABCE41AC2653BB6 /* TTTTimeIntervalFormatter.h in Headers */,
+				C76BABE1C7FFE2194BEBF9E2 /* TTTURLRequestFormatter.h in Headers */,
+				BDC8DCEA14F2205454219B75 /* TTTUnitOfInformationFormatter.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		371DA0C9F418854773CF1176 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F47090F2E430F57D4A418ABC /* UIScrollView+EmptyDataSet.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72A7B97905197EC5A99A4F48 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2729250D1ABC4D3000A271D4 /* FXBlurView.h in Headers */,
+				76DD36909432E7A0D099A52F /* CCMCustomAnimation.h in Headers */,
+				2BF118E3C9B707F407C64759 /* CCMPopupAnimation.h in Headers */,
+				669FC7DD31A82F7B7020DE68 /* CCMPopupSegue.h in Headers */,
+				B93B08B55639D9206ACF9BB8 /* CCMPopupTransitioning.h in Headers */,
+				E0A15620B966D9A1978BCC69 /* UIImage+ImageEffects.h in Headers */,
+				CBF77891E0EE71E6B0EC765C /* UIImage+screenshot.h in Headers */,
+				EF66E6DCFDFDD120112D91E7 /* UIViewController+CCMPopupAnimation.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABFFCD797763A5C8D9F99211 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34F52DB11D630212F757835E /* UIFont+Montserrat.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		27E35F05E5875720A1EDB421 /* Pods-Drop It!-CCMPopup */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A00E3D5AC4135BBEA86DC44 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-CCMPopup" */;
+			buildPhases = (
+				D354B21C2ABB9987F1BE5B04 /* Sources */,
+				6E148A0102A7ACA079499218 /* Frameworks */,
+				72A7B97905197EC5A99A4F48 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Drop It!-CCMPopup";
+			productName = "Pods-Drop It!-CCMPopup";
+			productReference = 581734AD88AE1D3B723FB86F /* libPods-Drop It!-CCMPopup.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		472370995044B12C2AE3C040 /* Pods-Drop It!-FormatterKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D34204D713216E73B6C87BE5 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-FormatterKit" */;
+			buildPhases = (
+				4B891E1BD2C1CA959EA37B2C /* Sources */,
+				777820ADE6AE6732F0D95990 /* Frameworks */,
+				1BFEDDA70FF8DCAA1EB21EB9 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Drop It!-FormatterKit";
+			productName = "Pods-Drop It!-FormatterKit";
+			productReference = 5C4F04A55AF171B82ACC6FCF /* libPods-Drop It!-FormatterKit.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		52823648C52CF9365ECB3803 /* Pods-Drop It! */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB81302726D4872622818051 /* Build configuration list for PBXNativeTarget "Pods-Drop It!" */;
+			buildPhases = (
+				741BF9CC1B42590F5EB3E9D3 /* Sources */,
+				445BD5339C26B90919D5F03D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BA3710B8892B77E401E263AB /* PBXTargetDependency */,
+				F060AF17C7D3B5D9EFD404FD /* PBXTargetDependency */,
+				D51103DD4DE741D75B9E6AE8 /* PBXTargetDependency */,
+				C60953CD428A4FB72E901714 /* PBXTargetDependency */,
+			);
+			name = "Pods-Drop It!";
+			productName = "Pods-Drop It!";
+			productReference = 3ABAB4C015D8159D95544C01 /* libPods-Drop It!.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		AFB912B4316D8E0F4DD4764E /* Montserrat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA478FE7C96DF3AC9FCF2E28 /* Build configuration list for PBXNativeTarget "Montserrat" */;
+			buildPhases = (
+				241E85D39651E9280B166260 /* Sources */,
+				0381704FEB23228529C05F0A /* Frameworks */,
+				481B3E1C0454D6697B8AD6B7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Montserrat;
+			productName = Montserrat;
+			productReference = C8C1B1AB5DE75C1C463640A4 /* Montserrat.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		B3402B0ED3E308A90F7F4946 /* Pods-Drop It!-DZNEmptyDataSet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA15FCB0E56AE98DA77BB2DC /* Build configuration list for PBXNativeTarget "Pods-Drop It!-DZNEmptyDataSet" */;
+			buildPhases = (
+				DE9A6D1B6C0DD45960444313 /* Sources */,
+				0DDA98F3142F77D43220125E /* Frameworks */,
+				371DA0C9F418854773CF1176 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Drop It!-DZNEmptyDataSet";
+			productName = "Pods-Drop It!-DZNEmptyDataSet";
+			productReference = D6373B4CB5AEC0F49C232507 /* libPods-Drop It!-DZNEmptyDataSet.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F6F65BB601365851C1927D60 /* Pods-Drop It!-Montserrat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D96B3EEF2C845E5854D96552 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-Montserrat" */;
+			buildPhases = (
+				2CE26F0F1D70AB8F29361D16 /* Sources */,
+				E990E8B3AD8B63951D8BCD61 /* Frameworks */,
+				ABFFCD797763A5C8D9F99211 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				51CCDFF7E14CE6BDD012505D /* PBXTargetDependency */,
+			);
+			name = "Pods-Drop It!-Montserrat";
+			productName = "Pods-Drop It!-Montserrat";
+			productReference = 39CB7DB208437245CCBFC1FB /* libPods-Drop It!-Montserrat.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F61A1C162BCD0104FCA8ADF5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = ED36E6F47B21CBAF129AE2BD /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C9A0513F49669B6E4F0390CE;
+			productRefGroup = A47E84BFE1C66E9A985B75EB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AFB912B4316D8E0F4DD4764E /* Montserrat */,
+				52823648C52CF9365ECB3803 /* Pods-Drop It! */,
+				27E35F05E5875720A1EDB421 /* Pods-Drop It!-CCMPopup */,
+				B3402B0ED3E308A90F7F4946 /* Pods-Drop It!-DZNEmptyDataSet */,
+				472370995044B12C2AE3C040 /* Pods-Drop It!-FormatterKit */,
+				F6F65BB601365851C1927D60 /* Pods-Drop It!-Montserrat */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		481B3E1C0454D6697B8AD6B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D71C0A8B8C8F77893F629170 /* Montserrat-Bold.ttf in Resources */,
+				7C2718B40CA68525E96BCF09 /* Montserrat-Regular.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		241E85D39651E9280B166260 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CE26F0F1D70AB8F29361D16 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				381E284C5CC566EF9D015193 /* Pods-Drop It!-Montserrat-dummy.m in Sources */,
+				1A41826390F9D614C27ECA60 /* UIFont+Montserrat.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B891E1BD2C1CA959EA37B2C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19A691858B9D21AFE39AB569 /* Pods-Drop It!-FormatterKit-dummy.m in Sources */,
+				2BE59B6D47DD2587DFDE7484 /* TTTAddressFormatter.m in Sources */,
+				A764EBF5F869ECB5D23E301C /* TTTArrayFormatter.m in Sources */,
+				A52A1BE2734EBCE9FA3C1AB4 /* TTTColorFormatter.m in Sources */,
+				AAAA1F0F350D4579CB3D16AA /* TTTLocationFormatter.m in Sources */,
+				2437EFB4AA02687BBD28F032 /* TTTNameFormatter.m in Sources */,
+				2A69D9B496081AE7DF3E18F1 /* TTTOrdinalNumberFormatter.m in Sources */,
+				91F56B6DE7FB5B8C25DC2379 /* TTTTimeIntervalFormatter.m in Sources */,
+				0B44F282C1217739BC2B5BE2 /* TTTURLRequestFormatter.m in Sources */,
+				525D4AF3FD5C1D0D55AFA492 /* TTTUnitOfInformationFormatter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		741BF9CC1B42590F5EB3E9D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF65B9A1A587F5AE6758A93A /* Pods-Drop It!-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D354B21C2ABB9987F1BE5B04 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F12C8C5E7974BC939BB6707 /* CCMCustomAnimation.m in Sources */,
+				C88DC50BE40233E3B3E7BE13 /* CCMPopupAnimation.m in Sources */,
+				942A64AD2C13E277F399F39E /* CCMPopupSegue.m in Sources */,
+				FE9991BDCBE0C772F8F15258 /* CCMPopupTransitioning.m in Sources */,
+				4CBE60AFECA12F57CABC7B68 /* Pods-Drop It!-CCMPopup-dummy.m in Sources */,
+				DE44FBCC952579D254098795 /* UIImage+ImageEffects.m in Sources */,
+				09CBC88E1C515736257EBF6A /* UIImage+screenshot.m in Sources */,
+				602F3071A42524D18BDFB477 /* UIViewController+CCMPopupAnimation.m in Sources */,
+				2729250E1ABC4D3000A271D4 /* FXBlurView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE9A6D1B6C0DD45960444313 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8074A2068D63CEE6C77B970 /* Pods-Drop It!-DZNEmptyDataSet-dummy.m in Sources */,
+				B64EF86767F8C0CDD02680BB /* UIScrollView+EmptyDataSet.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		51CCDFF7E14CE6BDD012505D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Montserrat;
+			target = AFB912B4316D8E0F4DD4764E /* Montserrat */;
+			targetProxy = B0A5BB4394DAC7474232904B /* PBXContainerItemProxy */;
+		};
+		BA3710B8892B77E401E263AB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Drop It!-CCMPopup";
+			target = 27E35F05E5875720A1EDB421 /* Pods-Drop It!-CCMPopup */;
+			targetProxy = E921D1A2E357D29130C94F51 /* PBXContainerItemProxy */;
+		};
+		C60953CD428A4FB72E901714 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Drop It!-Montserrat";
+			target = F6F65BB601365851C1927D60 /* Pods-Drop It!-Montserrat */;
+			targetProxy = 837EA427EC1F32BA7850F4BD /* PBXContainerItemProxy */;
+		};
+		D51103DD4DE741D75B9E6AE8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Drop It!-FormatterKit";
+			target = 472370995044B12C2AE3C040 /* Pods-Drop It!-FormatterKit */;
+			targetProxy = 6FD9BE5A585E078AFF0F303E /* PBXContainerItemProxy */;
+		};
+		F060AF17C7D3B5D9EFD404FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Drop It!-DZNEmptyDataSet";
+			target = B3402B0ED3E308A90F7F4946 /* Pods-Drop It!-DZNEmptyDataSet */;
+			targetProxy = 3C7475D0C174EED599102A43 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		09AA1EF70EC638A2CEFFED1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC21682F5059129DE2DECE9E /* Pods-Drop It!.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		15AEC57F3D533AC9941955EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92B70696E3409B946A6B9750 /* Pods-Drop It!-Montserrat-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-Montserrat/Pods-Drop It!-Montserrat-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		15B6AF3CB820CD056CF44D50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6F82735B13F74B7E803EB96 /* Pods-Drop It!-CCMPopup-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-CCMPopup/Pods-Drop It!-CCMPopup-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		212A85796C695CC59F98E03F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3C54178565ADD26B8784BC0 /* Pods-Drop It!.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		244F40335F615154E54EBABD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		26C8FE44FA9E20773CEBBD50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6F82735B13F74B7E803EB96 /* Pods-Drop It!-CCMPopup-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-CCMPopup/Pods-Drop It!-CCMPopup-prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		31589F14DDB7D06290A4F7B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		770551CE58022D7CF8FF5D89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75BF2AC5A13D73C0DC2D9000 /* Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-DZNEmptyDataSet/Pods-Drop It!-DZNEmptyDataSet-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		8BAAE46712C7E1D7BBB4010E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		8E5BC04298E2AB3DCA61CAC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92B70696E3409B946A6B9750 /* Pods-Drop It!-Montserrat-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-Montserrat/Pods-Drop It!-Montserrat-prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A4618A9FB0366DE984A765DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		B38FD775A114595DCA304C9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD6CE3BE241FE4FCFE84220F /* Pods-Drop It!-FormatterKit-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-FormatterKit/Pods-Drop It!-FormatterKit-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		EB332EE97DE99C2DFEEEC114 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75BF2AC5A13D73C0DC2D9000 /* Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-DZNEmptyDataSet/Pods-Drop It!-DZNEmptyDataSet-prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F6CAE316110F3C4A7B3BA36F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD6CE3BE241FE4FCFE84220F /* Pods-Drop It!-FormatterKit-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-FormatterKit/Pods-Drop It!-FormatterKit-prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8A00E3D5AC4135BBEA86DC44 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-CCMPopup" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15B6AF3CB820CD056CF44D50 /* Debug */,
+				26C8FE44FA9E20773CEBBD50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BA478FE7C96DF3AC9FCF2E28 /* Build configuration list for PBXNativeTarget "Montserrat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31589F14DDB7D06290A4F7B5 /* Debug */,
+				8BAAE46712C7E1D7BBB4010E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB81302726D4872622818051 /* Build configuration list for PBXNativeTarget "Pods-Drop It!" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09AA1EF70EC638A2CEFFED1B /* Debug */,
+				212A85796C695CC59F98E03F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D34204D713216E73B6C87BE5 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-FormatterKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B38FD775A114595DCA304C9D /* Debug */,
+				F6CAE316110F3C4A7B3BA36F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D96B3EEF2C845E5854D96552 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-Montserrat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15AEC57F3D533AC9941955EB /* Debug */,
+				8E5BC04298E2AB3DCA61CAC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA15FCB0E56AE98DA77BB2DC /* Build configuration list for PBXNativeTarget "Pods-Drop It!-DZNEmptyDataSet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				770551CE58022D7CF8FF5D89 /* Debug */,
+				EB332EE97DE99C2DFEEEC114 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED36E6F47B21CBAF129AE2BD /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4618A9FB0366DE984A765DD /* Debug */,
+				244F40335F615154E54EBABD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F61A1C162BCD0104FCA8ADF5 /* Project object */;
+}

@@ -11,8 +11,10 @@
 #import <ParseUI/ParseUI.h>
 #import <CoreLocation/CoreLocation.h>
 
+#import "DITableViewCell.h"
 #import "PostTextTableViewCell.h"
 #import "TimelineTableViewCell.h"
+#import "ColouredTableViewCell.h"
 
 #import "AddPostViewController.h"
 #import "ViewPostTableViewController.h"
@@ -32,8 +34,6 @@
 
 //Ad
 #import <AvocarrotSDK/AvocarrotInstream.h>
-
-
 
 @interface HomeTableViewController ()<AddPostViewControllerDataSource, ViewPostViewControllerDelegate, MapViewControllerDataSource, MapViewControllerDelegate, CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, AVInstreamAdDelegate>
 {
@@ -136,7 +136,8 @@
     self.tableView.backgroundColor = TABLEVIEW2_COLOR;
 
     //[self.tableView registerClass:[PostTextTableViewCell class] forCellReuseIdentifier:@"BoxCell"];
-    [self.tableView registerClass:[TimelineTableViewCell class] forCellReuseIdentifier:@"BoxCell"];
+    //[self.tableView registerClass:[TimelineTableViewCell class] forCellReuseIdentifier:@"BoxCell"];
+    [self.tableView registerClass:[ColouredTableViewCell class] forCellReuseIdentifier:@"BoxCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -264,75 +265,71 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *postObject = _allPosts[indexPath.row];
-    NSString *postText = postObject[@"text"];
     NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
     NSInteger repliesCount = [postObject[@"totalReplies"] integerValue];
-    NSString *postDate = [Config calculateTime:postObject[@"date"]];
     PFObject *parseObject = postObject[@"parseObject"];
     NSString *cellIdentifier = [NSString stringWithFormat:@"BoxCell%@",parseObject.objectId];
 
-    
     //Check the type in other to know which type of cell to display
     PostCellType type = [Config cellType];
     
-    TimelineTableViewCell *_cell = (TimelineTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!_cell)
-        _cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    _cell.selectionStyle= UITableViewCellSelectionStyleNone;
+    DITableViewCell *cell;
+    
+    if (type == TIMELINE)
+    {
+        TimelineTableViewCell *_cell = (TimelineTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!_cell)
+            _cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        
+        _cell = [self setTimelineCellFrames:_cell withPostObject:postObject];
+        
+        cell = _cell;
+        
+    }else if (type == COLOURED){
+        ColouredTableViewCell *_cell = (ColouredTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!_cell)
+            _cell = [[ColouredTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        
+        _cell = [self setColouredCellFrames:_cell withPostObject:postObject forIndex:indexPath.row];
+        
+        cell = _cell;
+    }
+
+    cell.selectionStyle= UITableViewCellSelectionStyleNone;
+    cell.tag = indexPath.row;
+    
     
     // Configure the cell...
-    _cell.postText.text = postText;
-    _cell.date.text = postDate;
-    _cell.comments.text = [Config repliesCount:repliesCount];
-    [_cell.smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
-    
-    //Set Frames
-    NSDictionary *subViewframes = [Config subViewFrames2:postObject];
-    _cell.line.frame = [subViewframes[@"lineFrame"] CGRectValue];
-    _cell.lineBorder.frame = [subViewframes[@"lineBorderFrame"] CGRectValue];
-    _cell.bubble.frame = [subViewframes[@"bubbleFrame"] CGRectValue];
-    _cell.triangle.frame = [subViewframes[@"triangleFrame"] CGRectValue];
-
-    _cell.postContainer.frame = [subViewframes[@"containerFrame"] CGRectValue];
-    _cell.postText.frame = [subViewframes[@"postTextFrame"] CGRectValue];
-    _cell.postImage.frame = [subViewframes[@"imageFrame"] CGRectValue];
-    _cell.actionsView.frame = [subViewframes[@"actionViewframe"] CGRectValue];
-    
-    UIColor *rColor = [Config getBubbleColor];
-    _cell.bubble.layer.borderColor = rColor.CGColor;
-    /*
-    _cell.bubble.layer.borderWidth = 0;
-    _cell.bubble.image = [UIImage imageNamed:[Config fruits]];
-     */
-    
+    cell.postText.text = postObject[@"text"];
+    cell.date.text = [Config calculateTime:postObject[@"date"]];
+    cell.comments.text = [Config repliesCount:repliesCount];
+    [cell.smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
     
     if (parseObject[@"pic"])
     {
-        _cell.postImage.file = parseObject[@"pic"];
-        _cell.postImage.tag = 1;//indexPath.row;
-        [_cell.postImage loadInBackground];
-        [_cell.postImage setupImageViewerWithPFFile:_cell.postImage.file onOpen:nil onClose:nil];
+        cell.postImage.file = parseObject[@"pic"];
+        cell.postImage.tag = 1;//indexPath.row;
+        [cell.postImage loadInBackground];
+        [cell.postImage setupImageViewerWithPFFile:cell.postImage.file onOpen:nil onClose:nil];
     }
     
     if (![postObject[@"disliked"] boolValue]){
-        _cell.smiley.selected = [postObject[@"liked"] boolValue];
+        cell.smiley.selected = [postObject[@"liked"] boolValue];
     }else{
-        _cell.smiley.selected = NO;
-        _cell.smiley.highlighted = [postObject[@"disliked"] boolValue];
+        cell.smiley.selected = NO;
+        cell.smiley.highlighted = [postObject[@"disliked"] boolValue];
     }
-    
-    _cell.tag = indexPath.row;
     
     //If the user is not the post authour
     //They can like, dislike and report the post
     if (![Config isPostAuthor:postObject])
     {
-        _cell.smiley.tag = indexPath.row;
-        [_cell.smiley addTarget:self action:@selector(likePost:) forControlEvents:UIControlEventTouchUpInside];
+        cell.smiley.tag = indexPath.row;
+        [cell.smiley addTarget:self action:@selector(likePost:) forControlEvents:UIControlEventTouchUpInside];
         
-        __weak typeof(_cell) weakSelf = _cell;
+        __weak typeof(cell) weakSelf = cell;
         
-        [_cell setSwipeGestureWithView:[self viewWithImageName:@"cross"]
+        [cell setSwipeGestureWithView:[self viewWithImageName:@"cross"]
                                  color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
                                   mode:MCSwipeTableViewCellModeExit
                                  state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
@@ -349,8 +346,44 @@
                                  }];
     }
     
-    _cell.bottomBorder.backgroundColor = [tableView separatorColor].CGColor;
+    cell.bottomBorder.backgroundColor = [tableView separatorColor].CGColor;
     
+    return cell;
+}
+
+- (TimelineTableViewCell *)setTimelineCellFrames:(TimelineTableViewCell *)_cell withPostObject:(NSDictionary *)postObject
+{
+    //Set Frames
+    NSDictionary *subViewframes = [Config subViewFrames2:postObject];
+    _cell.line.frame = [subViewframes[@"lineFrame"] CGRectValue];
+    _cell.lineBorder.frame = [subViewframes[@"lineBorderFrame"] CGRectValue];
+    _cell.bubble.frame = [subViewframes[@"bubbleFrame"] CGRectValue];
+    _cell.triangle.frame = [subViewframes[@"triangleFrame"] CGRectValue];
+    
+    _cell.postContainer.frame = [subViewframes[@"containerFrame"] CGRectValue];
+    _cell.postText.frame = [subViewframes[@"postTextFrame"] CGRectValue];
+    _cell.postImage.frame = [subViewframes[@"imageFrame"] CGRectValue];
+    _cell.actionsView.frame = [subViewframes[@"actionViewframe"] CGRectValue];
+    
+    UIColor *rColor = [Config getBubbleColor];
+    _cell.bubble.layer.borderColor = rColor.CGColor;
+    
+    return _cell;
+}
+
+- (ColouredTableViewCell *)setColouredCellFrames:(ColouredTableViewCell *)_cell withPostObject:(NSDictionary *)postObject forIndex:(NSInteger)index
+{
+    //Set Frames
+    NSDictionary *subViewframes = [Config colouredCellFrames:postObject];
+    _cell.line.frame = [subViewframes[@"lineFrame"] CGRectValue];
+    
+    _cell.postContainer.frame = [subViewframes[@"containerFrame"] CGRectValue];
+    _cell.postText.frame = [subViewframes[@"postTextFrame"] CGRectValue];
+    _cell.postImage.frame = [subViewframes[@"imageFrame"] CGRectValue];
+    _cell.actionsView.frame = [subViewframes[@"actionViewFrame"] CGRectValue];
+    _cell.smiley.frame = [subViewframes[@"smileyFrame"] CGRectValue];
+    
+    _cell.line.backgroundColor = [Config getSideColor:index];
     
     return _cell;
 }

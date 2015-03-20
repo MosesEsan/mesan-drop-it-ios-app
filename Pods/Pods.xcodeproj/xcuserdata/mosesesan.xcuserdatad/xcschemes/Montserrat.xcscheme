@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E38DF2F117B331DEE09A0FFC"
+               BlueprintIdentifier = "AFB912B4316D8E0F4DD4764E"
                BuildableName = "Montserrat.bundle"
                BlueprintName = "Montserrat"
                ReferencedContainer = "container:Pods.xcodeproj">

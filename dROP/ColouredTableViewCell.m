@@ -1,20 +1,20 @@
 //
-//  TimelineTableViewCell.m
+//  ColouredTableViewCell.m
 //  Drop It!
 //
-//  Created by Moses Esan on 11/03/2015.
+//  Created by Moses Esan on 20/03/2015.
 //  Copyright (c) 2015 Moses Esan. All rights reserved.
 //
 
-#import "TimelineTableViewCell.h"
+#import "ColouredTableViewCell.h"
+
 
 
 #define LEFT_PADDING 16.5f
 
 #define POST_TEXT_WIDTH WIDTH - 16.5f - (LEFT_PADDING * 2)
 
-@implementation TimelineTableViewCell
-
+@implementation ColouredTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -24,33 +24,17 @@
         // Initialization code
         self.backgroundColor = [UIColor clearColor];
         
-        self.line = [[UIView alloc] init];
-        self.line.backgroundColor = [UIColor clearColor];
-        [self.contentView addSubview:self.line];
-        
-        _lineBorder = [CALayer layer];
-        _lineBorder.backgroundColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:1].CGColor;//D8D8D8
-        [self.line.layer addSublayer:_lineBorder];
-        
-        
-         _bubble = [[UIImageView alloc] init];
-        _bubble.clipsToBounds = YES;
-        _bubble.layer.cornerRadius =  BUBBLE_FRAME_WIDTH / 2;
-        _bubble.layer.borderWidth = 2.5f;
-        _bubble.layer.masksToBounds = YES;
-        _bubble.backgroundColor = [UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1.0f];
-        //[UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.8f];
-        //[UIColor whiteColor];
-        [self.line addSubview:_bubble];
-
-        
         self.postContainer = [[UIView alloc] init];
         self.postContainer.backgroundColor = [UIColor whiteColor];
-        self.postContainer.layer.borderWidth = .4f;
+        self.postContainer.layer.borderWidth = 1.0f;
         self.postContainer.layer.borderColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.6f].CGColor;
-        self.postContainer.layer.cornerRadius = 4.0f;
+        //self.postContainer.layer.cornerRadius = 4.0f;
         self.postContainer.clipsToBounds = YES;
         [self.contentView addSubview:self.postContainer];
+        
+        
+        self.line = [[UIView alloc] init];
+        [self.postContainer addSubview:self.line];
         
         self.postText = [[UILabel alloc] init];
         self.postText.backgroundColor = [UIColor clearColor];
@@ -61,11 +45,11 @@
         self.postText.clipsToBounds = YES;
         self.postText.userInteractionEnabled = YES;
         /*
-        self.postText.attributesText = @{NSForegroundColorAttributeName: TEXT_COLOR, NSFontAttributeName: TEXT_FONT};
-        self.postText.attributesHashtag = @{NSForegroundColorAttributeName: BAR_TINT_COLOR2, NSFontAttributeName: TEXT_FONT};
-        */
+         self.postText.attributesText = @{NSForegroundColorAttributeName: TEXT_COLOR, NSFontAttributeName: TEXT_FONT};
+         self.postText.attributesHashtag = @{NSForegroundColorAttributeName: BAR_TINT_COLOR2, NSFontAttributeName: TEXT_FONT};
+         */
         [self.postContainer addSubview:self.postText];
-    
+        
         
         self.postImage = [[PFImageView alloc] init];
         self.postImage.backgroundColor = [UIColor clearColor];
@@ -82,7 +66,7 @@
         
         self.bottomBorder = [CALayer layer];
         self.bottomBorder.frame = CGRectMake(0, ACTIONS_VIEW_HEIGHT - .5f, CGRectGetWidth(self.actionsView.frame), .5f);
-       // [self.actionsView.layer addSublayer:_bottomBorder];
+        // [self.actionsView.layer addSublayer:self.bottomBorder];
         
         
         self.date = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, ACTIONS_VIEW_HEIGHT)];
@@ -115,26 +99,6 @@
         self.smiley.titleEdgeInsets = UIEdgeInsetsMake(2, -60, 0, 30);
         
         [self.actionsView addSubview:self.smiley];
-        
-        
-        _triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 10, 20)];
-        _triangle.backgroundColor = [UIColor whiteColor];
-        [self.contentView addSubview:_triangle];
-        
-        CAShapeLayer *mask = [[CAShapeLayer alloc] init];
-        mask.frame = _triangle.layer.bounds;
-        
-        CGMutablePathRef path = CGPathCreateMutable();
-        CGPathMoveToPoint(path, nil, 0, 0);
-        CGPathAddLineToPoint(path, nil, 0, 10.0f);
-        CGPathAddLineToPoint(path, nil, 10, 0.0f);
-        CGPathAddLineToPoint(path, nil, 10.0f, 20.0f);
-        CGPathAddLineToPoint(path, nil, 0.0f, 10.0f);
-        CGPathCloseSubpath(path);
-        mask.path = path;
-        CGPathRelease(path);
-        
-        _triangle.layer.mask = mask;
     }
     
     return self;

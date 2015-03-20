@@ -34,6 +34,8 @@
 		272925061ABB5CFF00A271D4 /* AvocarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272925051ABB5CFF00A271D4 /* AvocarrotSDK.framework */; };
 		272925081ABB7C0800A271D4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272925071ABB7C0800A271D4 /* AdSupport.framework */; };
 		2729250A1ABB7C1300A271D4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272925091ABB7C1300A271D4 /* CoreTelephony.framework */; };
+		2729251D1ABC59AB00A271D4 /* ColouredTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2729251C1ABC59AB00A271D4 /* ColouredTableViewCell.m */; };
+		272925201ABC692A00A271D4 /* DITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2729251F1ABC692A00A271D4 /* DITableViewCell.m */; };
 		273E1AC51AB0B13200D41694 /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 273E1AC41AB0B13200D41694 /* TimelineTableViewCell.m */; };
 		273E1ACE1AB36CF900D41694 /* FullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 273E1ACD1AB36CF900D41694 /* FullScreenViewController.m */; };
 		2778CFC91AB9181600DD30CE /* RTSpinKitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2778CFC81AB9181600DD30CE /* RTSpinKitView.m */; };
@@ -47,7 +49,6 @@
 		27A3348E1AA63525008188FC /* DropItTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A3348D1AA63525008188FC /* DropItTests.m */; };
 		27A334991AA6367F008188FC /* HomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A334981AA6367F008188FC /* HomeTableViewController.m */; };
 		27B4041B1AA64057007DC137 /* PostTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B4041A1AA64057007DC137 /* PostTextTableViewCell.m */; };
-		27B404341AA65F51007DC137 /* PostTextPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B404331AA65F51007DC137 /* PostTextPhotoTableViewCell.m */; };
 		27B404401AA66744007DC137 /* CoverPhotoPH.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 27B4043F1AA66744007DC137 /* CoverPhotoPH.JPG */; };
 		27B404431AA77B57007DC137 /* AddPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B404421AA77B57007DC137 /* AddPostViewController.m */; };
 		27B404651AA8AC2F007DC137 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B404641AA8AC2F007DC137 /* AudioToolbox.framework */; };
@@ -132,6 +133,10 @@
 		272925051ABB5CFF00A271D4 /* AvocarrotSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AvocarrotSDK.framework; path = "../avocarrot-ios-sdk-v3.1.2/AvocarrotSDK.framework"; sourceTree = "<group>"; };
 		272925071ABB7C0800A271D4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		272925091ABB7C1300A271D4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		2729251B1ABC59AB00A271D4 /* ColouredTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColouredTableViewCell.h; sourceTree = "<group>"; };
+		2729251C1ABC59AB00A271D4 /* ColouredTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColouredTableViewCell.m; sourceTree = "<group>"; };
+		2729251E1ABC692A00A271D4 /* DITableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DITableViewCell.h; sourceTree = "<group>"; };
+		2729251F1ABC692A00A271D4 /* DITableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DITableViewCell.m; sourceTree = "<group>"; };
 		273E1AC31AB0B13200D41694 /* TimelineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineTableViewCell.h; sourceTree = "<group>"; };
 		273E1AC41AB0B13200D41694 /* TimelineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineTableViewCell.m; sourceTree = "<group>"; };
 		273E1ACC1AB36CF900D41694 /* FullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenViewController.h; sourceTree = "<group>"; };
@@ -158,8 +163,6 @@
 		27A334981AA6367F008188FC /* HomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewController.m; sourceTree = "<group>"; };
 		27B404191AA64057007DC137 /* PostTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTextTableViewCell.h; sourceTree = "<group>"; };
 		27B4041A1AA64057007DC137 /* PostTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTextTableViewCell.m; sourceTree = "<group>"; };
-		27B404321AA65F51007DC137 /* PostTextPhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTextPhotoTableViewCell.h; sourceTree = "<group>"; };
-		27B404331AA65F51007DC137 /* PostTextPhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTextPhotoTableViewCell.m; sourceTree = "<group>"; };
 		27B404381AA6605E007DC137 /* Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		27B4043F1AA66744007DC137 /* CoverPhotoPH.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CoverPhotoPH.JPG; sourceTree = "<group>"; };
 		27B404411AA77B57007DC137 /* AddPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPostViewController.h; sourceTree = "<group>"; };
@@ -224,28 +227,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2729250A1ABB7C1300A271D4 /* CoreTelephony.framework in Frameworks */,
-				272925081ABB7C0800A271D4 /* AdSupport.framework in Frameworks */,
-				272925061ABB5CFF00A271D4 /* AvocarrotSDK.framework in Frameworks */,
-				27131FFD1AB72E0A00CF23DB /* MapKit.framework in Frameworks */,
-				278CF74F1AAD409600A13D4B /* AVFoundation.framework in Frameworks */,
 				27B4048A1AA8ADBE007DC137 /* Accounts.framework in Frameworks */,
-				27B404861AA8AD64007DC137 /* Social.framework in Frameworks */,
-				27B404781AA8AC6D007DC137 /* libsqlite3.dylib in Frameworks */,
-				27B404791AA8AC6D007DC137 /* libz.dylib in Frameworks */,
-				27B404751AA8AC57007DC137 /* SystemConfiguration.framework in Frameworks */,
-				27B404731AA8AC4E007DC137 /* StoreKit.framework in Frameworks */,
-				27B404881AA8AD8D007DC137 /* FacebookSDK.framework in Frameworks */,
-				27B404711AA8AC49007DC137 /* Security.framework in Frameworks */,
+				272925081ABB7C0800A271D4 /* AdSupport.framework in Frameworks */,
+				27B404651AA8AC2F007DC137 /* AudioToolbox.framework in Frameworks */,
+				278CF74F1AAD409600A13D4B /* AVFoundation.framework in Frameworks */,
+				272925061ABB5CFF00A271D4 /* AvocarrotSDK.framework in Frameworks */,
+				27B404671AA8AC36007DC137 /* CFNetwork.framework in Frameworks */,
 				27B4046C1AA8AC44007DC137 /* CoreGraphics.framework in Frameworks */,
 				27B4046D1AA8AC44007DC137 /* CoreLocation.framework in Frameworks */,
-				27B404841AA8ACF2007DC137 /* ParseUI.framework in Frameworks */,
+				2729250A1ABB7C1300A271D4 /* CoreTelephony.framework in Frameworks */,
+				27B404881AA8AD8D007DC137 /* FacebookSDK.framework in Frameworks */,
+				27131FFD1AB72E0A00CF23DB /* MapKit.framework in Frameworks */,
 				27B4046E1AA8AC44007DC137 /* MobileCoreServices.framework in Frameworks */,
-				27B4046F1AA8AC44007DC137 /* QuartzCore.framework in Frameworks */,
 				27B404811AA8ACF2007DC137 /* Parse.framework in Frameworks */,
-				27B404671AA8AC36007DC137 /* CFNetwork.framework in Frameworks */,
-				27B404651AA8AC2F007DC137 /* AudioToolbox.framework in Frameworks */,
 				27B404831AA8ACF2007DC137 /* ParseFacebookUtils.framework in Frameworks */,
+				27B404841AA8ACF2007DC137 /* ParseUI.framework in Frameworks */,
+				27B404711AA8AC49007DC137 /* Security.framework in Frameworks */,
+				27B404861AA8AD64007DC137 /* Social.framework in Frameworks */,
+				27B404731AA8AC4E007DC137 /* StoreKit.framework in Frameworks */,
+				27B404751AA8AC57007DC137 /* SystemConfiguration.framework in Frameworks */,
+				27B4046F1AA8AC44007DC137 /* QuartzCore.framework in Frameworks */,
+				27B404781AA8AC6D007DC137 /* libsqlite3.dylib in Frameworks */,
+				27B404791AA8AC6D007DC137 /* libz.dylib in Frameworks */,
 				C82287016D474D61B499CF9F /* libPods-Drop It!.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,14 +323,16 @@
 		278CF74B1AAD3ED900A13D4B /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
+				2729251E1ABC692A00A271D4 /* DITableViewCell.h */,
+				2729251F1ABC692A00A271D4 /* DITableViewCell.m */,
 				27B404191AA64057007DC137 /* PostTextTableViewCell.h */,
 				27B4041A1AA64057007DC137 /* PostTextTableViewCell.m */,
 				27B404D91AABBEEC007DC137 /* CommentTableViewCell.h */,
 				27B404DA1AABBEEC007DC137 /* CommentTableViewCell.m */,
-				27B404321AA65F51007DC137 /* PostTextPhotoTableViewCell.h */,
-				27B404331AA65F51007DC137 /* PostTextPhotoTableViewCell.m */,
 				273E1AC31AB0B13200D41694 /* TimelineTableViewCell.h */,
 				273E1AC41AB0B13200D41694 /* TimelineTableViewCell.m */,
+				2729251B1ABC59AB00A271D4 /* ColouredTableViewCell.h */,
+				2729251C1ABC59AB00A271D4 /* ColouredTableViewCell.m */,
 			);
 			name = "Table View Cells";
 			sourceTree = "<group>";
@@ -699,6 +704,7 @@
 				27A334991AA6367F008188FC /* HomeTableViewController.m in Sources */,
 				27B404D81AAB9570007DC137 /* LPlaceholderTextView.m in Sources */,
 				273E1ACE1AB36CF900D41694 /* FullScreenViewController.m in Sources */,
+				2729251D1ABC59AB00A271D4 /* ColouredTableViewCell.m in Sources */,
 				27131FDF1AB5C78100CF23DB /* MapViewController.m in Sources */,
 				27DE0C301AB9D44000DA0D9C /* JPSThumbnailAnnotation.m in Sources */,
 				27B96AAA1AAFBD7400AC4120 /* CCMBorderView.m in Sources */,
@@ -708,6 +714,7 @@
 				27B4041B1AA64057007DC137 /* PostTextTableViewCell.m in Sources */,
 				271320401AB77AA800CF23DB /* MapPostViewController.m in Sources */,
 				27B96A941AAFBA4900AC4120 /* ABCIntroView.m in Sources */,
+				272925201ABC692A00A271D4 /* DITableViewCell.m in Sources */,
 				27A334741AA63525008188FC /* main.m in Sources */,
 				278CF7441AAD2EDF00A13D4B /* Reachability.m in Sources */,
 				2778CFC91AB9181600DD30CE /* RTSpinKitView.m in Sources */,
@@ -717,7 +724,6 @@
 				27DE0C311AB9D44000DA0D9C /* JPSThumbnailAnnotationView.m in Sources */,
 				27EC53A01AB3F68500CC2A10 /* MHFacebookImageViewer.m in Sources */,
 				27B404DB1AABBEEC007DC137 /* CommentTableViewCell.m in Sources */,
-				27B404341AA65F51007DC137 /* PostTextPhotoTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
