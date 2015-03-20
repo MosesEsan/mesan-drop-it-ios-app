@@ -178,7 +178,7 @@
     [self.view addSubview:spinner];
     
     
-    //If app is not in testing mode, take the current location into consideration
+    //If app is in production mode, initialize Ad
     if ([Config appMode] == PRODUCTION)
     {
         // Initialize the Avocarrot SDK and start loading an ad
@@ -268,7 +268,8 @@
     NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
     NSInteger repliesCount = [postObject[@"totalReplies"] integerValue];
     NSString *postDate = [Config calculateTime:postObject[@"date"]];
-    NSString *cellIdentifier = [NSString stringWithFormat:@"BoxCell%ld",(long)indexPath.row];
+    PFObject *parseObject = postObject[@"parseObject"];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"BoxCell%@",parseObject.objectId];
 
     
     //Check the type in other to know which type of cell to display
@@ -305,9 +306,9 @@
      */
     
     
-    if (postObject[@"parseObject"][@"pic"])
+    if (parseObject[@"pic"])
     {
-        _cell.postImage.file = postObject[@"parseObject"][@"pic"];
+        _cell.postImage.file = parseObject[@"pic"];
         _cell.postImage.tag = 1;//indexPath.row;
         [_cell.postImage loadInBackground];
         [_cell.postImage setupImageViewerWithPFFile:_cell.postImage.file onOpen:nil onClose:nil];
