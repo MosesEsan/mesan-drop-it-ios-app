@@ -1,15 +1,22 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '7.0'
 
-target 'dROP' do
-    #pod 'CRGradientNavigationBar'
-    pod 'Montserrat'
-    pod "CCMPopup"
-    pod 'FormatterKit'
+target 'Drop It!' do
+
+
+#pod 'CRGradientNavigationBar'
+pod 'Montserrat'
+pod 'CCMPopup'
+pod 'FormatterKit'
+#pod 'Shimmer'
+#pod 'PulsingHalo'
+#pod 'STTweetLabel'
+#pod 'LNBRippleEffect'
+pod 'DZNEmptyDataSet'
 
 end
 
-target 'dROPTests' do
+target 'DropItTests' do
 
 end
 
