@@ -31,13 +31,13 @@
 		2713203B1AB76E7100CF23DB /* watermelon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 271320371AB76E7100CF23DB /* watermelon2.png */; };
 		2713203D1AB76E9200CF23DB /* peach2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2713203C1AB76E9200CF23DB /* peach2.png */; };
 		271320401AB77AA800CF23DB /* MapPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2713203F1AB77AA800CF23DB /* MapPostViewController.m */; };
-		272925061ABB5CFF00A271D4 /* AvocarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272925051ABB5CFF00A271D4 /* AvocarrotSDK.framework */; };
 		272925081ABB7C0800A271D4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272925071ABB7C0800A271D4 /* AdSupport.framework */; };
 		2729250A1ABB7C1300A271D4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272925091ABB7C1300A271D4 /* CoreTelephony.framework */; };
 		2729251D1ABC59AB00A271D4 /* ColouredTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2729251C1ABC59AB00A271D4 /* ColouredTableViewCell.m */; };
 		272925201ABC692A00A271D4 /* DITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2729251F1ABC692A00A271D4 /* DITableViewCell.m */; };
 		273E1AC51AB0B13200D41694 /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 273E1AC41AB0B13200D41694 /* TimelineTableViewCell.m */; };
 		273E1ACE1AB36CF900D41694 /* FullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 273E1ACD1AB36CF900D41694 /* FullScreenViewController.m */; };
+		274C88211AC0780B00C8FB72 /* AvocarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274C88201AC0780B00C8FB72 /* AvocarrotSDK.framework */; };
 		2778CFC91AB9181600DD30CE /* RTSpinKitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2778CFC81AB9181600DD30CE /* RTSpinKitView.m */; };
 		278CF73A1AACFD0E00A13D4B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278CF7391AACFD0E00A13D4B /* ProfileViewController.m */; };
 		278CF7441AAD2EDF00A13D4B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 278CF7431AAD2EDF00A13D4B /* Reachability.m */; };
@@ -130,7 +130,6 @@
 		2713203C1AB76E9200CF23DB /* peach2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = peach2.png; sourceTree = "<group>"; };
 		2713203E1AB77AA800CF23DB /* MapPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPostViewController.h; sourceTree = "<group>"; };
 		2713203F1AB77AA800CF23DB /* MapPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPostViewController.m; sourceTree = "<group>"; };
-		272925051ABB5CFF00A271D4 /* AvocarrotSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AvocarrotSDK.framework; path = "../avocarrot-ios-sdk-v3.1.2/AvocarrotSDK.framework"; sourceTree = "<group>"; };
 		272925071ABB7C0800A271D4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		272925091ABB7C1300A271D4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		2729251B1ABC59AB00A271D4 /* ColouredTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColouredTableViewCell.h; sourceTree = "<group>"; };
@@ -141,6 +140,7 @@
 		273E1AC41AB0B13200D41694 /* TimelineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineTableViewCell.m; sourceTree = "<group>"; };
 		273E1ACC1AB36CF900D41694 /* FullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenViewController.h; sourceTree = "<group>"; };
 		273E1ACD1AB36CF900D41694 /* FullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenViewController.m; sourceTree = "<group>"; };
+		274C88201AC0780B00C8FB72 /* AvocarrotSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AvocarrotSDK.framework; sourceTree = "<group>"; };
 		2778CFC71AB9181600DD30CE /* RTSpinKitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSpinKitView.h; sourceTree = "<group>"; };
 		2778CFC81AB9181600DD30CE /* RTSpinKitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSpinKitView.m; sourceTree = "<group>"; };
 		278CF7381AACFD0E00A13D4B /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -231,7 +231,6 @@
 				272925081ABB7C0800A271D4 /* AdSupport.framework in Frameworks */,
 				27B404651AA8AC2F007DC137 /* AudioToolbox.framework in Frameworks */,
 				278CF74F1AAD409600A13D4B /* AVFoundation.framework in Frameworks */,
-				272925061ABB5CFF00A271D4 /* AvocarrotSDK.framework in Frameworks */,
 				27B404671AA8AC36007DC137 /* CFNetwork.framework in Frameworks */,
 				27B4046C1AA8AC44007DC137 /* CoreGraphics.framework in Frameworks */,
 				27B4046D1AA8AC44007DC137 /* CoreLocation.framework in Frameworks */,
@@ -247,6 +246,7 @@
 				27B404731AA8AC4E007DC137 /* StoreKit.framework in Frameworks */,
 				27B404751AA8AC57007DC137 /* SystemConfiguration.framework in Frameworks */,
 				27B4046F1AA8AC44007DC137 /* QuartzCore.framework in Frameworks */,
+				274C88211AC0780B00C8FB72 /* AvocarrotSDK.framework in Frameworks */,
 				27B404781AA8AC6D007DC137 /* libsqlite3.dylib in Frameworks */,
 				27B404791AA8AC6D007DC137 /* libz.dylib in Frameworks */,
 				C82287016D474D61B499CF9F /* libPods-Drop It!.a in Frameworks */,
@@ -511,9 +511,9 @@
 		488E64E64531AA34639045DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				274C88201AC0780B00C8FB72 /* AvocarrotSDK.framework */,
 				272925091ABB7C1300A271D4 /* CoreTelephony.framework */,
 				272925071ABB7C0800A271D4 /* AdSupport.framework */,
-				272925051ABB5CFF00A271D4 /* AvocarrotSDK.framework */,
 				27131FFC1AB72E0A00CF23DB /* MapKit.framework */,
 				278CF74E1AAD409600A13D4B /* AVFoundation.framework */,
 				27B4047A1AA8ACF2007DC137 /* parse-library-1.6.3 */,
@@ -837,6 +837,7 @@
 					"/Users/mosesesan/Downloads/parse-library-1.6.3",
 					"$(PROJECT_DIR)/dROP",
 					"/Users/mosesesan/Dropbox/avocarrot-ios-sdk-v3.1.2",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = dROP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -857,6 +858,7 @@
 					"/Users/mosesesan/Downloads/parse-library-1.6.3",
 					"$(PROJECT_DIR)/dROP",
 					"/Users/mosesesan/Dropbox/avocarrot-ios-sdk-v3.1.2",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = dROP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

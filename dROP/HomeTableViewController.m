@@ -159,11 +159,11 @@
     
     [self.tableView addSubview:refreshControl];
     
-    //Check if Intro View has to be shown
-    [self showIntroView];
-    
     //Table header
     [self tableHeader];
+    
+    //Check if Intro View has to be shown
+    [self showIntroView];
     
     //Add Loading View
     spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleWanderingCubes color:BAR_TINT_COLOR2];
@@ -572,18 +572,30 @@
     
     [self queryForAllPostsNearLocation];
     
-    if ([Config checkAddPermission:_currentLocation] == YES)
+    
+    //If app is not in testing mode, take the current location into consideration
+    if ([Config appMode] != TESTING)
     {
+        if ([Config checkAddPermission:_currentLocation] == YES)
+        {
+            self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:profile],
+                                                        negativeSpacer,
+                                                        [[UIBarButtonItem alloc] initWithCustomView:mapButton],
+                                                        negativeSpacer,
+                                                        addNew
+                                                        ];
+        }else{
+            self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:profile],
+                                                        negativeSpacer,
+                                                        [[UIBarButtonItem alloc] initWithCustomView:mapButton]
+                                                        ];
+        }
+    }else{
         self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:profile],
                                                     negativeSpacer,
                                                     [[UIBarButtonItem alloc] initWithCustomView:mapButton],
                                                     negativeSpacer,
                                                     addNew
-                                                    ];
-    }else{
-        self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:profile],
-                                                    negativeSpacer,
-                                                    [[UIBarButtonItem alloc] initWithCustomView:mapButton]
                                                     ];
     }
 }
