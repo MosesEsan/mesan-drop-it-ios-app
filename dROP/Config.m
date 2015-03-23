@@ -38,7 +38,7 @@
                                  @"App Mode" : @(TESTING),
                                  @"Mode Configured" : [NSNumber numberWithBool:NO],
                                  @"Last Active" : [NSDate date],
-                                 @"Cell Type" : @(TIMELINE)
+                                 @"Cell Type" : @(COLOURED)
                                  };
         
         [[NSUserDefaults standardUserDefaults] setObject:config forKey:@"DIConfig"];
@@ -68,7 +68,7 @@
                                                          @"App Mode" : @(mode),
                                                          @"Mode Configured" : [NSNumber numberWithBool:YES],
                                                          @"Last Active" : [NSDate date],
-                                                         @"Cell Type" : @(TIMELINE)
+                                                         @"Cell Type" : @(COLOURED)
                                                          };
                             }
                         }
@@ -102,15 +102,38 @@
 }
 
 + (PostCellType)cellType
-{
-    PostCellType type = COLOURED;
-    
+{    
     //Set Default Locations
     NSDictionary *config = [[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"];
     
-    //type = (PostCellType)[config[@"Cell Type"] intValue];
+    NSInteger intValue = [config[@"Cell Type"] intValue];
     
-    return type;
+    if (intValue < 0 || intValue > 1) {
+        [Config setCellType:COLOURED];
+        return COLOURED;
+    }else{
+        return (PostCellType)intValue;
+    }
+}
+
+
++ (BOOL)setCellType:(PostCellType)mode
+{
+    //Set Default Locations
+    NSDictionary *config = [[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"];
+    PostCellType type = (PostCellType)[config[@"Cell Type"] intValue];
+    
+    if (type == mode ) {
+        return NO;
+    }else{
+        NSMutableDictionary *newConfig = config.mutableCopy;
+        newConfig[@"Cell Type"] = @(mode);
+        
+        [[NSUserDefaults standardUserDefaults] setObject:newConfig forKey:@"DIConfig"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        return YES;
+    }
 }
 
 + (void)updateAvailableLocations:(NSDate *)lastUpdated
@@ -600,23 +623,21 @@
 {
     CGFloat postTextHeight = [Config calculateHeightForText:postObject[@"text"] withWidth:WIDTH - 55.5f withFont:TEXT_FONT];
     
-    CGFloat cellHeight = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT;
+    CGFloat cellHeight = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
     
     if (postObject[@"parseObject"][@"pic"])
         cellHeight =  cellHeight + 10 + IMAGEVIEW_HEIGHT;
     
+    CGRect mainContainerFrame = CGRectMake(CONTAINER_FRAME_X, 0,
+                                       WIDTH - (CONTAINER_FRAME_X + (CONTAINER_FRAME_X / 2) + 2), cellHeight);
     
+    CGRect lineFrame = CGRectMake(0, 0, COLOURED_BAR_WIDTH, cellHeight);
+    CGRect postContainerFrame = CGRectMake(COLOURED_BAR_WIDTH, 0, CGRectGetWidth(mainContainerFrame) - COLOURED_BAR_WIDTH, cellHeight); //1 Added to cover up left border
     
-    //Set container Frame
-    CGRect containerFrame = CGRectMake(CONTAINER_FRAME_X, 0,
-                                       WIDTH - (CONTAINER_FRAME_X * 2), cellHeight);
-    
-    CGRect lineFrame = CGRectMake(0, 0, LINE_FRAME_WIDTH2, cellHeight);
-    
-    CGFloat width = CGRectGetWidth(containerFrame) - (LINE_FRAME_WIDTH2 + 8 + 8);
-    CGRect labelFrame = CGRectMake(LINE_FRAME_WIDTH2 + 8, TOP_PADDING, width, postTextHeight);
-    CGRect imageFrame = CGRectMake(LINE_FRAME_WIDTH2 + 8, 0, width, IMAGEVIEW_HEIGHT);
-    CGRect actionViewFrame = CGRectMake(LINE_FRAME_WIDTH2 + 8, 0, width + 8, ACTIONS_VIEW_HEIGHT);
+    CGFloat width = CGRectGetWidth(postContainerFrame) - (8 * 2);
+    CGRect labelFrame = CGRectMake(8, TOP_PADDING, width, postTextHeight);
+    CGRect imageFrame = CGRectMake(8, 0, width, IMAGEVIEW_HEIGHT);
+    CGRect actionViewFrame = CGRectMake(8, 0, width + 8, ACTIONS_VIEW_HEIGHT);
     CGRect smileyFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
     
     if (postObject[@"parseObject"][@"pic"])
@@ -639,7 +660,8 @@
     
     NSDictionary *subViewframes =   @{
                                       @"lineFrame" : [NSValue valueWithCGRect:lineFrame],
-                                      @"containerFrame" : [NSValue valueWithCGRect:containerFrame],
+                                      @"mainContainerFrame" : [NSValue valueWithCGRect:mainContainerFrame],
+                                      @"postContainerFrame" : [NSValue valueWithCGRect:postContainerFrame],
                                       @"postTextFrame" : [NSValue valueWithCGRect:labelFrame],
                                       @"imageFrame" : [NSValue valueWithCGRect:imageFrame],
                                       @"actionViewFrame" : [NSValue valueWithCGRect:actionViewFrame],

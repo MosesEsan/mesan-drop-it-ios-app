@@ -23,73 +23,61 @@
         // Initialization code
         self.backgroundColor = [UIColor whiteColor];
         
-        _postText = [[UILabel alloc] initWithFrame:CGRectMake(LEFT_PADDING, TOP_PADDING, TEXT_WIDTH, 0)];
-        _postText.backgroundColor = [UIColor clearColor];
-        _postText.numberOfLines = 0;
-        _postText.textColor = TEXT_COLOR;
-        _postText.textAlignment = NSTextAlignmentLeft;
-        _postText.font = TEXT_FONT;
-        _postText.clipsToBounds = YES;
-        _postText.userInteractionEnabled = YES;
-        [self.contentView addSubview:_postText];
+        self.postText = [[UILabel alloc] initWithFrame:CGRectMake(LEFT_PADDING, TOP_PADDING, TEXT_WIDTH, 0)];
+        self.postText.backgroundColor = [UIColor clearColor];
+        self.postText.numberOfLines = 0;
+        self.postText.textColor = TEXT_COLOR;
+        self.postText.textAlignment = NSTextAlignmentLeft;
+        self.postText.font = TEXT_FONT;
+        self.postText.clipsToBounds = YES;
+        self.postText.userInteractionEnabled = YES;
+        [self.contentView addSubview:self.postText];
         
-        _postImage = [[PFImageView alloc] initWithFrame:CGRectMake(LEFT_PADDING, 0, TEXT_WIDTH, IMAGEVIEW_HEIGHT)];
-        _postImage.backgroundColor = [UIColor clearColor];
-        _postImage.layer.cornerRadius = 5.0f;
-        _postImage.image = [UIImage imageNamed:@"CoverPhotoPH.JPG"];
-        _postImage.clipsToBounds = YES;
-        _postImage.contentMode = UIViewContentModeScaleAspectFill;
-        [self.contentView addSubview:_postImage];
+        self.postImage = [[PFImageView alloc] initWithFrame:CGRectMake(LEFT_PADDING, 0, TEXT_WIDTH, IMAGEVIEW_HEIGHT)];
+        self.postImage.backgroundColor = [UIColor clearColor];
+        self.postImage.layer.cornerRadius = 5.0f;
+        self.postImage.image = [UIImage imageNamed:@"CoverPhotoPH.JPG"];
+        self.postImage.clipsToBounds = YES;
+        self.postImage.contentMode = UIViewContentModeScaleAspectFill;
+        [self.contentView addSubview:self.postImage];
         
-        _actionsView = [[UIView alloc] initWithFrame:CGRectMake(LEFT_PADDING, 0, TEXT_WIDTH + LEFT_PADDING, ACTIONS_VIEW_HEIGHT)];
-        _actionsView.backgroundColor = [UIColor clearColor];
-        [self.contentView addSubview:_actionsView];
+        self.actionsView = [[UIView alloc] initWithFrame:CGRectMake(LEFT_PADDING, 0, TEXT_WIDTH + LEFT_PADDING, ACTIONS_VIEW_HEIGHT)];
+        self.actionsView.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:self.actionsView];
         
-        _date = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, ACTIONS_VIEW_HEIGHT)];
-        _date.backgroundColor = [UIColor clearColor];
-        _date.textColor = DATE_COLOR;
-        _date.textAlignment = NSTextAlignmentLeft;
-        _date.font = DATE_FONT;
-        [_actionsView addSubview:_date];
+        self.date = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, ACTIONS_VIEW_HEIGHT)];
+        self.date.backgroundColor = [UIColor clearColor];
+        self.date.textColor = DATE_COLOR;
+        self.date.textAlignment = NSTextAlignmentLeft;
+        self.date.font = DATE_FONT;
+        [self.actionsView addSubview:self.date];
         
-        //_comments = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(_actionsView.frame) - 90, 0, 90, ACTIONS_VIEW_HEIGHT)];
-        _comments = [[UILabel alloc] initWithFrame:CGRectMake(65, 0, 90, ACTIONS_VIEW_HEIGHT)];
-        _comments.backgroundColor = [UIColor clearColor];
-        _comments.textColor = DATE_COLOR;
-        _comments.textAlignment = NSTextAlignmentLeft;
-        _comments.font = COMMENTS_FONT;
-        [_actionsView addSubview:_comments];
+        //self.comments = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.actionsView.frame) - 90, 0, 90, ACTIONS_VIEW_HEIGHT)];
+        self.comments = [[UILabel alloc] initWithFrame:CGRectMake(65, 0, 90, ACTIONS_VIEW_HEIGHT)];
+        self.comments.backgroundColor = [UIColor clearColor];
+        self.comments.textColor = DATE_COLOR;
+        self.comments.textAlignment = NSTextAlignmentLeft;
+        self.comments.font = COMMENTS_FONT;
+        [self.actionsView addSubview:self.comments];
         
-        /*
-        _likes = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(_actionsView.frame) - ACTIONS_VIEW_HEIGHT - 35 + 5, 0, 35, ACTIONS_VIEW_HEIGHT)];
-        _likes.backgroundColor = [UIColor clearColor];
-        [_likes setTitleColor:DATE_COLOR forState:UIControlStateNormal];
-        [_likes setTitleColor:BAR_TINT_COLOR2 forState:UIControlStateSelected];
-        _likes.titleLabel.textAlignment = NSTextAlignmentRight;
-        _likes.titleLabel.font = LIKES_FONT;
-        _likes.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-
-        [_actionsView addSubview:_likes];
-        */
-        
-        _smiley = [UIButton buttonWithType:UIButtonTypeCustom];
-        _smiley.frame = CGRectMake((CGRectGetWidth(_actionsView.frame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
-        _smiley.backgroundColor = [UIColor clearColor];
-        [_smiley setImage:[UIImage imageNamed:@"SmileyGray"] forState:UIControlStateNormal];
-        [_smiley setImage:[UIImage imageNamed:@"SmileyBluish"] forState:UIControlStateSelected];
-        [_smiley setImage:[UIImage imageNamed:@"Sad"] forState:UIControlStateHighlighted];
-        [_smiley setTitleColor:DATE_COLOR forState:UIControlStateNormal];
-        [_smiley setTitleColor:BAR_TINT_COLOR2 forState:UIControlStateSelected];
-        _smiley.titleLabel.font = LIKES_FONT;
-        _smiley.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        _smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 33, 5.2f, 0);
-        _smiley.titleEdgeInsets = UIEdgeInsetsMake(2, -50, 0, 20);
+        self.smiley = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.smiley.frame = CGRectMake((CGRectGetWidth(self.actionsView.frame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
+        self.smiley.backgroundColor = [UIColor clearColor];
+        [self.smiley setImage:[UIImage imageNamed:@"SmileyGray"] forState:UIControlStateNormal];
+        [self.smiley setImage:[UIImage imageNamed:@"SmileyBluish"] forState:UIControlStateSelected];
+        [self.smiley setImage:[UIImage imageNamed:@"Sad"] forState:UIControlStateHighlighted];
+        [self.smiley setTitleColor:DATE_COLOR forState:UIControlStateNormal];
+        [self.smiley setTitleColor:BAR_TINT_COLOR2 forState:UIControlStateSelected];
+        self.smiley.titleLabel.font = LIKES_FONT;
+        self.smiley.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        self.smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 33, 5.2f, 0);
+        self.smiley.titleEdgeInsets = UIEdgeInsetsMake(2, -50, 0, 20);
         
         
-        _smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 33, 5.2f, 15);
-        _smiley.titleEdgeInsets = UIEdgeInsetsMake(2, -65, 0, 35);
+        self.smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 33, 5.2f, 15);
+        self.smiley.titleEdgeInsets = UIEdgeInsetsMake(2, -65, 0, 35);
         
-        [_actionsView addSubview:_smiley];
+        [self.actionsView addSubview:self.smiley];
         
         
     }

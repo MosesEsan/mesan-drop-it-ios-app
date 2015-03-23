@@ -24,24 +24,27 @@
 #import "CCMBorderView.h"
 #import "CCMPopupTransitioning.h"
 #import "ABCIntroView.h"
-//#import "FBShimmeringView.h"
 
-#import "FullScreenViewController.h"
 #import "MapViewController.h"
 #import "MHFacebookImageViewer.h"
 #import "RTSpinKitView.h"
 #import "UIScrollView+EmptyDataSet.h"
+#import "JDFTooltipView.h"
 
 //Ad
 #import <AvocarrotSDK/AvocarrotInstream.h>
 
-@interface HomeTableViewController ()<AddPostViewControllerDataSource, ViewPostViewControllerDelegate, MapViewControllerDataSource, MapViewControllerDelegate, CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, AVInstreamAdDelegate>
+@interface HomeTableViewController ()<AddPostViewControllerDataSource, ViewPostViewControllerDelegate, MapViewControllerDataSource, MapViewControllerDelegate, CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, AVInstreamAdDelegate, UIActionSheetDelegate>
 {
-    //FBShimmeringView *shimmeringView;
+    UILabel *layoutLabel;
     UIButton *profile;
     UIButton *mapButton;
-    UIButton *addNew;
+    UIBarButtonItem *addNew;
     UIBarButtonItem *negativeSpacer;
+    
+    UIView *tableHeader;
+    UILabel *toolTipLocation; //Hack
+    JDFTooltipView *tooltip;
     
     ProfileViewController *profileViewController;
     
@@ -54,12 +57,10 @@
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
 
-
 @property (nonatomic, strong) NSMutableArray *allPosts;
 @property (nonatomic, strong) NSMutableArray *likes;
 
 @property (nonatomic, strong) MCSwipeTableViewCell *cellToDelete;
-
 
 @end
 
@@ -77,23 +78,18 @@
     showAlert = NO;
     
     //TitleView
-    //shimmeringView = [[FBShimmeringView alloc] initWithFrame:CGRectMake(0, 2, 90, 37)];
-    //[self.view addSubview:shimmeringView];
-    
-    UILabel *layoutLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 90, 37)];
+    layoutLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 90, 37)];
     layoutLabel.textAlignment = NSTextAlignmentLeft;//NSTextAlignmentCenter;
     layoutLabel.text = @"DropIt";
     layoutLabel.textColor = [UIColor colorWithRed:235/255.0f green:237/255.0f blue:236/255.0f alpha:1.0f];
-    //layoutLabel.font =  [UIFont systemFontOfSize:21];
     layoutLabel.font = [UIFont montserratFontOfSize:20.0f];
     layoutLabel.backgroundColor = [UIColor clearColor];
     layoutLabel.textColor = [UIColor whiteColor];
-    //layoutLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0f];
-    
-    //shimmeringView.contentView = layoutLabel;
+    layoutLabel.userInteractionEnabled = YES;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:layoutLabel];
-    //self.navigationItem.titleView = layoutLabel;
-
+    
+    UITapGestureRecognizer *changeLayout = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeLayout:)];
+    [layoutLabel addGestureRecognizer:changeLayout];
     
     //Profile and New
     profile = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -112,12 +108,13 @@
     mapButton.imageEdgeInsets = UIEdgeInsetsMake(1, 1, 1, 1);
     [mapButton addTarget:self action:@selector(viewMap:) forControlEvents:UIControlEventTouchUpInside];
     
-    addNew = [UIButton buttonWithType:UIButtonTypeCustom];
-    addNew.frame = CGRectMake(0, 0, 23, 23);
-    [addNew setImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
-    [addNew setClipsToBounds:YES];
-    addNew.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [addNew addTarget:self action:@selector(addNewPost:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *addNewButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    addNewButton.frame = CGRectMake(0, 0, 23, 23);
+    [addNewButton setImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
+    [addNewButton setClipsToBounds:YES];
+    addNewButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [addNewButton addTarget:self action:@selector(addNewPost:) forControlEvents:UIControlEventTouchUpInside];
+    addNew = [[UIBarButtonItem alloc] initWithCustomView:addNewButton];
     
     negativeSpacer = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
@@ -135,9 +132,6 @@
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.backgroundColor = TABLEVIEW2_COLOR;
 
-    //[self.tableView registerClass:[PostTextTableViewCell class] forCellReuseIdentifier:@"BoxCell"];
-    //[self.tableView registerClass:[TimelineTableViewCell class] forCellReuseIdentifier:@"BoxCell"];
-    [self.tableView registerClass:[ColouredTableViewCell class] forCellReuseIdentifier:@"BoxCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -174,7 +168,6 @@
     //Add Loading View
     spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleWanderingCubes color:BAR_TINT_COLOR2];
     spinner.center = CGPointMake(CGRectGetWidth(self.view.frame) / 2, (CGRectGetHeight(self.view.frame) / 2) - 40);
-    //spinner.backgroundColor = [UIColor clearColor];
     [spinner startAnimating];
     [self.view addSubview:spinner];
     
@@ -211,9 +204,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    // Start shimmering.
-    //shimmeringView.shimmering = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -222,31 +212,28 @@
 }
 
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (tooltip != nil)
+        [tooltip hideAnimated:YES];
+}
+
+
 - (void)tableHeader
 {
-    UIView *tableHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 10.0f)];
+    tableHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 10.0f)];
     tableHeader.backgroundColor = [UIColor clearColor];
     self.tableView.tableHeaderView = tableHeader;
     
-    UIView *_line = [[UIView alloc] initWithFrame:CGRectMake(7.5f, 0, 33, CGRectGetHeight(tableHeader.frame))];
-    _line.backgroundColor = [UIColor clearColor];
-    //[tableHeader addSubview:_line];
+    //Hack for Tooltip
+    toolTipLocation = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 90, 0)];
+    toolTipLocation.backgroundColor = [UIColor redColor];
+    [tableHeader addSubview:toolTipLocation];
     
-    CALayer *_lineBorder = [CALayer layer];
-    _lineBorder.frame = CGRectMake(LEFT_PADDING - 1, CGRectGetHeight(tableHeader.frame) / 2, 2.0, CGRectGetHeight(tableHeader.frame) / 2);
-    _lineBorder.backgroundColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:1].CGColor;
-    [_line.layer addSublayer:_lineBorder];
     
-    CGFloat y = (CGRectGetHeight(tableHeader.frame) / 2) - (13/2);
-    
-    UIView *_bubble = [[UIView alloc] initWithFrame:CGRectMake((33/2) - (13/2), y, 13, 13)];
-    _bubble.clipsToBounds = YES;
-    _bubble.layer.cornerRadius = _bubble.frame.size.width / 2;
-    //_bubble.layer.borderWidth = 4.0f;
-    _bubble.backgroundColor = [Config getBubbleColor];
-    _bubble.layer.masksToBounds = YES;
-    _bubble.layer.borderColor = [UIColor whiteColor].CGColor;
-    [_line addSubview:_bubble];
+    UIView *tableFooter = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 10.0f)];
+    tableFooter.backgroundColor = [UIColor clearColor];
+    self.tableView.tableFooterView = tableFooter;
 }
 
 #pragma mark - Table view data source
@@ -268,24 +255,26 @@
     NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
     NSInteger repliesCount = [postObject[@"totalReplies"] integerValue];
     PFObject *parseObject = postObject[@"parseObject"];
-    NSString *cellIdentifier = [NSString stringWithFormat:@"BoxCell%@",parseObject.objectId];
 
     //Check the type in other to know which type of cell to display
     PostCellType type = [Config cellType];
     
     DITableViewCell *cell;
-    
+
     if (type == TIMELINE)
     {
+        NSString *cellIdentifier = [NSString stringWithFormat:@"TimelineCell%@",parseObject.objectId];
         TimelineTableViewCell *_cell = (TimelineTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (!_cell)
             _cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
-        _cell = [self setTimelineCellFrames:_cell withPostObject:postObject];
+        _cell = [self setTimelineCellFrames:_cell withPostObject:postObject forIndex:indexPath.row];
         
         cell = _cell;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
     }else if (type == COLOURED){
+        NSString *cellIdentifier = [NSString stringWithFormat:@"ColouredCell%@",parseObject.objectId];
         ColouredTableViewCell *_cell = (ColouredTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (!_cell)
             _cell = [[ColouredTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
@@ -293,17 +282,25 @@
         _cell = [self setColouredCellFrames:_cell withPostObject:postObject forIndex:indexPath.row];
         
         cell = _cell;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
 
-    cell.selectionStyle= UITableViewCellSelectionStyleNone;
     cell.tag = indexPath.row;
-    
     
     // Configure the cell...
     cell.postText.text = postObject[@"text"];
     cell.date.text = [Config calculateTime:postObject[@"date"]];
     cell.comments.text = [Config repliesCount:repliesCount];
     [cell.smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
+    
+    //if the user is the owner of the post
+    //and the post has likes, show the smiley button
+    //else hide it
+    if ([Config isPostAuthor:postObject])
+    {
+        if (likesCount > 0) cell.smiley.hidden = NO;
+        else cell.smiley.hidden = YES;
+    }
     
     if (parseObject[@"pic"])
     {
@@ -346,12 +343,25 @@
                                  }];
     }
     
+    cell.selectionStyle= UITableViewCellSelectionStyleNone;
     cell.bottomBorder.backgroundColor = [tableView separatorColor].CGColor;
     
     return cell;
 }
 
-- (TimelineTableViewCell *)setTimelineCellFrames:(TimelineTableViewCell *)_cell withPostObject:(NSDictionary *)postObject
+- (PostTextTableViewCell *)setListCellFrames:(PostTextTableViewCell *)_cell withPostObject:(NSDictionary *)postObject
+{
+    //Set Frames
+    NSDictionary *subViewframes = [Config subViewFrames:postObject];
+    
+    _cell.postText.frame = [subViewframes[@"postTextFrame"] CGRectValue];
+    _cell.postImage.frame = [subViewframes[@"imageFrame"] CGRectValue];
+    _cell.actionsView.frame = [subViewframes[@"actionViewframe"] CGRectValue];
+    
+    return _cell;
+}
+
+- (TimelineTableViewCell *)setTimelineCellFrames:(TimelineTableViewCell *)_cell withPostObject:(NSDictionary *)postObject forIndex:(NSInteger)index
 {
     //Set Frames
     NSDictionary *subViewframes = [Config subViewFrames2:postObject];
@@ -360,13 +370,14 @@
     _cell.bubble.frame = [subViewframes[@"bubbleFrame"] CGRectValue];
     _cell.triangle.frame = [subViewframes[@"triangleFrame"] CGRectValue];
     
-    _cell.postContainer.frame = [subViewframes[@"containerFrame"] CGRectValue];
+    _cell.mainContainer.frame = [subViewframes[@"containerFrame"] CGRectValue];
     _cell.postText.frame = [subViewframes[@"postTextFrame"] CGRectValue];
     _cell.postImage.frame = [subViewframes[@"imageFrame"] CGRectValue];
     _cell.actionsView.frame = [subViewframes[@"actionViewframe"] CGRectValue];
     
-    UIColor *rColor = [Config getBubbleColor];
-    _cell.bubble.layer.borderColor = rColor.CGColor;
+    //UIColor *rColor = [Config getBubbleColor];
+    //_cell.bubble.layer.borderColor = rColor.CGColor;
+    _cell.bubble.layer.borderColor = [Config getSideColor:index].CGColor;
     
     return _cell;
 }
@@ -377,13 +388,18 @@
     NSDictionary *subViewframes = [Config colouredCellFrames:postObject];
     _cell.line.frame = [subViewframes[@"lineFrame"] CGRectValue];
     
-    _cell.postContainer.frame = [subViewframes[@"containerFrame"] CGRectValue];
+    _cell.mainContainer.frame = [subViewframes[@"mainContainerFrame"] CGRectValue];
+    _cell.postContainer.frame = [subViewframes[@"postContainerFrame"] CGRectValue];
     _cell.postText.frame = [subViewframes[@"postTextFrame"] CGRectValue];
     _cell.postImage.frame = [subViewframes[@"imageFrame"] CGRectValue];
     _cell.actionsView.frame = [subViewframes[@"actionViewFrame"] CGRectValue];
     _cell.smiley.frame = [subViewframes[@"smileyFrame"] CGRectValue];
     
     _cell.line.backgroundColor = [Config getSideColor:index];
+    _cell.line.layer.borderColor = [Config getSideColor:index].CGColor;
+    
+    if (index != ([_allPosts count] - 1))
+        _cell.bottomBorder.frame = CGRectMake(0, CGRectGetHeight(_cell.mainContainer.frame) - 0.5f, CGRectGetWidth(_cell.mainContainer.frame), .5f);
     
     return _cell;
 }
@@ -393,14 +409,19 @@
     NSDictionary *postObject = _allPosts[indexPath.row];
     NSString *postText = postObject[@"text"];
     
-    CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:WIDTH - 55.5f withFont:TEXT_FONT];
+    CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:WIDTH - 55.0f withFont:TEXT_FONT];
+    
+    CGFloat height = 0;
+    
+    if ([Config cellType] == TIMELINE)
+        height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 5;
+    else if ([Config cellType] == COLOURED)
+        height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
     
     if (postObject[@"parseObject"][@"pic"])
-    {
-        return TOP_PADDING + postTextHeight + 10 + IMAGEVIEW_HEIGHT + 12 + ACTIONS_VIEW_HEIGHT + 8;
-    }else{
-        return TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 8;
-    }
+        height += 10 + IMAGEVIEW_HEIGHT;
+    
+    return height;
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
@@ -449,6 +470,41 @@
     [self.navigationController pushViewController:viewPost animated:YES];
 }
 
+- (void)changeLayout:(UIButton *)sender
+{
+    //Create the action sheet
+    UIActionSheet* sheet = [[UIActionSheet alloc]
+                            initWithTitle:@"Change layout"
+                            delegate:self
+                            cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
+                            otherButtonTitles:@"Timeline", @"List", nil];
+    
+    //Display the action sheet
+    [sheet showInView: self.navigationController.view];
+}
+
+#pragma mark - UIActionSheet Delegate
+- (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)index
+{
+    NSString *title = [actionSheet buttonTitleAtIndex:index];
+    PostCellType mode;
+    /*
+    if ([title isEqualToString:@"List"])  mode = LIST;
+    else
+    */
+    if ([title isEqualToString:@"Timeline"])  mode = TIMELINE;
+    else if ([title isEqualToString:@"List"]) mode = COLOURED;
+    
+    if ([Config setCellType:mode]) {
+        
+        if ([title isEqualToString:@"List"])  self.tableView.tableHeaderView = nil;
+        else [self tableHeader];
+        
+        [self.tableView reloadData];
+    }
+}
+
+
 - (void)addNewPost:(UIBarButtonItem *)sender
 {
     AddPostViewController *addNewPost = [[AddPostViewController alloc] initWithNibName:nil bundle:nil];
@@ -476,14 +532,6 @@
     MapViewController *mapView = [[MapViewController alloc] initWithNibName:nil bundle:nil];
     mapView.dataSource = self;
     mapView.delegate = self;
-    /*
-    UINavigationController *mapNavController = [[UINavigationController alloc] initWithRootViewController:mapView];
-    mapNavController.navigationBar.barStyle = BAR_STYLE;
-    mapNavController.navigationBar.barTintColor = BAR_TINT_COLOR2;
-    mapNavController.navigationBar.tintColor = [UIColor colorWithRed:235/255.0f green:237/255.0f blue:236/255.0f alpha:1.0f];
-    mapNavController.navigationBar.translucent = NO;
-    */
-    
     [self.navigationController presentViewController:mapView animated:YES completion:nil];
 }
 
@@ -530,7 +578,7 @@
                                                     negativeSpacer,
                                                     [[UIBarButtonItem alloc] initWithCustomView:mapButton],
                                                     negativeSpacer,
-                                                    [[UIBarButtonItem alloc] initWithCustomView:addNew]
+                                                    addNew
                                                     ];
     }else{
         self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:profile],
@@ -799,6 +847,16 @@
         
     }else if([title isEqualToString:@"Report"]) {
         
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Report Post"
+                                                            message:@"Please tell us what is wrong with ths post."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"Offensive content", @"Spam", @"Other", nil];
+        [alertView show];
+    }else if([title isEqualToString:@"Offensive content"] ||
+             [title isEqualToString:@"Spam"] ||
+             [title isEqualToString:@"Other"])
+    {
         [self reportPost:_cellToDelete.tag];
         [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
     }else{
@@ -841,9 +899,16 @@
         popup.presentingController = self;
         
         [self presentViewController:introView animated:YES completion:nil];
+        
+        tooltip = [[JDFTooltipView alloc] initWithTargetView:toolTipLocation hostView:self.view tooltipText:@"Tap The Title Label To Change Post Layout." arrowDirection:JDFTooltipViewArrowDirectionUp width:180.0f];
+        tooltip.dismissOnTouch = YES;
+        tooltip.tooltipBackgroundColour = [UIColor colorWithRed: 0.89 green: 0.6 blue: 0 alpha: 1];
+        tooltip.textColour = [UIColor whiteColor];
+        tooltip.font= [UIFont fontWithName:@"HelveticaNeue-Medium" size:12.5f];
+        
+        [tooltip show];
     }
 }
-
 
 -(void)onDoneButtonPressed{
     
@@ -928,23 +993,6 @@
     imageView.backgroundColor = [UIColor clearColor];
     
     return imageView;
-}
-
-- (void)showFullScreen:(UITapGestureRecognizer *)gesture
-{
-    NSInteger tag = gesture.view.tag;
-    NSDictionary *postObject = _allPosts[tag];
-    PFFile *file = postObject[@"parseObject"][@"pic"];
-    
-    FullScreenViewController *fullScreen = [[FullScreenViewController alloc] initWithFile:file];
-    
-    CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
-    popup.destinationBounds = [[UIScreen mainScreen] bounds];
-    //popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
-    popup.presentedController = fullScreen;
-    popup.presentingController = self;
-    
-    [self presentViewController:fullScreen animated:YES completion:nil];
 }
 
 - (BOOL)prefersStatusBarHidden

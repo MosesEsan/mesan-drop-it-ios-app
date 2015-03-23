@@ -1,6 +1,6 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CCMPopup" "${PODS_ROOT}/Headers/Public/DZNEmptyDataSet" "${PODS_ROOT}/Headers/Public/FormatterKit" "${PODS_ROOT}/Headers/Public/Montserrat"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/CCMPopup" -isystem "${PODS_ROOT}/Headers/Public/DZNEmptyDataSet" -isystem "${PODS_ROOT}/Headers/Public/FormatterKit" -isystem "${PODS_ROOT}/Headers/Public/Montserrat"
-OTHER_LDFLAGS = -ObjC -l"Pods-Drop It!-CCMPopup" -l"Pods-Drop It!-DZNEmptyDataSet" -l"Pods-Drop It!-FormatterKit" -l"Pods-Drop It!-Montserrat" -framework "AddressBook" -framework "AddressBookUI" -framework "CoreLocation" -framework "CoreText" -framework "UIKit"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CCMPopup" "${PODS_ROOT}/Headers/Public/DZNEmptyDataSet" "${PODS_ROOT}/Headers/Public/FormatterKit" "${PODS_ROOT}/Headers/Public/JDFTooltips" "${PODS_ROOT}/Headers/Public/Montserrat"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/CCMPopup" -isystem "${PODS_ROOT}/Headers/Public/DZNEmptyDataSet" -isystem "${PODS_ROOT}/Headers/Public/FormatterKit" -isystem "${PODS_ROOT}/Headers/Public/JDFTooltips" -isystem "${PODS_ROOT}/Headers/Public/Montserrat"
+OTHER_LDFLAGS = -ObjC -l"Pods-Drop It!-CCMPopup" -l"Pods-Drop It!-DZNEmptyDataSet" -l"Pods-Drop It!-FormatterKit" -l"Pods-Drop It!-JDFTooltips" -l"Pods-Drop It!-Montserrat" -framework "AddressBook" -framework "AddressBookUI" -framework "CoreLocation" -framework "CoreText" -framework "UIKit"
 OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
 PODS_ROOT = ${SRCROOT}/Pods

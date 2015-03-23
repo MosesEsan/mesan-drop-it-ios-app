@@ -14,6 +14,8 @@
 #import "CommentTableViewCell.h"
 #import "MHFacebookImageViewer.h"
 
+#define SUB_CONTAINER_FRAME self.view.bounds
+
 @interface ViewPostTableViewController ()<UITextViewDelegate>
 {
     
@@ -75,7 +77,7 @@
         [reportButton addTarget:self action:@selector(reportPost:) forControlEvents:UIControlEventTouchUpInside];
         
         UIImageView *reportImageview =
-        [Config imageViewFrame:CGRectMake(20.0f, 10.0f, 24, 24)
+        [Config imageViewFrame:CGRectMake(24.0f, 12.0f, 20, 20)
                      withImage:[UIImage imageNamed:@"Report"]
                      withColor:[UIColor whiteColor]];
         reportImageview.userInteractionEnabled = YES;
@@ -84,12 +86,17 @@
         
         UITapGestureRecognizer *report = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reportPost:)];
         [reportImageview addGestureRecognizer:report];
-        
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:reportButton];
+
+        UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+                                           initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                           target:nil action:nil];
+        negativeSpacer.width = -8;
+        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:reportButton], nil]];
+        //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:reportButton];
     }
     
     //Main View - Tableview, Textfield etc
-    subviewContainer = [[UIView alloc] initWithFrame:self.view.bounds];
+    subviewContainer = [[UIView alloc] initWithFrame:SUB_CONTAINER_FRAME];
     subviewContainer.clipsToBounds = YES;
     [self.view addSubview:subviewContainer];
     
@@ -295,8 +302,19 @@
     _smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 33, 5.2f, 15);
     _smiley.titleEdgeInsets = UIEdgeInsetsMake(2, -65, 0, 35);
     _smiley.tag = self.view.tag;
-    [_smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
     [_actionsView addSubview:_smiley];
+    
+    [_smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
+    
+    //if the user is the owner of the post
+    //and the post has likes, show the smiley button
+    //else hide it
+    if ([Config isPostAuthor:_postObject])
+    {
+        if (likesCount > 0) _smiley.hidden = NO;
+        else _smiley.hidden = YES;
+    }
+    
     
     //If the user is not the post authour
     //They can like, dislike and report the post
@@ -439,11 +457,8 @@
     
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
-    //Move caption on top of view
-    CGFloat newHeight = subviewContainer.frame.size.height - kbSize.height;
-    
-    CGRect rect = subviewContainer.frame;
-    rect.size.height = newHeight; //Set the new Y position
+    CGRect rect = SUB_CONTAINER_FRAME;
+    rect.size.height = SUB_CONTAINER_FRAME.size.height - kbSize.height + 64.0f; //Add 64.0f to accomodate for the navigationbar
     subviewContainer.frame = rect;
     
     [self resetSubView];
@@ -571,18 +586,19 @@
     
     subviewContainer.frame = subviewContainer.frame;
     
+    //Get the contentsize of the UITextview
     float height = commentTextView.contentSize.height;
     
-    //1- set Uitextview new size
+    //1- set UITextview new size
     CGRect frame = commentTextView.frame;
-    frame.size.height = height; //Give it some padding
+    frame.size.height = height;
     commentTextView.frame = frame;
     
-    //2
+    //2 - Set The Compose Container
     frame = composeContainer.frame;
-    frame.size.height = 10 + height + 10.0;
+    frame.size.height = 10 + height + 10.0; //Padding (10) at top and bottom
     
-    //3
+    //3 - Set Tableview Frame
     CGRect tableViewFrame = _tableView.frame;
     tableViewFrame.size.height = subviewContainer.frame.size.height - 64.0f - frame.size.height;
     _tableView.frame = tableViewFrame;
@@ -603,7 +619,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3]; // if you want to slide up the view
     
-    subviewContainer.frame = subviewContainer.frame;
+    subviewContainer.frame = SUB_CONTAINER_FRAME;
     
     CGRect tableViewFrame = self.view.frame;
     tableViewFrame.size.height = tableViewFrame.size.height - 119;
@@ -628,12 +644,33 @@
 }
 
 - (void)reportPost:(id)sender
-{    
-    //update array and database
-    [self.delegate reportPost:self.view.tag];
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Report Post"
+                                                        message:@"Please tell us what is wrong with ths post."
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Offensive content", @"Spam", @"Other", nil];
+    [alertView show];
     
-    ///close
-    [self.navigationController popViewControllerAnimated:TRUE];
+    
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    if([title isEqualToString:@"Cancel"])
+    {
+        //do nothing
+    }else{
+        
+        //update array and database
+        [self.delegate reportPost:self.view.tag];
+        
+        ///close
+        [self.navigationController popViewControllerAnimated:TRUE];
+    }
 }
 
 - (void)close:(UITapGestureRecognizer *)sender

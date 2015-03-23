@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Drop It!-JDFTooltips.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Drop It!-Montserrat.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>27E35F05E5875720A1EDB421</key>
+		<key>0DEDEE0CB74BB0DEFE30D8C4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>472370995044B12C2AE3C040</key>
+		<key>187E95932BDD9C3BFDDA5137</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>52823648C52CF9365ECB3803</key>
+		<key>224A7E58FF199F7E8A5CBDFB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AFB912B4316D8E0F4DD4764E</key>
+		<key>426679AAD6ED6D1A55B9781E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B3402B0ED3E308A90F7F4946</key>
+		<key>589F679ABE26B01EBD58360D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F6F65BB601365851C1927D60</key>
+		<key>92A94B9CD47379892852E72B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AE7C93D7C66C73EA708413CE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

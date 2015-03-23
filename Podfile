@@ -14,6 +14,8 @@ pod 'FormatterKit'
 #pod 'LNBRippleEffect'
 pod 'DZNEmptyDataSet'
 #pod 'AppsfireSDK'
+#pod 'MMPopLabel'
+pod 'JDFTooltips'
 
 end
 

@@ -277,7 +277,17 @@
     _cell.postText.text = postText;
     _cell.date.text = postDate;
     _cell.comments.text = [Config repliesCount:repliesCount];
+    
     [_cell.smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
+    
+    //if the user is the owner of the post
+    //and the post has likes, show the smiley button
+    //else hide it
+    if ([Config isPostAuthor:postObject])
+    {
+        if (likesCount > 0) _cell.smiley.hidden = NO;
+        else _cell.smiley.hidden = YES;
+    }
     
     //Set Frames
     NSDictionary *subViewframes = [Config subViewFrames:postObject];

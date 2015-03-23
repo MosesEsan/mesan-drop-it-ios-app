@@ -8,8 +8,6 @@
 
 #import "ColouredTableViewCell.h"
 
-
-
 #define LEFT_PADDING 16.5f
 
 #define POST_TEXT_WIDTH WIDTH - 16.5f - (LEFT_PADDING * 2)
@@ -24,17 +22,24 @@
         // Initialization code
         self.backgroundColor = [UIColor clearColor];
         
-        self.postContainer = [[UIView alloc] init];
-        self.postContainer.backgroundColor = [UIColor whiteColor];
-        self.postContainer.layer.borderWidth = 1.0f;
-        self.postContainer.layer.borderColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.6f].CGColor;
-        //self.postContainer.layer.cornerRadius = 4.0f;
-        self.postContainer.clipsToBounds = YES;
-        [self.contentView addSubview:self.postContainer];
-        
+        self.mainContainer = [[UIView alloc] init];
+        self.mainContainer.backgroundColor = [UIColor clearColor];
+        self.mainContainer.clipsToBounds = YES;
+        //self.mainContainer.layer.borderWidth = 0.5f;
+        //self.mainContainer.layer.borderColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:1].CGColor;
+        [self.contentView addSubview:self.mainContainer];
         
         self.line = [[UIView alloc] init];
-        [self.postContainer addSubview:self.line];
+        self.line.layer.borderWidth = 0.7f;
+        [self.mainContainer addSubview:self.line];
+        
+        self.postContainer = [[UIView alloc] init];
+        self.postContainer.backgroundColor = [UIColor whiteColor];
+        //self.postContainer.layer.borderWidth = 1.5f;
+        //self.postContainer.layer.borderColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.6f].CGColor;
+        //self.postContainer.layer.cornerRadius = 4.0f;
+        self.postContainer.clipsToBounds = YES;
+        [self.mainContainer addSubview:self.postContainer];
         
         self.postText = [[UILabel alloc] init];
         self.postText.backgroundColor = [UIColor clearColor];
@@ -99,6 +104,12 @@
         self.smiley.titleEdgeInsets = UIEdgeInsetsMake(2, -60, 0, 30);
         
         [self.actionsView addSubview:self.smiley];
+        
+        self.bottomBorder = [CALayer layer];
+        self.bottomBorder.backgroundColor = [UIColor colorWithRed:0.906 green:0.906 blue:0.906 alpha:1].CGColor;
+        self.bottomBorder.backgroundColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:0.5].CGColor;
+        [self.mainContainer.layer addSublayer:self.bottomBorder];
+        
     }
     
     return self;
@@ -113,5 +124,7 @@
 
     // Configure the view for the selected state
 }
+
+
 
 @end

@@ -11,4 +11,6 @@
 
 @interface ColouredTableViewCell : DITableViewCell
 
+@property (nonatomic, strong) UIView *postContainer;
+
 @end

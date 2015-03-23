@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) UIView *line;
 
-@property (nonatomic, strong) UIView *postContainer;
+@property (nonatomic, strong) UIView *mainContainer;
 
 @property (nonatomic, strong) UILabel *postText;
 @property (nonatomic, strong) PFImageView *postImage;

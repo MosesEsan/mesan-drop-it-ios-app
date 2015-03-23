@@ -21,7 +21,6 @@ typedef NS_ENUM(NSInteger, AppMode) {
 };
 
 typedef NS_ENUM(NSInteger, PostCellType) {
-    LIST,
     TIMELINE,
     COLOURED
 };
@@ -69,13 +68,11 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define IMAGEVIEW_HEIGHT 160
 #define ACTIONS_VIEW_HEIGHT 28
 
-
 #define LINE_FRAME_WIDTH 33
 #define BUBBLE_FRAME_WIDTH 14
 
-#define CONTAINER_FRAME_X 6.5f
-#define LINE_FRAME_WIDTH2 3.5f
-
+#define CONTAINER_FRAME_X 7.5f
+#define COLOURED_BAR_WIDTH 0.0f
 
 #define DATE_COLOR [UIColor colorWithRed:137/255.0f green:143/255.0f blue:156/255.0f alpha:1.0f]
 #define MESSAGE_COLOR [UIColor colorWithRed:85/255.0f green:85/255.0f blue:85/255.0f alpha:1.0f]
@@ -95,13 +92,10 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define CONFIGURATION_CLASS_NAME @"Config"
 #define ADS_CLASS_NAME @"Ads"
 
-
 #define NEW_POST_TYPE @"New"
 #define LIKE_POST_TYPE @"Like"
 #define DISLIKE_POST_TYPE @"Dislike"
 #define REPORT_POST_TYPE @"Report"
-
-
 
 #define NEW_POST_NOTIFICATION @"NewPostAdded"
 
@@ -137,6 +131,7 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 + (void)setConfiguration;
 + (AppMode)appMode;
 + (PostCellType)cellType;
++ (BOOL)setCellType:(PostCellType)mode;
 
 + (NSMutableArray *)availableLocations;
 + (void)updateAvailableLocations:(NSDate *)lastUpdated;

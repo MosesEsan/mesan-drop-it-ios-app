@@ -44,13 +44,13 @@
         [self.line addSubview:_bubble];
 
         
-        self.postContainer = [[UIView alloc] init];
-        self.postContainer.backgroundColor = [UIColor whiteColor];
-        self.postContainer.layer.borderWidth = .4f;
-        self.postContainer.layer.borderColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.6f].CGColor;
-        self.postContainer.layer.cornerRadius = 4.0f;
-        self.postContainer.clipsToBounds = YES;
-        [self.contentView addSubview:self.postContainer];
+        self.mainContainer = [[UIView alloc] init];
+        self.mainContainer.backgroundColor = [UIColor whiteColor];
+        self.mainContainer.layer.borderWidth = .4f;
+        self.mainContainer.layer.borderColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.6f].CGColor;
+        self.mainContainer.layer.cornerRadius = 4.0f;
+        self.mainContainer.clipsToBounds = YES;
+        [self.contentView addSubview:self.mainContainer];
         
         self.postText = [[UILabel alloc] init];
         self.postText.backgroundColor = [UIColor clearColor];
@@ -64,7 +64,7 @@
         self.postText.attributesText = @{NSForegroundColorAttributeName: TEXT_COLOR, NSFontAttributeName: TEXT_FONT};
         self.postText.attributesHashtag = @{NSForegroundColorAttributeName: BAR_TINT_COLOR2, NSFontAttributeName: TEXT_FONT};
         */
-        [self.postContainer addSubview:self.postText];
+        [self.mainContainer addSubview:self.postText];
     
         
         self.postImage = [[PFImageView alloc] init];
@@ -74,11 +74,11 @@
         self.postImage.clipsToBounds = YES;
         self.postImage.contentMode = UIViewContentModeScaleAspectFill;
         self.postImage.userInteractionEnabled = YES;
-        [self.postContainer addSubview:self.postImage];
+        [self.mainContainer addSubview:self.postImage];
         
         self.actionsView = [[UIView alloc] initWithFrame:CGRectMake(LEFT_PADDING * 3, 0, WIDTH - (LEFT_PADDING * 3), ACTIONS_VIEW_HEIGHT)];
         self.actionsView.backgroundColor = [UIColor clearColor];
-        [self.postContainer addSubview:self.actionsView];
+        [self.mainContainer addSubview:self.actionsView];
         
         self.bottomBorder = [CALayer layer];
         self.bottomBorder.frame = CGRectMake(0, ACTIONS_VIEW_HEIGHT - .5f, CGRectGetWidth(self.actionsView.frame), .5f);

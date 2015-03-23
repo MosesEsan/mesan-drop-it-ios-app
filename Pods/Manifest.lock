@@ -20,18 +20,21 @@ PODS:
   - FormatterKit/TimeIntervalFormatter (1.8.0)
   - FormatterKit/UnitOfInformationFormatter (1.8.0)
   - FormatterKit/URLRequestFormatter (1.8.0)
+  - JDFTooltips (1.0)
   - Montserrat (1.0.0)
 
 DEPENDENCIES:
   - CCMPopup
   - DZNEmptyDataSet
   - FormatterKit
+  - JDFTooltips
   - Montserrat
 
 SPEC CHECKSUMS:
   CCMPopup: 529f59478cbf4e5fc10592255f80cf3be1ba4a9e
   DZNEmptyDataSet: 741da409081a4bf707c949c964623a6ad1799772
   FormatterKit: 547a808c41172136a3f3acb424ac9361d38bb32f
+  JDFTooltips: 423d80b196868a4023df130bddd91e14ac86ffce
   Montserrat: 580c932fcad1ea7e282931e8a5719eacd12b6f0a
 
 COCOAPODS: 0.35.0

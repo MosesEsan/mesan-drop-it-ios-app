@@ -50,7 +50,7 @@
         _view.titleLabel.text = thumbnail.title;
         _view.subtitleLabel.text = thumbnail.subtitle;
         //
-        //_view.imageView.image = thumbnail.image;
+        _view.imageView.image = thumbnail.image;
         if(thumbnail.imgUrl){
            // [_view.imageView setImageWithURL:[NSURL URLWithString:thumbnail.imgUrl]];
         }

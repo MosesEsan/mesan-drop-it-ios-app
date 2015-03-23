@@ -1,0 +1,1 @@
+../../../JDFTooltips/Pod/Classes/JDFSequentialTooltipManager.h

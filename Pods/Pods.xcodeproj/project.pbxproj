@@ -7,716 +7,791 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09CBC88E1C515736257EBF6A /* UIImage+screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 046EFA09B37E6A7B8D22B2AA /* UIImage+screenshot.m */; };
-		0B44F282C1217739BC2B5BE2 /* TTTURLRequestFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E33AB456A3A08B297269F54 /* TTTURLRequestFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		1301BE801EDAD6A114C1A049 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C6E645DBFC97117A231700 /* UIKit.framework */; };
-		19A691858B9D21AFE39AB569 /* Pods-Drop It!-FormatterKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591E5593CD2D03DB8E55969 /* Pods-Drop It!-FormatterKit-dummy.m */; };
-		1A41826390F9D614C27ECA60 /* UIFont+Montserrat.m in Sources */ = {isa = PBXBuildFile; fileRef = 43701D6CA370EEA8EA69B273 /* UIFont+Montserrat.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		1CC685F136A28184CCDE4E39 /* TTTColorFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = A1CFB6016344D50A74586C20 /* TTTColorFormatter.h */; };
-		2437EFB4AA02687BBD28F032 /* TTTNameFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E18B4A5DCC691B80A8349C0E /* TTTNameFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		2729250D1ABC4D3000A271D4 /* FXBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2729250B1ABC4D3000A271D4 /* FXBlurView.h */; };
-		2729250E1ABC4D3000A271D4 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2729250C1ABC4D3000A271D4 /* FXBlurView.m */; };
-		2A69D9B496081AE7DF3E18F1 /* TTTOrdinalNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B4FFD1DFB25911DA96F6A433 /* TTTOrdinalNumberFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		2BE59B6D47DD2587DFDE7484 /* TTTAddressFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2A3FB2706DFEFD5A81B257 /* TTTAddressFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		2BF118E3C9B707F407C64759 /* CCMPopupAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E3F89B895119423D971DDD7 /* CCMPopupAnimation.h */; };
-		34F52DB11D630212F757835E /* UIFont+Montserrat.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B1D1A5FC4A9A93FC698B8A /* UIFont+Montserrat.h */; };
-		381E284C5CC566EF9D015193 /* Pods-Drop It!-Montserrat-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F0C502FAAE4EE5325B098 /* Pods-Drop It!-Montserrat-dummy.m */; };
-		3F12C8C5E7974BC939BB6707 /* CCMCustomAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD74F1BBFDA1476CC4DB23F /* CCMCustomAnimation.m */; };
-		408DE51C4FA3158935422453 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D17E2794AA8D7AE898D3DE /* Foundation.framework */; };
-		42F84C134ABCE41AC2653BB6 /* TTTTimeIntervalFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E9878776E2F716D51200138 /* TTTTimeIntervalFormatter.h */; };
-		44E13BAF5FBC7DBCCC40B1AD /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EEFEF719A7CD408E75099DB /* AddressBook.framework */; };
-		4CBE60AFECA12F57CABC7B68 /* Pods-Drop It!-CCMPopup-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231C4975C9168A8BDF10DA2 /* Pods-Drop It!-CCMPopup-dummy.m */; };
-		525D4AF3FD5C1D0D55AFA492 /* TTTUnitOfInformationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E36CD4A252539C0D4407D78A /* TTTUnitOfInformationFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		602F3071A42524D18BDFB477 /* UIViewController+CCMPopupAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEE25FE53228DE07BA65EA3 /* UIViewController+CCMPopupAnimation.m */; };
-		619CFF5C71A901FF205C959C /* TTTNameFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D41232352DAA8B7A842AAB9 /* TTTNameFormatter.h */; };
-		669FC7DD31A82F7B7020DE68 /* CCMPopupSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B93441DE72169331490BA86 /* CCMPopupSegue.h */; };
-		76DD36909432E7A0D099A52F /* CCMCustomAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 78D99E3F54C41A56BB455003 /* CCMCustomAnimation.h */; };
-		796308EA0207250BD4FDC880 /* TTTAddressFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AD9E4B06F0F049939AF2215 /* TTTAddressFormatter.h */; };
-		7C2718B40CA68525E96BCF09 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6377A5AADCB2FBC09892E36E /* Montserrat-Regular.ttf */; };
-		7F5D7D3E23686199BBA620CD /* TTTLocationFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 07F0B9FDA7EE247DE6C57469 /* TTTLocationFormatter.h */; };
-		8015C00F52FD8F3136DF6D0C /* TTTOrdinalNumberFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = CA99D2B7E2166A21A4522A43 /* TTTOrdinalNumberFormatter.h */; };
-		8286B395C710EA19939EB4E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C6E645DBFC97117A231700 /* UIKit.framework */; };
-		902698C9CCD9FCF7C7D3F60F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D17E2794AA8D7AE898D3DE /* Foundation.framework */; };
-		90EE5378E6F799871DA315B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D17E2794AA8D7AE898D3DE /* Foundation.framework */; };
-		91F56B6DE7FB5B8C25DC2379 /* TTTTimeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B8654B5F7A3944B0DAC7D24E /* TTTTimeIntervalFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		942A64AD2C13E277F399F39E /* CCMPopupSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9894C95ECD4B3E9BF5AE2C70 /* CCMPopupSegue.m */; };
-		99B2DC14579140ED94B29269 /* TTTArrayFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = E8C655AD170A92452CE95D59 /* TTTArrayFormatter.h */; };
-		A52A1BE2734EBCE9FA3C1AB4 /* TTTColorFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9959FA233544081CA7EC5 /* TTTColorFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		A5D3171FF437C9C4449C69ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D17E2794AA8D7AE898D3DE /* Foundation.framework */; };
-		A764EBF5F869ECB5D23E301C /* TTTArrayFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5820E0774ECA7303F3A68322 /* TTTArrayFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		A8204086FE36680ECCE389EC /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD432FDFFB5C2484FBC6FB51 /* AddressBookUI.framework */; };
-		AAAA1F0F350D4579CB3D16AA /* TTTLocationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 644101712C9AEBA2BE125144 /* TTTLocationFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		B64EF86767F8C0CDD02680BB /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BA94FA7C9415026582DB01 /* UIScrollView+EmptyDataSet.m */; };
-		B93B08B55639D9206ACF9BB8 /* CCMPopupTransitioning.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C7CF0ECA7C69AE57F0D57AE /* CCMPopupTransitioning.h */; };
-		BDC8DCEA14F2205454219B75 /* TTTUnitOfInformationFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 56E65B2507C4E2D82148D517 /* TTTUnitOfInformationFormatter.h */; };
-		BF65B9A1A587F5AE6758A93A /* Pods-Drop It!-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 92717AE3C2AC67E6BAD8B016 /* Pods-Drop It!-dummy.m */; };
-		C76BABE1C7FFE2194BEBF9E2 /* TTTURLRequestFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 828C33D5D2B755A20C4C0F8B /* TTTURLRequestFormatter.h */; };
-		C8074A2068D63CEE6C77B970 /* Pods-Drop It!-DZNEmptyDataSet-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A4B392051C592581A18ABC /* Pods-Drop It!-DZNEmptyDataSet-dummy.m */; };
-		C88DC50BE40233E3B3E7BE13 /* CCMPopupAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = CA23615752C65D81778CF557 /* CCMPopupAnimation.m */; };
-		CBF77891E0EE71E6B0EC765C /* UIImage+screenshot.h in Headers */ = {isa = PBXBuildFile; fileRef = E0C8A3E812E838E08A100748 /* UIImage+screenshot.h */; };
-		D71C0A8B8C8F77893F629170 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9483FCEAB62FEC9A0A066B9F /* Montserrat-Bold.ttf */; };
-		DE44FBCC952579D254098795 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B98026023DE5F423DDB47427 /* UIImage+ImageEffects.m */; };
-		E0A15620B966D9A1978BCC69 /* UIImage+ImageEffects.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA859800CB094E3AA0E2C27 /* UIImage+ImageEffects.h */; };
-		E7BED4EC12065F50BAFF92EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D17E2794AA8D7AE898D3DE /* Foundation.framework */; };
-		EF66E6DCFDFDD120112D91E7 /* UIViewController+CCMPopupAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 17A91F9737EF0EB94CDD7482 /* UIViewController+CCMPopupAnimation.h */; };
-		F089E736C0D3327115D5326F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B13273E1A802BCE090D5C163 /* CoreLocation.framework */; };
-		F47090F2E430F57D4A418ABC /* UIScrollView+EmptyDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 71C072388A49C87899E41CA4 /* UIScrollView+EmptyDataSet.h */; };
-		FCC579DBF7CDE41EF66347B4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E83A5474E68691736F83AF /* CoreText.framework */; };
-		FE9991BDCBE0C772F8F15258 /* CCMPopupTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 853E628E1D5B953819566143 /* CCMPopupTransitioning.m */; };
+		01DEF7DB59BB423854579933 /* Pods-Drop It!-FormatterKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A67CA14EBC7BC6488216824 /* Pods-Drop It!-FormatterKit-dummy.m */; };
+		08228709152692BC78E8C357 /* TTTTimeIntervalFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D510F32E88DC29AB60FA0CD /* TTTTimeIntervalFormatter.h */; };
+		09315011BCA06F0BF6CA3583 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF7A4A5123B2EA19643FADB /* UIScrollView+EmptyDataSet.m */; };
+		09EA1862EE0397B965DF99EB /* TTTArrayFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 933D19A563FF369DE1A06622 /* TTTArrayFormatter.h */; };
+		0A012A9DDC4D5037591EB3AB /* JDFTooltips.h in Headers */ = {isa = PBXBuildFile; fileRef = 174F85A53800E20B303EFDD0 /* JDFTooltips.h */; };
+		0CBBC5E74C8684F23794FC82 /* CCMCustomAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 476E0A1FABC99F75E13A0C39 /* CCMCustomAnimation.h */; };
+		0EA2733AE7CAB95D4B559D5E /* TTTURLRequestFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1506D4353590BA97F87676EB /* TTTURLRequestFormatter.h */; };
+		0F78C5CA9426B246CF3EAAA6 /* CCMPopupTransitioning.h in Headers */ = {isa = PBXBuildFile; fileRef = 389F5BA1526E2161EA7F28A0 /* CCMPopupTransitioning.h */; };
+		1645C21CEFE521EA728D9F1B /* JDFSequentialTooltipManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 58E934E89F7ADD71F94E96A8 /* JDFSequentialTooltipManager.h */; };
+		16F723CB4C48870F13D9825B /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75A618BB2CBFF355C1C14B6B /* Montserrat-Regular.ttf */; };
+		1B4D0234DEB077288F07CA6E /* JDFTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6256544950B586721A202E3D /* JDFTooltipManager.m */; };
+		22AE1F209B11726AFBBCE843 /* CCMPopupTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC9B20FFFB702B436B3C770 /* CCMPopupTransitioning.m */; };
+		22F1F389B4667D181740D0CC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E563D971861366D6F33C9A42 /* UIKit.framework */; };
+		258913AA1667A9542162244A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F5C0CB7A1264CD48B3D1AD4 /* Foundation.framework */; };
+		272E89431AC044BF001EB34E /* FXBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = 272E89411AC044BF001EB34E /* FXBlurView.h */; };
+		272E89441AC044BF001EB34E /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 272E89421AC044BF001EB34E /* FXBlurView.m */; };
+		2BEFA28FF7680BE801B050FD /* TTTArrayFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B74354654C9E37F7DFA68C /* TTTArrayFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2DB62DF9F29385AADB01BE42 /* UIView+JDFTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = D07257779D1C9639D5E64AD8 /* UIView+JDFTooltips.m */; };
+		3CB6F9B299D54CFC1642631B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F5C0CB7A1264CD48B3D1AD4 /* Foundation.framework */; };
+		3EBB3B51952E08233E607249 /* UIViewController+CCMPopupAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = A85E308A92BEA1639F7B11AB /* UIViewController+CCMPopupAnimation.m */; };
+		416120D089513355EA5DF86D /* TTTUnitOfInformationFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = FA48F14799700D34EA53C4FA /* TTTUnitOfInformationFormatter.h */; };
+		443DD9E0C793D1FB219146A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F5C0CB7A1264CD48B3D1AD4 /* Foundation.framework */; };
+		44A76400735625B68D31A4B9 /* CCMPopupSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 009528B57C71DA31308DD981 /* CCMPopupSegue.m */; };
+		45DD2BEC1B81739AF5E5763D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F5C0CB7A1264CD48B3D1AD4 /* Foundation.framework */; };
+		46C0E13911CF2E012E53A4FA /* UILabel+JDFTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = 50716552F2CE73D7A3383F0B /* UILabel+JDFTooltips.m */; };
+		49FE54C0172087C8AF05C9CC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFFFAAF8DF879C157D243BE3 /* CoreLocation.framework */; };
+		52489EDD67F76AE25A909B1E /* UIImage+ImageEffects.h in Headers */ = {isa = PBXBuildFile; fileRef = A9F3A8E31AB51AA0FB9EB278 /* UIImage+ImageEffects.h */; };
+		5455EA4A7EDBFEA352CF0E53 /* TTTURLRequestFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3FF735A52D2B598C6B5B26 /* TTTURLRequestFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		56F823DD917A3E4E968B5834 /* UIView+JDFTooltips.h in Headers */ = {isa = PBXBuildFile; fileRef = EDF82391415A0BC0625BD832 /* UIView+JDFTooltips.h */; };
+		5818E51A26F43587B93AB03D /* UIScrollView+EmptyDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 22BA86B7B76813713BF22A2D /* UIScrollView+EmptyDataSet.h */; };
+		5A4214F2CA446581343FF6FC /* UIImage+screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5A516102A091B09D7C37B0 /* UIImage+screenshot.m */; };
+		5ECF5024C64F5CE003BA4CBB /* TTTNameFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 914C5626EC0D0CA16F23D64D /* TTTNameFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		5EF0090142A4F042036D7727 /* TTTOrdinalNumberFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 65766900BCB5449EDB5C88BF /* TTTOrdinalNumberFormatter.h */; };
+		6522E52828E166A8A62D544C /* UIViewController+CCMPopupAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F882CD6775FEBF571D88C11 /* UIViewController+CCMPopupAnimation.h */; };
+		6ABC68AF7B8A0AD6C738BB86 /* TTTColorFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = DA35219548DAD5D61C89258A /* TTTColorFormatter.h */; };
+		6BA7226B1FA139599F392E9E /* TTTAddressFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E7F09D283293DE8CEB3E75 /* TTTAddressFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		7343B2B186884C45FCB3B499 /* Pods-Drop It!-CCMPopup-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3DF134A272A8E2D69A9C9 /* Pods-Drop It!-CCMPopup-dummy.m */; };
+		739001E5BF9FFAF65BC8C781 /* CCMPopupAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 525B62D968B700F7E9D5363B /* CCMPopupAnimation.m */; };
+		7611FBE354A60577116C983C /* TTTLocationFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 35B98B465D53A9B54920DAF9 /* TTTLocationFormatter.h */; };
+		79A49100FE9B0C6539E07CDE /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00998EC43BC01B15D7FC3FEE /* Montserrat-Bold.ttf */; };
+		83D50FF345C3A386889DDED9 /* Pods-Drop It!-DZNEmptyDataSet-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 14661B7AB387BE09B2D82533 /* Pods-Drop It!-DZNEmptyDataSet-dummy.m */; };
+		8527EEF3EACAEA532CA6E129 /* UIFont+Montserrat.h in Headers */ = {isa = PBXBuildFile; fileRef = BA1EF366CA241B349105FEB7 /* UIFont+Montserrat.h */; };
+		87D6312DA5FE88FEEB66B0A1 /* JDFSequentialTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFDB26D09A80A00F7EAD6E5 /* JDFSequentialTooltipManager.m */; };
+		8C4CE21FBE9AEFA390A15C4E /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2089EC17035B0842904BF85A /* UIImage+ImageEffects.m */; };
+		956D015EA0B71F4594E867BB /* TTTColorFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBA9BF3C0397E26A7D105F1 /* TTTColorFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		9A1BD4ED8565344F1AFB2875 /* UILabel+JDFTooltips.h in Headers */ = {isa = PBXBuildFile; fileRef = 3274B702010837F20C9AE361 /* UILabel+JDFTooltips.h */; };
+		9A7E5DF1D142F6408B68DCC1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F5C0CB7A1264CD48B3D1AD4 /* Foundation.framework */; };
+		9B116319333EADD6F0A8EBF8 /* TTTOrdinalNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D73AF70940A9D7087294042 /* TTTOrdinalNumberFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		9DA55E10F1D66C03AF25BA9A /* TTTAddressFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = B9EBD857D9E3E952BD7A9127 /* TTTAddressFormatter.h */; };
+		A21EFE6092E5F0141624F6F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F5C0CB7A1264CD48B3D1AD4 /* Foundation.framework */; };
+		A5068E1957FE898B6A0EF99C /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270AC0EA332A68AD199E0983 /* AddressBook.framework */; };
+		A6985683116181E0C90F8956 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76107E530CED8778C216312C /* AddressBookUI.framework */; };
+		A6C437598BFF29336071309B /* TTTLocationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 804886FC46D1E77C0B77A835 /* TTTLocationFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		A97414641D7635A0817D9A4B /* CCMCustomAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A0C17AE5E4C4FEF76DB7BA /* CCMCustomAnimation.m */; };
+		B757FBDD04F0F1D2564077F3 /* UIImage+screenshot.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A3C636B570460E878A7B28C /* UIImage+screenshot.h */; };
+		BB058B4BBD030E7D9387855F /* Pods-Drop It!-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FD29529216D767F8CBA40ED2 /* Pods-Drop It!-dummy.m */; };
+		BC2DE9F6DD3534DFEFE83F39 /* TTTUnitOfInformationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 570910E0BA37F9456496599B /* TTTUnitOfInformationFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		BEEC9BE230316E6D4EBAF041 /* TTTTimeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E435C97C97039D1F28D693 /* TTTTimeIntervalFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		C07B6A25A7D4C39DA3D4B0A4 /* Pods-Drop It!-Montserrat-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2915723A5F00C2856AD10223 /* Pods-Drop It!-Montserrat-dummy.m */; };
+		CC5A8577FB94A53E6EE77B7E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E563D971861366D6F33C9A42 /* UIKit.framework */; };
+		D0D14FFC87BA7CDF7B3FE875 /* Pods-Drop It!-JDFTooltips-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE0F1B15DF366E9EC26198F /* Pods-Drop It!-JDFTooltips-dummy.m */; };
+		D61A911258EED3B95DF5D4D8 /* TTTNameFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = E484F91FEE1EF4D730E7271D /* TTTNameFormatter.h */; };
+		DAC470997A42F46CC19FB1A6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D7980B27B8B503BD1D4175 /* CoreText.framework */; };
+		E4154EB628EB139E9317B4D4 /* JDFTooltipView.h in Headers */ = {isa = PBXBuildFile; fileRef = AB969B5FB5F957D69E6FC164 /* JDFTooltipView.h */; };
+		E645703D550CC9B5D704892C /* JDFTooltipManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B15F19335E973BB96F421376 /* JDFTooltipManager.h */; };
+		EEAC5D72B385F7D1C049DF48 /* CCMPopupAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = BDADB76D1BC2222DA072A349 /* CCMPopupAnimation.h */; };
+		EF0BDF38B29B229DEDBD581D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E563D971861366D6F33C9A42 /* UIKit.framework */; };
+		EFD38F0B15558505B7EBA9A4 /* UIFont+Montserrat.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9FB8A41EF52FAB6E7461E2 /* UIFont+Montserrat.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		F73F7CC4A8E5032DB2556A4C /* JDFTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E382AB4299B4A3C147C71BF /* JDFTooltipView.m */; };
+		FFEB519D95136785DC26D621 /* CCMPopupSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C70D3D03A14FE9A629D5B25 /* CCMPopupSegue.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3C7475D0C174EED599102A43 /* PBXContainerItemProxy */ = {
+		17712E8E9C3B498713E1D95F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F61A1C162BCD0104FCA8ADF5 /* Project object */;
+			containerPortal = B1BD022CCA13859CE658F7F5 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = B3402B0ED3E308A90F7F4946;
-			remoteInfo = "Pods-Drop It!-DZNEmptyDataSet";
-		};
-		6FD9BE5A585E078AFF0F303E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F61A1C162BCD0104FCA8ADF5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 472370995044B12C2AE3C040;
-			remoteInfo = "Pods-Drop It!-FormatterKit";
-		};
-		837EA427EC1F32BA7850F4BD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F61A1C162BCD0104FCA8ADF5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F6F65BB601365851C1927D60;
+			remoteGlobalIDString = 187E95932BDD9C3BFDDA5137;
 			remoteInfo = "Pods-Drop It!-Montserrat";
 		};
-		B0A5BB4394DAC7474232904B /* PBXContainerItemProxy */ = {
+		4752DC45BBE19F7DAF3ADDFD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F61A1C162BCD0104FCA8ADF5 /* Project object */;
+			containerPortal = B1BD022CCA13859CE658F7F5 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = AFB912B4316D8E0F4DD4764E;
+			remoteGlobalIDString = 589F679ABE26B01EBD58360D;
+			remoteInfo = "Pods-Drop It!-JDFTooltips";
+		};
+		55C021326DBA729D9270D603 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1BD022CCA13859CE658F7F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DEDEE0CB74BB0DEFE30D8C4;
+			remoteInfo = "Pods-Drop It!-FormatterKit";
+		};
+		693DE25752391252C75330BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1BD022CCA13859CE658F7F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 426679AAD6ED6D1A55B9781E;
 			remoteInfo = Montserrat;
 		};
-		E921D1A2E357D29130C94F51 /* PBXContainerItemProxy */ = {
+		707956963AAEE1A01BBAC47A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F61A1C162BCD0104FCA8ADF5 /* Project object */;
+			containerPortal = B1BD022CCA13859CE658F7F5 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 27E35F05E5875720A1EDB421;
+			remoteGlobalIDString = 92A94B9CD47379892852E72B;
 			remoteInfo = "Pods-Drop It!-CCMPopup";
+		};
+		7AABEC33536B529D9A0F7EE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1BD022CCA13859CE658F7F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AE7C93D7C66C73EA708413CE;
+			remoteInfo = "Pods-Drop It!-DZNEmptyDataSet";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0013D911A563D2D8257E5133 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		046EFA09B37E6A7B8D22B2AA /* UIImage+screenshot.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+screenshot.m"; path = "CCMPopup/UIImage+screenshot/UIImage+screenshot.m"; sourceTree = "<group>"; };
-		07F0B9FDA7EE247DE6C57469 /* TTTLocationFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTLocationFormatter.h; path = FormatterKit/TTTLocationFormatter.h; sourceTree = "<group>"; };
-		0BBFDB09D70568921764105E /* Pods-Drop It!-FormatterKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-FormatterKit.xcconfig"; sourceTree = "<group>"; };
-		0BEC240196F873E99B91E05A /* id.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = id.lproj; path = Localizations/id.lproj; sourceTree = "<group>"; };
-		138BE9A864200AB23E34D04A /* ja.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ja.lproj; path = Localizations/ja.lproj; sourceTree = "<group>"; };
-		144BA9A5B612126AA2EED575 /* pl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = pl.lproj; path = Localizations/pl.lproj; sourceTree = "<group>"; };
-		1591E5593CD2D03DB8E55969 /* Pods-Drop It!-FormatterKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-FormatterKit-dummy.m"; sourceTree = "<group>"; };
-		1711A7AB619A056A9246AD29 /* Pods-Drop It!-CCMPopup-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-CCMPopup-prefix.pch"; sourceTree = "<group>"; };
-		17A91F9737EF0EB94CDD7482 /* UIViewController+CCMPopupAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+CCMPopupAnimation.h"; path = "CCMPopup/UIViewController+CCMPopupAnimation.h"; sourceTree = "<group>"; };
-		1FFD0CF477DB3AEBCD2AF4D8 /* Pods-Drop It!-Montserrat-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-Montserrat-prefix.pch"; sourceTree = "<group>"; };
-		20958B3E4C43ABD6B5752D6E /* Pods-Drop It!-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Drop It!-resources.sh"; sourceTree = "<group>"; };
-		2729250B1ABC4D3000A271D4 /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
-		2729250C1ABC4D3000A271D4 /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
-		27B772990F9733E144A772EC /* Pods-Drop It!-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Drop It!-acknowledgements.plist"; sourceTree = "<group>"; };
-		2808EEB693C36A2012C51DFB /* tr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = tr.lproj; path = Localizations/tr.lproj; sourceTree = "<group>"; };
-		2AD9E4B06F0F049939AF2215 /* TTTAddressFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTAddressFormatter.h; path = FormatterKit/TTTAddressFormatter.h; sourceTree = "<group>"; };
-		3821DDA9C8EFE483C16BB1F2 /* nb.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = nb.lproj; path = Localizations/nb.lproj; sourceTree = "<group>"; };
-		39CB7DB208437245CCBFC1FB /* libPods-Drop It!-Montserrat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!-Montserrat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3ABAB4C015D8159D95544C01 /* libPods-Drop It!.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C1F0C502FAAE4EE5325B098 /* Pods-Drop It!-Montserrat-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-Montserrat-dummy.m"; sourceTree = "<group>"; };
-		3E1CBB2AEAE4F08119CAC14E /* vi.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = vi.lproj; path = Localizations/vi.lproj; sourceTree = "<group>"; };
-		3E33AB456A3A08B297269F54 /* TTTURLRequestFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTURLRequestFormatter.m; path = FormatterKit/TTTURLRequestFormatter.m; sourceTree = "<group>"; };
-		3E3F89B895119423D971DDD7 /* CCMPopupAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CCMPopupAnimation.h; path = CCMPopup/CCMPopupAnimation.h; sourceTree = "<group>"; };
-		3EEFEF719A7CD408E75099DB /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AddressBook.framework; sourceTree = DEVELOPER_DIR; };
-		43701D6CA370EEA8EA69B273 /* UIFont+Montserrat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Montserrat.m"; sourceTree = "<group>"; };
-		4DCE6EF7D774C1CF4DA69B54 /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = en.lproj; path = Localizations/en.lproj; sourceTree = "<group>"; };
-		52B1D1A5FC4A9A93FC698B8A /* UIFont+Montserrat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIFont+Montserrat.h"; sourceTree = "<group>"; };
-		533FE3C09B1CF4EA8D554E57 /* Pods-Drop It!-FormatterKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-FormatterKit-prefix.pch"; sourceTree = "<group>"; };
-		56E65B2507C4E2D82148D517 /* TTTUnitOfInformationFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTUnitOfInformationFormatter.h; path = FormatterKit/TTTUnitOfInformationFormatter.h; sourceTree = "<group>"; };
-		581734AD88AE1D3B723FB86F /* libPods-Drop It!-CCMPopup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!-CCMPopup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5820E0774ECA7303F3A68322 /* TTTArrayFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTArrayFormatter.m; path = FormatterKit/TTTArrayFormatter.m; sourceTree = "<group>"; };
-		5C4F04A55AF171B82ACC6FCF /* libPods-Drop It!-FormatterKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!-FormatterKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C7CF0ECA7C69AE57F0D57AE /* CCMPopupTransitioning.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CCMPopupTransitioning.h; path = CCMPopup/CCMPopupTransitioning.h; sourceTree = "<group>"; };
-		5E9878776E2F716D51200138 /* TTTTimeIntervalFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTTimeIntervalFormatter.h; path = FormatterKit/TTTTimeIntervalFormatter.h; sourceTree = "<group>"; };
-		5ED9959FA233544081CA7EC5 /* TTTColorFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTColorFormatter.m; path = FormatterKit/TTTColorFormatter.m; sourceTree = "<group>"; };
-		6231C4975C9168A8BDF10DA2 /* Pods-Drop It!-CCMPopup-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-CCMPopup-dummy.m"; sourceTree = "<group>"; };
-		6377A5AADCB2FBC09892E36E /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "Fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
-		644101712C9AEBA2BE125144 /* TTTLocationFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTLocationFormatter.m; path = FormatterKit/TTTLocationFormatter.m; sourceTree = "<group>"; };
-		64D17E2794AA8D7AE898D3DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		650ED7EF1063BAB0C9C35033 /* Pods-Drop It!-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-environment.h"; sourceTree = "<group>"; };
-		6B93441DE72169331490BA86 /* CCMPopupSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CCMPopupSegue.h; path = CCMPopup/CCMPopupSegue.h; sourceTree = "<group>"; };
-		6D10F3B1F9B2E2B3C6A4B973 /* pt_BR.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = pt_BR.lproj; path = Localizations/pt_BR.lproj; sourceTree = "<group>"; };
-		6F2A3FB2706DFEFD5A81B257 /* TTTAddressFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTAddressFormatter.m; path = FormatterKit/TTTAddressFormatter.m; sourceTree = "<group>"; };
-		6FA2213A2E29BA7ECFE56D73 /* zh-Hans.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = "zh-Hans.lproj"; path = "Localizations/zh-Hans.lproj"; sourceTree = "<group>"; };
-		71C072388A49C87899E41CA4 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EmptyDataSet.h"; path = "Source/UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
-		71D20237B0CBC6FE0E9B3D61 /* Pods-Drop It!-DZNEmptyDataSet.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-DZNEmptyDataSet.xcconfig"; sourceTree = "<group>"; };
-		7441B353CB1E18FD173B4CF5 /* nn.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = nn.lproj; path = Localizations/nn.lproj; sourceTree = "<group>"; };
-		75BF2AC5A13D73C0DC2D9000 /* Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig"; sourceTree = "<group>"; };
-		76BA94FA7C9415026582DB01 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EmptyDataSet.m"; path = "Source/UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
-		78D99E3F54C41A56BB455003 /* CCMCustomAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CCMCustomAnimation.h; path = CCMPopup/CCMCustomAnimation.h; sourceTree = "<group>"; };
-		7D41232352DAA8B7A842AAB9 /* TTTNameFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTNameFormatter.h; path = FormatterKit/TTTNameFormatter.h; sourceTree = "<group>"; };
-		828C33D5D2B755A20C4C0F8B /* TTTURLRequestFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTURLRequestFormatter.h; path = FormatterKit/TTTURLRequestFormatter.h; sourceTree = "<group>"; };
-		83C6E645DBFC97117A231700 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		853E628E1D5B953819566143 /* CCMPopupTransitioning.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CCMPopupTransitioning.m; path = CCMPopup/CCMPopupTransitioning.m; sourceTree = "<group>"; };
-		8C75536C74BF14EB16B5B31A /* de.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = de.lproj; path = Localizations/de.lproj; sourceTree = "<group>"; };
-		8CE37C9D8804BCDD580823ED /* es.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = es.lproj; path = Localizations/es.lproj; sourceTree = "<group>"; };
-		92717AE3C2AC67E6BAD8B016 /* Pods-Drop It!-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-dummy.m"; sourceTree = "<group>"; };
-		92B70696E3409B946A6B9750 /* Pods-Drop It!-Montserrat-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-Montserrat-Private.xcconfig"; sourceTree = "<group>"; };
-		9483FCEAB62FEC9A0A066B9F /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "Fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
-		9894C95ECD4B3E9BF5AE2C70 /* CCMPopupSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CCMPopupSegue.m; path = CCMPopup/CCMPopupSegue.m; sourceTree = "<group>"; };
-		9CA859800CB094E3AA0E2C27 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "CCMPopup/UIImage+ImageEffects/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
-		9CE541E3FCC7FBED46E6577E /* Pods-Drop It!-CCMPopup.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-CCMPopup.xcconfig"; sourceTree = "<group>"; };
-		A1CFB6016344D50A74586C20 /* TTTColorFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTColorFormatter.h; path = FormatterKit/TTTColorFormatter.h; sourceTree = "<group>"; };
-		A3C54178565ADD26B8784BC0 /* Pods-Drop It!.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!.release.xcconfig"; sourceTree = "<group>"; };
-		A7FA57417209664244583AD3 /* it.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = it.lproj; path = Localizations/it.lproj; sourceTree = "<group>"; };
-		A8A4B392051C592581A18ABC /* Pods-Drop It!-DZNEmptyDataSet-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-DZNEmptyDataSet-dummy.m"; sourceTree = "<group>"; };
-		AB73CD8AC56DF13FE439C128 /* ru.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ru.lproj; path = Localizations/ru.lproj; sourceTree = "<group>"; };
-		ABB4F269BD4912D7A7DC0825 /* sv.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = sv.lproj; path = Localizations/sv.lproj; sourceTree = "<group>"; };
-		AE91B257789640F69BDD13A7 /* nl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = nl.lproj; path = Localizations/nl.lproj; sourceTree = "<group>"; };
-		AEEA37896A789A8E4BB18245 /* ko.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ko.lproj; path = Localizations/ko.lproj; sourceTree = "<group>"; };
-		AF59B249C5B86CA80273C874 /* ca.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ca.lproj; path = Localizations/ca.lproj; sourceTree = "<group>"; };
-		B13273E1A802BCE090D5C163 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
-		B4DA8B0C1A658934B6218419 /* da.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = da.lproj; path = Localizations/da.lproj; sourceTree = "<group>"; };
-		B4E83A5474E68691736F83AF /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
-		B4FFD1DFB25911DA96F6A433 /* TTTOrdinalNumberFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTOrdinalNumberFormatter.m; path = FormatterKit/TTTOrdinalNumberFormatter.m; sourceTree = "<group>"; };
-		B5645CDE0996CFD01DB3301A /* Pods-Drop It!-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Drop It!-acknowledgements.markdown"; sourceTree = "<group>"; };
-		B8654B5F7A3944B0DAC7D24E /* TTTTimeIntervalFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTTimeIntervalFormatter.m; path = FormatterKit/TTTTimeIntervalFormatter.m; sourceTree = "<group>"; };
-		B98026023DE5F423DDB47427 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "CCMPopup/UIImage+ImageEffects/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		BD432FDFFB5C2484FBC6FB51 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AddressBookUI.framework; sourceTree = DEVELOPER_DIR; };
-		BFD74F1BBFDA1476CC4DB23F /* CCMCustomAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CCMCustomAnimation.m; path = CCMPopup/CCMCustomAnimation.m; sourceTree = "<group>"; };
-		C8C1B1AB5DE75C1C463640A4 /* Montserrat.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Montserrat.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		CA23615752C65D81778CF557 /* CCMPopupAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CCMPopupAnimation.m; path = CCMPopup/CCMPopupAnimation.m; sourceTree = "<group>"; };
-		CA99D2B7E2166A21A4522A43 /* TTTOrdinalNumberFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTOrdinalNumberFormatter.h; path = FormatterKit/TTTOrdinalNumberFormatter.h; sourceTree = "<group>"; };
-		CC6C19EAD870E8D4150004B1 /* uk.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = uk.lproj; path = Localizations/uk.lproj; sourceTree = "<group>"; };
-		D1227F899A4F02A43C33F213 /* Pods-Drop It!-DZNEmptyDataSet-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-DZNEmptyDataSet-prefix.pch"; sourceTree = "<group>"; };
-		D2FDA136C491B41FF7722EA8 /* pt.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = pt.lproj; path = Localizations/pt.lproj; sourceTree = "<group>"; };
-		D6373B4CB5AEC0F49C232507 /* libPods-Drop It!-DZNEmptyDataSet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!-DZNEmptyDataSet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6F82735B13F74B7E803EB96 /* Pods-Drop It!-CCMPopup-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-CCMPopup-Private.xcconfig"; sourceTree = "<group>"; };
-		D92897CA71149694488CC8F6 /* el.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = el.lproj; path = Localizations/el.lproj; sourceTree = "<group>"; };
-		DC21682F5059129DE2DECE9E /* Pods-Drop It!.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!.debug.xcconfig"; sourceTree = "<group>"; };
-		E0C8A3E812E838E08A100748 /* UIImage+screenshot.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+screenshot.h"; path = "CCMPopup/UIImage+screenshot/UIImage+screenshot.h"; sourceTree = "<group>"; };
-		E124B6D7D412282C5C2CD4C7 /* cs.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = cs.lproj; path = Localizations/cs.lproj; sourceTree = "<group>"; };
-		E18B4A5DCC691B80A8349C0E /* TTTNameFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTNameFormatter.m; path = FormatterKit/TTTNameFormatter.m; sourceTree = "<group>"; };
-		E36CD4A252539C0D4407D78A /* TTTUnitOfInformationFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTUnitOfInformationFormatter.m; path = FormatterKit/TTTUnitOfInformationFormatter.m; sourceTree = "<group>"; };
-		E53B3A4E420F8056D6811B24 /* Pods-Drop It!-Montserrat.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-Montserrat.xcconfig"; sourceTree = "<group>"; };
-		E8C655AD170A92452CE95D59 /* TTTArrayFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTArrayFormatter.h; path = FormatterKit/TTTArrayFormatter.h; sourceTree = "<group>"; };
-		EDEE25FE53228DE07BA65EA3 /* UIViewController+CCMPopupAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+CCMPopupAnimation.m"; path = "CCMPopup/UIViewController+CCMPopupAnimation.m"; sourceTree = "<group>"; };
-		F208AF15434822DBC0281F12 /* zh-Hant.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = "zh-Hant.lproj"; path = "Localizations/zh-Hant.lproj"; sourceTree = "<group>"; };
-		F81B7A41BE2C1B8818EF5890 /* fr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = fr.lproj; path = Localizations/fr.lproj; sourceTree = "<group>"; };
-		FD6CE3BE241FE4FCFE84220F /* Pods-Drop It!-FormatterKit-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-FormatterKit-Private.xcconfig"; sourceTree = "<group>"; };
+		009528B57C71DA31308DD981 /* CCMPopupSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CCMPopupSegue.m; path = CCMPopup/CCMPopupSegue.m; sourceTree = "<group>"; };
+		00998EC43BC01B15D7FC3FEE /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "Fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		083F61C72A7C41E84BA8E18C /* pl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = pl.lproj; path = Localizations/pl.lproj; sourceTree = "<group>"; };
+		0866C799A81E7818E1824A3F /* Pods-Drop It!-JDFTooltips-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-JDFTooltips-prefix.pch"; sourceTree = "<group>"; };
+		0B9FB8A41EF52FAB6E7461E2 /* UIFont+Montserrat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Montserrat.m"; sourceTree = "<group>"; };
+		0CFDB26D09A80A00F7EAD6E5 /* JDFSequentialTooltipManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JDFSequentialTooltipManager.m; path = Pod/Classes/JDFSequentialTooltipManager.m; sourceTree = "<group>"; };
+		14661B7AB387BE09B2D82533 /* Pods-Drop It!-DZNEmptyDataSet-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-DZNEmptyDataSet-dummy.m"; sourceTree = "<group>"; };
+		1506D4353590BA97F87676EB /* TTTURLRequestFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTURLRequestFormatter.h; path = FormatterKit/TTTURLRequestFormatter.h; sourceTree = "<group>"; };
+		15203D659DD74F79E0F0EA30 /* Pods-Drop It!-JDFTooltips-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-JDFTooltips-Private.xcconfig"; sourceTree = "<group>"; };
+		174F85A53800E20B303EFDD0 /* JDFTooltips.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JDFTooltips.h; path = Pod/Classes/JDFTooltips.h; sourceTree = "<group>"; };
+		182B0F0812598882E8349CD0 /* nb.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = nb.lproj; path = Localizations/nb.lproj; sourceTree = "<group>"; };
+		1DAFE46D533D56876BDA419C /* Pods-Drop It!.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!.release.xcconfig"; sourceTree = "<group>"; };
+		201AB9D842E6B3EC29BF4963 /* cs.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = cs.lproj; path = Localizations/cs.lproj; sourceTree = "<group>"; };
+		2089EC17035B0842904BF85A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "CCMPopup/UIImage+ImageEffects/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		22BA86B7B76813713BF22A2D /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EmptyDataSet.h"; path = "Source/UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
+		24F19E0AC01A2115AA550248 /* Pods-Drop It!-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-environment.h"; sourceTree = "<group>"; };
+		26AE1D2E792D75C85C130A41 /* ru.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ru.lproj; path = Localizations/ru.lproj; sourceTree = "<group>"; };
+		270AC0EA332A68AD199E0983 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AddressBook.framework; sourceTree = DEVELOPER_DIR; };
+		272E89411AC044BF001EB34E /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
+		272E89421AC044BF001EB34E /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
+		2915723A5F00C2856AD10223 /* Pods-Drop It!-Montserrat-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-Montserrat-dummy.m"; sourceTree = "<group>"; };
+		2A3C636B570460E878A7B28C /* UIImage+screenshot.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+screenshot.h"; path = "CCMPopup/UIImage+screenshot/UIImage+screenshot.h"; sourceTree = "<group>"; };
+		2C3527E571F766086B1D0DD8 /* Pods-Drop It!-JDFTooltips.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-JDFTooltips.xcconfig"; sourceTree = "<group>"; };
+		2C641813444E7DBCE5623D2F /* libPods-Drop It!-Montserrat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!-Montserrat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D0AA143BE8F2BB55E2C8F95 /* Pods-Drop It!-CCMPopup-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-CCMPopup-prefix.pch"; sourceTree = "<group>"; };
+		2D86B2A655C272D48C4C2F9C /* de.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = de.lproj; path = Localizations/de.lproj; sourceTree = "<group>"; };
+		2DE0F1B15DF366E9EC26198F /* Pods-Drop It!-JDFTooltips-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-JDFTooltips-dummy.m"; sourceTree = "<group>"; };
+		2F882CD6775FEBF571D88C11 /* UIViewController+CCMPopupAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+CCMPopupAnimation.h"; path = "CCMPopup/UIViewController+CCMPopupAnimation.h"; sourceTree = "<group>"; };
+		30799F8E91CF7C1941EB1558 /* Pods-Drop It!-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Drop It!-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3274B702010837F20C9AE361 /* UILabel+JDFTooltips.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UILabel+JDFTooltips.h"; path = "Pod/Classes/UILabel+JDFTooltips.h"; sourceTree = "<group>"; };
+		35B98B465D53A9B54920DAF9 /* TTTLocationFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTLocationFormatter.h; path = FormatterKit/TTTLocationFormatter.h; sourceTree = "<group>"; };
+		37FF95A68B7855A9CA67EEB9 /* uk.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = uk.lproj; path = Localizations/uk.lproj; sourceTree = "<group>"; };
+		389F5BA1526E2161EA7F28A0 /* CCMPopupTransitioning.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CCMPopupTransitioning.h; path = CCMPopup/CCMPopupTransitioning.h; sourceTree = "<group>"; };
+		3CF3DF134A272A8E2D69A9C9 /* Pods-Drop It!-CCMPopup-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-CCMPopup-dummy.m"; sourceTree = "<group>"; };
+		3CF7A4A5123B2EA19643FADB /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EmptyDataSet.m"; path = "Source/UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
+		3E0BA0917C17E6A6D49E8282 /* Pods-Drop It!-FormatterKit-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-FormatterKit-Private.xcconfig"; sourceTree = "<group>"; };
+		42FC349BD60ACE729BA4139C /* libPods-Drop It!-JDFTooltips.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!-JDFTooltips.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		43D7980B27B8B503BD1D4175 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
+		476E0A1FABC99F75E13A0C39 /* CCMCustomAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CCMCustomAnimation.h; path = CCMPopup/CCMCustomAnimation.h; sourceTree = "<group>"; };
+		5032A86B8B388BE43D596DA0 /* Montserrat.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Montserrat.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		50716552F2CE73D7A3383F0B /* UILabel+JDFTooltips.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UILabel+JDFTooltips.m"; path = "Pod/Classes/UILabel+JDFTooltips.m"; sourceTree = "<group>"; };
+		50AD1B5F4BCE62F769F171C3 /* Pods-Drop It!-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Drop It!-acknowledgements.plist"; sourceTree = "<group>"; };
+		525B62D968B700F7E9D5363B /* CCMPopupAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CCMPopupAnimation.m; path = CCMPopup/CCMPopupAnimation.m; sourceTree = "<group>"; };
+		570910E0BA37F9456496599B /* TTTUnitOfInformationFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTUnitOfInformationFormatter.m; path = FormatterKit/TTTUnitOfInformationFormatter.m; sourceTree = "<group>"; };
+		58E934E89F7ADD71F94E96A8 /* JDFSequentialTooltipManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JDFSequentialTooltipManager.h; path = Pod/Classes/JDFSequentialTooltipManager.h; sourceTree = "<group>"; };
+		5D73AF70940A9D7087294042 /* TTTOrdinalNumberFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTOrdinalNumberFormatter.m; path = FormatterKit/TTTOrdinalNumberFormatter.m; sourceTree = "<group>"; };
+		5F5C0CB7A1264CD48B3D1AD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		60C7900A2B2DACEFBDDE9767 /* Pods-Drop It!-DZNEmptyDataSet-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-DZNEmptyDataSet-prefix.pch"; sourceTree = "<group>"; };
+		6256544950B586721A202E3D /* JDFTooltipManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JDFTooltipManager.m; path = Pod/Classes/JDFTooltipManager.m; sourceTree = "<group>"; };
+		65766900BCB5449EDB5C88BF /* TTTOrdinalNumberFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTOrdinalNumberFormatter.h; path = FormatterKit/TTTOrdinalNumberFormatter.h; sourceTree = "<group>"; };
+		682C3C138820C09BFB8995BF /* libPods-Drop It!.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A67CA14EBC7BC6488216824 /* Pods-Drop It!-FormatterKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-FormatterKit-dummy.m"; sourceTree = "<group>"; };
+		6BF99257F100F6EAA9A6945A /* Pods-Drop It!-CCMPopup-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-CCMPopup-Private.xcconfig"; sourceTree = "<group>"; };
+		6C70D3D03A14FE9A629D5B25 /* CCMPopupSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CCMPopupSegue.h; path = CCMPopup/CCMPopupSegue.h; sourceTree = "<group>"; };
+		72E348A01B27377FB0CC482C /* Pods-Drop It!-Montserrat-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-Montserrat-prefix.pch"; sourceTree = "<group>"; };
+		75A618BB2CBFF355C1C14B6B /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "Fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		76107E530CED8778C216312C /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AddressBookUI.framework; sourceTree = DEVELOPER_DIR; };
+		78A0C17AE5E4C4FEF76DB7BA /* CCMCustomAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CCMCustomAnimation.m; path = CCMPopup/CCMCustomAnimation.m; sourceTree = "<group>"; };
+		7E382AB4299B4A3C147C71BF /* JDFTooltipView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JDFTooltipView.m; path = Pod/Classes/JDFTooltipView.m; sourceTree = "<group>"; };
+		804886FC46D1E77C0B77A835 /* TTTLocationFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTLocationFormatter.m; path = FormatterKit/TTTLocationFormatter.m; sourceTree = "<group>"; };
+		83E435C97C97039D1F28D693 /* TTTTimeIntervalFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTTimeIntervalFormatter.m; path = FormatterKit/TTTTimeIntervalFormatter.m; sourceTree = "<group>"; };
+		865433AEA5EB75BCD7AA768F /* Pods-Drop It!.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!.debug.xcconfig"; sourceTree = "<group>"; };
+		867C1D675D4A96781703D314 /* nn.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = nn.lproj; path = Localizations/nn.lproj; sourceTree = "<group>"; };
+		8C79589FB1FCF50CE8E6F7FF /* nl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = nl.lproj; path = Localizations/nl.lproj; sourceTree = "<group>"; };
+		90465480F9A44967C79C6069 /* Pods-Drop It!-Montserrat.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-Montserrat.xcconfig"; sourceTree = "<group>"; };
+		914C5626EC0D0CA16F23D64D /* TTTNameFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTNameFormatter.m; path = FormatterKit/TTTNameFormatter.m; sourceTree = "<group>"; };
+		933D19A563FF369DE1A06622 /* TTTArrayFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTArrayFormatter.h; path = FormatterKit/TTTArrayFormatter.h; sourceTree = "<group>"; };
+		967CD128C8C6A28B53A245A9 /* Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig"; sourceTree = "<group>"; };
+		9D510F32E88DC29AB60FA0CD /* TTTTimeIntervalFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTTimeIntervalFormatter.h; path = FormatterKit/TTTTimeIntervalFormatter.h; sourceTree = "<group>"; };
+		9FA7C4DE0189D14C9AA3B5FB /* Pods-Drop It!-FormatterKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Drop It!-FormatterKit-prefix.pch"; sourceTree = "<group>"; };
+		A62F55D006AE30FD3E56F3C7 /* pt_BR.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = pt_BR.lproj; path = Localizations/pt_BR.lproj; sourceTree = "<group>"; };
+		A85E308A92BEA1639F7B11AB /* UIViewController+CCMPopupAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+CCMPopupAnimation.m"; path = "CCMPopup/UIViewController+CCMPopupAnimation.m"; sourceTree = "<group>"; };
+		A9F3A8E31AB51AA0FB9EB278 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "CCMPopup/UIImage+ImageEffects/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		AB969B5FB5F957D69E6FC164 /* JDFTooltipView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JDFTooltipView.h; path = Pod/Classes/JDFTooltipView.h; sourceTree = "<group>"; };
+		AD7CF6781CC5C96973DB18E1 /* Pods-Drop It!-Montserrat-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-Montserrat-Private.xcconfig"; sourceTree = "<group>"; };
+		AE6DD5DDAFF7B419F4EB0A84 /* Pods-Drop It!-FormatterKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-FormatterKit.xcconfig"; sourceTree = "<group>"; };
+		AFFFAAF8DF879C157D243BE3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
+		B15F19335E973BB96F421376 /* JDFTooltipManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JDFTooltipManager.h; path = Pod/Classes/JDFTooltipManager.h; sourceTree = "<group>"; };
+		B25213CEEEB4CA87B7280C53 /* el.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = el.lproj; path = Localizations/el.lproj; sourceTree = "<group>"; };
+		B5838EA0426D2846966F4FE4 /* libPods-Drop It!-FormatterKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!-FormatterKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6700B4A9C0DE72EB0FCF8D6 /* tr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = tr.lproj; path = Localizations/tr.lproj; sourceTree = "<group>"; };
+		B77E0F2E1714F10DA9076FC6 /* vi.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = vi.lproj; path = Localizations/vi.lproj; sourceTree = "<group>"; };
+		B9EBD857D9E3E952BD7A9127 /* TTTAddressFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTAddressFormatter.h; path = FormatterKit/TTTAddressFormatter.h; sourceTree = "<group>"; };
+		BA1EF366CA241B349105FEB7 /* UIFont+Montserrat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIFont+Montserrat.h"; sourceTree = "<group>"; };
+		BCB015196F7F51EDA644137E /* da.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = da.lproj; path = Localizations/da.lproj; sourceTree = "<group>"; };
+		BDADB76D1BC2222DA072A349 /* CCMPopupAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CCMPopupAnimation.h; path = CCMPopup/CCMPopupAnimation.h; sourceTree = "<group>"; };
+		BEBA9BF3C0397E26A7D105F1 /* TTTColorFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTColorFormatter.m; path = FormatterKit/TTTColorFormatter.m; sourceTree = "<group>"; };
+		C1F29531082D97738B92CAA2 /* libPods-Drop It!-DZNEmptyDataSet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!-DZNEmptyDataSet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6B74354654C9E37F7DFA68C /* TTTArrayFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTArrayFormatter.m; path = FormatterKit/TTTArrayFormatter.m; sourceTree = "<group>"; };
+		CD4279A1E03D1B7847D4EB98 /* Pods-Drop It!-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Drop It!-resources.sh"; sourceTree = "<group>"; };
+		CDA540B5CE1636DD2D5C84F5 /* ja.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ja.lproj; path = Localizations/ja.lproj; sourceTree = "<group>"; };
+		D07257779D1C9639D5E64AD8 /* UIView+JDFTooltips.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+JDFTooltips.m"; path = "Pod/Classes/UIView+JDFTooltips.m"; sourceTree = "<group>"; };
+		D2A13A9C6E7D1F7C6C6AE800 /* zh-Hans.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = "zh-Hans.lproj"; path = "Localizations/zh-Hans.lproj"; sourceTree = "<group>"; };
+		D43F3E63BFC9C3A497FDA457 /* pt.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = pt.lproj; path = Localizations/pt.lproj; sourceTree = "<group>"; };
+		D728486B340717034312A08C /* es.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = es.lproj; path = Localizations/es.lproj; sourceTree = "<group>"; };
+		D8A2EECA01D9FA6425DE1CCD /* ko.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ko.lproj; path = Localizations/ko.lproj; sourceTree = "<group>"; };
+		DA35219548DAD5D61C89258A /* TTTColorFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTColorFormatter.h; path = FormatterKit/TTTColorFormatter.h; sourceTree = "<group>"; };
+		DB5A516102A091B09D7C37B0 /* UIImage+screenshot.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+screenshot.m"; path = "CCMPopup/UIImage+screenshot/UIImage+screenshot.m"; sourceTree = "<group>"; };
+		DDA386621E93A2C0E67C487E /* Pods-Drop It!-DZNEmptyDataSet.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-DZNEmptyDataSet.xcconfig"; sourceTree = "<group>"; };
+		DDB81992CC7A415AE2942CE1 /* sv.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = sv.lproj; path = Localizations/sv.lproj; sourceTree = "<group>"; };
+		DE00AF3A18D0DC3B5B267A6C /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E316A80620BF506941076475 /* ca.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ca.lproj; path = Localizations/ca.lproj; sourceTree = "<group>"; };
+		E39E117700BBDC105CAFA30F /* fr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = fr.lproj; path = Localizations/fr.lproj; sourceTree = "<group>"; };
+		E484F91FEE1EF4D730E7271D /* TTTNameFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTNameFormatter.h; path = FormatterKit/TTTNameFormatter.h; sourceTree = "<group>"; };
+		E555A341922C42110D7C1A82 /* it.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = it.lproj; path = Localizations/it.lproj; sourceTree = "<group>"; };
+		E563D971861366D6F33C9A42 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		E8DFB9EADB274C563B64E908 /* Pods-Drop It!-CCMPopup.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Drop It!-CCMPopup.xcconfig"; sourceTree = "<group>"; };
+		EA81906B7C080AAAD0A3DDB8 /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = en.lproj; path = Localizations/en.lproj; sourceTree = "<group>"; };
+		EB3FF735A52D2B598C6B5B26 /* TTTURLRequestFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTURLRequestFormatter.m; path = FormatterKit/TTTURLRequestFormatter.m; sourceTree = "<group>"; };
+		EC7D42595FD6478695A027E0 /* id.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = id.lproj; path = Localizations/id.lproj; sourceTree = "<group>"; };
+		EDF82391415A0BC0625BD832 /* UIView+JDFTooltips.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+JDFTooltips.h"; path = "Pod/Classes/UIView+JDFTooltips.h"; sourceTree = "<group>"; };
+		F2E7F09D283293DE8CEB3E75 /* TTTAddressFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTTAddressFormatter.m; path = FormatterKit/TTTAddressFormatter.m; sourceTree = "<group>"; };
+		F4F8ED6C63DB4BB4BED21747 /* libPods-Drop It!-CCMPopup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Drop It!-CCMPopup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA48F14799700D34EA53C4FA /* TTTUnitOfInformationFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTTUnitOfInformationFormatter.h; path = FormatterKit/TTTUnitOfInformationFormatter.h; sourceTree = "<group>"; };
+		FCC9B20FFFB702B436B3C770 /* CCMPopupTransitioning.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CCMPopupTransitioning.m; path = CCMPopup/CCMPopupTransitioning.m; sourceTree = "<group>"; };
+		FD29529216D767F8CBA40ED2 /* Pods-Drop It!-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Drop It!-dummy.m"; sourceTree = "<group>"; };
+		FFD1A43E79118C69E867E858 /* zh-Hant.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = "zh-Hant.lproj"; path = "Localizations/zh-Hant.lproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0381704FEB23228529C05F0A /* Frameworks */ = {
+		01609E57F376A7FF623FC9F6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				443DD9E0C793D1FB219146A1 /* Foundation.framework in Frameworks */,
+				CC5A8577FB94A53E6EE77B7E /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1309DEB0048D9A69EBC499B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A21EFE6092E5F0141624F6F9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		178EEBFBAC64795534A942BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5068E1957FE898B6A0EF99C /* AddressBook.framework in Frameworks */,
+				A6985683116181E0C90F8956 /* AddressBookUI.framework in Frameworks */,
+				49FE54C0172087C8AF05C9CC /* CoreLocation.framework in Frameworks */,
+				3CB6F9B299D54CFC1642631B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		512E3E1F962F3D9B089A1595 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0DDA98F3142F77D43220125E /* Frameworks */ = {
+		81F0CFD66063F60418D371DE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5D3171FF437C9C4449C69ED /* Foundation.framework in Frameworks */,
-				1301BE801EDAD6A114C1A049 /* UIKit.framework in Frameworks */,
+				9A7E5DF1D142F6408B68DCC1 /* Foundation.framework in Frameworks */,
+				EF0BDF38B29B229DEDBD581D /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		445BD5339C26B90919D5F03D /* Frameworks */ = {
+		846191A033D5E85C01D49B35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				902698C9CCD9FCF7C7D3F60F /* Foundation.framework in Frameworks */,
+				DAC470997A42F46CC19FB1A6 /* CoreText.framework in Frameworks */,
+				258913AA1667A9542162244A /* Foundation.framework in Frameworks */,
+				22F1F389B4667D181740D0CC /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6E148A0102A7ACA079499218 /* Frameworks */ = {
+		BD02BAE90C8E883C2AE5379B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90EE5378E6F799871DA315B8 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		777820ADE6AE6732F0D95990 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				44E13BAF5FBC7DBCCC40B1AD /* AddressBook.framework in Frameworks */,
-				A8204086FE36680ECCE389EC /* AddressBookUI.framework in Frameworks */,
-				F089E736C0D3327115D5326F /* CoreLocation.framework in Frameworks */,
-				E7BED4EC12065F50BAFF92EA /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E990E8B3AD8B63951D8BCD61 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FCC579DBF7CDE41EF66347B4 /* CoreText.framework in Frameworks */,
-				408DE51C4FA3158935422453 /* Foundation.framework in Frameworks */,
-				8286B395C710EA19939EB4E1 /* UIKit.framework in Frameworks */,
+				45DD2BEC1B81739AF5E5763D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		016FA80D34CF62441EC049F2 /* iOS */ = {
+		0113E8CFC6CFB8A717A3FEDC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3EEFEF719A7CD408E75099DB /* AddressBook.framework */,
-				BD432FDFFB5C2484FBC6FB51 /* AddressBookUI.framework */,
-				B13273E1A802BCE090D5C163 /* CoreLocation.framework */,
-				B4E83A5474E68691736F83AF /* CoreText.framework */,
-				64D17E2794AA8D7AE898D3DE /* Foundation.framework */,
-				83C6E645DBFC97117A231700 /* UIKit.framework */,
+				00998EC43BC01B15D7FC3FEE /* Montserrat-Bold.ttf */,
+				75A618BB2CBFF355C1C14B6B /* Montserrat-Regular.ttf */,
 			);
-			name = iOS;
+			name = Resources;
 			sourceTree = "<group>";
 		};
-		02D58655CB0D034DBA899B7D /* Resources */ = {
+		02DE921710F994C9E0965ABF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		08955C41AA8CC05D62A630B7 /* Montserrat */ = {
+		13A25720643706C0D2AE62FD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				52B1D1A5FC4A9A93FC698B8A /* UIFont+Montserrat.h */,
-				43701D6CA370EEA8EA69B273 /* UIFont+Montserrat.m */,
-				AE17107BF464C6DDDDFC303E /* Resources */,
-				143B33ED2BA0FDB45D595419 /* Support Files */,
 			);
-			path = Montserrat;
+			name = Resources;
 			sourceTree = "<group>";
 		};
-		0FF859242507155A76CD482B /* OrdinalNumberFormatter */ = {
+		14F558971415C25870FC1B50 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				CA99D2B7E2166A21A4522A43 /* TTTOrdinalNumberFormatter.h */,
-				B4FFD1DFB25911DA96F6A433 /* TTTOrdinalNumberFormatter.m */,
-				75D8815310D76B003A4F133E /* Resources */,
+				2C3527E571F766086B1D0DD8 /* Pods-Drop It!-JDFTooltips.xcconfig */,
+				15203D659DD74F79E0F0EA30 /* Pods-Drop It!-JDFTooltips-Private.xcconfig */,
+				2DE0F1B15DF366E9EC26198F /* Pods-Drop It!-JDFTooltips-dummy.m */,
+				0866C799A81E7818E1824A3F /* Pods-Drop It!-JDFTooltips-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-Drop It!-JDFTooltips";
+			sourceTree = "<group>";
+		};
+		19DC81B9E8399BB3248D3F6B /* CCMPopup */ = {
+			isa = PBXGroup;
+			children = (
+				272E89411AC044BF001EB34E /* FXBlurView.h */,
+				272E89421AC044BF001EB34E /* FXBlurView.m */,
+				476E0A1FABC99F75E13A0C39 /* CCMCustomAnimation.h */,
+				78A0C17AE5E4C4FEF76DB7BA /* CCMCustomAnimation.m */,
+				BDADB76D1BC2222DA072A349 /* CCMPopupAnimation.h */,
+				525B62D968B700F7E9D5363B /* CCMPopupAnimation.m */,
+				6C70D3D03A14FE9A629D5B25 /* CCMPopupSegue.h */,
+				009528B57C71DA31308DD981 /* CCMPopupSegue.m */,
+				389F5BA1526E2161EA7F28A0 /* CCMPopupTransitioning.h */,
+				FCC9B20FFFB702B436B3C770 /* CCMPopupTransitioning.m */,
+				A9F3A8E31AB51AA0FB9EB278 /* UIImage+ImageEffects.h */,
+				2089EC17035B0842904BF85A /* UIImage+ImageEffects.m */,
+				2A3C636B570460E878A7B28C /* UIImage+screenshot.h */,
+				DB5A516102A091B09D7C37B0 /* UIImage+screenshot.m */,
+				2F882CD6775FEBF571D88C11 /* UIViewController+CCMPopupAnimation.h */,
+				A85E308A92BEA1639F7B11AB /* UIViewController+CCMPopupAnimation.m */,
+				32B29A6B6BC70E45B8CB24FB /* Support Files */,
+			);
+			path = CCMPopup;
+			sourceTree = "<group>";
+		};
+		234D35692CDD0B42420A2AC6 /* TimeIntervalFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				9D510F32E88DC29AB60FA0CD /* TTTTimeIntervalFormatter.h */,
+				83E435C97C97039D1F28D693 /* TTTTimeIntervalFormatter.m */,
+				BBB5D9D489B96FE579372990 /* Resources */,
+			);
+			name = TimeIntervalFormatter;
+			sourceTree = "<group>";
+		};
+		263DFF01A89439535296B26E /* URLRequestFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				1506D4353590BA97F87676EB /* TTTURLRequestFormatter.h */,
+				EB3FF735A52D2B598C6B5B26 /* TTTURLRequestFormatter.m */,
+				AAFA5377D9A4D100C6EE39E0 /* Resources */,
+			);
+			name = URLRequestFormatter;
+			sourceTree = "<group>";
+		};
+		3147729DE2213192F675ADA9 /* OrdinalNumberFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				65766900BCB5449EDB5C88BF /* TTTOrdinalNumberFormatter.h */,
+				5D73AF70940A9D7087294042 /* TTTOrdinalNumberFormatter.m */,
+				B0BBD3453E38A9A90955C363 /* Resources */,
 			);
 			name = OrdinalNumberFormatter;
 			sourceTree = "<group>";
 		};
-		123210E6DAD0C5E69D3D0AF4 /* Resources */ = {
+		317F4BAF35D4DAAC2E5DD41B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				704A1BC2BB41E1F9E6818DD6 /* iOS */,
 			);
-			name = Resources;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		143B33ED2BA0FDB45D595419 /* Support Files */ = {
+		32B29A6B6BC70E45B8CB24FB /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				E53B3A4E420F8056D6811B24 /* Pods-Drop It!-Montserrat.xcconfig */,
-				92B70696E3409B946A6B9750 /* Pods-Drop It!-Montserrat-Private.xcconfig */,
-				3C1F0C502FAAE4EE5325B098 /* Pods-Drop It!-Montserrat-dummy.m */,
-				1FFD0CF477DB3AEBCD2AF4D8 /* Pods-Drop It!-Montserrat-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Pods-Drop It!-Montserrat";
-			sourceTree = "<group>";
-		};
-		205F6DFC6085937D10C0F1BC /* ArrayFormatter */ = {
-			isa = PBXGroup;
-			children = (
-				E8C655AD170A92452CE95D59 /* TTTArrayFormatter.h */,
-				5820E0774ECA7303F3A68322 /* TTTArrayFormatter.m */,
-				BF9FE9F64A9A47424E969014 /* Resources */,
-			);
-			name = ArrayFormatter;
-			sourceTree = "<group>";
-		};
-		3234961E906E6E9ADB954425 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				9CE541E3FCC7FBED46E6577E /* Pods-Drop It!-CCMPopup.xcconfig */,
-				D6F82735B13F74B7E803EB96 /* Pods-Drop It!-CCMPopup-Private.xcconfig */,
-				6231C4975C9168A8BDF10DA2 /* Pods-Drop It!-CCMPopup-dummy.m */,
-				1711A7AB619A056A9246AD29 /* Pods-Drop It!-CCMPopup-prefix.pch */,
+				E8DFB9EADB274C563B64E908 /* Pods-Drop It!-CCMPopup.xcconfig */,
+				6BF99257F100F6EAA9A6945A /* Pods-Drop It!-CCMPopup-Private.xcconfig */,
+				3CF3DF134A272A8E2D69A9C9 /* Pods-Drop It!-CCMPopup-dummy.m */,
+				2D0AA143BE8F2BB55E2C8F95 /* Pods-Drop It!-CCMPopup-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Pods-Drop It!-CCMPopup";
 			sourceTree = "<group>";
 		};
-		34105367703A270BB935A5F2 /* Support Files */ = {
+		3608BDC1D67CF68547FDB282 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0BBFDB09D70568921764105E /* Pods-Drop It!-FormatterKit.xcconfig */,
-				FD6CE3BE241FE4FCFE84220F /* Pods-Drop It!-FormatterKit-Private.xcconfig */,
-				1591E5593CD2D03DB8E55969 /* Pods-Drop It!-FormatterKit-dummy.m */,
-				533FE3C09B1CF4EA8D554E57 /* Pods-Drop It!-FormatterKit-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Pods-Drop It!-FormatterKit";
-			sourceTree = "<group>";
-		};
-		3634BBAB2B016B6F25E0C7BF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		442C615CFF290D7581502E08 /* ColorFormatter */ = {
-			isa = PBXGroup;
-			children = (
-				A1CFB6016344D50A74586C20 /* TTTColorFormatter.h */,
-				5ED9959FA233544081CA7EC5 /* TTTColorFormatter.m */,
-				BC8D4B0FA90E0FE6EA61EC0C /* Resources */,
-			);
-			name = ColorFormatter;
-			sourceTree = "<group>";
-		};
-		4D4EE2F65B5F4407760BC474 /* LocationFormatter */ = {
-			isa = PBXGroup;
-			children = (
-				07F0B9FDA7EE247DE6C57469 /* TTTLocationFormatter.h */,
-				644101712C9AEBA2BE125144 /* TTTLocationFormatter.m */,
-				83CF71CCE167FF125F4B89B9 /* Resources */,
-			);
-			name = LocationFormatter;
-			sourceTree = "<group>";
-		};
-		61F2A4DD2A2A17B1DFA7BBC0 /* UnitOfInformationFormatter */ = {
-			isa = PBXGroup;
-			children = (
-				56E65B2507C4E2D82148D517 /* TTTUnitOfInformationFormatter.h */,
-				E36CD4A252539C0D4407D78A /* TTTUnitOfInformationFormatter.m */,
-				3634BBAB2B016B6F25E0C7BF /* Resources */,
-			);
-			name = UnitOfInformationFormatter;
-			sourceTree = "<group>";
-		};
-		6D93B48F3433DE944EFC98B8 /* TimeIntervalFormatter */ = {
-			isa = PBXGroup;
-			children = (
-				5E9878776E2F716D51200138 /* TTTTimeIntervalFormatter.h */,
-				B8654B5F7A3944B0DAC7D24E /* TTTTimeIntervalFormatter.m */,
-				D469E98BA1668A9C47FBA210 /* Resources */,
-			);
-			name = TimeIntervalFormatter;
-			sourceTree = "<group>";
-		};
-		75D8815310D76B003A4F133E /* Resources */ = {
-			isa = PBXGroup;
-			children = (
+				E316A80620BF506941076475 /* ca.lproj */,
+				201AB9D842E6B3EC29BF4963 /* cs.lproj */,
+				BCB015196F7F51EDA644137E /* da.lproj */,
+				2D86B2A655C272D48C4C2F9C /* de.lproj */,
+				B25213CEEEB4CA87B7280C53 /* el.lproj */,
+				EA81906B7C080AAAD0A3DDB8 /* en.lproj */,
+				D728486B340717034312A08C /* es.lproj */,
+				E39E117700BBDC105CAFA30F /* fr.lproj */,
+				EC7D42595FD6478695A027E0 /* id.lproj */,
+				E555A341922C42110D7C1A82 /* it.lproj */,
+				CDA540B5CE1636DD2D5C84F5 /* ja.lproj */,
+				D8A2EECA01D9FA6425DE1CCD /* ko.lproj */,
+				182B0F0812598882E8349CD0 /* nb.lproj */,
+				8C79589FB1FCF50CE8E6F7FF /* nl.lproj */,
+				867C1D675D4A96781703D314 /* nn.lproj */,
+				083F61C72A7C41E84BA8E18C /* pl.lproj */,
+				D43F3E63BFC9C3A497FDA457 /* pt.lproj */,
+				A62F55D006AE30FD3E56F3C7 /* pt_BR.lproj */,
+				26AE1D2E792D75C85C130A41 /* ru.lproj */,
+				DDB81992CC7A415AE2942CE1 /* sv.lproj */,
+				B6700B4A9C0DE72EB0FCF8D6 /* tr.lproj */,
+				37FF95A68B7855A9CA67EEB9 /* uk.lproj */,
+				B77E0F2E1714F10DA9076FC6 /* vi.lproj */,
+				D2A13A9C6E7D1F7C6C6AE800 /* zh-Hans.lproj */,
+				FFD1A43E79118C69E867E858 /* zh-Hant.lproj */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		80CBDFC8658F349BD46005FA /* Pods */ = {
+		36A624168924029015B30B70 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E54B2B123CA7CE871757D494 /* CCMPopup */,
-				AA9D41DB4A6AF228F959BE38 /* DZNEmptyDataSet */,
-				8F1705D0B0816B3ABC71C682 /* FormatterKit */,
-				08955C41AA8CC05D62A630B7 /* Montserrat */,
+				19DC81B9E8399BB3248D3F6B /* CCMPopup */,
+				D556E3A29E7DE8C210ABA953 /* DZNEmptyDataSet */,
+				F905567F7121D76D78ECF9A1 /* FormatterKit */,
+				77CEA313C84EABD082F0F92A /* JDFTooltips */,
+				8D7951DE98FC160F0B9CD212 /* Montserrat */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		81B1F296C2AF99B89B6818CA /* Resources */ = {
+		3C16DB1B514E85366DBC597E /* Pods-Drop It! */ = {
 			isa = PBXGroup;
 			children = (
-				AF59B249C5B86CA80273C874 /* ca.lproj */,
-				E124B6D7D412282C5C2CD4C7 /* cs.lproj */,
-				B4DA8B0C1A658934B6218419 /* da.lproj */,
-				8C75536C74BF14EB16B5B31A /* de.lproj */,
-				D92897CA71149694488CC8F6 /* el.lproj */,
-				4DCE6EF7D774C1CF4DA69B54 /* en.lproj */,
-				8CE37C9D8804BCDD580823ED /* es.lproj */,
-				F81B7A41BE2C1B8818EF5890 /* fr.lproj */,
-				0BEC240196F873E99B91E05A /* id.lproj */,
-				A7FA57417209664244583AD3 /* it.lproj */,
-				138BE9A864200AB23E34D04A /* ja.lproj */,
-				AEEA37896A789A8E4BB18245 /* ko.lproj */,
-				3821DDA9C8EFE483C16BB1F2 /* nb.lproj */,
-				AE91B257789640F69BDD13A7 /* nl.lproj */,
-				7441B353CB1E18FD173B4CF5 /* nn.lproj */,
-				144BA9A5B612126AA2EED575 /* pl.lproj */,
-				D2FDA136C491B41FF7722EA8 /* pt.lproj */,
-				6D10F3B1F9B2E2B3C6A4B973 /* pt_BR.lproj */,
-				AB73CD8AC56DF13FE439C128 /* ru.lproj */,
-				ABB4F269BD4912D7A7DC0825 /* sv.lproj */,
-				2808EEB693C36A2012C51DFB /* tr.lproj */,
-				CC6C19EAD870E8D4150004B1 /* uk.lproj */,
-				3E1CBB2AEAE4F08119CAC14E /* vi.lproj */,
-				6FA2213A2E29BA7ECFE56D73 /* zh-Hans.lproj */,
-				F208AF15434822DBC0281F12 /* zh-Hant.lproj */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		83CF71CCE167FF125F4B89B9 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		89E1C961078135514763956A /* AddressFormatter */ = {
-			isa = PBXGroup;
-			children = (
-				2AD9E4B06F0F049939AF2215 /* TTTAddressFormatter.h */,
-				6F2A3FB2706DFEFD5A81B257 /* TTTAddressFormatter.m */,
-				81B1F296C2AF99B89B6818CA /* Resources */,
-			);
-			name = AddressFormatter;
-			sourceTree = "<group>";
-		};
-		8A9B10858D2A5FC0170D766A /* URLRequestFormatter */ = {
-			isa = PBXGroup;
-			children = (
-				828C33D5D2B755A20C4C0F8B /* TTTURLRequestFormatter.h */,
-				3E33AB456A3A08B297269F54 /* TTTURLRequestFormatter.m */,
-				123210E6DAD0C5E69D3D0AF4 /* Resources */,
-			);
-			name = URLRequestFormatter;
-			sourceTree = "<group>";
-		};
-		8EB666465105899D329DEAD7 /* Pods-Drop It! */ = {
-			isa = PBXGroup;
-			children = (
-				B5645CDE0996CFD01DB3301A /* Pods-Drop It!-acknowledgements.markdown */,
-				27B772990F9733E144A772EC /* Pods-Drop It!-acknowledgements.plist */,
-				92717AE3C2AC67E6BAD8B016 /* Pods-Drop It!-dummy.m */,
-				650ED7EF1063BAB0C9C35033 /* Pods-Drop It!-environment.h */,
-				20958B3E4C43ABD6B5752D6E /* Pods-Drop It!-resources.sh */,
-				DC21682F5059129DE2DECE9E /* Pods-Drop It!.debug.xcconfig */,
-				A3C54178565ADD26B8784BC0 /* Pods-Drop It!.release.xcconfig */,
+				30799F8E91CF7C1941EB1558 /* Pods-Drop It!-acknowledgements.markdown */,
+				50AD1B5F4BCE62F769F171C3 /* Pods-Drop It!-acknowledgements.plist */,
+				FD29529216D767F8CBA40ED2 /* Pods-Drop It!-dummy.m */,
+				24F19E0AC01A2115AA550248 /* Pods-Drop It!-environment.h */,
+				CD4279A1E03D1B7847D4EB98 /* Pods-Drop It!-resources.sh */,
+				865433AEA5EB75BCD7AA768F /* Pods-Drop It!.debug.xcconfig */,
+				1DAFE46D533D56876BDA419C /* Pods-Drop It!.release.xcconfig */,
 			);
 			name = "Pods-Drop It!";
 			path = "Target Support Files/Pods-Drop It!";
 			sourceTree = "<group>";
 		};
-		8F1705D0B0816B3ABC71C682 /* FormatterKit */ = {
+		704A1BC2BB41E1F9E6818DD6 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				89E1C961078135514763956A /* AddressFormatter */,
-				205F6DFC6085937D10C0F1BC /* ArrayFormatter */,
-				442C615CFF290D7581502E08 /* ColorFormatter */,
-				4D4EE2F65B5F4407760BC474 /* LocationFormatter */,
-				BDEE5F9D73EDF2315A4E7E8A /* NameFormatter */,
-				0FF859242507155A76CD482B /* OrdinalNumberFormatter */,
-				34105367703A270BB935A5F2 /* Support Files */,
-				6D93B48F3433DE944EFC98B8 /* TimeIntervalFormatter */,
-				8A9B10858D2A5FC0170D766A /* URLRequestFormatter */,
-				61F2A4DD2A2A17B1DFA7BBC0 /* UnitOfInformationFormatter */,
+				270AC0EA332A68AD199E0983 /* AddressBook.framework */,
+				76107E530CED8778C216312C /* AddressBookUI.framework */,
+				AFFFAAF8DF879C157D243BE3 /* CoreLocation.framework */,
+				43D7980B27B8B503BD1D4175 /* CoreText.framework */,
+				5F5C0CB7A1264CD48B3D1AD4 /* Foundation.framework */,
+				E563D971861366D6F33C9A42 /* UIKit.framework */,
 			);
-			path = FormatterKit;
+			name = iOS;
 			sourceTree = "<group>";
 		};
-		A47E84BFE1C66E9A985B75EB /* Products */ = {
+		776B8D5E4C4F0A0C330C3CD6 /* UnitOfInformationFormatter */ = {
 			isa = PBXGroup;
 			children = (
-				C8C1B1AB5DE75C1C463640A4 /* Montserrat.bundle */,
-				3ABAB4C015D8159D95544C01 /* libPods-Drop It!.a */,
-				581734AD88AE1D3B723FB86F /* libPods-Drop It!-CCMPopup.a */,
-				D6373B4CB5AEC0F49C232507 /* libPods-Drop It!-DZNEmptyDataSet.a */,
-				5C4F04A55AF171B82ACC6FCF /* libPods-Drop It!-FormatterKit.a */,
-				39CB7DB208437245CCBFC1FB /* libPods-Drop It!-Montserrat.a */,
+				FA48F14799700D34EA53C4FA /* TTTUnitOfInformationFormatter.h */,
+				570910E0BA37F9456496599B /* TTTUnitOfInformationFormatter.m */,
+				C2F12E5DC4C0E327C5DEC389 /* Resources */,
 			);
-			name = Products;
+			name = UnitOfInformationFormatter;
 			sourceTree = "<group>";
 		};
-		AA9D41DB4A6AF228F959BE38 /* DZNEmptyDataSet */ = {
+		77CEA313C84EABD082F0F92A /* JDFTooltips */ = {
 			isa = PBXGroup;
 			children = (
-				71C072388A49C87899E41CA4 /* UIScrollView+EmptyDataSet.h */,
-				76BA94FA7C9415026582DB01 /* UIScrollView+EmptyDataSet.m */,
-				C72293E43A5193CA720E2967 /* Support Files */,
+				58E934E89F7ADD71F94E96A8 /* JDFSequentialTooltipManager.h */,
+				0CFDB26D09A80A00F7EAD6E5 /* JDFSequentialTooltipManager.m */,
+				B15F19335E973BB96F421376 /* JDFTooltipManager.h */,
+				6256544950B586721A202E3D /* JDFTooltipManager.m */,
+				AB969B5FB5F957D69E6FC164 /* JDFTooltipView.h */,
+				7E382AB4299B4A3C147C71BF /* JDFTooltipView.m */,
+				174F85A53800E20B303EFDD0 /* JDFTooltips.h */,
+				3274B702010837F20C9AE361 /* UILabel+JDFTooltips.h */,
+				50716552F2CE73D7A3383F0B /* UILabel+JDFTooltips.m */,
+				EDF82391415A0BC0625BD832 /* UIView+JDFTooltips.h */,
+				D07257779D1C9639D5E64AD8 /* UIView+JDFTooltips.m */,
+				14F558971415C25870FC1B50 /* Support Files */,
 			);
-			path = DZNEmptyDataSet;
+			path = JDFTooltips;
 			sourceTree = "<group>";
 		};
-		AE17107BF464C6DDDDFC303E /* Resources */ = {
+		7C73C58B944F6050746E9AEE /* AddressFormatter */ = {
 			isa = PBXGroup;
 			children = (
-				9483FCEAB62FEC9A0A066B9F /* Montserrat-Bold.ttf */,
-				6377A5AADCB2FBC09892E36E /* Montserrat-Regular.ttf */,
+				B9EBD857D9E3E952BD7A9127 /* TTTAddressFormatter.h */,
+				F2E7F09D283293DE8CEB3E75 /* TTTAddressFormatter.m */,
+				3608BDC1D67CF68547FDB282 /* Resources */,
 			);
-			name = Resources;
+			name = AddressFormatter;
 			sourceTree = "<group>";
 		};
-		BC8D4B0FA90E0FE6EA61EC0C /* Resources */ = {
+		7CA70699D8FAF3FBE71DA8FE /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				AE6DD5DDAFF7B419F4EB0A84 /* Pods-Drop It!-FormatterKit.xcconfig */,
+				3E0BA0917C17E6A6D49E8282 /* Pods-Drop It!-FormatterKit-Private.xcconfig */,
+				6A67CA14EBC7BC6488216824 /* Pods-Drop It!-FormatterKit-dummy.m */,
+				9FA7C4DE0189D14C9AA3B5FB /* Pods-Drop It!-FormatterKit-prefix.pch */,
 			);
-			name = Resources;
+			name = "Support Files";
+			path = "../Target Support Files/Pods-Drop It!-FormatterKit";
 			sourceTree = "<group>";
 		};
-		BDEE5F9D73EDF2315A4E7E8A /* NameFormatter */ = {
+		8D3E3E76B835E30707C70FD2 /* ArrayFormatter */ = {
 			isa = PBXGroup;
 			children = (
-				7D41232352DAA8B7A842AAB9 /* TTTNameFormatter.h */,
-				E18B4A5DCC691B80A8349C0E /* TTTNameFormatter.m */,
-				02D58655CB0D034DBA899B7D /* Resources */,
+				933D19A563FF369DE1A06622 /* TTTArrayFormatter.h */,
+				C6B74354654C9E37F7DFA68C /* TTTArrayFormatter.m */,
+				02DE921710F994C9E0965ABF /* Resources */,
 			);
-			name = NameFormatter;
+			name = ArrayFormatter;
 			sourceTree = "<group>";
 		};
-		BF9FE9F64A9A47424E969014 /* Resources */ = {
+		8D7951DE98FC160F0B9CD212 /* Montserrat */ = {
 			isa = PBXGroup;
 			children = (
+				BA1EF366CA241B349105FEB7 /* UIFont+Montserrat.h */,
+				0B9FB8A41EF52FAB6E7461E2 /* UIFont+Montserrat.m */,
+				0113E8CFC6CFB8A717A3FEDC /* Resources */,
+				B175A76B09B4D6F38BE80813 /* Support Files */,
 			);
-			name = Resources;
+			path = Montserrat;
 			sourceTree = "<group>";
 		};
-		C72293E43A5193CA720E2967 /* Support Files */ = {
+		96F0A9110BF0E37DF0C29D0A /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				71D20237B0CBC6FE0E9B3D61 /* Pods-Drop It!-DZNEmptyDataSet.xcconfig */,
-				75BF2AC5A13D73C0DC2D9000 /* Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig */,
-				A8A4B392051C592581A18ABC /* Pods-Drop It!-DZNEmptyDataSet-dummy.m */,
-				D1227F899A4F02A43C33F213 /* Pods-Drop It!-DZNEmptyDataSet-prefix.pch */,
+				DDA386621E93A2C0E67C487E /* Pods-Drop It!-DZNEmptyDataSet.xcconfig */,
+				967CD128C8C6A28B53A245A9 /* Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig */,
+				14661B7AB387BE09B2D82533 /* Pods-Drop It!-DZNEmptyDataSet-dummy.m */,
+				60C7900A2B2DACEFBDDE9767 /* Pods-Drop It!-DZNEmptyDataSet-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Pods-Drop It!-DZNEmptyDataSet";
 			sourceTree = "<group>";
 		};
-		C9A0513F49669B6E4F0390CE = {
+		9E556DCC420C5B6AE0E4A081 = {
 			isa = PBXGroup;
 			children = (
-				0013D911A563D2D8257E5133 /* Podfile */,
-				E1B6C2062E8394FA6A95B71F /* Frameworks */,
-				80CBDFC8658F349BD46005FA /* Pods */,
-				A47E84BFE1C66E9A985B75EB /* Products */,
-				D9FCB97C59BBD776FB81B65B /* Targets Support Files */,
+				DE00AF3A18D0DC3B5B267A6C /* Podfile */,
+				317F4BAF35D4DAAC2E5DD41B /* Frameworks */,
+				36A624168924029015B30B70 /* Pods */,
+				B90445CA1BDE1DF08724E9F3 /* Products */,
+				ECF1E84C2876458A821AF3F8 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D469E98BA1668A9C47FBA210 /* Resources */ = {
+		AAFA5377D9A4D100C6EE39E0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		D9FCB97C59BBD776FB81B65B /* Targets Support Files */ = {
+		B0BBD3453E38A9A90955C363 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8EB666465105899D329DEAD7 /* Pods-Drop It! */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		B175A76B09B4D6F38BE80813 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				90465480F9A44967C79C6069 /* Pods-Drop It!-Montserrat.xcconfig */,
+				AD7CF6781CC5C96973DB18E1 /* Pods-Drop It!-Montserrat-Private.xcconfig */,
+				2915723A5F00C2856AD10223 /* Pods-Drop It!-Montserrat-dummy.m */,
+				72E348A01B27377FB0CC482C /* Pods-Drop It!-Montserrat-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-Drop It!-Montserrat";
+			sourceTree = "<group>";
+		};
+		B244BADA0C4E32A20484489D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		B90445CA1BDE1DF08724E9F3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5032A86B8B388BE43D596DA0 /* Montserrat.bundle */,
+				682C3C138820C09BFB8995BF /* libPods-Drop It!.a */,
+				F4F8ED6C63DB4BB4BED21747 /* libPods-Drop It!-CCMPopup.a */,
+				C1F29531082D97738B92CAA2 /* libPods-Drop It!-DZNEmptyDataSet.a */,
+				B5838EA0426D2846966F4FE4 /* libPods-Drop It!-FormatterKit.a */,
+				42FC349BD60ACE729BA4139C /* libPods-Drop It!-JDFTooltips.a */,
+				2C641813444E7DBCE5623D2F /* libPods-Drop It!-Montserrat.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BBB5D9D489B96FE579372990 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		BF5E3647FB3AB9C533AC525A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		C123EDE4DBE006039563D154 /* LocationFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				35B98B465D53A9B54920DAF9 /* TTTLocationFormatter.h */,
+				804886FC46D1E77C0B77A835 /* TTTLocationFormatter.m */,
+				13A25720643706C0D2AE62FD /* Resources */,
+			);
+			name = LocationFormatter;
+			sourceTree = "<group>";
+		};
+		C2F12E5DC4C0E327C5DEC389 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		D556E3A29E7DE8C210ABA953 /* DZNEmptyDataSet */ = {
+			isa = PBXGroup;
+			children = (
+				22BA86B7B76813713BF22A2D /* UIScrollView+EmptyDataSet.h */,
+				3CF7A4A5123B2EA19643FADB /* UIScrollView+EmptyDataSet.m */,
+				96F0A9110BF0E37DF0C29D0A /* Support Files */,
+			);
+			path = DZNEmptyDataSet;
+			sourceTree = "<group>";
+		};
+		D92DBA5062181B4F8F09416A /* NameFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				E484F91FEE1EF4D730E7271D /* TTTNameFormatter.h */,
+				914C5626EC0D0CA16F23D64D /* TTTNameFormatter.m */,
+				B244BADA0C4E32A20484489D /* Resources */,
+			);
+			name = NameFormatter;
+			sourceTree = "<group>";
+		};
+		E4061457FCE4D19D0AD670EC /* ColorFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				DA35219548DAD5D61C89258A /* TTTColorFormatter.h */,
+				BEBA9BF3C0397E26A7D105F1 /* TTTColorFormatter.m */,
+				BF5E3647FB3AB9C533AC525A /* Resources */,
+			);
+			name = ColorFormatter;
+			sourceTree = "<group>";
+		};
+		ECF1E84C2876458A821AF3F8 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				3C16DB1B514E85366DBC597E /* Pods-Drop It! */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		E1B6C2062E8394FA6A95B71F /* Frameworks */ = {
+		F905567F7121D76D78ECF9A1 /* FormatterKit */ = {
 			isa = PBXGroup;
 			children = (
-				016FA80D34CF62441EC049F2 /* iOS */,
+				7C73C58B944F6050746E9AEE /* AddressFormatter */,
+				8D3E3E76B835E30707C70FD2 /* ArrayFormatter */,
+				E4061457FCE4D19D0AD670EC /* ColorFormatter */,
+				C123EDE4DBE006039563D154 /* LocationFormatter */,
+				D92DBA5062181B4F8F09416A /* NameFormatter */,
+				3147729DE2213192F675ADA9 /* OrdinalNumberFormatter */,
+				7CA70699D8FAF3FBE71DA8FE /* Support Files */,
+				234D35692CDD0B42420A2AC6 /* TimeIntervalFormatter */,
+				263DFF01A89439535296B26E /* URLRequestFormatter */,
+				776B8D5E4C4F0A0C330C3CD6 /* UnitOfInformationFormatter */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E54B2B123CA7CE871757D494 /* CCMPopup */ = {
-			isa = PBXGroup;
-			children = (
-				2729250B1ABC4D3000A271D4 /* FXBlurView.h */,
-				2729250C1ABC4D3000A271D4 /* FXBlurView.m */,
-				78D99E3F54C41A56BB455003 /* CCMCustomAnimation.h */,
-				BFD74F1BBFDA1476CC4DB23F /* CCMCustomAnimation.m */,
-				3E3F89B895119423D971DDD7 /* CCMPopupAnimation.h */,
-				CA23615752C65D81778CF557 /* CCMPopupAnimation.m */,
-				6B93441DE72169331490BA86 /* CCMPopupSegue.h */,
-				9894C95ECD4B3E9BF5AE2C70 /* CCMPopupSegue.m */,
-				5C7CF0ECA7C69AE57F0D57AE /* CCMPopupTransitioning.h */,
-				853E628E1D5B953819566143 /* CCMPopupTransitioning.m */,
-				9CA859800CB094E3AA0E2C27 /* UIImage+ImageEffects.h */,
-				B98026023DE5F423DDB47427 /* UIImage+ImageEffects.m */,
-				E0C8A3E812E838E08A100748 /* UIImage+screenshot.h */,
-				046EFA09B37E6A7B8D22B2AA /* UIImage+screenshot.m */,
-				17A91F9737EF0EB94CDD7482 /* UIViewController+CCMPopupAnimation.h */,
-				EDEE25FE53228DE07BA65EA3 /* UIViewController+CCMPopupAnimation.m */,
-				3234961E906E6E9ADB954425 /* Support Files */,
-			);
-			path = CCMPopup;
+			path = FormatterKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		1BFEDDA70FF8DCAA1EB21EB9 /* Headers */ = {
+		42CC86EE983A784E748943FF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				796308EA0207250BD4FDC880 /* TTTAddressFormatter.h in Headers */,
-				99B2DC14579140ED94B29269 /* TTTArrayFormatter.h in Headers */,
-				1CC685F136A28184CCDE4E39 /* TTTColorFormatter.h in Headers */,
-				7F5D7D3E23686199BBA620CD /* TTTLocationFormatter.h in Headers */,
-				619CFF5C71A901FF205C959C /* TTTNameFormatter.h in Headers */,
-				8015C00F52FD8F3136DF6D0C /* TTTOrdinalNumberFormatter.h in Headers */,
-				42F84C134ABCE41AC2653BB6 /* TTTTimeIntervalFormatter.h in Headers */,
-				C76BABE1C7FFE2194BEBF9E2 /* TTTURLRequestFormatter.h in Headers */,
-				BDC8DCEA14F2205454219B75 /* TTTUnitOfInformationFormatter.h in Headers */,
+				1645C21CEFE521EA728D9F1B /* JDFSequentialTooltipManager.h in Headers */,
+				E645703D550CC9B5D704892C /* JDFTooltipManager.h in Headers */,
+				E4154EB628EB139E9317B4D4 /* JDFTooltipView.h in Headers */,
+				0A012A9DDC4D5037591EB3AB /* JDFTooltips.h in Headers */,
+				9A1BD4ED8565344F1AFB2875 /* UILabel+JDFTooltips.h in Headers */,
+				56F823DD917A3E4E968B5834 /* UIView+JDFTooltips.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		371DA0C9F418854773CF1176 /* Headers */ = {
+		907A3F80E1D6C16E21B9F459 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F47090F2E430F57D4A418ABC /* UIScrollView+EmptyDataSet.h in Headers */,
+				272E89431AC044BF001EB34E /* FXBlurView.h in Headers */,
+				0CBBC5E74C8684F23794FC82 /* CCMCustomAnimation.h in Headers */,
+				EEAC5D72B385F7D1C049DF48 /* CCMPopupAnimation.h in Headers */,
+				FFEB519D95136785DC26D621 /* CCMPopupSegue.h in Headers */,
+				0F78C5CA9426B246CF3EAAA6 /* CCMPopupTransitioning.h in Headers */,
+				52489EDD67F76AE25A909B1E /* UIImage+ImageEffects.h in Headers */,
+				B757FBDD04F0F1D2564077F3 /* UIImage+screenshot.h in Headers */,
+				6522E52828E166A8A62D544C /* UIViewController+CCMPopupAnimation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		72A7B97905197EC5A99A4F48 /* Headers */ = {
+		A52B14290CB2223A0D6EA5AC /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2729250D1ABC4D3000A271D4 /* FXBlurView.h in Headers */,
-				76DD36909432E7A0D099A52F /* CCMCustomAnimation.h in Headers */,
-				2BF118E3C9B707F407C64759 /* CCMPopupAnimation.h in Headers */,
-				669FC7DD31A82F7B7020DE68 /* CCMPopupSegue.h in Headers */,
-				B93B08B55639D9206ACF9BB8 /* CCMPopupTransitioning.h in Headers */,
-				E0A15620B966D9A1978BCC69 /* UIImage+ImageEffects.h in Headers */,
-				CBF77891E0EE71E6B0EC765C /* UIImage+screenshot.h in Headers */,
-				EF66E6DCFDFDD120112D91E7 /* UIViewController+CCMPopupAnimation.h in Headers */,
+				5818E51A26F43587B93AB03D /* UIScrollView+EmptyDataSet.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ABFFCD797763A5C8D9F99211 /* Headers */ = {
+		BC0F7A046F76875991CFE623 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34F52DB11D630212F757835E /* UIFont+Montserrat.h in Headers */,
+				8527EEF3EACAEA532CA6E129 /* UIFont+Montserrat.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB337661EAE2F03AE03B92D5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DA55E10F1D66C03AF25BA9A /* TTTAddressFormatter.h in Headers */,
+				09EA1862EE0397B965DF99EB /* TTTArrayFormatter.h in Headers */,
+				6ABC68AF7B8A0AD6C738BB86 /* TTTColorFormatter.h in Headers */,
+				7611FBE354A60577116C983C /* TTTLocationFormatter.h in Headers */,
+				D61A911258EED3B95DF5D4D8 /* TTTNameFormatter.h in Headers */,
+				5EF0090142A4F042036D7727 /* TTTOrdinalNumberFormatter.h in Headers */,
+				08228709152692BC78E8C357 /* TTTTimeIntervalFormatter.h in Headers */,
+				0EA2733AE7CAB95D4B559D5E /* TTTURLRequestFormatter.h in Headers */,
+				416120D089513355EA5DF86D /* TTTUnitOfInformationFormatter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		27E35F05E5875720A1EDB421 /* Pods-Drop It!-CCMPopup */ = {
+		0DEDEE0CB74BB0DEFE30D8C4 /* Pods-Drop It!-FormatterKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A00E3D5AC4135BBEA86DC44 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-CCMPopup" */;
+			buildConfigurationList = 01E31087DE58B0EBE11A8707 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-FormatterKit" */;
 			buildPhases = (
-				D354B21C2ABB9987F1BE5B04 /* Sources */,
-				6E148A0102A7ACA079499218 /* Frameworks */,
-				72A7B97905197EC5A99A4F48 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-Drop It!-CCMPopup";
-			productName = "Pods-Drop It!-CCMPopup";
-			productReference = 581734AD88AE1D3B723FB86F /* libPods-Drop It!-CCMPopup.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		472370995044B12C2AE3C040 /* Pods-Drop It!-FormatterKit */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D34204D713216E73B6C87BE5 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-FormatterKit" */;
-			buildPhases = (
-				4B891E1BD2C1CA959EA37B2C /* Sources */,
-				777820ADE6AE6732F0D95990 /* Frameworks */,
-				1BFEDDA70FF8DCAA1EB21EB9 /* Headers */,
+				67614C73F6D7DB986DF7763B /* Sources */,
+				178EEBFBAC64795534A942BC /* Frameworks */,
+				CB337661EAE2F03AE03B92D5 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -724,36 +799,55 @@
 			);
 			name = "Pods-Drop It!-FormatterKit";
 			productName = "Pods-Drop It!-FormatterKit";
-			productReference = 5C4F04A55AF171B82ACC6FCF /* libPods-Drop It!-FormatterKit.a */;
+			productReference = B5838EA0426D2846966F4FE4 /* libPods-Drop It!-FormatterKit.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		52823648C52CF9365ECB3803 /* Pods-Drop It! */ = {
+		187E95932BDD9C3BFDDA5137 /* Pods-Drop It!-Montserrat */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BB81302726D4872622818051 /* Build configuration list for PBXNativeTarget "Pods-Drop It!" */;
+			buildConfigurationList = 1E6AF31A0D360DC929A69332 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-Montserrat" */;
 			buildPhases = (
-				741BF9CC1B42590F5EB3E9D3 /* Sources */,
-				445BD5339C26B90919D5F03D /* Frameworks */,
+				8C6804B7971E45656E28EFE5 /* Sources */,
+				846191A033D5E85C01D49B35 /* Frameworks */,
+				BC0F7A046F76875991CFE623 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				BA3710B8892B77E401E263AB /* PBXTargetDependency */,
-				F060AF17C7D3B5D9EFD404FD /* PBXTargetDependency */,
-				D51103DD4DE741D75B9E6AE8 /* PBXTargetDependency */,
-				C60953CD428A4FB72E901714 /* PBXTargetDependency */,
+				5A0786A0C463DAF796A091BF /* PBXTargetDependency */,
+			);
+			name = "Pods-Drop It!-Montserrat";
+			productName = "Pods-Drop It!-Montserrat";
+			productReference = 2C641813444E7DBCE5623D2F /* libPods-Drop It!-Montserrat.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		224A7E58FF199F7E8A5CBDFB /* Pods-Drop It! */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 82242BC35BCA81567D9EED9A /* Build configuration list for PBXNativeTarget "Pods-Drop It!" */;
+			buildPhases = (
+				442F70201E285809714E2FFC /* Sources */,
+				BD02BAE90C8E883C2AE5379B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FB810961EE0BBA668796310C /* PBXTargetDependency */,
+				6947B921667285353030D9F6 /* PBXTargetDependency */,
+				EB083DE2CD19516858CF5E73 /* PBXTargetDependency */,
+				B6860C35345E715B4551FF1D /* PBXTargetDependency */,
+				76206773081C4582D3BF4288 /* PBXTargetDependency */,
 			);
 			name = "Pods-Drop It!";
 			productName = "Pods-Drop It!";
-			productReference = 3ABAB4C015D8159D95544C01 /* libPods-Drop It!.a */;
+			productReference = 682C3C138820C09BFB8995BF /* libPods-Drop It!.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		AFB912B4316D8E0F4DD4764E /* Montserrat */ = {
+		426679AAD6ED6D1A55B9781E /* Montserrat */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BA478FE7C96DF3AC9FCF2E28 /* Build configuration list for PBXNativeTarget "Montserrat" */;
+			buildConfigurationList = 021B0F908D86E95EE94E7314 /* Build configuration list for PBXNativeTarget "Montserrat" */;
 			buildPhases = (
-				241E85D39651E9280B166260 /* Sources */,
-				0381704FEB23228529C05F0A /* Frameworks */,
-				481B3E1C0454D6697B8AD6B7 /* Resources */,
+				C3E1B387471B071F303DD9AA /* Sources */,
+				512E3E1F962F3D9B089A1595 /* Frameworks */,
+				C3991BC89BEEDF7D99E6AD9F /* Resources */,
 			);
 			buildRules = (
 			);
@@ -761,16 +855,50 @@
 			);
 			name = Montserrat;
 			productName = Montserrat;
-			productReference = C8C1B1AB5DE75C1C463640A4 /* Montserrat.bundle */;
+			productReference = 5032A86B8B388BE43D596DA0 /* Montserrat.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		B3402B0ED3E308A90F7F4946 /* Pods-Drop It!-DZNEmptyDataSet */ = {
+		589F679ABE26B01EBD58360D /* Pods-Drop It!-JDFTooltips */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA15FCB0E56AE98DA77BB2DC /* Build configuration list for PBXNativeTarget "Pods-Drop It!-DZNEmptyDataSet" */;
+			buildConfigurationList = B215BBF53EA675C57B654913 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-JDFTooltips" */;
 			buildPhases = (
-				DE9A6D1B6C0DD45960444313 /* Sources */,
-				0DDA98F3142F77D43220125E /* Frameworks */,
-				371DA0C9F418854773CF1176 /* Headers */,
+				FCC9DC0E2F66F95AC097EB3D /* Sources */,
+				81F0CFD66063F60418D371DE /* Frameworks */,
+				42CC86EE983A784E748943FF /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Drop It!-JDFTooltips";
+			productName = "Pods-Drop It!-JDFTooltips";
+			productReference = 42FC349BD60ACE729BA4139C /* libPods-Drop It!-JDFTooltips.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		92A94B9CD47379892852E72B /* Pods-Drop It!-CCMPopup */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E6A7BBA67D25D52A5157E84 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-CCMPopup" */;
+			buildPhases = (
+				E7734E1232C3ECF5824B16B0 /* Sources */,
+				1309DEB0048D9A69EBC499B4 /* Frameworks */,
+				907A3F80E1D6C16E21B9F459 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Drop It!-CCMPopup";
+			productName = "Pods-Drop It!-CCMPopup";
+			productReference = F4F8ED6C63DB4BB4BED21747 /* libPods-Drop It!-CCMPopup.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		AE7C93D7C66C73EA708413CE /* Pods-Drop It!-DZNEmptyDataSet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D328B7A877AE05345BA671A /* Build configuration list for PBXNativeTarget "Pods-Drop It!-DZNEmptyDataSet" */;
+			buildPhases = (
+				F253ACD6959F5783A06204CA /* Sources */,
+				01609E57F376A7FF623FC9F6 /* Frameworks */,
+				A52B14290CB2223A0D6EA5AC /* Headers */,
 			);
 			buildRules = (
 			);
@@ -778,175 +906,177 @@
 			);
 			name = "Pods-Drop It!-DZNEmptyDataSet";
 			productName = "Pods-Drop It!-DZNEmptyDataSet";
-			productReference = D6373B4CB5AEC0F49C232507 /* libPods-Drop It!-DZNEmptyDataSet.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		F6F65BB601365851C1927D60 /* Pods-Drop It!-Montserrat */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D96B3EEF2C845E5854D96552 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-Montserrat" */;
-			buildPhases = (
-				2CE26F0F1D70AB8F29361D16 /* Sources */,
-				E990E8B3AD8B63951D8BCD61 /* Frameworks */,
-				ABFFCD797763A5C8D9F99211 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				51CCDFF7E14CE6BDD012505D /* PBXTargetDependency */,
-			);
-			name = "Pods-Drop It!-Montserrat";
-			productName = "Pods-Drop It!-Montserrat";
-			productReference = 39CB7DB208437245CCBFC1FB /* libPods-Drop It!-Montserrat.a */;
+			productReference = C1F29531082D97738B92CAA2 /* libPods-Drop It!-DZNEmptyDataSet.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		F61A1C162BCD0104FCA8ADF5 /* Project object */ = {
+		B1BD022CCA13859CE658F7F5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0510;
 			};
-			buildConfigurationList = ED36E6F47B21CBAF129AE2BD /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 5C40DBC41C2F5A5EDCA441B9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = C9A0513F49669B6E4F0390CE;
-			productRefGroup = A47E84BFE1C66E9A985B75EB /* Products */;
+			mainGroup = 9E556DCC420C5B6AE0E4A081;
+			productRefGroup = B90445CA1BDE1DF08724E9F3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AFB912B4316D8E0F4DD4764E /* Montserrat */,
-				52823648C52CF9365ECB3803 /* Pods-Drop It! */,
-				27E35F05E5875720A1EDB421 /* Pods-Drop It!-CCMPopup */,
-				B3402B0ED3E308A90F7F4946 /* Pods-Drop It!-DZNEmptyDataSet */,
-				472370995044B12C2AE3C040 /* Pods-Drop It!-FormatterKit */,
-				F6F65BB601365851C1927D60 /* Pods-Drop It!-Montserrat */,
+				426679AAD6ED6D1A55B9781E /* Montserrat */,
+				224A7E58FF199F7E8A5CBDFB /* Pods-Drop It! */,
+				92A94B9CD47379892852E72B /* Pods-Drop It!-CCMPopup */,
+				AE7C93D7C66C73EA708413CE /* Pods-Drop It!-DZNEmptyDataSet */,
+				0DEDEE0CB74BB0DEFE30D8C4 /* Pods-Drop It!-FormatterKit */,
+				589F679ABE26B01EBD58360D /* Pods-Drop It!-JDFTooltips */,
+				187E95932BDD9C3BFDDA5137 /* Pods-Drop It!-Montserrat */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		481B3E1C0454D6697B8AD6B7 /* Resources */ = {
+		C3991BC89BEEDF7D99E6AD9F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D71C0A8B8C8F77893F629170 /* Montserrat-Bold.ttf in Resources */,
-				7C2718B40CA68525E96BCF09 /* Montserrat-Regular.ttf in Resources */,
+				79A49100FE9B0C6539E07CDE /* Montserrat-Bold.ttf in Resources */,
+				16F723CB4C48870F13D9825B /* Montserrat-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		241E85D39651E9280B166260 /* Sources */ = {
+		442F70201E285809714E2FFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB058B4BBD030E7D9387855F /* Pods-Drop It!-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		67614C73F6D7DB986DF7763B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01DEF7DB59BB423854579933 /* Pods-Drop It!-FormatterKit-dummy.m in Sources */,
+				6BA7226B1FA139599F392E9E /* TTTAddressFormatter.m in Sources */,
+				2BEFA28FF7680BE801B050FD /* TTTArrayFormatter.m in Sources */,
+				956D015EA0B71F4594E867BB /* TTTColorFormatter.m in Sources */,
+				A6C437598BFF29336071309B /* TTTLocationFormatter.m in Sources */,
+				5ECF5024C64F5CE003BA4CBB /* TTTNameFormatter.m in Sources */,
+				9B116319333EADD6F0A8EBF8 /* TTTOrdinalNumberFormatter.m in Sources */,
+				BEEC9BE230316E6D4EBAF041 /* TTTTimeIntervalFormatter.m in Sources */,
+				5455EA4A7EDBFEA352CF0E53 /* TTTURLRequestFormatter.m in Sources */,
+				BC2DE9F6DD3534DFEFE83F39 /* TTTUnitOfInformationFormatter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C6804B7971E45656E28EFE5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C07B6A25A7D4C39DA3D4B0A4 /* Pods-Drop It!-Montserrat-dummy.m in Sources */,
+				EFD38F0B15558505B7EBA9A4 /* UIFont+Montserrat.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3E1B387471B071F303DD9AA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2CE26F0F1D70AB8F29361D16 /* Sources */ = {
+		E7734E1232C3ECF5824B16B0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				381E284C5CC566EF9D015193 /* Pods-Drop It!-Montserrat-dummy.m in Sources */,
-				1A41826390F9D614C27ECA60 /* UIFont+Montserrat.m in Sources */,
+				A97414641D7635A0817D9A4B /* CCMCustomAnimation.m in Sources */,
+				739001E5BF9FFAF65BC8C781 /* CCMPopupAnimation.m in Sources */,
+				44A76400735625B68D31A4B9 /* CCMPopupSegue.m in Sources */,
+				22AE1F209B11726AFBBCE843 /* CCMPopupTransitioning.m in Sources */,
+				7343B2B186884C45FCB3B499 /* Pods-Drop It!-CCMPopup-dummy.m in Sources */,
+				8C4CE21FBE9AEFA390A15C4E /* UIImage+ImageEffects.m in Sources */,
+				5A4214F2CA446581343FF6FC /* UIImage+screenshot.m in Sources */,
+				3EBB3B51952E08233E607249 /* UIViewController+CCMPopupAnimation.m in Sources */,
+				272E89441AC044BF001EB34E /* FXBlurView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4B891E1BD2C1CA959EA37B2C /* Sources */ = {
+		F253ACD6959F5783A06204CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19A691858B9D21AFE39AB569 /* Pods-Drop It!-FormatterKit-dummy.m in Sources */,
-				2BE59B6D47DD2587DFDE7484 /* TTTAddressFormatter.m in Sources */,
-				A764EBF5F869ECB5D23E301C /* TTTArrayFormatter.m in Sources */,
-				A52A1BE2734EBCE9FA3C1AB4 /* TTTColorFormatter.m in Sources */,
-				AAAA1F0F350D4579CB3D16AA /* TTTLocationFormatter.m in Sources */,
-				2437EFB4AA02687BBD28F032 /* TTTNameFormatter.m in Sources */,
-				2A69D9B496081AE7DF3E18F1 /* TTTOrdinalNumberFormatter.m in Sources */,
-				91F56B6DE7FB5B8C25DC2379 /* TTTTimeIntervalFormatter.m in Sources */,
-				0B44F282C1217739BC2B5BE2 /* TTTURLRequestFormatter.m in Sources */,
-				525D4AF3FD5C1D0D55AFA492 /* TTTUnitOfInformationFormatter.m in Sources */,
+				83D50FF345C3A386889DDED9 /* Pods-Drop It!-DZNEmptyDataSet-dummy.m in Sources */,
+				09315011BCA06F0BF6CA3583 /* UIScrollView+EmptyDataSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		741BF9CC1B42590F5EB3E9D3 /* Sources */ = {
+		FCC9DC0E2F66F95AC097EB3D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF65B9A1A587F5AE6758A93A /* Pods-Drop It!-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D354B21C2ABB9987F1BE5B04 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3F12C8C5E7974BC939BB6707 /* CCMCustomAnimation.m in Sources */,
-				C88DC50BE40233E3B3E7BE13 /* CCMPopupAnimation.m in Sources */,
-				942A64AD2C13E277F399F39E /* CCMPopupSegue.m in Sources */,
-				FE9991BDCBE0C772F8F15258 /* CCMPopupTransitioning.m in Sources */,
-				4CBE60AFECA12F57CABC7B68 /* Pods-Drop It!-CCMPopup-dummy.m in Sources */,
-				DE44FBCC952579D254098795 /* UIImage+ImageEffects.m in Sources */,
-				09CBC88E1C515736257EBF6A /* UIImage+screenshot.m in Sources */,
-				602F3071A42524D18BDFB477 /* UIViewController+CCMPopupAnimation.m in Sources */,
-				2729250E1ABC4D3000A271D4 /* FXBlurView.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DE9A6D1B6C0DD45960444313 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C8074A2068D63CEE6C77B970 /* Pods-Drop It!-DZNEmptyDataSet-dummy.m in Sources */,
-				B64EF86767F8C0CDD02680BB /* UIScrollView+EmptyDataSet.m in Sources */,
+				87D6312DA5FE88FEEB66B0A1 /* JDFSequentialTooltipManager.m in Sources */,
+				1B4D0234DEB077288F07CA6E /* JDFTooltipManager.m in Sources */,
+				F73F7CC4A8E5032DB2556A4C /* JDFTooltipView.m in Sources */,
+				D0D14FFC87BA7CDF7B3FE875 /* Pods-Drop It!-JDFTooltips-dummy.m in Sources */,
+				46C0E13911CF2E012E53A4FA /* UILabel+JDFTooltips.m in Sources */,
+				2DB62DF9F29385AADB01BE42 /* UIView+JDFTooltips.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		51CCDFF7E14CE6BDD012505D /* PBXTargetDependency */ = {
+		5A0786A0C463DAF796A091BF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Montserrat;
-			target = AFB912B4316D8E0F4DD4764E /* Montserrat */;
-			targetProxy = B0A5BB4394DAC7474232904B /* PBXContainerItemProxy */;
+			target = 426679AAD6ED6D1A55B9781E /* Montserrat */;
+			targetProxy = 693DE25752391252C75330BA /* PBXContainerItemProxy */;
 		};
-		BA3710B8892B77E401E263AB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-Drop It!-CCMPopup";
-			target = 27E35F05E5875720A1EDB421 /* Pods-Drop It!-CCMPopup */;
-			targetProxy = E921D1A2E357D29130C94F51 /* PBXContainerItemProxy */;
-		};
-		C60953CD428A4FB72E901714 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-Drop It!-Montserrat";
-			target = F6F65BB601365851C1927D60 /* Pods-Drop It!-Montserrat */;
-			targetProxy = 837EA427EC1F32BA7850F4BD /* PBXContainerItemProxy */;
-		};
-		D51103DD4DE741D75B9E6AE8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-Drop It!-FormatterKit";
-			target = 472370995044B12C2AE3C040 /* Pods-Drop It!-FormatterKit */;
-			targetProxy = 6FD9BE5A585E078AFF0F303E /* PBXContainerItemProxy */;
-		};
-		F060AF17C7D3B5D9EFD404FD /* PBXTargetDependency */ = {
+		6947B921667285353030D9F6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-Drop It!-DZNEmptyDataSet";
-			target = B3402B0ED3E308A90F7F4946 /* Pods-Drop It!-DZNEmptyDataSet */;
-			targetProxy = 3C7475D0C174EED599102A43 /* PBXContainerItemProxy */;
+			target = AE7C93D7C66C73EA708413CE /* Pods-Drop It!-DZNEmptyDataSet */;
+			targetProxy = 7AABEC33536B529D9A0F7EE3 /* PBXContainerItemProxy */;
+		};
+		76206773081C4582D3BF4288 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Drop It!-Montserrat";
+			target = 187E95932BDD9C3BFDDA5137 /* Pods-Drop It!-Montserrat */;
+			targetProxy = 17712E8E9C3B498713E1D95F /* PBXContainerItemProxy */;
+		};
+		B6860C35345E715B4551FF1D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Drop It!-JDFTooltips";
+			target = 589F679ABE26B01EBD58360D /* Pods-Drop It!-JDFTooltips */;
+			targetProxy = 4752DC45BBE19F7DAF3ADDFD /* PBXContainerItemProxy */;
+		};
+		EB083DE2CD19516858CF5E73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Drop It!-FormatterKit";
+			target = 0DEDEE0CB74BB0DEFE30D8C4 /* Pods-Drop It!-FormatterKit */;
+			targetProxy = 55C021326DBA729D9270D603 /* PBXContainerItemProxy */;
+		};
+		FB810961EE0BBA668796310C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Drop It!-CCMPopup";
+			target = 92A94B9CD47379892852E72B /* Pods-Drop It!-CCMPopup */;
+			targetProxy = 707956963AAEE1A01BBAC47A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		09AA1EF70EC638A2CEFFED1B /* Debug */ = {
+		004E6F84D714A36B9A33E0ED /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DC21682F5059129DE2DECE9E /* Pods-Drop It!.debug.xcconfig */;
+			baseConfigurationReference = 967CD128C8C6A28B53A245A9 /* Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
@@ -954,6 +1084,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-DZNEmptyDataSet/Pods-Drop It!-DZNEmptyDataSet-prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -970,9 +1101,121 @@
 			};
 			name = Debug;
 		};
-		15AEC57F3D533AC9941955EB /* Debug */ = {
+		07D5A945A4F30D9DF0D24090 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92B70696E3409B946A6B9750 /* Pods-Drop It!-Montserrat-Private.xcconfig */;
+			baseConfigurationReference = 15203D659DD74F79E0F0EA30 /* Pods-Drop It!-JDFTooltips-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-JDFTooltips/Pods-Drop It!-JDFTooltips-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		1113DFCDBF634AD6A225F66C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E0BA0917C17E6A6D49E8282 /* Pods-Drop It!-FormatterKit-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-FormatterKit/Pods-Drop It!-FormatterKit-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		1BAA4EBA3521227B0A68FB60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15203D659DD74F79E0F0EA30 /* Pods-Drop It!-JDFTooltips-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-JDFTooltips/Pods-Drop It!-JDFTooltips-prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		599C400CBC86914FB7D35517 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 967CD128C8C6A28B53A245A9 /* Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-DZNEmptyDataSet/Pods-Drop It!-DZNEmptyDataSet-prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5E533FA4D802920619F48339 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD7CF6781CC5C96973DB18E1 /* Pods-Drop It!-Montserrat-Private.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
@@ -997,9 +1240,132 @@
 			};
 			name = Debug;
 		};
-		15B6AF3CB820CD056CF44D50 /* Debug */ = {
+		71215F3F3E862EBEFF14D508 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6F82735B13F74B7E803EB96 /* Pods-Drop It!-CCMPopup-Private.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		8A747A3C4037588FC37C1138 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BF99257F100F6EAA9A6945A /* Pods-Drop It!-CCMPopup-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-CCMPopup/Pods-Drop It!-CCMPopup-prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A8B63304B1BB1AA230DEA188 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E0BA0917C17E6A6D49E8282 /* Pods-Drop It!-FormatterKit-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-FormatterKit/Pods-Drop It!-FormatterKit-prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CADF00CBEF914EC47F11E9B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD7CF6781CC5C96973DB18E1 /* Pods-Drop It!-Montserrat-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-Montserrat/Pods-Drop It!-Montserrat-prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E0FE0064D5FCDC89042E6C76 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 865433AEA5EB75BCD7AA768F /* Pods-Drop It!.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		E201FC8D55187BA70C9A9190 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BF99257F100F6EAA9A6945A /* Pods-Drop It!-CCMPopup-Private.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
@@ -1024,35 +1390,17 @@
 			};
 			name = Debug;
 		};
-		212A85796C695CC59F98E03F /* Release */ = {
+		E47A374C95081C9F24A23A1F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3C54178565ADD26B8784BC0 /* Pods-Drop It!.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_CFLAGS = (
-					"-DNS_BLOCK_ASSERTIONS=1",
-					"$(inherited)",
-				);
-				OTHER_CPLUSPLUSFLAGS = (
-					"-DNS_BLOCK_ASSERTIONS=1",
-					"$(inherited)",
-				);
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
-		244F40335F615154E54EBABD /* Release */ = {
+		E800A6AB29C70E422EEFF90E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1083,112 +1431,7 @@
 			};
 			name = Release;
 		};
-		26C8FE44FA9E20773CEBBD50 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6F82735B13F74B7E803EB96 /* Pods-Drop It!-CCMPopup-Private.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-CCMPopup/Pods-Drop It!-CCMPopup-prefix.pch";
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_CFLAGS = (
-					"-DNS_BLOCK_ASSERTIONS=1",
-					"$(inherited)",
-				);
-				OTHER_CPLUSPLUSFLAGS = (
-					"-DNS_BLOCK_ASSERTIONS=1",
-					"$(inherited)",
-				);
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		31589F14DDB7D06290A4F7B5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		770551CE58022D7CF8FF5D89 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 75BF2AC5A13D73C0DC2D9000 /* Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-DZNEmptyDataSet/Pods-Drop It!-DZNEmptyDataSet-prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		8BAAE46712C7E1D7BBB4010E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		8E5BC04298E2AB3DCA61CAC3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92B70696E3409B946A6B9750 /* Pods-Drop It!-Montserrat-Private.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-Montserrat/Pods-Drop It!-Montserrat-prefix.pch";
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_CFLAGS = (
-					"-DNS_BLOCK_ASSERTIONS=1",
-					"$(inherited)",
-				);
-				OTHER_CPLUSPLUSFLAGS = (
-					"-DNS_BLOCK_ASSERTIONS=1",
-					"$(inherited)",
-				);
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		A4618A9FB0366DE984A765DD /* Debug */ = {
+		EE5C29670D2EA4FD6A34B7A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1224,71 +1467,14 @@
 			};
 			name = Debug;
 		};
-		B38FD775A114595DCA304C9D /* Debug */ = {
+		F96E5156621D11D53118D9E2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD6CE3BE241FE4FCFE84220F /* Pods-Drop It!-FormatterKit-Private.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-FormatterKit/Pods-Drop It!-FormatterKit-prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		EB332EE97DE99C2DFEEEC114 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 75BF2AC5A13D73C0DC2D9000 /* Pods-Drop It!-DZNEmptyDataSet-Private.xcconfig */;
+			baseConfigurationReference = 1DAFE46D533D56876BDA419C /* Pods-Drop It!.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-DZNEmptyDataSet/Pods-Drop It!-DZNEmptyDataSet-prefix.pch";
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_CFLAGS = (
-					"-DNS_BLOCK_ASSERTIONS=1",
-					"$(inherited)",
-				);
-				OTHER_CPLUSPLUSFLAGS = (
-					"-DNS_BLOCK_ASSERTIONS=1",
-					"$(inherited)",
-				);
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		F6CAE316110F3C4A7B3BA36F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD6CE3BE241FE4FCFE84220F /* Pods-Drop It!-FormatterKit-Private.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-Drop It!-FormatterKit/Pods-Drop It!-FormatterKit-prefix.pch";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = (
@@ -1312,70 +1498,79 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8A00E3D5AC4135BBEA86DC44 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-CCMPopup" */ = {
+		01E31087DE58B0EBE11A8707 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-FormatterKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				15B6AF3CB820CD056CF44D50 /* Debug */,
-				26C8FE44FA9E20773CEBBD50 /* Release */,
+				1113DFCDBF634AD6A225F66C /* Debug */,
+				A8B63304B1BB1AA230DEA188 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BA478FE7C96DF3AC9FCF2E28 /* Build configuration list for PBXNativeTarget "Montserrat" */ = {
+		021B0F908D86E95EE94E7314 /* Build configuration list for PBXNativeTarget "Montserrat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31589F14DDB7D06290A4F7B5 /* Debug */,
-				8BAAE46712C7E1D7BBB4010E /* Release */,
+				71215F3F3E862EBEFF14D508 /* Debug */,
+				E47A374C95081C9F24A23A1F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BB81302726D4872622818051 /* Build configuration list for PBXNativeTarget "Pods-Drop It!" */ = {
+		1E6AF31A0D360DC929A69332 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-Montserrat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				09AA1EF70EC638A2CEFFED1B /* Debug */,
-				212A85796C695CC59F98E03F /* Release */,
+				5E533FA4D802920619F48339 /* Debug */,
+				CADF00CBEF914EC47F11E9B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D34204D713216E73B6C87BE5 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-FormatterKit" */ = {
+		5C40DBC41C2F5A5EDCA441B9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B38FD775A114595DCA304C9D /* Debug */,
-				F6CAE316110F3C4A7B3BA36F /* Release */,
+				EE5C29670D2EA4FD6A34B7A1 /* Debug */,
+				E800A6AB29C70E422EEFF90E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D96B3EEF2C845E5854D96552 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-Montserrat" */ = {
+		6D328B7A877AE05345BA671A /* Build configuration list for PBXNativeTarget "Pods-Drop It!-DZNEmptyDataSet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				15AEC57F3D533AC9941955EB /* Debug */,
-				8E5BC04298E2AB3DCA61CAC3 /* Release */,
+				004E6F84D714A36B9A33E0ED /* Debug */,
+				599C400CBC86914FB7D35517 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA15FCB0E56AE98DA77BB2DC /* Build configuration list for PBXNativeTarget "Pods-Drop It!-DZNEmptyDataSet" */ = {
+		7E6A7BBA67D25D52A5157E84 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-CCMPopup" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				770551CE58022D7CF8FF5D89 /* Debug */,
-				EB332EE97DE99C2DFEEEC114 /* Release */,
+				E201FC8D55187BA70C9A9190 /* Debug */,
+				8A747A3C4037588FC37C1138 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED36E6F47B21CBAF129AE2BD /* Build configuration list for PBXProject "Pods" */ = {
+		82242BC35BCA81567D9EED9A /* Build configuration list for PBXNativeTarget "Pods-Drop It!" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A4618A9FB0366DE984A765DD /* Debug */,
-				244F40335F615154E54EBABD /* Release */,
+				E0FE0064D5FCDC89042E6C76 /* Debug */,
+				F96E5156621D11D53118D9E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B215BBF53EA675C57B654913 /* Build configuration list for PBXNativeTarget "Pods-Drop It!-JDFTooltips" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07D5A945A4F30D9DF0D24090 /* Debug */,
+				1BAA4EBA3521227B0A68FB60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = F61A1C162BCD0104FCA8ADF5 /* Project object */;
+	rootObject = B1BD022CCA13859CE658F7F5 /* Project object */;
 }

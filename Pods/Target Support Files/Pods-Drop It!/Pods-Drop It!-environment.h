@@ -78,6 +78,12 @@
 #define COCOAPODS_VERSION_MINOR_FormatterKit_UnitOfInformationFormatter 8
 #define COCOAPODS_VERSION_PATCH_FormatterKit_UnitOfInformationFormatter 0
 
+// JDFTooltips
+#define COCOAPODS_POD_AVAILABLE_JDFTooltips
+#define COCOAPODS_VERSION_MAJOR_JDFTooltips 1
+#define COCOAPODS_VERSION_MINOR_JDFTooltips 0
+#define COCOAPODS_VERSION_PATCH_JDFTooltips 0
+
 // Montserrat
 #define COCOAPODS_POD_AVAILABLE_Montserrat
 #define COCOAPODS_VERSION_MAJOR_Montserrat 1

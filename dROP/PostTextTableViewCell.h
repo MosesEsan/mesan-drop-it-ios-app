@@ -7,18 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ParseUI/ParseUI.h>
-#import "Config.h"
-#import "MCSwipeTableViewCell.h"
+#import "DITableViewCell.h"
 
-@interface PostTextTableViewCell : MCSwipeTableViewCell
+@interface PostTextTableViewCell : DITableViewCell
 
-@property (nonatomic, strong) UILabel *postText;
-@property (nonatomic, strong) PFImageView *postImage;
-@property (nonatomic, strong) UIView *actionsView;
-
-@property (nonatomic, strong) UILabel *date;
-@property (nonatomic, strong) UIButton *smiley;
-@property (nonatomic, strong) UILabel *comments;
 
 @end
