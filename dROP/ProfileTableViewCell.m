@@ -171,7 +171,12 @@
     self.actionsView.frame = actionViewFrame;
     self.smiley.frame = smileyFrame;
     
-    self.profilePic.image = [Config usersAvatar];
+    if (postObject[@"parseObject"][@"avatar"]){
+        self.profilePic.image = [UIImage imageNamed:postObject[@"parseObject"][@"avatar"]];
+    }else{
+        self.profilePic.image = [UIImage imageNamed:[Config fruits]];
+    }
+    
 }
 
 - (void)awakeFromNib {

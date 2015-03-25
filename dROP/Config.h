@@ -136,6 +136,7 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 + (BOOL)setCellType:(PostCellType)mode;
 
 + (UIImage *)usersAvatar;
++ (NSString *)usersAvatarString;
 
 + (NSMutableArray *)availableLocations;
 + (void)updateAvailableLocations:(NSDate *)lastUpdated;

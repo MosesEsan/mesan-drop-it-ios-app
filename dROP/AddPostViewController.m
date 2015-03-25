@@ -319,6 +319,7 @@
                 postObject[@"location"] = currentPoint;
                 postObject[@"type"] = NEW_POST_TYPE;
                 postObject[@"college"] = [Config getClosestLocation:currentLocation];
+                postObject[@"avatar"] = [Config usersAvatarString];
                 
                 if (_previewPhoto != nil)
                 {

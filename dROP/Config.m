@@ -160,6 +160,26 @@
     return avatar;
 }
 
++ (NSString *)usersAvatarString
+{
+    //Set Default Locations
+    NSDictionary *config = [[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"];
+    
+    if (config[@"Avatar"] == nil)
+    {
+        //set an avatar
+        NSMutableDictionary *newConfig = config.mutableCopy;
+        newConfig[@"Avatar"] = [Config fruits];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:newConfig forKey:@"DIConfig"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
+    config = [[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"];
+    
+    return config[@"Avatar"];
+}
+
 + (void)updateAvailableLocations:(NSDate *)lastUpdated
 {
     //Get the current locations
