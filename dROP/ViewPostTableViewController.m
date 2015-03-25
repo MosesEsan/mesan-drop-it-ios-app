@@ -494,6 +494,7 @@
         commentObject[@"text"] = commenttext;
         commentObject[@"deviceId"] = [Config deviceId];
         commentObject[@"postId"] = parseObject.objectId;
+        commentObject[@"post"] = parseObject;
         
         // Use PFACL to restrict future modifications to this object.
         PFACL *readOnlyACL = [PFACL ACL];

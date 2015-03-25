@@ -358,6 +358,27 @@
                                                                                otherButtonTitles:@"Dislike", @"Report",nil];
                                      [alertView show];
                                  }];
+    }else if ([Config isPostAuthor:postObject]){
+        
+        //If the user is th author of the post
+        //allow the user to be able to delete the post
+        __weak typeof(cell) weakSelf = cell;
+        
+        [cell setSwipeGestureWithView:[self viewWithImageName:@"cross"]
+                                color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
+                                 mode:MCSwipeTableViewCellModeExit
+                                state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+                                    
+                                    _cellToDelete = weakSelf;
+                                    
+                                    
+                                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Post"
+                                                                                        message:@"Are yu sure you want to delete this post?"
+                                                                                       delegate:self
+                                                                              cancelButtonTitle:@"No"
+                                                                              otherButtonTitles:@"Yes",nil];
+                                    [alertView show];
+                                }];
     }
     
     cell.selectionStyle= UITableViewCellSelectionStyleNone;
@@ -765,6 +786,8 @@
         
         //Unlike Post
         [parseObject removeObject:[Config deviceId] forKey:@"likes"];
+        
+        parseObject[@"type"] = UNLIKE_POST_TYPE;
     }
     
     [postObject setValue:[NSNumber numberWithInteger:likesCount] forKey:@"totalLikes"];
@@ -850,6 +873,18 @@
     [_allPosts removeObjectAtIndex:tag];
 }
 
+- (void)deletePost:(NSInteger)tag
+{
+    NSDictionary *postObject = _allPosts[tag];
+    
+    //get the Parse Object and Report Post
+    PFObject *parseObject = postObject[@"parseObject"];
+    [parseObject deleteInBackground];
+    
+    [_allPosts removeObjectAtIndex:tag];
+}
+
+
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -876,6 +911,9 @@
              [title isEqualToString:@"Other"])
     {
         [self reportPost:_cellToDelete.tag];
+        [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
+    }else if([title isEqualToString:@"Yes"]) {
+        [self deletePost:_cellToDelete.tag];
         [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
     }else{
         [_cellToDelete swipeToOriginWithCompletion:^{

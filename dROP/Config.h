@@ -96,6 +96,7 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 
 #define NEW_POST_TYPE @"New"
 #define LIKE_POST_TYPE @"Like"
+#define UNLIKE_POST_TYPE @"Unlike"
 #define DISLIKE_POST_TYPE @"Dislike"
 #define REPORT_POST_TYPE @"Report"
 

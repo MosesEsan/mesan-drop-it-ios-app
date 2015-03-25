@@ -84,6 +84,7 @@
 		27B96AA71AAFBD5C00AC4120 /* cross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B96AA51AAFBD5C00AC4120 /* cross@2x.png */; };
 		27B96AAA1AAFBD7400AC4120 /* CCMBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B96AA91AAFBD7400AC4120 /* CCMBorderView.m */; };
 		27B96AB01AB00ED600AC4120 /* Blue-Blurry-Desktop-Background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 27B96AAE1AB00ED600AC4120 /* Blue-Blurry-Desktop-Background.jpg */; };
+		27D3B81B1AC36238000E4ED5 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 27D3B81A1AC36238000E4ED5 /* placeholder.jpg */; };
 		27DE0C301AB9D44000DA0D9C /* JPSThumbnailAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE0C2C1AB9D44000DA0D9C /* JPSThumbnailAnnotation.m */; };
 		27DE0C311AB9D44000DA0D9C /* JPSThumbnailAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE0C2E1AB9D44000DA0D9C /* JPSThumbnailAnnotationView.m */; };
 		27DE0C321AB9D44000DA0D9C /* JPSThumnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE0C2F1AB9D44000DA0D9C /* JPSThumnail.m */; };
@@ -208,6 +209,7 @@
 		27B96AA81AAFBD7400AC4120 /* CCMBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMBorderView.h; sourceTree = "<group>"; };
 		27B96AA91AAFBD7400AC4120 /* CCMBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMBorderView.m; sourceTree = "<group>"; };
 		27B96AAE1AB00ED600AC4120 /* Blue-Blurry-Desktop-Background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Blue-Blurry-Desktop-Background.jpg"; path = "Intro_Screen_Background.imageset/Blue-Blurry-Desktop-Background.jpg"; sourceTree = "<group>"; };
+		27D3B81A1AC36238000E4ED5 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		27DE0C2A1AB9D44000DA0D9C /* JPSThumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPSThumbnail.h; sourceTree = "<group>"; };
 		27DE0C2B1AB9D44000DA0D9C /* JPSThumbnailAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPSThumbnailAnnotation.h; sourceTree = "<group>"; };
 		27DE0C2C1AB9D44000DA0D9C /* JPSThumbnailAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPSThumbnailAnnotation.m; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 			children = (
 				2713200D1AB7669300CF23DB /* Fruits */,
 				27B4043F1AA66744007DC137 /* CoverPhotoPH.JPG */,
+				27D3B81A1AC36238000E4ED5 /* placeholder.jpg */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				27B96AA71AAFBD5C00AC4120 /* cross@2x.png in Resources */,
 				271320281AB7669F00CF23DB /* strawberry.png in Resources */,
 				27EC53A11AB3F68500CC2A10 /* Done.png in Resources */,
+				27D3B81B1AC36238000E4ED5 /* placeholder.jpg in Resources */,
 				27B96A961AAFBA4900AC4120 /* Comment.png in Resources */,
 				271320381AB76E7100CF23DB /* papaya.png in Resources */,
 				2713201C1AB7669F00CF23DB /* apple.png in Resources */,
