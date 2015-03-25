@@ -418,9 +418,23 @@
         height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 5;
     else if ([Config cellType] == COLOURED)
         height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
+    else if ([Config isPostAuthor:postObject])
+    {
+        CGFloat mainContainerWidth = WIDTH - (CONTAINER_FRAME_X + (CONTAINER_FRAME_X / 2) + 2);
+        CGFloat postContainerWidth = mainContainerWidth - PROFILE_PIC_WIDTH;
+        CGFloat labelWidth = postContainerWidth - (8 * 2);
+        
+        CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:labelWidth withFont:TEXT_FONT];
+        height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 5;
+    }
     
     if (postObject[@"parseObject"][@"pic"])
         height += 10 + IMAGEVIEW_HEIGHT;
+    
+    if ([Config isPostAuthor:postObject])
+    {
+        height = [Config calculateCellHeight:postObject];
+    }
     
     return height;
 }

@@ -20,7 +20,7 @@
     if (self)
     {
         // Initialization code
-        self.backgroundColor = [UIColor greenColor];
+        self.backgroundColor = [UIColor clearColor];
         
         self.mainContainer = [[UIView alloc] init];
         self.mainContainer.backgroundColor = [UIColor clearColor];
@@ -30,14 +30,23 @@
         [self.contentView addSubview:self.mainContainer];
         
         self.line = [[UIView alloc] init];
-        self.line.layer.borderWidth = 0.7f;
+        self.line.backgroundColor = [UIColor whiteColor];
         [self.mainContainer addSubview:self.line];
+        
+        self.profilePic = [[UIImageView alloc] initWithFrame:CGRectMake(5, TOP_PADDING, 35.0f, 35.0f)];
+        self.profilePic.backgroundColor = [BAR_TINT_COLOR2 colorWithAlphaComponent:0.3];//[UIColor whiteColor];
+        self.profilePic.layer.borderWidth = .2f;
+        self.profilePic.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        self.profilePic.contentMode = UIViewContentModeScaleAspectFit;
+        self.profilePic.layer.masksToBounds = YES;
+        self.profilePic.clipsToBounds = YES;
+        self.profilePic.layer.cornerRadius = CGRectGetWidth(self.profilePic.frame) / 2;
+        [self.line addSubview:self.profilePic];
+        
+        
         
         self.postContainer = [[UIView alloc] init];
         self.postContainer.backgroundColor = [UIColor whiteColor];
-        //self.postContainer.layer.borderWidth = 1.5f;
-        //self.postContainer.layer.borderColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.6f].CGColor;
-        //self.postContainer.layer.cornerRadius = 4.0f;
         self.postContainer.clipsToBounds = YES;
         [self.mainContainer addSubview:self.postContainer];
         
@@ -49,10 +58,6 @@
         self.postText.font = TEXT_FONT;
         self.postText.clipsToBounds = YES;
         self.postText.userInteractionEnabled = YES;
-        /*
-         self.postText.attributesText = @{NSForegroundColorAttributeName: TEXT_COLOR, NSFontAttributeName: TEXT_FONT};
-         self.postText.attributesHashtag = @{NSForegroundColorAttributeName: BAR_TINT_COLOR2, NSFontAttributeName: TEXT_FONT};
-         */
         [self.postContainer addSubview:self.postText];
         
         
@@ -119,25 +124,23 @@
 - (void)setFrameWithObject:(NSDictionary *)postObject forIndex:(NSInteger)index
 {
     
-    #define PROFILE_PIC_WIDTH 50.0f
     
-    CGFloat postTextHeight = [Config calculateHeightForText:postObject[@"text"] withWidth:WIDTH - 55.5f withFont:TEXT_FONT];
+    CGFloat mainContainerWidth = WIDTH - (CONTAINER_FRAME_X + (CONTAINER_FRAME_X / 2) + 2);
+    CGFloat postContainerWidth = mainContainerWidth - PROFILE_PIC_WIDTH;
+    CGFloat labelWidth = postContainerWidth - 8;
     
-    CGFloat cellHeight = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
+    CGFloat postTextHeight = [Config calculateHeightForText:postObject[@"text"] withWidth:labelWidth withFont:TEXT_FONT];
     
-    if (postObject[@"parseObject"][@"pic"])
-        cellHeight =  cellHeight + 10 + IMAGEVIEW_HEIGHT;
+    CGFloat cellHeight = [Config calculateCellHeight:postObject];
     
-    CGRect mainContainerFrame = CGRectMake(CONTAINER_FRAME_X, 0,
-                                           WIDTH - (CONTAINER_FRAME_X + (CONTAINER_FRAME_X / 2) + 2), cellHeight);
+    CGRect mainContainerFrame = CGRectMake(CONTAINER_FRAME_X, 0, mainContainerWidth, cellHeight);
     
     CGRect lineFrame = CGRectMake(0, 0, PROFILE_PIC_WIDTH, cellHeight);
-    CGRect postContainerFrame = CGRectMake(PROFILE_PIC_WIDTH, 0, CGRectGetWidth(mainContainerFrame) - PROFILE_PIC_WIDTH, cellHeight); //1 Added to cover up left border
+    CGRect postContainerFrame = CGRectMake(PROFILE_PIC_WIDTH, 0, postContainerWidth, cellHeight); //1 Added to cover up left border
     
-    CGFloat width = CGRectGetWidth(postContainerFrame) - (8 * 2);
-    CGRect labelFrame = CGRectMake(8, TOP_PADDING, width, postTextHeight);
-    CGRect imageFrame = CGRectMake(8, 0, width, IMAGEVIEW_HEIGHT);
-    CGRect actionViewFrame = CGRectMake(8, 0, width + 8, ACTIONS_VIEW_HEIGHT);
+    CGRect labelFrame = CGRectMake(0, TOP_PADDING, labelWidth, postTextHeight);
+    CGRect imageFrame = CGRectMake(0, 0, labelWidth, IMAGEVIEW_HEIGHT);
+    CGRect actionViewFrame = CGRectMake(0, 0, labelWidth + 8, ACTIONS_VIEW_HEIGHT);
     CGRect smileyFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
     
     if (postObject[@"parseObject"][@"pic"])
@@ -163,15 +166,12 @@
     
     self.mainContainer.frame = mainContainerFrame;
     self.postContainer.frame = postContainerFrame;
-    self.postContainer.backgroundColor = [UIColor redColor];
     self.postText.frame = labelFrame;
-    
     self.postImage.frame = imageFrame;
     self.actionsView.frame = actionViewFrame;
     self.smiley.frame = smileyFrame;
     
-    self.line.backgroundColor = [Config getSideColor:index];
-    self.line.layer.borderColor = [Config getSideColor:index].CGColor;
+    self.profilePic.image = [Config usersAvatar];
 }
 
 - (void)awakeFromNib {

@@ -74,6 +74,8 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define CONTAINER_FRAME_X 7.5f
 #define COLOURED_BAR_WIDTH 0.0f
 
+#define PROFILE_PIC_WIDTH 50.0f
+
 #define DATE_COLOR [UIColor colorWithRed:137/255.0f green:143/255.0f blue:156/255.0f alpha:1.0f]
 #define MESSAGE_COLOR [UIColor colorWithRed:85/255.0f green:85/255.0f blue:85/255.0f alpha:1.0f]
 #define TEXT_COLOR [UIColor colorWithRed:34/255.0f green:34/255.0f blue:34/255.0f alpha:1.0f]
@@ -133,6 +135,8 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 + (PostCellType)cellType;
 + (BOOL)setCellType:(PostCellType)mode;
 
++ (UIImage *)usersAvatar;
+
 + (NSMutableArray *)availableLocations;
 + (void)updateAvailableLocations:(NSDate *)lastUpdated;
 
@@ -160,7 +164,7 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 
 + (NSDictionary *)subViewFrames:(NSDictionary *)postObject;
 + (NSDictionary *)subViewFrames2:(NSDictionary *)postObject;
-+ (NSDictionary *)colouredCellFrames:(NSDictionary *)postObject;
++ (CGFloat)calculateCellHeight:(NSDictionary *)postObject;
 
 
 + (NSDictionary *)userPoints;

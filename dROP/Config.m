@@ -34,11 +34,14 @@
     {
         NSLog(@"Config not set");
         
+        NSString *avatar = [Config fruits];
+        
         NSDictionary *config = @{@"Installation Date" : [NSDate date],
                                  @"App Mode" : @(TESTING),
                                  @"Mode Configured" : [NSNumber numberWithBool:NO],
                                  @"Last Active" : [NSDate date],
-                                 @"Cell Type" : @(COLOURED)
+                                 @"Cell Type" : @(COLOURED),
+                                 @"Avatar" : avatar
                                  };
         
         [[NSUserDefaults standardUserDefaults] setObject:config forKey:@"DIConfig"];
@@ -65,11 +68,12 @@
                                 AppMode mode = (AppMode)[config[@"modeValue"] intValue];
                                 
                                 newConfig = @{@"Installation Date" : [NSDate date],
-                                                         @"App Mode" : @(mode),
-                                                         @"Mode Configured" : [NSNumber numberWithBool:YES],
-                                                         @"Last Active" : [NSDate date],
-                                                         @"Cell Type" : @(COLOURED)
-                                                         };
+                                              @"App Mode" : @(mode),
+                                              @"Mode Configured" : [NSNumber numberWithBool:YES],
+                                              @"Last Active" : [NSDate date],
+                                              @"Cell Type" : @(COLOURED),
+                                              @"Avatar" : avatar
+                                              };
                             }
                         }
                         
@@ -116,7 +120,6 @@
     }
 }
 
-
 + (BOOL)setCellType:(PostCellType)mode
 {
     //Set Default Locations
@@ -134,6 +137,27 @@
         
         return YES;
     }
+}
+
++ (UIImage *)usersAvatar
+{
+    //Set Default Locations
+    NSDictionary *config = [[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"];
+    
+    if (config[@"Avatar"] == nil)
+    {
+        //set an avatar
+        NSMutableDictionary *newConfig = config.mutableCopy;
+        newConfig[@"Avatar"] = [Config fruits];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:newConfig forKey:@"DIConfig"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
+    config = [[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"];
+    UIImage *avatar = [UIImage imageNamed:config[@"Avatar"]];
+    
+    return avatar;
 }
 
 + (void)updateAvailableLocations:(NSDate *)lastUpdated
@@ -619,6 +643,23 @@
     return subViewframes;
 }
 
+
++ (CGFloat)calculateCellHeight:(NSDictionary *)postObject
+{
+    NSString *postText = postObject[@"text"];
+    
+    CGFloat mainContainerWidth = WIDTH - (CONTAINER_FRAME_X + (CONTAINER_FRAME_X / 2) + 2);
+    CGFloat postContainerWidth = mainContainerWidth - PROFILE_PIC_WIDTH;
+    CGFloat labelWidth = postContainerWidth - 8;
+    
+    CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:labelWidth withFont:TEXT_FONT];
+    CGFloat height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 5;
+    
+    if (postObject[@"parseObject"][@"pic"])
+        height += 10 + IMAGEVIEW_HEIGHT;
+    
+    return height;
+}
 
 
 

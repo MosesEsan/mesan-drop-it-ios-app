@@ -12,5 +12,6 @@
 @interface ProfileTableViewCell : DITableViewCell
 
 @property (nonatomic, strong) UIView *postContainer;
+@property (nonatomic, strong) UIImageView *profilePic;
 
 @end
