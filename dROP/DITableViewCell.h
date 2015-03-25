@@ -26,4 +26,7 @@
 @property (nonatomic, strong) UIButton *smiley;
 @property (nonatomic, strong) UILabel *comments;
 
+- (void)setFrameWithObject:(NSDictionary *)postObject forIndex:(NSInteger)index;
+
+
 @end

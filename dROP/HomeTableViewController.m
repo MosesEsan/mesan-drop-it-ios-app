@@ -15,6 +15,7 @@
 #import "PostTextTableViewCell.h"
 #import "TimelineTableViewCell.h"
 #import "ColouredTableViewCell.h"
+#import "ProfileTableViewCell.h"
 
 #import "AddPostViewController.h"
 #import "ViewPostTableViewController.h"
@@ -256,35 +257,57 @@
     NSInteger repliesCount = [postObject[@"totalReplies"] integerValue];
     PFObject *parseObject = postObject[@"parseObject"];
 
-    //Check the type in other to know which type of cell to display
-    PostCellType type = [Config cellType];
-    
     DITableViewCell *cell;
 
-    if (type == TIMELINE)
+    if ([Config isPostAuthor:postObject])
     {
-        NSString *cellIdentifier = [NSString stringWithFormat:@"TimelineCell%@",parseObject.objectId];
-        TimelineTableViewCell *_cell = (TimelineTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        NSString *cellIdentifier = [NSString stringWithFormat:@"ProfileCell%@",parseObject.objectId];
+        ProfileTableViewCell *_cell = (ProfileTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (!_cell)
-            _cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            _cell = [[ProfileTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
-        _cell = [self setTimelineCellFrames:_cell withPostObject:postObject forIndex:indexPath.row];
+        [_cell setFrameWithObject:postObject forIndex:indexPath.row];
+        
+        if (indexPath.row != ([_allPosts count] - 1))
+            _cell.bottomBorder.frame = CGRectMake(0, CGRectGetHeight(_cell.mainContainer.frame) - 0.5f, CGRectGetWidth(_cell.mainContainer.frame), .5f);
         
         cell = _cell;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
-    }else if (type == COLOURED){
-        NSString *cellIdentifier = [NSString stringWithFormat:@"ColouredCell%@",parseObject.objectId];
-        ColouredTableViewCell *_cell = (ColouredTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (!_cell)
-            _cell = [[ColouredTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }else{
+        //Check the type in other to know which type of cell to display
+        PostCellType type = [Config cellType];
         
-        _cell = [self setColouredCellFrames:_cell withPostObject:postObject forIndex:indexPath.row];
-        
-        cell = _cell;
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }
+        if (type == TIMELINE)
+        {
+            NSString *cellIdentifier = [NSString stringWithFormat:@"TimelineCell%@",parseObject.objectId];
+            TimelineTableViewCell *_cell = (TimelineTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            if (!_cell)
+                _cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            
+            _cell = [self setTimelineCellFrames:_cell withPostObject:postObject forIndex:indexPath.row];
+            
+            cell = _cell;
+            tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            
+        }else if (type == COLOURED){
+            NSString *cellIdentifier = [NSString stringWithFormat:@"ColouredCell%@",parseObject.objectId];
+            ColouredTableViewCell *_cell = (ColouredTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            if (!_cell)
+                _cell = [[ColouredTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            
+            [_cell setFrameWithObject:postObject forIndex:indexPath.row];
+            
+            if (indexPath.row != ([_allPosts count] - 1))
+                _cell.bottomBorder.frame = CGRectMake(0, CGRectGetHeight(_cell.mainContainer.frame) - 0.5f, CGRectGetWidth(_cell.mainContainer.frame), .5f);
+            
+            cell = _cell;
+            tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        }
 
+    }
+    
+    
     cell.tag = indexPath.row;
     
     // Configure the cell...
@@ -378,28 +401,6 @@
     //UIColor *rColor = [Config getBubbleColor];
     //_cell.bubble.layer.borderColor = rColor.CGColor;
     _cell.bubble.layer.borderColor = [Config getSideColor:index].CGColor;
-    
-    return _cell;
-}
-
-- (ColouredTableViewCell *)setColouredCellFrames:(ColouredTableViewCell *)_cell withPostObject:(NSDictionary *)postObject forIndex:(NSInteger)index
-{
-    //Set Frames
-    NSDictionary *subViewframes = [Config colouredCellFrames:postObject];
-    _cell.line.frame = [subViewframes[@"lineFrame"] CGRectValue];
-    
-    _cell.mainContainer.frame = [subViewframes[@"mainContainerFrame"] CGRectValue];
-    _cell.postContainer.frame = [subViewframes[@"postContainerFrame"] CGRectValue];
-    _cell.postText.frame = [subViewframes[@"postTextFrame"] CGRectValue];
-    _cell.postImage.frame = [subViewframes[@"imageFrame"] CGRectValue];
-    _cell.actionsView.frame = [subViewframes[@"actionViewFrame"] CGRectValue];
-    _cell.smiley.frame = [subViewframes[@"smileyFrame"] CGRectValue];
-    
-    _cell.line.backgroundColor = [Config getSideColor:index];
-    _cell.line.layer.borderColor = [Config getSideColor:index].CGColor;
-    
-    if (index != ([_allPosts count] - 1))
-        _cell.bottomBorder.frame = CGRectMake(0, CGRectGetHeight(_cell.mainContainer.frame) - 0.5f, CGRectGetWidth(_cell.mainContainer.frame), .5f);
     
     return _cell;
 }

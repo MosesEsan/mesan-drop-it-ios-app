@@ -619,57 +619,12 @@
     return subViewframes;
 }
 
-+ (NSDictionary *)colouredCellFrames:(NSDictionary *)postObject
-{
-    CGFloat postTextHeight = [Config calculateHeightForText:postObject[@"text"] withWidth:WIDTH - 55.5f withFont:TEXT_FONT];
-    
-    CGFloat cellHeight = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
-    
-    if (postObject[@"parseObject"][@"pic"])
-        cellHeight =  cellHeight + 10 + IMAGEVIEW_HEIGHT;
-    
-    CGRect mainContainerFrame = CGRectMake(CONTAINER_FRAME_X, 0,
-                                       WIDTH - (CONTAINER_FRAME_X + (CONTAINER_FRAME_X / 2) + 2), cellHeight);
-    
-    CGRect lineFrame = CGRectMake(0, 0, COLOURED_BAR_WIDTH, cellHeight);
-    CGRect postContainerFrame = CGRectMake(COLOURED_BAR_WIDTH, 0, CGRectGetWidth(mainContainerFrame) - COLOURED_BAR_WIDTH, cellHeight); //1 Added to cover up left border
-    
-    CGFloat width = CGRectGetWidth(postContainerFrame) - (8 * 2);
-    CGRect labelFrame = CGRectMake(8, TOP_PADDING, width, postTextHeight);
-    CGRect imageFrame = CGRectMake(8, 0, width, IMAGEVIEW_HEIGHT);
-    CGRect actionViewFrame = CGRectMake(8, 0, width + 8, ACTIONS_VIEW_HEIGHT);
-    CGRect smileyFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
-    
-    if (postObject[@"parseObject"][@"pic"])
-    {
-        //Set Image View Frame
-        imageFrame.origin.y = labelFrame.origin.y + postTextHeight + 7;
-        imageFrame.size.height = IMAGEVIEW_HEIGHT;
-        
-        //Set Action View Frame
-        actionViewFrame.origin.y = imageFrame.origin.y + imageFrame.size.height + 10;
-    }else{
-        
-        //Set Image View Frame
-        imageFrame.origin.y = 0;
-        imageFrame.size.height = 0;
-        
-        //Set Action View Frame
-        actionViewFrame.origin.y = labelFrame.origin.y + postTextHeight + 10;
-    }
-    
-    NSDictionary *subViewframes =   @{
-                                      @"lineFrame" : [NSValue valueWithCGRect:lineFrame],
-                                      @"mainContainerFrame" : [NSValue valueWithCGRect:mainContainerFrame],
-                                      @"postContainerFrame" : [NSValue valueWithCGRect:postContainerFrame],
-                                      @"postTextFrame" : [NSValue valueWithCGRect:labelFrame],
-                                      @"imageFrame" : [NSValue valueWithCGRect:imageFrame],
-                                      @"actionViewFrame" : [NSValue valueWithCGRect:actionViewFrame],
-                                      @"smileyFrame" : [NSValue valueWithCGRect:smileyFrame]
-                                      };
-    
-    return subViewframes;
-}
+
+
+
+
+
+
 
 + (void)incrementUserPoints
 {

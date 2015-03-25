@@ -1,18 +1,18 @@
 //
-//  ColouredTableViewCell.m
+//  ProfileTableViewCell.m
 //  Drop It!
 //
-//  Created by Moses Esan on 20/03/2015.
+//  Created by Moses Esan on 25/03/2015.
 //  Copyright (c) 2015 Moses Esan. All rights reserved.
 //
 
-#import "ColouredTableViewCell.h"
+#import "ProfileTableViewCell.h"
 
 #define LEFT_PADDING 16.5f
 
 #define POST_TEXT_WIDTH WIDTH - 16.5f - (LEFT_PADDING * 2)
 
-@implementation ColouredTableViewCell
+@implementation ProfileTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -20,7 +20,7 @@
     if (self)
     {
         // Initialization code
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor greenColor];
         
         self.mainContainer = [[UIView alloc] init];
         self.mainContainer.backgroundColor = [UIColor clearColor];
@@ -115,8 +115,12 @@
     return self;
 }
 
+
 - (void)setFrameWithObject:(NSDictionary *)postObject forIndex:(NSInteger)index
 {
+    
+    #define PROFILE_PIC_WIDTH 50.0f
+    
     CGFloat postTextHeight = [Config calculateHeightForText:postObject[@"text"] withWidth:WIDTH - 55.5f withFont:TEXT_FONT];
     
     CGFloat cellHeight = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
@@ -127,8 +131,8 @@
     CGRect mainContainerFrame = CGRectMake(CONTAINER_FRAME_X, 0,
                                            WIDTH - (CONTAINER_FRAME_X + (CONTAINER_FRAME_X / 2) + 2), cellHeight);
     
-    CGRect lineFrame = CGRectMake(0, 0, COLOURED_BAR_WIDTH, cellHeight);
-    CGRect postContainerFrame = CGRectMake(COLOURED_BAR_WIDTH, 0, CGRectGetWidth(mainContainerFrame) - COLOURED_BAR_WIDTH, cellHeight); //1 Added to cover up left border
+    CGRect lineFrame = CGRectMake(0, 0, PROFILE_PIC_WIDTH, cellHeight);
+    CGRect postContainerFrame = CGRectMake(PROFILE_PIC_WIDTH, 0, CGRectGetWidth(mainContainerFrame) - PROFILE_PIC_WIDTH, cellHeight); //1 Added to cover up left border
     
     CGFloat width = CGRectGetWidth(postContainerFrame) - (8 * 2);
     CGRect labelFrame = CGRectMake(8, TOP_PADDING, width, postTextHeight);
@@ -159,7 +163,9 @@
     
     self.mainContainer.frame = mainContainerFrame;
     self.postContainer.frame = postContainerFrame;
+    self.postContainer.backgroundColor = [UIColor redColor];
     self.postText.frame = labelFrame;
+    
     self.postImage.frame = imageFrame;
     self.actionsView.frame = actionViewFrame;
     self.smiley.frame = smileyFrame;
@@ -177,7 +183,5 @@
 
     // Configure the view for the selected state
 }
-
-
 
 @end
