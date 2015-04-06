@@ -22,6 +22,14 @@ PODS:
   - FormatterKit/URLRequestFormatter (1.8.0)
   - JDFTooltips (1.0)
   - Montserrat (1.0.0)
+  - MSSlidingPanelController (1.3.4)
+  - NJKWebViewProgress (0.2.3):
+    - NJKWebViewProgress/Core (= 0.2.3)
+    - NJKWebViewProgress/ProgressView (= 0.2.3)
+  - NJKWebViewProgress/Core (0.2.3)
+  - NJKWebViewProgress/ProgressView (0.2.3)
+  - RESideMenu (4.0.7)
+  - STTweetLabel (3.1.16)
 
 DEPENDENCIES:
   - CCMPopup
@@ -29,12 +37,20 @@ DEPENDENCIES:
   - FormatterKit
   - JDFTooltips
   - Montserrat
+  - MSSlidingPanelController
+  - NJKWebViewProgress
+  - RESideMenu (~> 4.0.7)
+  - STTweetLabel
 
 SPEC CHECKSUMS:
-  CCMPopup: 529f59478cbf4e5fc10592255f80cf3be1ba4a9e
+  CCMPopup: e41fad5b8a0823c9cddea8eab6d431670c9dabe5
   DZNEmptyDataSet: 741da409081a4bf707c949c964623a6ad1799772
-  FormatterKit: 547a808c41172136a3f3acb424ac9361d38bb32f
-  JDFTooltips: 423d80b196868a4023df130bddd91e14ac86ffce
-  Montserrat: 580c932fcad1ea7e282931e8a5719eacd12b6f0a
+  FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
+  JDFTooltips: 439e3f1010b5e689e8438f66fce8448726e59897
+  Montserrat: 05ccfd6f44aadfd81b2bc3655f759099983be06e
+  MSSlidingPanelController: e1982ca6e6a50ca064a6cac4fdb650da7b3a1585
+  NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
+  RESideMenu: f24c508404b49c667344c54aba7e590883533958
+  STTweetLabel: f249ed62963dd73e88a6ff6ab2e871c48b0b5c31
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.36.1

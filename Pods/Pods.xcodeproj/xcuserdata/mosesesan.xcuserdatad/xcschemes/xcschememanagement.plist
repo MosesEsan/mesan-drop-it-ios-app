@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Montserrat.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Drop It!-CCMPopup.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,7 +24,32 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Drop It!-MSSlidingPanelController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Drop It!-Montserrat-Montserrat.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Drop It!-Montserrat.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Drop It!-NJKWebViewProgress.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Drop It!-RESideMenu.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Drop It!-STTweetLabel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,37 +62,57 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0DEDEE0CB74BB0DEFE30D8C4</key>
+		<key>36D39C3C19A70C9E9F8972FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>187E95932BDD9C3BFDDA5137</key>
+		<key>463396632996AD94C4AB9760</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>224A7E58FF199F7E8A5CBDFB</key>
+		<key>49AE73312137764AFA695B9F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>426679AAD6ED6D1A55B9781E</key>
+		<key>594E8A915ABCAAB30CED9CC3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>589F679ABE26B01EBD58360D</key>
+		<key>5DA6D5158133356258BD527A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>92A94B9CD47379892852E72B</key>
+		<key>78804D33A9ABAA197281BAC2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AE7C93D7C66C73EA708413CE</key>
+		<key>7D017AF3C28755346D14176F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B44C1CE5A9B375DDFC52AC4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A0DF81CE07D0432C2CD6D1E5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CB287754D5315D2C235504A4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FD1EE1EC09C2419DC7FFBD03</key>
 		<dict>
 			<key>primary</key>
 			<true/>

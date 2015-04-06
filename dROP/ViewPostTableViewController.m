@@ -32,6 +32,8 @@
     
     NSMutableArray *allComments;
     NSInteger likesCount;
+    
+    UIAlertView *reportPostAlertView;
 }
 
 @property (nonatomic, strong) UILabel *postText;
@@ -46,7 +48,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 
-
+@property (nonatomic, strong) MCSwipeTableViewCell *cellToDelete;
 
 @end
 
@@ -365,22 +367,21 @@
     return size.height;
 }
 
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PFObject *commentObject = allComments[indexPath.row];
+    NSDictionary *commentObject = allComments[indexPath.row];
     NSString *commentText = commentObject[@"text"];
-    NSString *commentDate = [Config calculateTime:commentObject.createdAt];
+    NSInteger smileyCount = [commentObject[@"totalLikes"] integerValue];
     NSString *cellIdentifier = [NSString stringWithFormat:@"CommentCell%ld",(long)indexPath.row];
+    
     
     CommentTableViewCell *cell = (CommentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell)
         cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     
     // Configure the cell...
-    cell.commentText.text = commentText;
-    cell.date.text = commentDate;
+    cell.commentText.text = commentObject[@"text"];
+    cell.date.text = [Config calculateTime:commentObject[@"date"]];
     
     //Set Label Frame
     CGFloat postTextHeight = [Config calculateHeightForText:commentText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
@@ -393,6 +394,81 @@
     frame.origin.y = labelFrame.origin.y + postTextHeight + 10;
     cell.actionsView.frame = frame;
     
+    
+    // Configure the cell...
+    [cell.smiley setTitle:[Config likesCount:smileyCount] forState:UIControlStateNormal];
+    
+    //if the user is the owner of the comment
+    //and the comment has likes, show the smiley button
+    //else hide it
+    if ([Config isPostAuthor:commentObject])
+    {
+        if (smileyCount > 0) cell.smiley.hidden = NO;
+        else cell.smiley.hidden = YES;
+    }
+    
+    //If the value for the disliked index is not YES,
+    //set the smiley selected state to the value of the liked index
+    if (![commentObject[@"disliked"] boolValue]){
+        cell.smiley.selected = [commentObject[@"liked"] boolValue];
+    }else{
+        //else  set the smiley selected state to NO
+        //set the smiley highlighted state to the value of the disliked index to indicate the user has disliked the post
+        cell.smiley.selected = NO;
+        cell.smiley.highlighted = [commentObject[@"disliked"] boolValue];
+    }
+    
+    //If the user is not the comment authour
+    //They can like, dislike and report the comment
+    if (![Config isPostAuthor:commentObject])
+    {
+        cell.smiley.tag = indexPath.row;
+        [cell.smiley addTarget:self action:@selector(likeComment:) forControlEvents:UIControlEventTouchUpInside];
+        
+        __weak typeof(cell) weakSelf = cell;
+        
+        [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
+                                color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
+                                 mode:MCSwipeTableViewCellModeExit
+                                state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+                                    
+                                    _cellToDelete = weakSelf;
+                                    
+                                    
+                                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Options?"
+                                                                                        message:@"What would you like to do?"
+                                                                                       delegate:self
+                                                                              cancelButtonTitle:@"Cancel"
+                                                                              otherButtonTitles:@"Dislike", @"Report",nil];
+                                    [alertView show];
+                                }];
+    }else if ([Config isPostAuthor:commentObject]){
+        
+        //If the user is th author of the post
+        //allow the user to be able to delete the post
+        __weak typeof(cell) weakSelf = cell;
+        
+        [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
+                                color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
+                                 mode:MCSwipeTableViewCellModeExit
+                                state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+                                    
+                                    _cellToDelete = weakSelf;
+                                    
+                                    
+                                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Comment"
+                                                                                        message:@"Are yu sure you want to delete this comment?"
+                                                                                       delegate:self
+                                                                              cancelButtonTitle:@"No"
+                                                                              otherButtonTitles:@"Yes",nil];
+                                    [alertView show];
+                                }];
+    }
+    
+
+    
+    
+    cell.tag = indexPath.row;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -474,112 +550,6 @@
     [self resetSubView];
 }
 
-- (void)addComment:(UIButton *)sender
-{
-    NSInteger commentLength = [[commentTextView text] length];
-
-    if (commentLength > 0)
-    {
-        NSString *commenttext = commentTextView.text;
-        
-        [self resetToDefault];
-
-        NSInteger repliesCount = [_postObject[@"totalReplies"] integerValue];
-        repliesCount++;
-        
-        PFObject *parseObject = _postObject[@"parseObject"];
-        
-        //Create Parse Comment Object
-        PFObject *commentObject = [PFObject objectWithClassName:COMMENTS_CLASS_NAME];
-        commentObject[@"text"] = commenttext;
-        commentObject[@"deviceId"] = [Config deviceId];
-        commentObject[@"postId"] = parseObject.objectId;
-        commentObject[@"post"] = parseObject;
-        
-        // Use PFACL to restrict future modifications to this object.
-        PFACL *readOnlyACL = [PFACL ACL];
-        [readOnlyACL setPublicReadAccess:YES];
-        [readOnlyACL setPublicWriteAccess:NO];
-        commentObject.ACL = readOnlyACL;
-        
-        [allComments addObject:commentObject];
-        
-        //Update main array with new replies count value
-        [_postObject setValue:[NSNumber numberWithInteger:repliesCount] forKey:@"totalReplies"];
-        [_delegate updateAllPostsArray:self.view.tag withPostObject:_postObject];
-        
-        [_tableView reloadData];
-        
-        [commentObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (error) {
-                NSLog(@"Couldn't save!");
-                NSLog(@"%@", error);
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error userInfo][@"error"]
-                                                                    message:nil
-                                                                   delegate:self
-                                                          cancelButtonTitle:nil
-                                                          otherButtonTitles:@"Ok", nil];
-                [alertView show];
-                return;
-            }
-            if (succeeded) {
-                NSLog(@"Successfully saved!");
-                NSLog(@"%@", commentObject);
-                
-                [parseObject addUniqueObject:commentObject.objectId forKey:@"replies"];
-                [parseObject saveInBackground];
-            } else {
-                NSLog(@"Failed to save.");
-            }
-        }];
-        
-    }else{
-        //Do nothing
-    }
-}
-
-- (void)queryForAllComments
-{
-    dispatch_queue_t commentsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(commentsQueue, ^{
-        
-        if ([Config checkInternetConnection])
-        {
-            PFObject *parseObject = _postObject[@"parseObject"];
-            
-            PFQuery *query = [PFQuery queryWithClassName:COMMENTS_CLASS_NAME];
-            [query whereKey:@"postId" equalTo:parseObject.objectId];
-            [query orderByAscending:@"createdAt"];
-            /*
-             // If no objects are loaded in memory, we look to the cache first to fill the table
-             // and then subsequently do a query against the network.
-             if ([allComments count] == 0)
-             {
-             query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-             }
-             */
-            query.limit = 20;
-            
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (error) {
-                    NSLog(@"error in geo query!"); // todo why is this ever happening?
-                } else {
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        allComments = objects.mutableCopy;
-                        [_tableView reloadData];
-                    });
-                }
-            }];
-            
-        }else{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
-            });
-        }
-    });
-}
-
 - (void)resetSubView
 {
     [UIView beginAnimations:nil context:NULL];
@@ -632,6 +602,184 @@
     [UIView commitAnimations];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    if (alertView == reportPostAlertView)
+    {
+        NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+        
+        if([title isEqualToString:@"Cancel"])
+        {
+            //do nothing
+        }else{
+            
+            //update array and database
+            [self.delegate reportPost:self.view.tag];
+            
+            ///close
+            [self.navigationController popViewControllerAnimated:TRUE];
+        }
+    }else{
+        
+        NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+        
+        if([title isEqualToString:@"Dislike"]) {
+            
+            [_cellToDelete swipeToOriginWithCompletion:^{
+                [self dislikeComment:_cellToDelete.tag];
+                _cellToDelete = nil;
+            }];
+            
+        }else if([title isEqualToString:@"Report"]) {
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Report Post"
+                                                                message:@"Please tell us what is wrong with ths post."
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Cancel"
+                                                      otherButtonTitles:@"Offensive content", @"Spam", @"Other", nil];
+            [alertView show];
+        }else if([title isEqualToString:@"Offensive content"] ||
+                 [title isEqualToString:@"Spam"] ||
+                 [title isEqualToString:@"Other"])
+        {
+            [self reportComment:_cellToDelete.tag];
+            [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
+        }else if([title isEqualToString:@"Yes"]) {
+            [self deleteComment:_cellToDelete.tag];
+            [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
+        }else{
+            [_cellToDelete swipeToOriginWithCompletion:^{
+            }];
+            
+            _cellToDelete = nil;
+        }
+    }
+}
+
+- (void)close:(UITapGestureRecognizer *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+
+
+
+
+#pragma mark - Main Methods
+//Retrieve Comments
+- (void)queryForAllComments
+{
+    dispatch_queue_t commentsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(commentsQueue, ^{
+        
+        if ([Config checkInternetConnection])
+        {
+            PFObject *parseObject = _postObject[@"parseObject"];
+            
+            PFQuery *query = [PFQuery queryWithClassName:COMMENTS_CLASS_NAME];
+            [query whereKey:@"postId" equalTo:parseObject.objectId];
+            [query orderByAscending:@"createdAt"];
+            /*
+             // If no objects are loaded in memory, we look to the cache first to fill the table
+             // and then subsequently do a query against the network.
+             if ([allComments count] == 0)
+             {
+             query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+             }
+             */
+            query.limit = 20;
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error) {
+                    NSLog(@"error in geo query!"); // todo why is this ever happening?
+                } else {
+                    
+                    NSMutableArray *filteredComments = [Config filterComments:objects];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        allComments = filteredComments;
+                        [_tableView reloadData];
+                    });
+                }
+            }];
+            
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
+            });
+        }
+    });
+}
+
+//Add New Comment
+- (void)addComment:(UIButton *)sender
+{
+    NSInteger commentLength = [[commentTextView text] length];
+    
+    if (commentLength > 0)
+    {
+        NSString *commenttext = commentTextView.text;
+        
+        [self resetToDefault];
+        
+        NSInteger repliesCount = [_postObject[@"totalReplies"] integerValue];
+        repliesCount++;
+        
+        PFObject *parseObject = _postObject[@"parseObject"];
+        
+        //Create Parse Comment Object
+        PFObject *commentObject = [PFObject objectWithClassName:COMMENTS_CLASS_NAME];
+        commentObject[@"text"] = commenttext;
+        commentObject[@"deviceId"] = [Config deviceId];
+        commentObject[@"postId"] = parseObject.objectId;
+        commentObject[@"post"] = parseObject;
+        
+        // Use PFACL to restrict future modifications to this object.
+        PFACL *readOnlyACL = [PFACL ACL];
+        [readOnlyACL setPublicReadAccess:YES];
+        [readOnlyACL setPublicWriteAccess:YES];
+        commentObject.ACL = readOnlyACL;
+        
+        NSDictionary *comments = [Config createCommentObject:commentObject];
+        [allComments addObject:comments];
+        
+        //Update main array with new replies count value
+        [_postObject setValue:[NSNumber numberWithInteger:repliesCount] forKey:@"totalReplies"];
+        [_delegate updateAllPostsArray:self.view.tag withPostObject:_postObject];
+        
+        [_tableView reloadData];
+        
+        [commentObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (error) {
+                NSLog(@"Couldn't save!");
+                NSLog(@"%@", error);
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error userInfo][@"error"]
+                                                                    message:nil
+                                                                   delegate:self
+                                                          cancelButtonTitle:nil
+                                                          otherButtonTitles:@"Ok", nil];
+                [alertView show];
+                return;
+            }
+            if (succeeded) {
+                NSLog(@"Successfully saved!");
+                NSLog(@"%@", commentObject);
+                
+                [parseObject addUniqueObject:commentObject.objectId forKey:@"replies"];
+                [parseObject saveInBackground];
+            } else {
+                NSLog(@"Failed to save.");
+            }
+        }];
+        
+    }else{
+        //Do nothing
+    }
+}
+
+//Like Post
 - (void)likePost:(UIButton *)sender
 {
     //figure out the new likes count value
@@ -644,39 +792,187 @@
     [sender setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
 }
 
+//Report Post
 - (void)reportPost:(id)sender
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Report Post"
+    reportPostAlertView = [[UIAlertView alloc] initWithTitle:@"Report Post"
                                                         message:@"Please tell us what is wrong with ths post."
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                               otherButtonTitles:@"Offensive content", @"Spam", @"Other", nil];
-    [alertView show];
-    
-    
+    [reportPostAlertView show];
 }
 
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//Like Comment
+- (void)likeComment:(UIButton *)sender
 {
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    //Get the comment object
+    NSDictionary *commentObject = allComments[sender.tag];
     
-    if([title isEqualToString:@"Cancel"])
+    //Get the current liked value and the current total likes
+    BOOL selected = [commentObject[@"liked"] boolValue];
+    NSInteger smileyCount = [commentObject[@"totalLikes"] integerValue];
+    
+    //change the buttons state
+    sender.selected = !selected;
+    
+    //Update the comment object liked and disliked value
+    [commentObject setValue:[NSNumber numberWithBool:!selected] forKey:@"liked"];
+    [commentObject setValue:[NSNumber numberWithBool:NO] forKey:@"disliked"];
+    
+    //get the Parse Object
+    PFObject *parseObject = commentObject[@"parseObject"];
+    
+    //If the current liked value is NO, which means the user is liking the comment
+    if (selected == NO)
     {
-        //do nothing
-    }else{
+        //increment the total likes count
+        smileyCount++;
         
-        //update array and database
-        [self.delegate reportPost:self.view.tag];
+        //Add the users device Id to the parse object likes array and remove it (if it exist)
+        //from the disliked array
+        [parseObject addUniqueObject:[Config deviceId] forKey:@"likes"];
+        [parseObject removeObject:[Config deviceId] forKey:@"dislikes"];
         
-        ///close
-        [self.navigationController popViewControllerAnimated:TRUE];
+        //Set the type of update that is being carried out
+        parseObject[@"type"] = LIKE_POST_TYPE;
+        
+    }else if (selected == YES){
+        //If the current liked value is YES, which means the user is unliking the comment
+        
+        //decrement the total likes count
+        smileyCount--;
+        
+        //Unlike Post
+        [parseObject removeObject:[Config deviceId] forKey:@"likes"];
+        
+        //Set the type of update that is being carried out
+        parseObject[@"type"] = UNLIKE_POST_TYPE;
     }
+    
+    //Update the value of the likes count
+    [commentObject setValue:[NSNumber numberWithInteger:smileyCount] forKey:@"totalLikes"];
+    
+    //Replace the comment object with the modified comment object
+    allComments[sender.tag] = commentObject;
+    
+    //Reload the table to reflect the changes
+    [self.tableView reloadData];
+    
+    //Save the parse object
+    [parseObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if(error){
+            sender.selected = selected; //return it to its previous state
+            //sort out the count
+        }
+    }];
 }
 
-- (void)close:(UITapGestureRecognizer *)sender
+//Dislike Comment
+- (void)dislikeComment:(NSInteger)tag
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //Get the comment object
+    NSDictionary *commentObject = allComments[tag];
+        
+    //Get the current dislike value
+    BOOL highlighted = [commentObject[@"disliked"] boolValue];
+    
+    //Update the comment object disliked value
+    [commentObject setValue:[NSNumber numberWithBool:!highlighted] forKey:@"disliked"];
+    
+    //get the Parse Object
+    PFObject *parseObject = commentObject[@"parseObject"];
+    
+    //If the current dislike value is NO, which means the user is disliking the comment
+    if (highlighted == NO)
+    {
+        //Add the users device Id to the parse object dislikes array and remove it (if it exist)
+        //from the likes array
+        [parseObject addUniqueObject:[Config deviceId] forKey:@"dislikes"];
+        [parseObject removeObject:[Config deviceId] forKey:@"likes"];
+        
+        //Set the type of update that is being carried out
+        parseObject[@"type"] = DISLIKE_POST_TYPE;
+        
+        //If user had previously liked this comment
+        //decrement the likes number
+        BOOL liked = [commentObject[@"liked"] boolValue];
+        if(liked == YES)
+        {
+            //decrement the total likes count
+            NSInteger smileyCount = [commentObject[@"totalLikes"] integerValue];
+            smileyCount--;
+            //Update the value of the likes count
+            [commentObject setValue:[NSNumber numberWithInteger:smileyCount] forKey:@"totalLikes"];
+        }
+        
+        //Update the comment object liked value
+        [commentObject setValue:[NSNumber numberWithBool:NO] forKey:@"liked"];
+    }
+
+    //Replace the comment object with the modified comment object
+    allComments[tag] = commentObject;
+    
+    //Reload the table to reflect the changes
+    [self.tableView reloadData];
+    
+    [parseObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if(error)
+            NSLog(@"Notdisliked");
+        /****attn*/
+        if(error){
+            //_cellToDelete.highlighted = highlighted; //return it to its previous state
+            //sort out the count
+        }
+    }];
+}
+
+//Report Comment
+- (void)reportComment:(NSInteger)tag
+{
+    //Get the comment object
+    NSDictionary *commentObject = allComments[tag];
+    
+    //get the Parse Object and Report Post
+    PFObject *parseObject = commentObject[@"parseObject"];
+    
+    //Add the users device Id to the parse object reports array
+    [parseObject addUniqueObject:[Config deviceId] forKey:@"reports"];
+    
+    //Set the type of update that is being carried out
+    parseObject[@"type"] = REPORT_POST_TYPE;
+    
+    [parseObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if(error)
+            //_cellToDelete.highlighted = highlighted; //return it to its previous state
+            NSLog(@"NotReported");
+        /****attn*/
+    }];
+    
+    //Remove the comment object from the array
+    [allComments removeObjectAtIndex:tag];
+}
+
+//Delete Comment
+- (void)deleteComment:(NSInteger)tag
+{
+    //Get the comment object
+    NSDictionary *commentObject = allComments[tag];
+    
+    //get the Parse Object
+    PFObject *parseObject = commentObject[@"parseObject"];
+    
+    //remove the comment object id from the post replies array
+    PFObject *postParseObject = _postObject[@"parseObject"];
+    
+    [postParseObject removeObject:parseObject.objectId forKey:@"replies"];
+    [postParseObject saveInBackground];
+    
+    //Delete the parse object from the datastore
+    [parseObject deleteInBackground];
+    
+    //Remove the comment object from the array
+    [allComments removeObjectAtIndex:tag];
 }
 
 /*

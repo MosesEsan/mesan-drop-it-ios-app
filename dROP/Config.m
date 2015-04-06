@@ -371,6 +371,48 @@
     return postObject.mutableCopy;
 }
 
+
++ (NSMutableArray *)filterComments:(NSArray *)commentObject
+{
+    NSMutableArray *newComments = [[NSMutableArray alloc] init];
+    
+    for (PFObject *comment in commentObject)
+    {
+        //if the user has not reported this message or this message has less than 5 reports
+        if (![Config getReportStatus:comment])
+        {
+            [newComments addObject:[Config createCommentObject:comment]];
+        }
+    }
+    
+    return newComments;
+}
+
++ (NSMutableDictionary *)createCommentObject:(PFObject *)parseObject
+{
+    NSString *commentText = parseObject[@"text"];
+    NSInteger likesCount = [parseObject[@"likes"] count];
+    //NSInteger repliesCount = [parseObject[@"replies"] count];
+    BOOL liked = [Config getLikeStatus:parseObject];
+    BOOL disliked = [Config getDisLikeStatus:parseObject];
+    id date = parseObject.createdAt;
+    
+    if(date == nil) date = [NSDate date];
+    
+    NSDictionary *postObject = @{
+                                 @"text" : commentText,
+                                 @"liked" : [NSNumber numberWithBool:liked],
+                                 @"disliked" : [NSNumber numberWithBool:disliked],
+                                 @"totalLikes" : [NSNumber numberWithInteger:likesCount],
+                                 //@"totalReplies" : [NSNumber numberWithInteger:repliesCount],
+                                 @"date" : date,
+                                 @"parseObject" : parseObject
+                                 };
+    
+    return postObject.mutableCopy;
+}
+
+
 + (BOOL)isPostAuthor:(NSDictionary *)postObject
 {
     PFObject *parseObject = postObject[@"parseObject"];
@@ -872,6 +914,21 @@
     return randomFruit;
 }
 
++ (NSString *)people
+{
+    NSArray *people =
+    @[@"man1", @"lady1", @"man2", @"lady2", @"man3",@"lady3", @"man4", @"lady4", @"man5", @"lady5", @"man6", @"lady6", @"man7", @"lady7", @"man8", @"lady8", @"man9", @"lady9", @"man10", @"lady10", @"man11", @"lady11"];
+    
+    NSInteger max = [people count];
+    NSInteger min = 0;
+    
+    int randNum = rand() % ((max - min) + min); //generate a random number.
+    
+    //Get color
+    NSString *randomFruit = people[randNum];
+    
+    return randomFruit;
+}
 
 
 
@@ -935,6 +992,91 @@
     [imageView setTintColor:color];
     
     return imageView;
+}
+
++ (UIImage *)drawListImage
+{
+    static UIImage *drawerButtonImage = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        UIGraphicsBeginImageContextWithOptions( CGSizeMake(26, 34), NO, 0 );
+        
+        //// Color Declarations
+        UIColor* fillColor =
+        //[UIColor colorWithRed:55/255.0f green:55/255.0f blue:55/255.0f alpha:1.0f];
+
+        [UIColor whiteColor];
+        
+        //// Frames
+        CGRect frame = CGRectMake(0, 0, 26, 32);
+        
+        //// Bottom Bar Drawing
+        UIBezierPath* bottomBarPath = [UIBezierPath bezierPathWithRect: CGRectMake(CGRectGetMinX(frame) + floor((CGRectGetWidth(frame) - 22) * 0.50000 + 0.5), CGRectGetMinY(frame) + floor((CGRectGetHeight(frame) - 1) * 0.72000 + 0.8), 22, 2)];
+        [fillColor setFill];
+        [bottomBarPath fill];
+        
+        
+        //// Middle Bar Drawing
+        UIBezierPath* middleBarPath = [UIBezierPath bezierPathWithRect: CGRectMake(CGRectGetMinX(frame) + floor((CGRectGetWidth(frame) - 22) * 0.50000 + 0.5), CGRectGetMinY(frame) + floor((CGRectGetHeight(frame) - 1) * 0.48000 + 0.5), 22, 2)];
+        [fillColor setFill];
+        [middleBarPath fill];
+        
+        
+        //// Top Bar Drawing
+        UIBezierPath* topBarPath = [UIBezierPath bezierPathWithRect: CGRectMake(CGRectGetMinX(frame) + floor((CGRectGetWidth(frame) - 22) * 0.50000 + 0.5), CGRectGetMinY(frame) + floor((CGRectGetHeight(frame) - 1) * 0.24000 + 0.5), 22, 2)];
+        [fillColor setFill];
+        [topBarPath fill];
+        
+        drawerButtonImage = UIGraphicsGetImageFromCurrentImageContext();
+    });
+    
+    return drawerButtonImage;
+}
+
+
++ (UIView *)viewWithImageName:(NSString *)imageName
+{
+    UIImage *image = [UIImage imageNamed:imageName];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    imageView.contentMode = UIViewContentModeCenter;
+    imageView.backgroundColor = [UIColor clearColor];
+    
+    return imageView;
+}
+
+
+//Imges
++ (UIImage *)imageWithImage:(UIImage *)image scaledToFillSize:(CGSize)size
+{
+    CGFloat scale = MAX(size.width/image.size.width, size.height/image.size.height);
+    CGFloat width = image.size.width * scale;
+    CGFloat height = image.size.height * scale;
+    CGRect imageRect = CGRectMake((size.width - width)/2.0f,
+                                  (size.height - height)/2.0f,
+                                  width,
+                                  height);
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    [image drawInRect:imageRect];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)size
+{
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        UIGraphicsBeginImageContextWithOptions(size, NO, [[UIScreen mainScreen] scale]);
+    } else {
+        UIGraphicsBeginImageContext(size);
+    }
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 - (void)unUsedCodes

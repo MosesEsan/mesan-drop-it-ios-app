@@ -84,9 +84,45 @@
 #define COCOAPODS_VERSION_MINOR_JDFTooltips 0
 #define COCOAPODS_VERSION_PATCH_JDFTooltips 0
 
+// MSSlidingPanelController
+#define COCOAPODS_POD_AVAILABLE_MSSlidingPanelController
+#define COCOAPODS_VERSION_MAJOR_MSSlidingPanelController 1
+#define COCOAPODS_VERSION_MINOR_MSSlidingPanelController 3
+#define COCOAPODS_VERSION_PATCH_MSSlidingPanelController 4
+
 // Montserrat
 #define COCOAPODS_POD_AVAILABLE_Montserrat
 #define COCOAPODS_VERSION_MAJOR_Montserrat 1
 #define COCOAPODS_VERSION_MINOR_Montserrat 0
 #define COCOAPODS_VERSION_PATCH_Montserrat 0
+
+// NJKWebViewProgress
+#define COCOAPODS_POD_AVAILABLE_NJKWebViewProgress
+#define COCOAPODS_VERSION_MAJOR_NJKWebViewProgress 0
+#define COCOAPODS_VERSION_MINOR_NJKWebViewProgress 2
+#define COCOAPODS_VERSION_PATCH_NJKWebViewProgress 3
+
+// NJKWebViewProgress/Core
+#define COCOAPODS_POD_AVAILABLE_NJKWebViewProgress_Core
+#define COCOAPODS_VERSION_MAJOR_NJKWebViewProgress_Core 0
+#define COCOAPODS_VERSION_MINOR_NJKWebViewProgress_Core 2
+#define COCOAPODS_VERSION_PATCH_NJKWebViewProgress_Core 3
+
+// NJKWebViewProgress/ProgressView
+#define COCOAPODS_POD_AVAILABLE_NJKWebViewProgress_ProgressView
+#define COCOAPODS_VERSION_MAJOR_NJKWebViewProgress_ProgressView 0
+#define COCOAPODS_VERSION_MINOR_NJKWebViewProgress_ProgressView 2
+#define COCOAPODS_VERSION_PATCH_NJKWebViewProgress_ProgressView 3
+
+// RESideMenu
+#define COCOAPODS_POD_AVAILABLE_RESideMenu
+#define COCOAPODS_VERSION_MAJOR_RESideMenu 4
+#define COCOAPODS_VERSION_MINOR_RESideMenu 0
+#define COCOAPODS_VERSION_PATCH_RESideMenu 7
+
+// STTweetLabel
+#define COCOAPODS_POD_AVAILABLE_STTweetLabel
+#define COCOAPODS_VERSION_MAJOR_STTweetLabel 3
+#define COCOAPODS_VERSION_MINOR_STTweetLabel 1
+#define COCOAPODS_VERSION_PATCH_STTweetLabel 16
 

@@ -12,7 +12,7 @@
 #import "LPlaceholderTextView.h"
 #import <Parse/Parse.h>
 
-#define ADD_BOX_FRAME CGRectMake(10, 20 + 64.0f, ADD_POST_WIDTH, ADD_POST_HEIGHT)
+#define ADD_BOX_FRAME CGRectMake(0, 0, ADD_POST_WIDTH, ADD_POST_HEIGHT)
 
 @interface AddPostViewController ()<UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -21,8 +21,9 @@
     UILabel *characterCountLabel;
     
     LPlaceholderTextView *messageTextView;
+    CALayer *bottomBorder;
+    UIView *footer;
     
-    UIView *addDialog;
     UIButton *removePicture;
 
 }
@@ -38,53 +39,55 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    addDialog = [[UIView alloc] initWithFrame:ADD_BOX_FRAME];
-    addDialog.backgroundColor = [UIColor redColor];
-    addDialog.backgroundColor = [UIColor whiteColor];
-    addDialog.layer.cornerRadius = 8.0f;
-    addDialog.clipsToBounds = YES;
-    //addDialog.layer.borderWidth = 0.1f;
-    addDialog.layer.borderColor = [UIColor colorWithRed:129/255.0f green:129/255.0f blue:129/255.0f alpha:1.0f].CGColor;
-    [self.view addSubview:addDialog];
+    UIBarButtonItem *exitButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
+                                                                                    target:self
+                                                                                    action:@selector(close:)];
+    self.navigationItem.leftBarButtonItem = exitButtonItem;
     
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ADD_POST_WIDTH, 40.0f)];
-    header.backgroundColor = [UIColor colorWithRed:186/255.0f green:188/255.0f blue:191/255.0f alpha:.4f];
-    //[UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:0.5f];
-    [addDialog addSubview:header];
-    
-    UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, CGRectGetHeight(header.frame))];
-    closeButton.backgroundColor = [UIColor clearColor];
-    [closeButton setImage:[UIImage imageNamed:@"Close"] forState:UIControlStateNormal];
-    [closeButton setImageEdgeInsets:UIEdgeInsetsMake(0, 3, 0, 6)];
-    [closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
-    [header addSubview:closeButton];
-    
-    UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(header.frame)- 80, 0, 80, CGRectGetHeight(header.frame))];
+    UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 59, 30)];
     postButton.backgroundColor = BAR_TINT_COLOR2;
+    postButton.layer.cornerRadius = 4.0f;
     [postButton setTitle:@"Drop" forState:UIControlStateNormal];
     [postButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    postButton.titleLabel.font = [UIFont montserratFontOfSize:17.0f];
+    postButton.titleLabel.font = [UIFont montserratFontOfSize:15.0f];
     [postButton addTarget:self action:@selector(dropPost:) forControlEvents:UIControlEventTouchUpInside];
-    [header addSubview:postButton];
+    //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:postButton];
+
+    
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+                      initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                      target:nil action:nil];
+    negativeSpacer.width = -3;
+    
+    self.navigationItem.rightBarButtonItems = @[negativeSpacer,[[UIBarButtonItem alloc] initWithCustomView:postButton]];
+    
     
     // Add the text view
-    messageTextView = [[LPlaceholderTextView alloc] initWithFrame:CGRectMake(4, 40, ADD_POST_WIDTH - 8, 170)];
+    messageTextView = [[LPlaceholderTextView alloc] initWithFrame:CGRectMake(10, 15, ADD_POST_WIDTH - 20, 170)];
     [messageTextView setAutocorrectionType:UITextAutocorrectionTypeYes];
     [messageTextView setReturnKeyType:UIReturnKeyGo];
-    [messageTextView.layer setCornerRadius:kViewRoundedCornerRadius];
+    //[messageTextView.layer setCornerRadius:kViewRoundedCornerRadius];
     [messageTextView setPlaceholderText:postPlaceholderText];
     [messageTextView setTextColor:TEXT_COLOR];
     messageTextView.delegate = self;
     [messageTextView setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:15.0f]];
-    [addDialog addSubview:messageTextView];
+    messageTextView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:messageTextView];
     
-    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, ADD_POST_HEIGHT - 40, ADD_POST_WIDTH, 40.0f)];
+    bottomBorder = [CALayer layer];
+    bottomBorder.frame = CGRectMake(0, messageTextView.frame.origin.y + CGRectGetHeight(messageTextView.frame) + 9, ADD_POST_WIDTH, 1.0f);
+    bottomBorder.backgroundColor = [UIColor colorWithRed:0.906 green:0.906 blue:0.906 alpha:1].CGColor;
+    bottomBorder.backgroundColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:0.5].CGColor;
+    [self.view.layer addSublayer:bottomBorder];
+    
+    footer = [[UIView alloc] initWithFrame:CGRectMake(0, messageTextView.frame.origin.y + CGRectGetHeight(messageTextView.frame) + 10, ADD_POST_WIDTH - 10, 40.0f)];
     footer.backgroundColor = [UIColor clearColor];
-    [addDialog addSubview:footer];
     
-    UIButton *cameraButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, CGRectGetHeight(footer.frame))];
+    [self.view addSubview:footer];
+    
+    UIButton *cameraButton = [[UIButton alloc] initWithFrame:CGRectMake(2, 0, 50, CGRectGetHeight(footer.frame))];
     cameraButton.backgroundColor = [UIColor clearColor];
     [cameraButton setImage:[UIImage imageNamed:@"Camera"] forState:UIControlStateNormal];
     [cameraButton setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 7, 18)];
@@ -152,7 +155,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+
     // register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -201,7 +205,7 @@
     // if the user clicked the return key
     if ([text isEqualToString: @"\n"]) {
         // Hide the keyboard
-        [textView resignFirstResponder];
+       // [textView resignFirstResponder];
     
         return NO ;
     }
@@ -235,16 +239,16 @@
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
 
     
+    CGFloat messageTextViewheight = CGRectGetHeight(self.view.frame) - kbSize.height - 25.0f - 40.0f;
     
-    CGFloat newY = [[UIScreen mainScreen] bounds].size.height - kbSize.height - ADD_POST_HEIGHT - 15;
+    messageTextView.frame = CGRectMake(10, 15, ADD_POST_WIDTH - 20, messageTextViewheight);
+    bottomBorder.frame = CGRectMake(0, messageTextView.frame.origin.y + CGRectGetHeight(messageTextView.frame) + 9, ADD_POST_WIDTH, 1.0f);
+    footer.frame = CGRectMake(0, messageTextView.frame.origin.y + CGRectGetHeight(messageTextView.frame) + 10, ADD_POST_WIDTH - 10, 40.0f);
 
     
     // [UIView beginAnimations:nil context:NULL];
     // [UIView setAnimationDuration:0.3]; // if you want to slide up the view
     
-    CGRect rect = addDialog.frame;
-    rect.origin.y = newY; //Set the new Y position
-    addDialog.frame = rect;
     
     //[UIView commitAnimations];
     
@@ -257,7 +261,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3]; // if you want to slide up the view
     
-    addDialog.frame = ADD_BOX_FRAME;
+   // addDialog.frame = ADD_BOX_FRAME;
     
     [UIView commitAnimations];
     
@@ -319,7 +323,7 @@
                 postObject[@"location"] = currentPoint;
                 postObject[@"type"] = NEW_POST_TYPE;
                 postObject[@"college"] = [Config getClosestLocation:currentLocation];
-                postObject[@"avatar"] = [Config usersAvatarString];
+                postObject[@"avatar"] = [Config people];
                 
                 if (_previewPhoto != nil)
                 {

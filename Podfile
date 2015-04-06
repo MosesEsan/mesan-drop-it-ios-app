@@ -3,19 +3,27 @@ platform :ios, '7.0'
 
 target 'Drop It!' do
 
-
-#pod 'CRGradientNavigationBar'
 pod 'Montserrat'
 pod 'CCMPopup'
 pod 'FormatterKit'
+pod 'STTweetLabel'
+pod 'DZNEmptyDataSet'
+pod 'JDFTooltips'
+pod 'NJKWebViewProgress'
+pod 'MSSlidingPanelController'
+pod 'RESideMenu', '~> 4.0.7'
+
+
+
+#pod 'UIWebView+Progress', :git => 'git@github.com:ishkawa/UIWebView-Progress.git'
+#pod 'CRGradientNavigationBar'
 #pod 'Shimmer'
 #pod 'PulsingHalo'
-#pod 'STTweetLabel'
 #pod 'LNBRippleEffect'
-pod 'DZNEmptyDataSet'
 #pod 'AppsfireSDK'
 #pod 'MMPopLabel'
-pod 'JDFTooltips'
+#pod 'RBMenu',  '~>0.1.9'
+#pod 'FXBlurView'
 
 end
 

@@ -111,7 +111,7 @@
                 PFGeoPoint *postPoint = parseObject[@"location"];
                 
                 JPSThumbnail *thumbnail = [[JPSThumbnail alloc] init];
-                thumbnail.image = [UIImage imageNamed:[Config fruits]];
+                thumbnail.image = [UIImage imageNamed:[Config people]];
                 thumbnail.title = @"";
                 thumbnail.subtitle = postObject[@"text"];
                 thumbnail.coordinate = CLLocationCoordinate2DMake(postPoint.latitude, postPoint.longitude);

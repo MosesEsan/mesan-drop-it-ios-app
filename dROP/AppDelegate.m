@@ -7,19 +7,17 @@
 //
 
 #import "AppDelegate.h"
-#import "HomeTableViewController.h"
-//#import "CRGradientNavigationBar.h"
 #import "Config.h"
+
+#import "MenuTableViewController.h"
+
+#import "DEMOLeftMenuViewController.h"
 
 @interface AppDelegate ()
 {
     NSDate *lastUpdated;
+    MenuTableViewController *_menuTableViewController;
 }
-
-//@property (strong) HomeViewController *homeViewController;
-@property (strong) HomeTableViewController *homeTableViewController;
-
-@property (strong) UINavigationController *homeNavigationController;
 
 @end
 
@@ -43,20 +41,42 @@
         //[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     }
     
-   // self.homeViewController = [[HomeViewController alloc] initWithNibName:nil bundle:nil];
-    self.homeTableViewController = [[HomeTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    HomeTableViewController *homeTableViewController = [[HomeTableViewController alloc] initWithStyle:UITableViewStylePlain];
     
-    self.homeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.homeTableViewController];
+    //Custom Code for  Menu Plugin
+    // Create content and menu controllers
+    //
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeTableViewController];
+    DEMOLeftMenuViewController *leftMenuViewController = [[DEMOLeftMenuViewController alloc] init];
+    leftMenuViewController.homeTableViewController = homeTableViewController;
     
-    self.homeNavigationController.navigationBar.barStyle = BAR_STYLE;
-    self.homeNavigationController.navigationBar.barTintColor = BAR_TINT_COLOR2;
-    self.homeNavigationController.navigationBar.tintColor = [UIColor colorWithRed:235/255.0f green:237/255.0f blue:236/255.0f alpha:1.0f];
-    self.homeNavigationController.navigationBar.translucent = NO;
+    // Create side menu controller
+    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController
+                                                                    leftMenuViewController:leftMenuViewController
+                                                                   rightMenuViewController:nil];
+    sideMenuViewController.backgroundImage = [UIImage imageNamed:@"Stars"];
+    sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
+    sideMenuViewController.delegate = self;
+    sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
+    sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
+    sideMenuViewController.contentViewShadowOpacity = 0.6;
+    sideMenuViewController.contentViewShadowRadius = 12;
+    sideMenuViewController.contentViewShadowEnabled = YES;
+ 
+     /*
+    _menuTableViewController = [[MenuTableViewController alloc] initWithStyle:UITableViewStylePlain];
+   
+    slidingPanelController = [[MSSlidingPanelController alloc] initWithCenterViewController:_homeNavigationController andLeftPanelController:_menuTableViewController];
+    [slidingPanelController setDelegate:_homeTableViewController];
+    [slidingPanelController setLeftPanelMaximumWidth:150.0f];
+    */
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    [self.window setRootViewController:self.homeNavigationController];
+    [self.window setRootViewController:sideMenuViewController];
         
     //Make the window visible
     [self.window makeKeyAndVisible];
@@ -76,6 +96,17 @@
     
     lastUpdated = nil;
     
+    /*
+    for (NSString* family in [UIFont familyNames])
+    {
+        NSLog(@"%@", family);
+        
+        for (NSString* name in [UIFont fontNamesForFamilyName: family])
+        {
+            NSLog(@"  %@", name);
+        }
+    }
+    */
     return YES;
 }
 

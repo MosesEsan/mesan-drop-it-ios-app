@@ -20,7 +20,7 @@
 @property (nonatomic, strong) UILabel *postText;
 @property (nonatomic, strong) PFImageView *postImage;
 @property (nonatomic, strong) UIView *actionsView;
-@property (nonatomic, strong)CALayer *bottomBorder;
+@property (nonatomic, strong) CALayer *bottomBorder;
 
 @property (nonatomic, strong) UILabel *date;
 @property (nonatomic, strong) UIButton *smiley;

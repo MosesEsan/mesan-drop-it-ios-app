@@ -17,7 +17,7 @@
 @property (nonatomic, strong) UIView *actionsView;
 
 @property (nonatomic, strong) UILabel *date;
-//@property (nonatomic, strong) UIButton *smiley;
+@property (nonatomic, strong) UIButton *smiley;
 
 
 @end

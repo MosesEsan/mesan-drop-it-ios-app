@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0DEDEE0CB74BB0DEFE30D8C4"
+               BlueprintIdentifier = "A0DF81CE07D0432C2CD6D1E5"
                BuildableName = "libPods-Drop It!-FormatterKit.a"
                BlueprintName = "Pods-Drop It!-FormatterKit"
                ReferencedContainer = "container:Pods.xcodeproj">

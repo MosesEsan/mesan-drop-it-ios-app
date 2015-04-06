@@ -34,5 +34,14 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Aspire-DemiBold.ttf</string>
+		<string>cocacolaii.ttf</string>
+		<string>BANANASP.TTF</string>
+		<string>BELSHAW_.TTF</string>
+	</array>
 </dict>
 </plist>

@@ -33,9 +33,10 @@
         self.line.backgroundColor = [UIColor whiteColor];
         [self.mainContainer addSubview:self.line];
         
-        self.profilePic = [[UIImageView alloc] initWithFrame:CGRectMake(5, TOP_PADDING, 35.0f, 35.0f)];
-        self.profilePic.backgroundColor = [BAR_TINT_COLOR2 colorWithAlphaComponent:0.3];//[UIColor whiteColor];
-        self.profilePic.layer.borderWidth = .2f;
+        self.profilePic = [[UIImageView alloc] initWithFrame:CGRectMake(5, TOP_PADDING, 30.0f, 30.0f)];
+        //self.profilePic.backgroundColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:1];
+        //[BAR_TINT_COLOR2 colorWithAlphaComponent:0.3];//[UIColor whiteColor];
+        //self.profilePic.layer.borderWidth = .2f;
         self.profilePic.layer.borderColor = [UIColor lightGrayColor].CGColor;
         self.profilePic.contentMode = UIViewContentModeScaleAspectFit;
         self.profilePic.layer.masksToBounds = YES;
@@ -123,8 +124,6 @@
 
 - (void)setFrameWithObject:(NSDictionary *)postObject forIndex:(NSInteger)index
 {
-    
-    
     CGFloat mainContainerWidth = WIDTH - (CONTAINER_FRAME_X + (CONTAINER_FRAME_X / 2) + 2);
     CGFloat postContainerWidth = mainContainerWidth - PROFILE_PIC_WIDTH;
     CGFloat labelWidth = postContainerWidth - 8;
@@ -174,9 +173,22 @@
     if (postObject[@"parseObject"][@"avatar"]){
         self.profilePic.image = [UIImage imageNamed:postObject[@"parseObject"][@"avatar"]];
     }else{
-        self.profilePic.image = [UIImage imageNamed:[Config fruits]];
+        self.profilePic.image = [UIImage imageNamed:[Config people]];
     }
     
+    [self setValues:postObject];
+}
+
+- (void)setValues:(NSDictionary *)postObject
+{
+    NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
+    NSInteger repliesCount = [postObject[@"totalReplies"] integerValue];
+
+    // Configure the cell...
+    self.postText.text = postObject[@"text"];
+    self.date.text = [Config calculateTime:postObject[@"date"]];
+    self.comments.text = [Config repliesCount:repliesCount];
+    [self.smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
 }
 
 - (void)awakeFromNib {

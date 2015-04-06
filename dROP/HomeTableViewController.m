@@ -19,35 +19,39 @@
 
 #import "AddPostViewController.h"
 #import "ViewPostTableViewController.h"
-#import "ProfileViewController.h"
 
 #import "UIFont+Montserrat.h"
 #import "CCMBorderView.h"
 #import "CCMPopupTransitioning.h"
 #import "ABCIntroView.h"
 
-#import "MapViewController.h"
 #import "MHFacebookImageViewer.h"
 #import "RTSpinKitView.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "JDFTooltipView.h"
 
+#import "MSViewControllerSlidingPanel.h"
+#import "RESideMenu.h"
+
+
+//#import "RBMenu.h"
+
 //Ad
 #import <AvocarrotSDK/AvocarrotInstream.h>
 
-@interface HomeTableViewController ()<AddPostViewControllerDataSource, ViewPostViewControllerDelegate, MapViewControllerDataSource, MapViewControllerDelegate, CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, AVInstreamAdDelegate, UIActionSheetDelegate>
+@interface HomeTableViewController ()<AddPostViewControllerDataSource, ViewPostViewControllerDelegate, CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, AVInstreamAdDelegate, UIActionSheetDelegate>
 {
+    //RBMenu *menu;
+    //RBMenuItem *menuItem1;
+    //RBMenuItem *menuItem2;
+    
     UILabel *layoutLabel;
-    UIButton *profile;
-    UIButton *mapButton;
     UIBarButtonItem *addNew;
-    UIBarButtonItem *negativeSpacer;
     
     UIView *tableHeader;
     UILabel *toolTipLocation; //Hack
     JDFTooltipView *tooltip;
     
-    ProfileViewController *profileViewController;
     
     ABCIntroView *introView;
     RTSpinKitView *spinner;
@@ -78,37 +82,28 @@
     _likes = [[NSMutableArray alloc] init];
     showAlert = NO;
     
+    //Menu
+    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    menuBtn.frame = CGRectMake(0, 0, 23.0f, 23.0f);
+    [menuBtn setImage:[Config drawListImage] forState:UIControlStateNormal];
+    [menuBtn setClipsToBounds:YES];
+    menuBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [menuBtn addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
+
     //TitleView
-    layoutLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 90, 37)];
-    layoutLabel.textAlignment = NSTextAlignmentLeft;//NSTextAlignmentCenter;
+    layoutLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 37)];
+    layoutLabel.textAlignment = NSTextAlignmentCenter;
     layoutLabel.text = @"DropIt";
     layoutLabel.textColor = [UIColor colorWithRed:235/255.0f green:237/255.0f blue:236/255.0f alpha:1.0f];
-    layoutLabel.font = [UIFont montserratFontOfSize:20.0f];
+    layoutLabel.font = [UIFont fontWithName:@"Belshaw" size:27.0f];
     layoutLabel.backgroundColor = [UIColor clearColor];
     layoutLabel.textColor = [UIColor whiteColor];
     layoutLabel.userInteractionEnabled = YES;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:layoutLabel];
-    
-    UITapGestureRecognizer *changeLayout = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeLayout:)];
-    [layoutLabel addGestureRecognizer:changeLayout];
-    
-    //Profile and New
-    profile = [UIButton buttonWithType:UIButtonTypeCustom];
-    profile.frame = CGRectMake(0, 0, 23, 23);
-    [profile setImage:[UIImage imageNamed:@"User"] forState:UIControlStateNormal];
-    [profile setClipsToBounds:YES];
-    profile.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    profile.imageEdgeInsets = UIEdgeInsetsMake(2, 2, 2, 2);
-    [profile addTarget:self action:@selector(viewProfile:) forControlEvents:UIControlEventTouchUpInside];
-    
-    mapButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    mapButton.frame = CGRectMake(0, 0, 23, 23);
-    [mapButton setImage:[UIImage imageNamed:@"Map"] forState:UIControlStateNormal];
-    [mapButton setClipsToBounds:YES];
-    mapButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    mapButton.imageEdgeInsets = UIEdgeInsetsMake(1, 1, 1, 1);
-    [mapButton addTarget:self action:@selector(viewMap:) forControlEvents:UIControlEventTouchUpInside];
-    
+    self.navigationItem.titleView = layoutLabel;
+    // CocaColaii
+    //PT-BananaSplit
+
     UIButton *addNewButton = [UIButton buttonWithType:UIButtonTypeCustom];
     addNewButton.frame = CGRectMake(0, 0, 23, 23);
     [addNewButton setImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
@@ -116,16 +111,6 @@
     addNewButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
     [addNewButton addTarget:self action:@selector(addNewPost:) forControlEvents:UIControlEventTouchUpInside];
     addNew = [[UIBarButtonItem alloc] initWithCustomView:addNewButton];
-    
-    negativeSpacer = [[UIBarButtonItem alloc]
-                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                       target:nil action:nil];
-    negativeSpacer.width = 14;
-    
-    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:profile],
-                                                negativeSpacer,
-                                                [[UIBarButtonItem alloc] initWithCustomView:mapButton]
-                                                ];
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
@@ -149,8 +134,6 @@
         self.currentLocation = currentLocation;
     }
     
-    //Initialize profile Table View Controller
-    profileViewController = [[ProfileViewController alloc] initWithNibName:nil bundle:nil];
     
     //Add Refresh Control
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
@@ -193,6 +176,14 @@
 {
     [self.locationManager startUpdatingLocation];
     showAlert = YES;
+    
+    self.navigationController.navigationBar.barStyle = BAR_STYLE;
+    self.navigationController.navigationBar.barTintColor = BAR_TINT_COLOR2;
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:235/255.0f green:237/255.0f blue:236/255.0f alpha:1.0f];
+    self.navigationController.navigationBar.translucent = NO;
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -205,6 +196,13 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    /*
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
+    self.title = @"";
+    */
 }
 
 - (void)didReceiveMemoryWarning {
@@ -254,7 +252,6 @@
 {
     NSDictionary *postObject = _allPosts[indexPath.row];
     NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
-    NSInteger repliesCount = [postObject[@"totalReplies"] integerValue];
     PFObject *parseObject = postObject[@"parseObject"];
 
     DITableViewCell *cell;
@@ -301,15 +298,16 @@
         
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
+    
+    if (parseObject[@"pic"])
+    {
+        cell.postImage.file = parseObject[@"pic"];
+        cell.postImage.tag = 1;//indexPath.row;
+        [cell.postImage loadInBackground];
+        [cell.postImage setupImageViewerWithPFFile:cell.postImage.file onOpen:nil onClose:nil];
+    }
 
-    cell.tag = indexPath.row;
-    
-    // Configure the cell...
-    cell.postText.text = postObject[@"text"];
-    cell.date.text = [Config calculateTime:postObject[@"date"]];
-    cell.comments.text = [Config repliesCount:repliesCount];
-    [cell.smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
-    
+
     //if the user is the owner of the post
     //and the post has likes, show the smiley button
     //else hide it
@@ -319,17 +317,13 @@
         else cell.smiley.hidden = YES;
     }
     
-    if (parseObject[@"pic"])
-    {
-        cell.postImage.file = parseObject[@"pic"];
-        cell.postImage.tag = 1;//indexPath.row;
-        [cell.postImage loadInBackground];
-        [cell.postImage setupImageViewerWithPFFile:cell.postImage.file onOpen:nil onClose:nil];
-    }
-    
+    //If the value for the disliked index is not YES,
+    //set the smiley selected state to the value of the liked index
     if (![postObject[@"disliked"] boolValue]){
         cell.smiley.selected = [postObject[@"liked"] boolValue];
     }else{
+        //else  set the smiley selected state to NO
+        //set the smiley highlighted state to the value of the disliked index to indicate the user has disliked the post
         cell.smiley.selected = NO;
         cell.smiley.highlighted = [postObject[@"disliked"] boolValue];
     }
@@ -343,7 +337,7 @@
         
         __weak typeof(cell) weakSelf = cell;
         
-        [cell setSwipeGestureWithView:[self viewWithImageName:@"cross"]
+        [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
                                  color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
                                   mode:MCSwipeTableViewCellModeExit
                                  state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
@@ -364,7 +358,7 @@
         //allow the user to be able to delete the post
         __weak typeof(cell) weakSelf = cell;
         
-        [cell setSwipeGestureWithView:[self viewWithImageName:@"cross"]
+        [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
                                 color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
                                  mode:MCSwipeTableViewCellModeExit
                                 state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
@@ -381,6 +375,7 @@
                                 }];
     }
     
+    cell.tag = indexPath.row;
     cell.selectionStyle= UITableViewCellSelectionStyleNone;
     cell.bottomBorder.backgroundColor = [tableView separatorColor].CGColor;
     
@@ -499,6 +494,10 @@
 
 - (void)changeLayout:(UIButton *)sender
 {
+    
+    //[menu showMenu];
+    /*
+    
     //Create the action sheet
     UIActionSheet* sheet = [[UIActionSheet alloc]
                             initWithTitle:@"Change layout"
@@ -508,6 +507,7 @@
     
     //Display the action sheet
     [sheet showInView: self.navigationController.view];
+    */
 }
 
 #pragma mark - UIActionSheet Delegate
@@ -535,20 +535,27 @@
 - (void)addNewPost:(UIBarButtonItem *)sender
 {
     AddPostViewController *addNewPost = [[AddPostViewController alloc] initWithNibName:nil bundle:nil];
-    
     addNewPost.dataSource = self;
+    
+    UINavigationController *addNC = [[UINavigationController alloc] initWithRootViewController:addNewPost];
+   // self.homeNavigationController.navigationBar.barStyle = BAR_STYLE;
+    addNC.navigationBar.barTintColor = [UIColor whiteColor];
+    addNC.navigationBar.tintColor = BAR_TINT_COLOR2;
+    addNC.navigationBar.translucent = NO;
+    
     
     CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
     popup.destinationBounds = [[UIScreen mainScreen] bounds];
-    popup.presentedController = addNewPost;
+    popup.presentedController = addNC;
     
     popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
     popup.backgroundViewAlpha = 3.0f;
     popup.presentingController = self;
     
-    [self presentViewController:addNewPost animated:YES completion:nil];
+    [self presentViewController:addNC animated:YES completion:nil];
 }
 
+/*
 - (void)viewProfile:(UIButton *)sender
 {
     [self.navigationController pushViewController:profileViewController animated:YES];
@@ -561,6 +568,7 @@
     mapView.delegate = self;
     [self.navigationController presentViewController:mapView animated:YES completion:nil];
 }
+*/
 
 #pragma mark - Location Manager
 
@@ -605,25 +613,12 @@
     {
         if ([Config checkAddPermission:_currentLocation] == YES)
         {
-            self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:profile],
-                                                        negativeSpacer,
-                                                        [[UIBarButtonItem alloc] initWithCustomView:mapButton],
-                                                        negativeSpacer,
-                                                        addNew
-                                                        ];
+            self.navigationItem.rightBarButtonItem = addNew;
         }else{
-            self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:profile],
-                                                        negativeSpacer,
-                                                        [[UIBarButtonItem alloc] initWithCustomView:mapButton]
-                                                        ];
+            self.navigationItem.rightBarButtonItem = nil;
         }
     }else{
-        self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:profile],
-                                                    negativeSpacer,
-                                                    [[UIBarButtonItem alloc] initWithCustomView:mapButton],
-                                                    negativeSpacer,
-                                                    addNew
-                                                    ];
+        self.navigationItem.rightBarButtonItem = addNew;
     }
 }
 
@@ -877,7 +872,7 @@
 {
     NSDictionary *postObject = _allPosts[tag];
     
-    //get the Parse Object and Report Post
+    //get the Parse Object
     PFObject *parseObject = postObject[@"parseObject"];
     [parseObject deleteInBackground];
     
@@ -937,6 +932,15 @@
     [refresh endRefreshing];
     
     [self queryForAllPostsNearLocation];
+}
+
+
+- (void)showMenu
+{
+    if ([[self slidingPanelController] sideDisplayed] == MSSPSideDisplayedLeft)
+        [[self slidingPanelController] closePanel];
+    else
+        [[self slidingPanelController] openLeftPanel];
 }
 
 - (void)showIntroView
@@ -1040,16 +1044,6 @@
     
 }
 
-
-- (UIView *)viewWithImageName:(NSString *)imageName
-{
-    UIImage *image = [UIImage imageNamed:imageName];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    imageView.contentMode = UIViewContentModeCenter;
-    imageView.backgroundColor = [UIColor clearColor];
-    
-    return imageView;
-}
 
 - (BOOL)prefersStatusBarHidden
 {

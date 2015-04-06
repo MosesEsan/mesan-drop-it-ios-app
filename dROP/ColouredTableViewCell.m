@@ -166,6 +166,19 @@
     
     self.line.backgroundColor = [Config getSideColor:index];
     self.line.layer.borderColor = [Config getSideColor:index].CGColor;
+    [self setValues:postObject];
+}
+
+- (void)setValues:(NSDictionary *)postObject
+{
+    NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
+    NSInteger repliesCount = [postObject[@"totalReplies"] integerValue];
+    
+    // Configure the cell...
+    self.postText.text = postObject[@"text"];
+    self.date.text = [Config calculateTime:postObject[@"date"]];
+    self.comments.text = [Config repliesCount:repliesCount];
+    [self.smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
 }
 
 - (void)awakeFromNib {

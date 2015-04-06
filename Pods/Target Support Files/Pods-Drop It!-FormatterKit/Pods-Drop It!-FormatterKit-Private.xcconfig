@@ -1,5 +1,6 @@
 #include "Pods-Drop It!-FormatterKit.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/FormatterKit" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CCMPopup" "${PODS_ROOT}/Headers/Public/DZNEmptyDataSet" "${PODS_ROOT}/Headers/Public/FormatterKit" "${PODS_ROOT}/Headers/Public/JDFTooltips" "${PODS_ROOT}/Headers/Public/Montserrat"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/FormatterKit" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CCMPopup" "${PODS_ROOT}/Headers/Public/DZNEmptyDataSet" "${PODS_ROOT}/Headers/Public/FormatterKit" "${PODS_ROOT}/Headers/Public/JDFTooltips" "${PODS_ROOT}/Headers/Public/MSSlidingPanelController" "${PODS_ROOT}/Headers/Public/Montserrat" "${PODS_ROOT}/Headers/Public/NJKWebViewProgress" "${PODS_ROOT}/Headers/Public/RESideMenu" "${PODS_ROOT}/Headers/Public/STTweetLabel"
 OTHER_LDFLAGS = ${PODS_DROP_IT__FORMATTERKIT_OTHER_LDFLAGS} -ObjC
 PODS_ROOT = ${SRCROOT}
+SKIP_INSTALL = YES

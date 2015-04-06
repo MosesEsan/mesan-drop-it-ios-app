@@ -35,8 +35,11 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 
 
 
-//#44B7C7 -- //1ABEC3
-#define BAR_TINT_COLOR2 [UIColor colorWithRed:68/255.0f green:183/255.0f blue:199/255.0f alpha:1.0f]
+//#44B7C7 -- //1ABEC3 -- 1199D6
+#define BAR_TINT_COLOR2 [UIColor colorWithRed:17/255.0f green:153/255.0f blue:214/255.0f alpha:1.0f]
+
+
+//[UIColor colorWithRed:68/255.0f green:183/255.0f blue:199/255.0f alpha:1.0f]
 //[UIColor colorWithRed:26/255.0f green:190/255.0f blue:195/255.0f alpha:1.0f]
 //#define BAR_TINT_COLOR22 [UIColor colorWithRed:103/255.0f green:199/255.0f blue:237/255.0f alpha:1.0f]
 #define BAR_STYLE UIBarStyleBlackTranslucent
@@ -46,7 +49,8 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 
 //D7D6D4
 //#define TABLEVIEW_COLOR 
-#define TABLEVIEW2_COLOR [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.4f]
+#define TABLEVIEW2_COLOR [UIColor colorWithRed:239/255.0f green:238/255.0f blue:237/255.0f alpha:1.0f];
+//[UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:1.0f]
 
 
 //F89A66 -
@@ -60,7 +64,14 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define LIKES_FONT [UIFont fontWithName:@"AvenirNext-DemiBold" size:12.5f]
 #define COMMENTS_FONT [UIFont fontWithName:@"AvenirNext-DemiBold" size:12.5f]
 
+#define ARTICLE_TITLE_FONT [UIFont fontWithName:@"AvenirNext-DemiBold" size:18.5f]
+#define ARTICLE_SUBTITLE_FONT [UIFont fontWithName:@"AvenirNext-Medium" size:15.0f]
+#define ARTICLE_PADDING 13.0f
+
+
 #define WIDTH [[UIScreen mainScreen] bounds].size.width
+#define HEIGHT [[UIScreen mainScreen] bounds].size.height
+
 #define TOP_PADDING 12
 #define LEFT_PADDING 16.5f
 
@@ -74,14 +85,15 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define CONTAINER_FRAME_X 7.5f
 #define COLOURED_BAR_WIDTH 0.0f
 
-#define PROFILE_PIC_WIDTH 50.0f
+#define PROFILE_PIC_WIDTH 43.0f
 
 #define DATE_COLOR [UIColor colorWithRed:137/255.0f green:143/255.0f blue:156/255.0f alpha:1.0f]
 #define MESSAGE_COLOR [UIColor colorWithRed:85/255.0f green:85/255.0f blue:85/255.0f alpha:1.0f]
 #define TEXT_COLOR [UIColor colorWithRed:34/255.0f green:34/255.0f blue:34/255.0f alpha:1.0f]
 
-#define ADD_POST_WIDTH WIDTH - 20
-#define ADD_POST_HEIGHT 240
+#define ADD_POST_WIDTH WIDTH - 0
+#define ADD_POST_HEIGHT 320
+//[[UIScreen mainScreen] bounds].size.width
 
 #define INFO_VIEW_WIDTH WIDTH - 40
 #define INFO_VIEW_HEIGHT 320
@@ -117,10 +129,6 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define NUMBER_OF_PAGES 4
 
 
-//Fruits
-
-
-
 
 
 //#define ONE_MILE_RADIUS 1609.34km
@@ -139,6 +147,7 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 + (UIImage *)usersAvatar;
 + (NSString *)usersAvatarString;
 
+
 + (NSMutableArray *)availableLocations;
 + (void)updateAvailableLocations:(NSDate *)lastUpdated;
 
@@ -151,6 +160,9 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 
 + (NSMutableArray *)filterPosts:(NSArray *)postObject;
 + (NSMutableDictionary *)createPostObject:(PFObject *)parseObject;
+
++ (NSMutableArray *)filterComments:(NSArray *)commentObject;
++ (NSMutableDictionary *)createCommentObject:(PFObject *)parseObject;
 
 + (BOOL)isPostAuthor:(NSDictionary *)postObject;
 + (BOOL)getDisLikeStatus:(PFObject *)postObject;
@@ -182,9 +194,19 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 + (NSMutableArray *)introsInfo;
 
 + (NSString *)fruits;
++ (NSString *)people;
 + (UIColor *)getBubbleColor;
 + (UIColor *)getSideColor:(NSInteger)index;
 + (PFImageView *)imageViewFrame:(CGRect)frame withImage:(UIImage *)image withColor:(UIColor *)color;
+
++ (UIView *)viewWithImageName:(NSString *)imageName;
+
++ (UIImage *)drawListImage;
++ (UIImage *) imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
++ (UIImage *) imageWithImage:(UIImage *)image scaledToFillSize:(CGSize)size;
+//+ (UIImage *) imageWithImage:(UIImage *)image scaledToMaxWidth:(CGFloat)width maxHeight:(CGFloat)height;
+//+ (UIImage *) imageWithImage: (UIImage*) sourceImage scaledToWidth: (float) i_width;
+
 
 @end
 

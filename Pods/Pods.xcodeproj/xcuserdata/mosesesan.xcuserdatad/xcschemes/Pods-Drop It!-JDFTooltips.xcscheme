@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "589F679ABE26B01EBD58360D"
+               BlueprintIdentifier = "5DA6D5158133356258BD527A"
                BuildableName = "libPods-Drop It!-JDFTooltips.a"
                BlueprintName = "Pods-Drop It!-JDFTooltips"
                ReferencedContainer = "container:Pods.xcodeproj">

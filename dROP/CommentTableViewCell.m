@@ -46,26 +46,25 @@
         _date.font = DATE_FONT;
         [_actionsView addSubview:_date];
         
-        /*
-        _smiley = [UIButton buttonWithType:UIButtonTypeCustom];
-        _smiley.frame = CGRectMake((CGRectGetWidth(_actionsView.frame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
-        _smiley.backgroundColor = [UIColor clearColor];
-        [_smiley setImage:[UIImage imageNamed:@"SmileyGray"] forState:UIControlStateNormal];
-        [_smiley setImage:[UIImage imageNamed:@"SmileyBluish"] forState:UIControlStateSelected];
-        [_smiley setImage:[UIImage imageNamed:@"Sad"] forState:UIControlStateHighlighted];
-        [_smiley setTitleColor:DATE_COLOR forState:UIControlStateNormal];
-        [_smiley setTitleColor:BAR_TINT_COLOR2 forState:UIControlStateSelected];
-        _smiley.titleLabel.font = LIKES_FONT;
-        _smiley.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        _smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 33, 5.2f, 0);
-        _smiley.titleEdgeInsets = UIEdgeInsetsMake(2, -50, 0, 20);
+        self.smiley = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.smiley.frame = CGRectMake((CGRectGetWidth(self.actionsView.frame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
         
+        self.smiley.backgroundColor = [UIColor clearColor];
+        [self.smiley setImage:[UIImage imageNamed:@"SmileyGray"] forState:UIControlStateNormal];
+        [self.smiley setImage:[UIImage imageNamed:@"SmileyBluish"] forState:UIControlStateSelected];
+        [self.smiley setImage:[UIImage imageNamed:@"Sad"] forState:UIControlStateHighlighted];
+        [self.smiley setTitleColor:DATE_COLOR forState:UIControlStateNormal];
+        [self.smiley setTitleColor:BAR_TINT_COLOR2 forState:UIControlStateSelected];
+        self.smiley.titleLabel.font = LIKES_FONT;
+        self.smiley.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         
+        self.smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 39, 5.2f, 8);
+        self.smiley.titleEdgeInsets = UIEdgeInsetsMake(2, -60, 0, 30);
         _smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 33, 5.2f, 15);
         _smiley.titleEdgeInsets = UIEdgeInsetsMake(2, -65, 0, 35);
         
-        [_actionsView addSubview:_smiley];
-         */
+        [self.actionsView addSubview:self.smiley];
+        
     }
     
     return self;

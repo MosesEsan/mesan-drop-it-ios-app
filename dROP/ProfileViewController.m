@@ -16,6 +16,7 @@
 #import "CCMPopupTransitioning.h"
 
 #import "MHFacebookImageViewer.h"
+#import "RESideMenu.h"
 
 
 
@@ -51,6 +52,15 @@
         [self queryForLikedPosts];
         [self queryForUsersPoints];
     });
+    
+    //Menu
+    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    menuBtn.frame = CGRectMake(0, 0, 23.0f, 23.0f);
+    [menuBtn setImage:[Config drawListImage] forState:UIControlStateNormal];
+    [menuBtn setClipsToBounds:YES];
+    menuBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [menuBtn addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
     
     UIButton *info = [UIButton buttonWithType:UIButtonTypeCustom];
     info.frame = CGRectMake(0, 0, 22, 22);
@@ -105,6 +115,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     showAlert = YES;
+
+    self.navigationController.navigationBar.barStyle = BAR_STYLE;
+    self.navigationController.navigationBar.barTintColor = BAR_TINT_COLOR2;
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:235/255.0f green:237/255.0f blue:236/255.0f alpha:1.0f];
+    self.navigationController.navigationBar.translucent = NO;
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
