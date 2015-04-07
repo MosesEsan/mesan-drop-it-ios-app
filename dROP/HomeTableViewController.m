@@ -30,7 +30,6 @@
 #import "UIScrollView+EmptyDataSet.h"
 #import "JDFTooltipView.h"
 
-#import "MSViewControllerSlidingPanel.h"
 #import "RESideMenu.h"
 
 
@@ -932,15 +931,6 @@
     [refresh endRefreshing];
     
     [self queryForAllPostsNearLocation];
-}
-
-
-- (void)showMenu
-{
-    if ([[self slidingPanelController] sideDisplayed] == MSSPSideDisplayedLeft)
-        [[self slidingPanelController] closePanel];
-    else
-        [[self slidingPanelController] openLeftPanel];
 }
 
 - (void)showIntroView

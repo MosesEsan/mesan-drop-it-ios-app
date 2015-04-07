@@ -12,11 +12,9 @@
 #import "Config.h"
 #import "JPSThumbnail.h"
 #import "JPSThumbnailAnnotation.h"
-//#import "MapPostViewController.h"
 #import "ViewPostTableViewController.h"
 
-//#import "CCMBorderView.h"
-//#import "CCMPopupTransitioning.h"
+#import "RESideMenu.h"
 
 
 
@@ -49,14 +47,14 @@
     layoutLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.2f];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:layoutLabel];
     
-    UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(close:)];
+    UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(presentLeftMenuViewController:)];
     self.navigationItem.rightBarButtonItem = close;
     
     self.mapView_ = [[MKMapView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     self.mapView_.delegate = self;
     self.mapView_.mapType = MKMapTypeStandard;
     //self.mapView_.showsUserLocation = YES;
-    [self.view addSubview:self.mapView_];
+    [self.view addSubview:self.mapView_];    
     
     
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -74,7 +72,7 @@
     
     [closeButton addSubview:closeImageview];
     
-    [closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
+    [closeButton addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];
 }
 
@@ -111,7 +109,13 @@
                 PFGeoPoint *postPoint = parseObject[@"location"];
                 
                 JPSThumbnail *thumbnail = [[JPSThumbnail alloc] init];
-                thumbnail.image = [UIImage imageNamed:[Config people]];
+                
+                if (parseObject[@"avatar"]){
+                    thumbnail.image = [UIImage imageNamed:postObject[@"parseObject"][@"avatar"]];
+                }else{
+                    thumbnail.image = [UIImage imageNamed:[Config people]];
+                }
+                
                 thumbnail.title = @"";
                 thumbnail.subtitle = postObject[@"text"];
                 thumbnail.coordinate = CLLocationCoordinate2DMake(postPoint.latitude, postPoint.longitude);
