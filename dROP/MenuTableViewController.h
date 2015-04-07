@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RESideMenu.h"
 
+//@class HomeTableViewController;
 #import "HomeTableViewController.h"
-#import "ArticlesTableViewController.h"
-#import "EventsViewController.h"
+
 
 @interface MenuTableViewController : UITableViewController
+
+@property (strong, nonatomic) HomeTableViewController *homeTableViewController;
 
 @end

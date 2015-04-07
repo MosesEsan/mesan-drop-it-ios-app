@@ -11,8 +11,6 @@
 
 #import "MenuTableViewController.h"
 
-#import "DEMOLeftMenuViewController.h"
-
 @interface AppDelegate ()
 {
     NSDate *lastUpdated;
@@ -47,7 +45,7 @@
     // Create content and menu controllers
     //
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeTableViewController];
-    DEMOLeftMenuViewController *leftMenuViewController = [[DEMOLeftMenuViewController alloc] init];
+    MenuTableViewController *leftMenuViewController = [[MenuTableViewController alloc] init];
     leftMenuViewController.homeTableViewController = homeTableViewController;
     
     // Create side menu controller
@@ -62,14 +60,7 @@
     sideMenuViewController.contentViewShadowOpacity = 0.6;
     sideMenuViewController.contentViewShadowRadius = 12;
     sideMenuViewController.contentViewShadowEnabled = YES;
- 
-     /*
-    _menuTableViewController = [[MenuTableViewController alloc] initWithStyle:UITableViewStylePlain];
-   
-    slidingPanelController = [[MSSlidingPanelController alloc] initWithCenterViewController:_homeNavigationController andLeftPanelController:_menuTableViewController];
-    [slidingPanelController setDelegate:_homeTableViewController];
-    [slidingPanelController setLeftPanelMaximumWidth:150.0f];
-    */
+
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     

@@ -10,7 +10,7 @@ pod 'STTweetLabel'
 pod 'DZNEmptyDataSet'
 pod 'JDFTooltips'
 pod 'NJKWebViewProgress'
-pod 'MSSlidingPanelController'
+#pod 'MSSlidingPanelController'
 pod 'RESideMenu', '~> 4.0.7'
 
 

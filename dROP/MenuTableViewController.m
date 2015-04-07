@@ -7,17 +7,27 @@
 //
 
 #import "MenuTableViewController.h"
-
-
-#import "AppDelegate.h"
-#import "MSViewControllerSlidingPanel.h"
-
+#import "HomeTableViewController.h"
+#import "ProfileViewController.h"
+#import "MapViewController.h"
 #import "Config.h"
+
+#define TABLEVIEW_HEIGHT HEIGHT - 70
 
 @interface MenuTableViewController ()
 {
     NSArray *colours;
 }
+
+
+@property (strong, readwrite, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) ProfileViewController *profileViewController;
+@property (strong, nonatomic) MapViewController *mapViewController;
+
+
+@property (strong, readwrite, nonatomic) UIViewController *currentViewController;
+
+
 @end
 
 @implementation MenuTableViewController
@@ -31,8 +41,32 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.bounces = NO;
+    self.tableView = ({
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width / 2) - 20, TABLEVIEW_HEIGHT) style:UITableViewStylePlain];
+        tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+        tableView.delegate = self;
+        tableView.dataSource = self;
+        tableView.opaque = NO;
+        tableView.backgroundColor = [UIColor clearColor];
+        tableView.backgroundView = nil;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableView.bounces = NO;
+        tableView;
+    });
+    
+    //_homeTableViewController = [[HomeTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    _profileViewController = [[ProfileViewController alloc] initWithNibName:nil bundle:nil];
+    _mapViewController = [[MapViewController alloc] initWithNibName:nil bundle:nil];
+    
+    _mapViewController.dataSource = _homeTableViewController;
+    _mapViewController.delegate = _homeTableViewController;
+}
+
+
+- (void)setHomeTableViewController:(HomeTableViewController *)homeTableViewController
+{
+    _currentViewController = homeTableViewController;
+    _homeTableViewController = (HomeTableViewController *)_currentViewController;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,14 +83,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 5;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //Screen height / numner of rows
+    CGFloat height = CGRectGetHeight(tableView.frame) / 5;
     
-    return HEIGHT / 5;
+    if (indexPath.row == 0)
+        return height * 2;
+    
+    return height;
 }
 
 
@@ -67,57 +104,48 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"Cell%ld",indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    UIColor *colour;
+    UIColor *colour = [UIColor clearColor];
     NSString *imageString;
     NSString *menuTitle;
     
     if (indexPath.row == 0)
     {
-        
-        
         //F3BB72
         colour = [UIColor colorWithRed:243/255.0f green:187/255.0f blue:114/255.0f alpha:1.0f];
-        imageString = @"User";
+        imageString = [Config people];
         menuTitle = @"PROFILE";
         
         
     }else if (indexPath.row == 1)
     {
-        //CDB5A3
-        colour = BAR_TINT_COLOR2;
-        //[UIColor colorWithRed:205/255.0f green:181/255.0f blue:163/255.0f alpha:1.0f];
         imageString = @"Home";
         menuTitle = @"HOME";
     }else if (indexPath.row == 2)
     {
-        //5D9EA1
-        colour = //[UIColor colorWithRed:93/255.0f green:158/255.0f blue:161/255.0f alpha:1.0f];
-        [UIColor colorWithRed:252/255.0f green:135/255.0f blue:13/255.0f alpha:1.0f];
-        imageString = @"Articles";
-        menuTitle = @"ARTICLE";
-    }else if (indexPath.row == 3)
-    {
-        //C2606F
-        colour =  [UIColor colorWithRed:236/255.0f green:86/255.0f blue:78/255.0f alpha:1.0f];
-
-        //[UIColor colorWithRed:194/255.0f green:96/255.0f blue:111/255.0f alpha:1.0f];
-        imageString = @"Events";
-        menuTitle = @"EVENTS";
-        
-    }else if (indexPath.row == 4)
-    {
-        //FF85A7
-        colour = [UIColor colorWithRed:255/255.0f green:133/255.0f blue:167/255.0f alpha:1.0f];
         imageString = @"Marker";
         menuTitle = @"MAP";
+    }else if (indexPath.row == 3)
+    {
+        imageString = @"Notification";
+        menuTitle = @"NOTIFICATIONS";
     }
     
-    cell.backgroundColor = colour;
+    cell.backgroundColor = [UIColor clearColor];
     
+    CGFloat height = CGRectGetHeight(tableView.frame) / 5;
     
-    UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake((150 / 2) - 15.0f, ((HEIGHT / 5) / 2) - 15.0f, 30.0f, 30.0f)];
-    icon.backgroundColor = [UIColor clearColor];
-    icon.image = [UIImage imageNamed:imageString];
+    if (indexPath.row == 0)
+        height = height * 2;
+    
+    UIButton *icon = [[UIButton alloc] initWithFrame:CGRectMake((150 / 2) - 22.50f, (height / 2) - 22.50f, 45.0f, 45.0f)];
+    icon.backgroundColor = colour;
+    [icon setImage:[UIImage imageNamed:imageString] forState:UIControlStateNormal];
+    icon.layer.cornerRadius = CGRectGetWidth(icon.frame) / 2;
+    icon.layer.borderWidth = 1.0f;
+    icon.layer.borderColor = [UIColor whiteColor].CGColor;
+    icon.clipsToBounds = YES;
+    icon.contentMode = UIViewContentModeScaleAspectFit;
+    icon.userInteractionEnabled = NO;
     [cell.contentView addSubview:icon];
     
     UILabel *iconTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, icon.frame.origin.y + CGRectGetWidth(icon.frame), 150.0f, 28)];
@@ -125,7 +153,7 @@
     iconTitle.textColor = [UIColor whiteColor];
     iconTitle.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:13.5f];
     iconTitle.textAlignment = NSTextAlignmentCenter;
-
+    
     [cell.contentView addSubview:iconTitle];
     
     // Configure the cell...
@@ -135,39 +163,38 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    UIViewController *newContentViewController;
     
-
-    /*
-    if (indexPath.row == 0)
-    {
-        //Profile
-    }else if (indexPath.row == 1)
-    {
-        //home
-        [[self slidingPanelController] setDelegate:appDelegate.homeTableViewController];
-        [[self slidingPanelController] setCenterViewController:appDelegate.homeNavigationController];
-    }else if (indexPath.row == 2)
-    {
-        //article
-        [[self slidingPanelController] setDelegate:appDelegate.articlesTableViewController];
-        [[self slidingPanelController] setCenterViewController:appDelegate.articlesNavigationController];
-    }else if (indexPath.row == 3)
-    {
-        //Events
-        [[self slidingPanelController] setDelegate:appDelegate.eventsViewController];
-        [[self slidingPanelController] setCenterViewController:appDelegate.eventsNavigationController];
-    }else if (indexPath.row == 4)
-    {
-        //Map
+    if (indexPath.row == 0){
+        newContentViewController = _profileViewController;
+    }else if (indexPath.row == 1){
+        newContentViewController = _homeTableViewController;
+    }else if (indexPath.row == 2){
+        newContentViewController = _mapViewController;
+        
+    }else if (indexPath.row == 3){
+        
     }
-    */
     
-    [[self slidingPanelController] closePanel];
-
+    if (newContentViewController != _currentViewController)
+    {
+        
+        if (indexPath.row == 2)
+        {
+            [self.sideMenuViewController setContentViewController:newContentViewController
+                                                         animated:YES];
+        }else{
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:newContentViewController]
+                                                         animated:YES];
+        }
+        
+        _currentViewController = newContentViewController;
+    }
+    
+    [self.sideMenuViewController hideMenuViewController];
 }
-
 
 /*
 // Override to support conditional editing of the table view.
