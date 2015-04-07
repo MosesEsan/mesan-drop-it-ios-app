@@ -36,6 +36,12 @@ Drop It is an anonymous social media app that allows you to anonymously find out
   <li>Timeline View Redesigned</li>
 </ul>
 
+<b>Version 0.3 (New Features)</b>
+<ul>
+  <li>Delete Post</li>
+  <li>Like/Dislike/Report and Delete Comments </li>
+  <li>Timeline View Redesigned and App Main colour changed</li>
+</ul>
 
 <b>Screenshots (All screenshot available at https://www.dropbox.com/sh/8mok74atxnyrtmq/AAAOqMBqMMAhgsPX5RMq9IpIa?dl=0)</b> 
 
