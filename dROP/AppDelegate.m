@@ -60,7 +60,9 @@
     sideMenuViewController.contentViewShadowOpacity = 0.6;
     sideMenuViewController.contentViewShadowRadius = 12;
     sideMenuViewController.contentViewShadowEnabled = YES;
-
+    sideMenuViewController.contentViewInLandscapeOffsetCenterX = 30.f;
+    sideMenuViewController.contentViewInPortraitOffsetCenterX  = -40.f;
+    sideMenuViewController.contentViewScaleValue = 0.9f;
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     

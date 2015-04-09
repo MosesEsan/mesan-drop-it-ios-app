@@ -41,7 +41,8 @@
                                  @"Mode Configured" : [NSNumber numberWithBool:NO],
                                  @"Last Active" : [NSDate date],
                                  @"Cell Type" : @(COLOURED),
-                                 @"Avatar" : avatar
+                                 @"Avatar" : avatar,
+                                 @"College" : ALL_COLLEGES
                                  };
         
         [[NSUserDefaults standardUserDefaults] setObject:config forKey:@"DIConfig"];
@@ -72,7 +73,8 @@
                                               @"Mode Configured" : [NSNumber numberWithBool:YES],
                                               @"Last Active" : [NSDate date],
                                               @"Cell Type" : @(COLOURED),
-                                              @"Avatar" : avatar
+                                              @"Avatar" : avatar,
+                                              @"College" : ALL_COLLEGES
                                               };
                             }
                         }
@@ -100,7 +102,7 @@
     //Set Default Locations
     NSDictionary *config = [[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"];
     
-    mode = (AppMode)[config[@"App Mode"] intValue];
+    //mode = (AppMode)[config[@"App Mode"] intValue];
     
     return mode;
 }
@@ -122,7 +124,6 @@
 
 + (BOOL)setCellType:(PostCellType)mode
 {
-    //Set Default Locations
     NSDictionary *config = [[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"];
     PostCellType type = (PostCellType)[config[@"Cell Type"] intValue];
     
@@ -180,19 +181,58 @@
     return config[@"Avatar"];
 }
 
++ (NSString *)college
+{
+    //Set Default Locations
+    NSDictionary *config = [[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"];
+    
+    return config[@"College"];
+}
+
++ (BOOL)setCollege:(NSString *)newCollege
+{
+    NSDictionary *config = [[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"];
+    NSString *currentCollege = config[@"College"];
+    
+    if (currentCollege == newCollege ) {
+        return NO;
+    }else{
+        NSMutableDictionary *newConfig = config.mutableCopy;
+        newConfig[@"College"] = newCollege;
+        
+        [[NSUserDefaults standardUserDefaults] setObject:newConfig forKey:@"DIConfig"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        return YES;
+    }
+}
+
 + (void)updateAvailableLocations:(NSDate *)lastUpdated
 {
     //Get the current locations
-     NSMutableArray *availableLocations = [[NSUserDefaults standardUserDefaults] objectForKey:@"AvailableLocations"];
+     NSDictionary *availableLocations = [[NSUserDefaults standardUserDefaults] objectForKey:@"AvailableLocations"];
     
     //If nil, pass the default and save it
     if (availableLocations == nil)
     {
-        availableLocations = [[NSMutableArray alloc] initWithObjects:
-                              @[@"Kevin Street", @"53.337296", @"-6.267333", @"8046.72"],
-                              @[@"Aungier Street", @"53.337296", @"-6.267333", @"8046.72"],
-                              @[@"IT Tallaght", @"53.290947", @"-6.363412", @"8046.72"],
-                              nil];
+        availableLocations =    @{@"DIT (Aungier Street)" : @{@"Name" : @"DIT (Aungier Street)",
+                                                           @"Latitude" : @"53.337296",
+                                                           @"Longitude" : @"-6.267333",
+                                                           @"Distance" : @"8046.72",
+                                                           //@"Logo" : [NSNull null]
+                                                           },
+                                @"DIT (Kevin Street)" : @{@"Name" : @"DIT (Kevin Street)",
+                                                          @"Latitude" : @"53.337296",
+                                                          @"Longitude" : @"-6.267333",
+                                                          @"Distance" : @"8046.72",//@"Logo" : [NSNull null]
+                                                          },
+                                @"IT Tallaght" : @{@"Name" : @"IT Tallaght",
+                                                   @"Latitude" : @"53.290947",
+                                                   @"Longitude" : @"-6.363412",
+                                                   @"Distance" : @"8046.72",
+                                                   //@"Logo" : [NSNull null]
+                                                   }
+                                };
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:availableLocations forKey:@"AvailableLocations"];
@@ -208,24 +248,29 @@
             if ([Config checkInternetConnection])
             {
                 PFQuery *query = [PFQuery queryWithClassName:LOCATIONS_CLASS_NAME];
+                [query orderByAscending:@"college"];
                 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                     if (error) {
                         NSLog(@"error in geo query!"); // todo why is this ever happening?
                     } else {
                         
-                        NSMutableArray *availableLocations = [[NSMutableArray alloc] init];
+                        NSMutableDictionary *availableLocations = [[NSMutableDictionary alloc] init];
+                        
                         if ([objects count] > 0)
                         {
                             for (PFObject *location in objects)
                             {
                                 NSString *college = location[@"college"];
                                 PFGeoPoint *locationGeo = location[@"location"];
-                                NSArray *locationInfo = @[college,
-                                                          [NSNumber numberWithDouble:locationGeo.latitude],
-                                                          [NSNumber numberWithDouble:locationGeo.longitude],
-                                                          location[@"distance"]];
+                                NSDictionary *locationInfo =
+                                @{@"Name" : college,
+                                  @"Latitude" : [NSNumber numberWithDouble:locationGeo.latitude],
+                                  @"Longitude" : [NSNumber numberWithDouble:locationGeo.longitude],
+                                  @"Distance" : location[@"distance"]
+                                  ///@"Logo" : location[@"logo"]
+                                  };
                                 
-                                [availableLocations addObject:locationInfo];
+                                [availableLocations setValue:locationInfo forKey:college];
                             }
                         }
                         
@@ -244,10 +289,10 @@
     }
 }
 
-+ (NSMutableArray *)availableLocations
++ (NSDictionary *)availableLocations
 {
     //Set Default Locations
-    NSMutableArray *availableLocations = [[NSUserDefaults standardUserDefaults] objectForKey:@"AvailableLocations"];
+    NSDictionary *availableLocations = [[NSUserDefaults standardUserDefaults] objectForKey:@"AvailableLocations"];
     
     return availableLocations;
 }
@@ -512,34 +557,56 @@
 
 + (BOOL)checkAddPermission:(CLLocation *)currentLocation
 {
-    //Get the current location
     BOOL isAllowedToAdd = NO;
+    NSDictionary *availableLocations = [Config availableLocations];
     
-    for (NSInteger i = 0; i < [[Config availableLocations] count]; i++)
+    //If the current default college is not all, check against location
+    if (![[Config college] isEqualToString:ALL_COLLEGES] &&
+        [availableLocations objectForKey:[Config college]] != nil)
     {
-        //Create a cllocation object
-        CLLocation *availablePoint = [[CLLocation alloc] initWithLatitude:[[Config availableLocations][i][1] floatValue]
-                                                                longitude:[[Config availableLocations][i][2] floatValue]];
+        NSDictionary *locationInfo = [availableLocations objectForKey:[Config college]];
         
-        CLLocationDistance delta = [currentLocation distanceFromLocation:availablePoint];
-        /*
-        NSString *text = [NSString stringWithFormat:@"The College is %@ - The Allowed Distance is %f and the users distance is %f.", [NSString stringWithFormat:@"%@",[Config availableLocations][i][0]],[[Config availableLocations][i][3] floatValue],delta];
-        
-        NSLog(text);
-        */
+        CLLocationDistance delta = [Config checkDistance:locationInfo fromCurrentLocatio:currentLocation];
         
         //If the user distance from the main location is less than or equal to the allowed distance
-        if (delta != 0 && delta <= [[Config availableLocations][i][3] floatValue])
+        if (delta != 0 && delta <= [locationInfo[@"Distance"] floatValue])
         {
             isAllowedToAdd = YES;
+        }
+        
+    }else{
+        
+        //Get all the keys
+        NSArray *keys = [availableLocations allKeys];
+        
+        for (NSInteger i = 0; i < [availableLocations count]; i++)
+        {
+            //Get the Key for the row
+            id aKey = [keys objectAtIndex:i];
+            NSDictionary *locationInfo = [availableLocations objectForKey:aKey];
             
-            //NSString *college = [NSString stringWithFormat:@"%@",availableLocations[i][0]];
-            // NSLog(college);
-            i = [[Config availableLocations] count];
+            CLLocationDistance delta = [Config checkDistance:locationInfo fromCurrentLocatio:currentLocation];
+            
+            //If the user distance from the main location is less than or equal to the allowed distance
+            if (delta != 0 && delta <= [locationInfo[@"Distance"] floatValue])
+            {
+                isAllowedToAdd = YES;
+                i = [availableLocations count];
+            }
         }
     }
     
     return isAllowedToAdd;
+}
+
+
++ (CLLocationDistance)checkDistance:(NSDictionary *)locationInfo fromCurrentLocatio:(CLLocation *)currentLocation
+{
+    //Create a cllocation object
+    CLLocation *availablePoint = [[CLLocation alloc] initWithLatitude:[locationInfo[@"Latitude"] floatValue]
+                                                            longitude:[locationInfo[@"Longitude"] floatValue]];
+    
+    return [currentLocation distanceFromLocation:availablePoint];
 }
 
 + (NSString *)getClosestLocation:(CLLocation *)currentLocation
@@ -547,35 +614,45 @@
     //Get the current location
     CLLocationDistance minDistance = 0;
     NSString *college = @"";
+    NSDictionary *availableLocations = [Config availableLocations];
+
+    //Get all the keys
+    NSArray *keys = [availableLocations allKeys];
     
-    for (NSInteger i = 0; i < [[Config availableLocations] count]; i++)
+    for (NSInteger i = 0; i < [availableLocations count]; i++)
     {
+        //Get the Key for the row
+        id aKey = [keys objectAtIndex:i];
+        NSDictionary *locationInfo = [availableLocations objectForKey:aKey];
+        
         //Create a cllocation object
-        CLLocation *availablePoint = [[CLLocation alloc] initWithLatitude:[[Config availableLocations][i][1] floatValue]
-                                                                longitude:[[Config availableLocations][i][2] floatValue]];
+        CLLocation *availablePoint = [[CLLocation alloc] initWithLatitude:[locationInfo[@"Latitude"] floatValue]
+                                                                longitude:[locationInfo[@"Longitude"] floatValue]];
         
         CLLocationDistance delta = [currentLocation distanceFromLocation:availablePoint];
         
         //If the user distance from the main location is less than or equal to the allowed distance
-        if (delta != 0 && delta <= [[Config availableLocations][i][3] floatValue])
+        if (delta != 0 && delta <= [locationInfo[@"Distance"] floatValue])
         {
-            //NSLog([NSString stringWithFormat:@"%@",[Config availableLocations][i][0]]);
             //check against the current least distance
-            if (minDistance == 0) {
+            if (minDistance == 0)
+            {
+                //if the min distance has not been changed form 0, set the new min distance to the current distance just calvulated
+                //Set the college name aswell
                 minDistance = delta;
-                college = [NSString stringWithFormat:@"%@",[Config availableLocations][i][0]];
+                college = [NSString stringWithFormat:@"%@",locationInfo[@"Name"]];
             }else{
                 if (delta < minDistance)
                 {
                     //Save the distance and college
                     minDistance = delta;
-                    college = [NSString stringWithFormat:@"%@",[Config availableLocations][i][0]];
+                    college = [NSString stringWithFormat:@"%@",locationInfo[@"Name"]];
                 }
             }
         }
     }
     
-    //NSLog([NSString stringWithFormat:@"Final is -> %@",college]);
+    NSLog([NSString stringWithFormat:@"Final is -> %@",college]);
 
     return college;
 }
@@ -992,6 +1069,18 @@
     [imageView setTintColor:color];
     
     return imageView;
+}
+
+
++ (UIButton *)menuButton
+{
+    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    menuBtn.frame = CGRectMake(0, 0, 23.0f, 23.0f);
+    [menuBtn setImage:[Config drawListImage] forState:UIControlStateNormal];
+    [menuBtn setClipsToBounds:YES];
+    menuBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    
+    return menuBtn;
 }
 
 + (UIImage *)drawListImage

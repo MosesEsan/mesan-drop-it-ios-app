@@ -24,11 +24,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Drop It!-MSSlidingPanelController.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Drop It!-Montserrat-Montserrat.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,57 +57,52 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>36D39C3C19A70C9E9F8972FD</key>
+		<key>011F5E1605D6F3266BEDD16E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>463396632996AD94C4AB9760</key>
+		<key>11C25BB9A0058C5C6DEB1EF1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>49AE73312137764AFA695B9F</key>
+		<key>732A31334921AFA1752704BF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>594E8A915ABCAAB30CED9CC3</key>
+		<key>75C8B0B062D0DE19194D75FF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5DA6D5158133356258BD527A</key>
+		<key>8AEEF0093A13469A102B2703</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>78804D33A9ABAA197281BAC2</key>
+		<key>B338EC932D92FD818A3C0802</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7D017AF3C28755346D14176F</key>
+		<key>BA2D20D70AECE01944ACD67C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9B44C1CE5A9B375DDFC52AC4</key>
+		<key>C23077148C969EF7DBB219D9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A0DF81CE07D0432C2CD6D1E5</key>
+		<key>DCB2EC0F2F64B243FE2776EE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CB287754D5315D2C235504A4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FD1EE1EC09C2419DC7FFBD03</key>
+		<key>F3E50C424E776CFAA373C5CF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

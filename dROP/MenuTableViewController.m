@@ -10,6 +10,7 @@
 #import "HomeTableViewController.h"
 #import "ProfileViewController.h"
 #import "MapViewController.h"
+#import "CollegeTableViewController.h"
 #import "Config.h"
 
 #define TABLEVIEW_HEIGHT HEIGHT - 70
@@ -23,6 +24,8 @@
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) ProfileViewController *profileViewController;
 @property (strong, nonatomic) MapViewController *mapViewController;
+
+@property (strong, nonatomic) CollegeTableViewController *collegeViewController;
 
 
 @property (strong, readwrite, nonatomic) UIViewController *currentViewController;
@@ -56,10 +59,15 @@
     
     //_homeTableViewController = [[HomeTableViewController alloc] initWithStyle:UITableViewStylePlain];
     _profileViewController = [[ProfileViewController alloc] initWithNibName:nil bundle:nil];
-    _mapViewController = [[MapViewController alloc] initWithNibName:nil bundle:nil];
     
+    _mapViewController = [[MapViewController alloc] initWithNibName:nil bundle:nil];
     _mapViewController.dataSource = _homeTableViewController;
     _mapViewController.delegate = _homeTableViewController;
+    
+    
+    _collegeViewController = [[CollegeTableViewController alloc] initWithStyle:UITableViewStylePlain];
+
+    
 }
 
 
@@ -83,7 +91,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 3;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -126,8 +134,8 @@
         menuTitle = @"MAP";
     }else if (indexPath.row == 3)
     {
-        imageString = @"Notification";
-        menuTitle = @"NOTIFICATIONS";
+        imageString = @"University";
+        menuTitle = @"COLLEGES";
     }
     
     cell.backgroundColor = [UIColor clearColor];
@@ -176,6 +184,9 @@
         
     }else if (indexPath.row == 3){
         
+        _collegeViewController.delegate = _homeTableViewController;
+        
+        newContentViewController = _collegeViewController;
     }
     
     if (newContentViewController != _currentViewController)

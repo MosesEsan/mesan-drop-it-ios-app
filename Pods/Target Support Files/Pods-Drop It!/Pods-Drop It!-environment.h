@@ -84,12 +84,6 @@
 #define COCOAPODS_VERSION_MINOR_JDFTooltips 0
 #define COCOAPODS_VERSION_PATCH_JDFTooltips 0
 
-// MSSlidingPanelController
-#define COCOAPODS_POD_AVAILABLE_MSSlidingPanelController
-#define COCOAPODS_VERSION_MAJOR_MSSlidingPanelController 1
-#define COCOAPODS_VERSION_MINOR_MSSlidingPanelController 3
-#define COCOAPODS_VERSION_PATCH_MSSlidingPanelController 4
-
 // Montserrat
 #define COCOAPODS_POD_AVAILABLE_Montserrat
 #define COCOAPODS_VERSION_MAJOR_Montserrat 1

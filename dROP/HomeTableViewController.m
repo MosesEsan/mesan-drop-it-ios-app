@@ -89,19 +89,16 @@
     menuBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
     [menuBtn addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
-
+    
     //TitleView
-    layoutLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 37)];
+    layoutLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
     layoutLabel.textAlignment = NSTextAlignmentCenter;
-    layoutLabel.text = @"DropIt";
-    layoutLabel.textColor = [UIColor colorWithRed:235/255.0f green:237/255.0f blue:236/255.0f alpha:1.0f];
-    layoutLabel.font = [UIFont fontWithName:@"Belshaw" size:27.0f];
     layoutLabel.backgroundColor = [UIColor clearColor];
     layoutLabel.textColor = [UIColor whiteColor];
     layoutLabel.userInteractionEnabled = YES;
     self.navigationItem.titleView = layoutLabel;
-    // CocaColaii
-    //PT-BananaSplit
+    
+    [self updateNavBar];
 
     UIButton *addNewButton = [UIButton buttonWithType:UIButtonTypeCustom];
     addNewButton.frame = CGRectMake(0, 0, 23, 23);
@@ -195,13 +192,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    /*
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    
-    self.title = @"";
-    */
 }
 
 - (void)didReceiveMemoryWarning {
@@ -491,24 +481,6 @@
     [self.navigationController pushViewController:viewPost animated:YES];
 }
 
-- (void)changeLayout:(UIButton *)sender
-{
-    
-    //[menu showMenu];
-    /*
-    
-    //Create the action sheet
-    UIActionSheet* sheet = [[UIActionSheet alloc]
-                            initWithTitle:@"Change layout"
-                            delegate:self
-                            cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
-                            otherButtonTitles:@"Timeline", @"List", nil];
-    
-    //Display the action sheet
-    [sheet showInView: self.navigationController.view];
-    */
-}
-
 #pragma mark - UIActionSheet Delegate
 - (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)index
 {
@@ -529,7 +501,6 @@
         [self.tableView reloadData];
     }
 }
-
 
 - (void)addNewPost:(UIBarButtonItem *)sender
 {
@@ -644,6 +615,46 @@
     [self queryForAllPostsNearLocation];
 }
 
+
+- (void)updateNavBar
+{
+    NSString *college = [Config college];
+    
+    if ([college isEqualToString:ALL_COLLEGES]
+        || college == nil)
+    {
+        layoutLabel.text = @"DropIt";
+        layoutLabel.font = [UIFont fontWithName:@"Belshaw" size:27.0f];
+    }else{
+        layoutLabel.text = [Config college];
+        layoutLabel.font = [UIFont fontWithName:@"AvenirNext-Medium" size:17.0f];
+    }
+    
+    if ([Config checkAddPermission:_currentLocation] == YES)
+    {
+        self.navigationItem.rightBarButtonItem = addNew;
+    }else{
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+}
+
+- (void)switchCollege
+{
+    [self updateNavBar];
+    
+    self.allPosts = nil;
+    [self.tableView reloadData];
+    
+    //Add Loading View
+    [spinner startAnimating];
+    
+    [self queryForAllPostsNearLocation];
+}
+
+
+
+//Methods
+
 - (void)queryForAllPostsNearLocation
 {
     //NSLog(@"%@",[NSDate date]);
@@ -659,6 +670,7 @@
             //If app is not in testing mode, take the current location into consideration
             if ([Config appMode] != TESTING)
             {
+                /*
                 if (self.currentLocation == nil) {
                     NSLog(@"%s got a nil location!", __PRETTY_FUNCTION__);
                 }
@@ -668,6 +680,13 @@
                                                            longitude:_currentLocation.coordinate.longitude];
                 
                 [query whereKey:@"location" nearGeoPoint:point withinKilometers:ONE_HALF_MILE_RADIUS_KM];
+                */
+                
+                //If the current default college is not all, take the college name into consideration
+                if (![[Config college] isEqualToString:ALL_COLLEGES])
+                {
+                    [query whereKey:@"college" containsString:[Config college]];
+                }
                 
             }
             

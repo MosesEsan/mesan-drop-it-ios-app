@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 #import "MapViewController.h"
+#import "CollegeTableViewController.h"
 
 
-@interface HomeTableViewController : UITableViewController <MapViewControllerDataSource, MapViewControllerDelegate>
+@interface HomeTableViewController : UITableViewController <MapViewControllerDataSource, MapViewControllerDelegate, CollegeViewControllerDelegate>
 
 
 @end

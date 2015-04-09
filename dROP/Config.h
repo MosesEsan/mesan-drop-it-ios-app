@@ -34,30 +34,15 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define APPSFIRE_CLIENT_SECRET @"226b76189b85d2bbad5905024da9cfd2"
 
 
-
 //#44B7C7 -- //1ABEC3 -- 1199D6
 #define BAR_TINT_COLOR2 [UIColor colorWithRed:17/255.0f green:153/255.0f blue:214/255.0f alpha:1.0f]
-
-
-//[UIColor colorWithRed:68/255.0f green:183/255.0f blue:199/255.0f alpha:1.0f]
-//[UIColor colorWithRed:26/255.0f green:190/255.0f blue:195/255.0f alpha:1.0f]
-//#define BAR_TINT_COLOR22 [UIColor colorWithRed:103/255.0f green:199/255.0f blue:237/255.0f alpha:1.0f]
 #define BAR_STYLE UIBarStyleBlackTranslucent
 #define TINT_COLOR [UIColor whiteColor]
 #define TRANSLUCENT NO
 #define CLIPS_TO_BOUNDS YES
 
 //D7D6D4
-//#define TABLEVIEW_COLOR 
 #define TABLEVIEW2_COLOR [UIColor colorWithRed:239/255.0f green:238/255.0f blue:237/255.0f alpha:1.0f];
-//[UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:1.0f]
-
-
-//F89A66 -
-//[UIColor colorWithRed:248/255.0f green:154/255.0f blue:102/255.0f alpha:1.0f];
-
-//D76E5A
-//[UIColor colorWithRed:215/255.0f green:110/255.0f blue:90/255.0f alpha:1.0f];
 
 #define TEXT_FONT [UIFont fontWithName:@"AvenirNext-Medium" size:14.0f]
 #define DATE_FONT [UIFont fontWithName:@"AvenirNext-Regular" size:13.0f]
@@ -68,6 +53,7 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define ARTICLE_SUBTITLE_FONT [UIFont fontWithName:@"AvenirNext-Medium" size:15.0f]
 #define ARTICLE_PADDING 13.0f
 
+#define ALL_COLLEGES @"All"
 
 #define WIDTH [[UIScreen mainScreen] bounds].size.width
 #define HEIGHT [[UIScreen mainScreen] bounds].size.height
@@ -147,8 +133,10 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 + (UIImage *)usersAvatar;
 + (NSString *)usersAvatarString;
 
++ (NSString *)college;
++ (BOOL)setCollege:(NSString *)newCollege;
 
-+ (NSMutableArray *)availableLocations;
++ (NSDictionary *)availableLocations;
 + (void)updateAvailableLocations:(NSDate *)lastUpdated;
 
 + (NSMutableArray *)rewards;
@@ -201,6 +189,7 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 
 + (UIView *)viewWithImageName:(NSString *)imageName;
 
++ (UIButton *)menuButton;
 + (UIImage *)drawListImage;
 + (UIImage *) imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 + (UIImage *) imageWithImage:(UIImage *)image scaledToFillSize:(CGSize)size;
