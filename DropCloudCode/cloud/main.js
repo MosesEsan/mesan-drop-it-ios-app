@@ -57,20 +57,37 @@ Parse.Cloud.afterSave("Posts", function(request) {
                     userObject.increment("points", 1);
                     userObject.save();
                 }
-            }else if (type == "Like"){
+            }else if (type == "Like" || type == "Dislike" || type == "Report"){
                 if (length > 0)
                 {
-                    userObject.increment("points", 2);
-                    userObject.save();
-
+                    if (type == "Like")
+                    {
+                        userObject.increment("points", 2);
+                        userObject.save();
+                    }else if (ype == "Dislike"){
+                        userObject.increment("points", -2);
+                        userObject.save();
+                    }else if (type == "Report"){
+                        userObject.increment("points", -5);
+                        userObject.save();
+                    }
 
                     //Create a notification object and save it
                     var Notification = Parse.Object.extend("Notifications");
                     var notification = new Notification();
-                    var message = "Someone liked your post: " + postText
+
+                    var message = "";
+
+                    if (type == "Like"){
+                        message = "Someone liked your post: " + postText
+                    }else if (type == "Dislike"){
+                        message = "Someone disliked your post: " + postText
+                    }else if (type == "Report"){
+                        message = "Someone reported your post: " + postText
+                    }
 
                     notification.set("message", message);
-                    notification.set("type", "Like");
+                    notification.set("type", type);
 
                     notification.save(null, {
                         success: function(notification) {
@@ -102,18 +119,6 @@ Parse.Cloud.afterSave("Posts", function(request) {
                         }
                     });
                 }
-            }else if (type == "Dislike"){
-                if (length > 0)
-                {
-                    userObject.increment("points", -2);
-                    userObject.save();
-                }
-            }else if (type == "Report"){
-                if (length > 0)
-                {
-                    userObject.increment("points", -5);
-                    userObject.save();
-                }
             }
         },
         error: function(error) {
@@ -127,9 +132,11 @@ Parse.Cloud.afterSave("Comments", function(request) {
     // Our "Comment" class has a "text" key with the body of the comment itself
     var commentText = request.object.get('text');
     var postId = request.object.get('postId');
+    var type = request.object.get("type");
+
+    console.log(type);
 
     var commenterDeviceId = request.object.get('deviceId');
-
 
     var Post = Parse.Object.extend("Posts");
     var query = new Parse.Query(Post);
@@ -144,47 +151,54 @@ Parse.Cloud.afterSave("Comments", function(request) {
 
                 var deviceId = postObject.get("deviceId");
 
-                if (deviceId != commenterDeviceId){
+                if (deviceId != commenterDeviceId)
+                {
+                    if (type != "Unlike" && type != "Report")
+                    {
+                        //Create a notification object and save it
+                        var Notification = Parse.Object.extend("Notifications");
+                        var notification = new Notification();
 
-                    //Create a notification object and save it
-                    var Notification = Parse.Object.extend("Notifications");
-                    var notification = new Notification();
-                    var message = "Someone left a comment on your post: " + commentText;
+                        var message = "Someone left a comment on your post: " + commentText;
 
-                    notification.set("message", message);
-                    notification.set("type", "Comment");
-
-                    notification.save(null, {
-                        success: function(notification) {
-                            // Execute any logic that should take place after the object is saved.
-                            //send push
-                            var pushQuery = new Parse.Query(Parse.Installation);
-                            pushQuery.equalTo('deviceId', deviceId);
-
-                            Parse.Push.send({
-                                where: pushQuery, // Set our Installation query
-                                data: {
-                                    alert: message
-                                }
-                            }, {
-                                success: function() {
-                                    // Push was successful
-                                    console.log("Pushed")
-                                },
-                                error: function(error) {
-                                    throw "Got an error " + error.code + " : " + error.message;
-                                }
-                            });
-                        },
-                        error: function(notification, error) {
-                            // Execute any logic that should take place if the save fails.
-                            // error is a Parse.Error with an error code and message.
-                            alert('Failed to create new object, with error code: ' + error.message);
+                        if (type == "Like"){
+                            message = "Someone liked your comment: " + commentText
+                        }else if (type == "Dislike"){
+                            message = "Someone disliked your comment: " + commentText
                         }
-                    });
 
+                        notification.set("message", message);
+                        notification.set("type", type);
 
+                        notification.save(null, {
+                            success: function(notification) {
+                                // Execute any logic that should take place after the object is saved.
+                                //send push notification
+                                var pushQuery = new Parse.Query(Parse.Installation);
+                                pushQuery.equalTo('deviceId', deviceId);
 
+                                Parse.Push.send({
+                                    where: pushQuery, // Set our Installation query
+                                    data: {
+                                        alert: message
+                                    }
+                                }, {
+                                    success: function() {
+                                        // Push was successful
+                                        console.log("Pushed")
+                                    },
+                                    error: function(error) {
+                                        throw "Got an error " + error.code + " : " + error.message;
+                                    }
+                                });
+                            },
+                            error: function(notification, error) {
+                                // Execute any logic that should take place if the save fails.
+                                // error is a Parse.Error with an error code and message.
+                                alert('Failed to create new object, with error code: ' + error.message);
+                            }
+                        });
+                    }
                 }
             }
         },
