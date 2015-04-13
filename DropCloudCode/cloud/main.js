@@ -64,7 +64,7 @@ Parse.Cloud.afterSave("Posts", function(request) {
                     {
                         userObject.increment("points", 2);
                         userObject.save();
-                    }else if (ype == "Dislike"){
+                    }else if (type == "Dislike"){
                         userObject.increment("points", -2);
                         userObject.save();
                     }else if (type == "Report"){
@@ -153,7 +153,7 @@ Parse.Cloud.afterSave("Comments", function(request) {
 
                 if (deviceId != commenterDeviceId)
                 {
-                    if (type != "Unlike" && type != "Report")
+                    if (type != "Unlike")
                     {
                         //Create a notification object and save it
                         var Notification = Parse.Object.extend("Notifications");
@@ -165,6 +165,8 @@ Parse.Cloud.afterSave("Comments", function(request) {
                             message = "Someone liked your comment: " + commentText
                         }else if (type == "Dislike"){
                             message = "Someone disliked your comment: " + commentText
+                        }else if (type == "Report"){
+                            message = "Someone reported your comment: " + commentText
                         }
 
                         notification.set("message", message);
