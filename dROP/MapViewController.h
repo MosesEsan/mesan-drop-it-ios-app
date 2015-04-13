@@ -13,24 +13,13 @@
 @protocol MapViewControllerDataSource <NSObject>
 
 - (CLLocation *)getUserCurrentLocation;
-- (NSMutableArray *)getAllPosts;
 
 @end
 
-@protocol MapViewControllerDelegate <NSObject>
-
-- (void)likePost:(UIButton *)sender;
-- (void)dislikePost:(NSInteger)tag;
-- (void)reportPost:(NSInteger)tag;
-- (void)updateAllPostsArray:(NSInteger)index withPostObject:(NSDictionary *)postObject;
-
-@end
 
 @interface MapViewController : UIViewController
 
 @property (nonatomic, weak) id<MapViewControllerDataSource> dataSource;
-@property (nonatomic, weak) id<MapViewControllerDelegate> delegate;
-
 
 
 @end

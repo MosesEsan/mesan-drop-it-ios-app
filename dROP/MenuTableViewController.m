@@ -21,7 +21,6 @@
 }
 
 
-@property (strong, readwrite, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) ProfileViewController *profileViewController;
 @property (strong, nonatomic) MapViewController *mapViewController;
 
@@ -44,32 +43,27 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width / 2) - 20, TABLEVIEW_HEIGHT) style:UITableViewStylePlain];
-        tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
-        tableView.delegate = self;
-        tableView.dataSource = self;
-        tableView.opaque = NO;
-        tableView.backgroundColor = [UIColor clearColor];
-        tableView.backgroundView = nil;
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        tableView.bounces = NO;
-        tableView;
-    });
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+    self.tableView.opaque = NO;
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundView = nil;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.bounces = NO;
     
     //_homeTableViewController = [[HomeTableViewController alloc] initWithStyle:UITableViewStylePlain];
     _profileViewController = [[ProfileViewController alloc] initWithNibName:nil bundle:nil];
     
     _mapViewController = [[MapViewController alloc] initWithNibName:nil bundle:nil];
     _mapViewController.dataSource = _homeTableViewController;
-    _mapViewController.delegate = _homeTableViewController;
     
     
     _collegeViewController = [[CollegeTableViewController alloc] initWithStyle:UITableViewStylePlain];
-
-    
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.tableView.frame = CGRectMake(0, 0, (self.view.frame.size.width / 2) - 20, CGRectGetHeight(self.view.frame) - 70);
+}
 
 - (void)setHomeTableViewController:(HomeTableViewController *)homeTableViewController
 {
@@ -130,12 +124,12 @@
         menuTitle = @"HOME";
     }else if (indexPath.row == 2)
     {
-        imageString = @"Marker";
-        menuTitle = @"MAP";
-    }else if (indexPath.row == 3)
-    {
         imageString = @"University";
         menuTitle = @"COLLEGES";
+    }else if (indexPath.row == 3)
+    {
+        imageString = @"Marker";
+        menuTitle = @"MAP";
     }
     
     cell.backgroundColor = [UIColor clearColor];
@@ -180,19 +174,18 @@
     }else if (indexPath.row == 1){
         newContentViewController = _homeTableViewController;
     }else if (indexPath.row == 2){
-        newContentViewController = _mapViewController;
-        
-    }else if (indexPath.row == 3){
-        
         _collegeViewController.delegate = _homeTableViewController;
         
         newContentViewController = _collegeViewController;
+        
+    }else if (indexPath.row == 3){
+        newContentViewController = _mapViewController;
     }
     
     if (newContentViewController != _currentViewController)
     {
         
-        if (indexPath.row == 2)
+        if (indexPath.row == 3)
         {
             [self.sideMenuViewController setContentViewController:newContentViewController
                                                          animated:YES];

@@ -12,7 +12,7 @@
 #import "CollegeTableViewController.h"
 
 
-@interface HomeTableViewController : UITableViewController <MapViewControllerDataSource, MapViewControllerDelegate, CollegeViewControllerDelegate>
+@interface HomeTableViewController : UITableViewController <MapViewControllerDataSource, CollegeViewControllerDelegate>
 
 
 @end

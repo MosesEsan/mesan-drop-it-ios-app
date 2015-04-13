@@ -18,7 +18,7 @@
 
 //#define TOP_PADDING2 TOP_PADDING
 
-@interface MapPostViewController ()<ViewPostViewControllerDelegate>
+@interface MapPostViewController ()
 {
     UIButton *_sad;
     UIButton *_smiley;
@@ -242,7 +242,6 @@
 {
     ViewPostTableViewController *viewComments = [[ViewPostTableViewController alloc] initWithNibName:nil bundle:nil];
     viewComments.postObject = _postObject;
-    viewComments.delegate = self; //**Need to set delegate
     viewComments.view.tag = _index;
     viewComments.showCloseButton = YES;
     

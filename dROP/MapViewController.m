@@ -15,13 +15,15 @@
 #import "ViewPostTableViewController.h"
 
 #import "RESideMenu.h"
+#import "DIDataManager.h"
 
 
 
-@interface MapViewController () <MKMapViewDelegate, ViewPostViewControllerDelegate>
+@interface MapViewController () <MKMapViewDelegate>
 //MapPostViewControllerDelegate>
 {
     BOOL allowPopUp;
+    DIDataManager *shared;
 }
 
 @property (nonatomic, strong) MKMapView *mapView_;
@@ -34,6 +36,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    shared = [DIDataManager sharedManager];
+
     
     //self.view.backgroundColor = [UIColor purpleColor];
     
@@ -83,7 +87,7 @@
     CLLocation *currentLocation = [self.dataSource getUserCurrentLocation];
     CLLocationCoordinate2D currentCoordinate = currentLocation.coordinate;
 
-    NSMutableArray *allPosts = [self.dataSource getAllPosts];
+    NSMutableArray *allPosts = shared.allPosts;
     
     if ([allPosts count] == 0)
     {
@@ -204,7 +208,6 @@
         
         ViewPostTableViewController *viewPost = [[ViewPostTableViewController alloc] initWithNibName:nil bundle:nil];
         viewPost.postObject = mapView_.postObject;
-        viewPost.delegate = self;
         viewPost.view.tag = mapView_.index;
         viewPost.showCloseButton = YES;
         
@@ -285,32 +288,6 @@
 - (void)close:(UIButton *)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - MapPostViewControllerDelegate
-
-- (void)dislikePost:(NSInteger)tag
-{
-    [self.delegate dislikePost:tag];
-}
-
-- (void)reportPost:(NSInteger)tag
-{
-    [self.delegate reportPost:tag];
-}
-
-
-#pragma mark - ViewPostViewControllerDelegate
-
-- (void)likePost:(UIButton *)sender
-{
-    //update array and database
-    [self.delegate likePost:sender];
-}
-
-- (void)updateAllPostsArray:(NSInteger)index withPostObject:(NSDictionary *)postObject
-{
-    [self.delegate updateAllPostsArray:index withPostObject:postObject];
 }
 
 - (void)didReceiveMemoryWarning {

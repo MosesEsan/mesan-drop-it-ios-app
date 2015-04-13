@@ -371,6 +371,8 @@
 + (NSString *)calculateTime:(id)time
 {
     TTTTimeIntervalFormatter *timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
+    timeIntervalFormatter.usesAbbreviatedCalendarUnits = YES;
+    timeIntervalFormatter.pastDeicticExpression = @"";
     
     NSTimeInterval timeInterval = [time timeIntervalSinceNow];
     NSString *date  = [timeIntervalFormatter stringForTimeInterval:timeInterval];
@@ -676,10 +678,13 @@
 
 + (NSString *)repliesCount:(NSInteger)repliesCount
 {
+    /*
     if (repliesCount > 0)
         return [NSString stringWithFormat:@"%ld cmts",repliesCount];
     else
         return [NSString stringWithFormat:@""];
+     */
+     return [NSString stringWithFormat:@"120 cmts"];
 }
 
 + (NSDictionary *)subViewFrames:(NSDictionary *)postObject

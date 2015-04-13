@@ -1,6 +1,23 @@
 PODS:
+  - Bolts (1.1.4)
   - CCMPopup (1.1.0)
   - DZNEmptyDataSet (1.5.2)
+  - Facebook-iOS-SDK (4.0.1):
+    - Bolts (~> 1.0)
+    - Facebook-iOS-SDK/CoreKit (= 4.0.1)
+    - Facebook-iOS-SDK/LoginKit (= 4.0.1)
+    - Facebook-iOS-SDK/ShareKit (= 4.0.1)
+  - Facebook-iOS-SDK/CoreKit (4.0.1):
+    - Bolts (~> 1.0)
+    - Facebook-iOS-SDK/CoreKit/no-arc (= 4.0.1)
+  - Facebook-iOS-SDK/CoreKit/no-arc (4.0.1):
+    - Bolts (~> 1.0)
+  - Facebook-iOS-SDK/LoginKit (4.0.1):
+    - Bolts (~> 1.0)
+    - Facebook-iOS-SDK/CoreKit
+  - Facebook-iOS-SDK/ShareKit (4.0.1):
+    - Bolts (~> 1.0)
+    - Facebook-iOS-SDK/CoreKit
   - FormatterKit (1.8.0):
     - FormatterKit/AddressFormatter (= 1.8.0)
     - FormatterKit/ArrayFormatter (= 1.8.0)
@@ -33,6 +50,7 @@ PODS:
 DEPENDENCIES:
   - CCMPopup
   - DZNEmptyDataSet
+  - Facebook-iOS-SDK
   - FormatterKit
   - JDFTooltips
   - Montserrat
@@ -41,8 +59,10 @@ DEPENDENCIES:
   - STTweetLabel
 
 SPEC CHECKSUMS:
+  Bolts: f8e2f94edbf9fec7bb8de5ecaaa3aa6b7de6f64e
   CCMPopup: e41fad5b8a0823c9cddea8eab6d431670c9dabe5
   DZNEmptyDataSet: 741da409081a4bf707c949c964623a6ad1799772
+  Facebook-iOS-SDK: 6d05532c97e9c542f8d87f94b7f6ee217493d00b
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   JDFTooltips: 439e3f1010b5e689e8438f66fce8448726e59897
   Montserrat: 05ccfd6f44aadfd81b2bc3655f759099983be06e

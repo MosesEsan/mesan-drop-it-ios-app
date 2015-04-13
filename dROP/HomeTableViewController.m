@@ -31,6 +31,7 @@
 #import "JDFTooltipView.h"
 
 #import "RESideMenu.h"
+#import "DIDataManager.h"
 
 
 //#import "RBMenu.h"
@@ -38,12 +39,8 @@
 //Ad
 #import <AvocarrotSDK/AvocarrotInstream.h>
 
-@interface HomeTableViewController ()<AddPostViewControllerDataSource, ViewPostViewControllerDelegate, CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, AVInstreamAdDelegate, UIActionSheetDelegate>
+@interface HomeTableViewController ()<AddPostViewControllerDataSource, CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, AVInstreamAdDelegate, UIActionSheetDelegate>
 {
-    //RBMenu *menu;
-    //RBMenuItem *menuItem1;
-    //RBMenuItem *menuItem2;
-    
     UILabel *layoutLabel;
     UIBarButtonItem *addNew;
     
@@ -56,13 +53,13 @@
     RTSpinKitView *spinner;
     
     BOOL showAlert;
+    
+    DIDataManager *shared;
 }
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
 
-@property (nonatomic, strong) NSMutableArray *allPosts;
-@property (nonatomic, strong) NSMutableArray *likes;
 
 @property (nonatomic, strong) MCSwipeTableViewCell *cellToDelete;
 
@@ -76,9 +73,9 @@
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
-    _allPosts = [[NSMutableArray alloc] init];
-    _likes = [[NSMutableArray alloc] init];
+    shared = [DIDataManager sharedManager];
+    shared.tableView = self.tableView;
+
     showAlert = NO;
     
     //Menu
@@ -233,13 +230,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [_allPosts count];
+    return [shared.allPosts count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *postObject = _allPosts[indexPath.row];
+    NSDictionary *postObject = shared.allPosts[indexPath.row];
     NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
     PFObject *parseObject = postObject[@"parseObject"];
 
@@ -261,15 +258,16 @@
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
     }else if (type == COLOURED){
-        
+        /*
         if ([Config isPostAuthor:postObject])
-        {
+        {*/
             NSString *cellIdentifier = [NSString stringWithFormat:@"ColouredCell%@",parseObject.objectId];
             ColouredTableViewCell *_cell = (ColouredTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
             if (!_cell)
                 _cell = [[ColouredTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             
             cell = _cell;
+            /*
             
         }else{
             NSString *cellIdentifier = [NSString stringWithFormat:@"ProfileCell%@",parseObject.objectId];
@@ -279,10 +277,10 @@
             
             cell = _cell;
         }
-        
+        */
         [cell setFrameWithObject:postObject forIndex:indexPath.row];
         
-        if (indexPath.row != ([_allPosts count] - 1))
+        if (indexPath.row != ([shared.allPosts count] - 1))
             cell.bottomBorder.frame = CGRectMake(0, CGRectGetHeight(cell.mainContainer.frame) - 0.5f, CGRectGetWidth(cell.mainContainer.frame), .5f);
         
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -406,7 +404,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *postObject = _allPosts[indexPath.row];
+    NSDictionary *postObject = shared.allPosts[indexPath.row];
     NSString *postText = postObject[@"text"];
     
     CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:WIDTH - 55.0f withFont:TEXT_FONT];
@@ -421,15 +419,15 @@
             height += 10 + IMAGEVIEW_HEIGHT;
     }else if ([Config cellType] == COLOURED){
         
-        if ([Config isPostAuthor:postObject])
-        {
+       // if ([Config isPostAuthor:postObject])
+     //   {
              height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
             
             if (postObject[@"parseObject"][@"pic"])
                 height += 10 + IMAGEVIEW_HEIGHT;
-        }else{
-            height = [Config calculateCellHeight:postObject];
-        }
+       // }else{
+         //   height = [Config calculateCellHeight:postObject];
+      //  }
     }
 
     return height;
@@ -475,8 +473,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ViewPostTableViewController *viewPost = [[ViewPostTableViewController alloc] initWithNibName:nil bundle:nil];
-    viewPost.postObject = _allPosts[indexPath.row];
-    viewPost.delegate = self;
+    viewPost.postObject = shared.allPosts[indexPath.row];
     viewPost.view.tag = indexPath.row;
     [self.navigationController pushViewController:viewPost animated:YES];
 }
@@ -599,7 +596,7 @@
 
 - (NSMutableArray *)getAllPosts
 {
-    return self.allPosts;
+    return shared.allPosts;
 }
 
 - (void)newPostAdded:(NSNotification *)notification
@@ -608,7 +605,7 @@
     PFObject *newObject = [info objectForKey:@"newObject"];
     
     //1 - Add New Post Array to the first position of the array
-    [_allPosts insertObject:[Config createPostObject:newObject] atIndex:0];
+    [shared.allPosts insertObject:[Config createPostObject:newObject] atIndex:0];
     
     [self.tableView reloadData];
     
@@ -642,7 +639,7 @@
 {
     [self updateNavBar];
     
-    self.allPosts = nil;
+    shared.allPosts = nil;
     [self.tableView reloadData];
     
     //Add Loading View
@@ -670,22 +667,23 @@
             //If app is not in testing mode, take the current location into consideration
             if ([Config appMode] != TESTING)
             {
-                /*
-                if (self.currentLocation == nil) {
-                    NSLog(@"%s got a nil location!", __PRETTY_FUNCTION__);
-                }
-                
-                // Query for posts sort of kind of near users current location.
-                PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:_currentLocation.coordinate.latitude
-                                                           longitude:_currentLocation.coordinate.longitude];
-                
-                [query whereKey:@"location" nearGeoPoint:point withinKilometers:ONE_HALF_MILE_RADIUS_KM];
-                */
-                
                 //If the current default college is not all, take the college name into consideration
                 if (![[Config college] isEqualToString:ALL_COLLEGES])
                 {
                     [query whereKey:@"college" containsString:[Config college]];
+                }else{
+                    /*
+                    if (self.currentLocation != nil)
+                    {
+                        // Query for posts sort of kind of near users current location.
+                        PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:_currentLocation.coordinate.latitude
+                                                                   longitude:_currentLocation.coordinate.longitude];
+                        
+                        [query whereKey:@"location" nearGeoPoint:point withinKilometers:ONE_HALF_MILE_RADIUS_KM];
+                    }else{
+                        NSLog(@"%s got a nil location!", __PRETTY_FUNCTION__);
+                    }
+                    */
                 }
                 
             }
@@ -702,7 +700,7 @@
                     NSMutableArray *filteredPost = [Config filterPosts:objects];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        _allPosts = filteredPost;
+                        shared.allPosts = filteredPost;
                         [spinner stopAnimating];
                         [self.tableView reloadData];
                         
@@ -768,133 +766,21 @@
 
 - (void)likePost:(UIButton *)sender
 {
-    NSDictionary *postObject = _allPosts[sender.tag];
-    
-    BOOL selected = [postObject[@"liked"] boolValue];
-    NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
-    
     //change its state
-    sender.selected = !selected;
-    
-    [postObject setValue:[NSNumber numberWithBool:!selected] forKey:@"liked"];
-    [postObject setValue:[NSNumber numberWithBool:NO] forKey:@"disliked"];
-    
-    //get the Parse Object
-    PFObject *parseObject = postObject[@"parseObject"];
-    if (selected == NO)
-    {
-        //increment number
-        likesCount++;
-        
-        //Like Post
-        [parseObject addUniqueObject:[Config deviceId] forKey:@"likes"];
-        [parseObject removeObject:[Config deviceId] forKey:@"dislikes"];
-        
-        parseObject[@"type"] = LIKE_POST_TYPE;
-
-        
-    }else if (selected == YES){
-        //decrement number
-        likesCount--;
-        
-        //Unlike Post
-        [parseObject removeObject:[Config deviceId] forKey:@"likes"];
-        
-        parseObject[@"type"] = UNLIKE_POST_TYPE;
-    }
-    
-    [postObject setValue:[NSNumber numberWithInteger:likesCount] forKey:@"totalLikes"];
-    
-    /*
-    //set sender value;
-    
-    if (likesCount > 0)
-        [sender setTitle:[NSString stringWithFormat:@"%ld",(long)likesCount] forState:UIControlStateNormal];
-    else
-        [sender setTitle:[NSString stringWithFormat:@""] forState:UIControlStateNormal];
-    */
-    
-    [self updateAllPostsArray:sender.tag withPostObject:postObject];
-    
-    [parseObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if(error)
-            sender.selected = selected; //return it to its previous state
-         /****attn*/
-    }];
+    sender.selected = [shared likePostAtIndex:sender.tag updateArray:YES];
 }
 
-- (void)dislikePost:(NSInteger)tag
-{
-    NSDictionary *postObject = _allPosts[tag];
-    
-    BOOL highlighted = [postObject[@"disliked"] boolValue];
-    
-    [postObject setValue:[NSNumber numberWithBool:!highlighted] forKey:@"disliked"];
-    
-    //get the Parse Object
-    PFObject *parseObject = postObject[@"parseObject"];
-    if (highlighted == NO)
-    {
-        //Dislike Post
-        [parseObject addUniqueObject:[Config deviceId] forKey:@"dislikes"];
-        [parseObject removeObject:[Config deviceId] forKey:@"likes"];
-        
-        parseObject[@"type"] = DISLIKE_POST_TYPE;
-        
-        //If user had previously liked this photo
-        //decrement the likes numn=ber
-        BOOL liked = [postObject[@"liked"] boolValue];
-        if(liked == YES)
-        {
-            //decrement number
-            NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
-            likesCount--;
-            [postObject setValue:[NSNumber numberWithInteger:likesCount] forKey:@"totalLikes"];
-            //attn set sender value
-        }
-        
-        [postObject setValue:[NSNumber numberWithBool:NO] forKey:@"liked"];
-    }
-    
-    [self updateAllPostsArray:tag withPostObject:postObject];
-    
-    [parseObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if(error)
-            //_cellToDelete.highlighted = highlighted; //return it to its previous state
-            NSLog(@"Notdisliked");
-        /****attn*/
-    }];
-}
 
-- (void)reportPost:(NSInteger)tag
-{
-    NSDictionary *postObject = _allPosts[tag];
-    
-    //get the Parse Object and Report Post
-    PFObject *parseObject = postObject[@"parseObject"];
-    [parseObject addUniqueObject:[Config deviceId] forKey:@"reports"];
-    
-    parseObject[@"type"] = REPORT_POST_TYPE;
-
-    [parseObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if(error)
-            //_cellToDelete.highlighted = highlighted; //return it to its previous state
-            NSLog(@"NotReported");
-        /****attn*/
-    }];
-    
-    [_allPosts removeObjectAtIndex:tag];
-}
 
 - (void)deletePost:(NSInteger)tag
 {
-    NSDictionary *postObject = _allPosts[tag];
+    NSDictionary *postObject = shared.allPosts[tag];
     
     //get the Parse Object
     PFObject *parseObject = postObject[@"parseObject"];
     [parseObject deleteInBackground];
     
-    [_allPosts removeObjectAtIndex:tag];
+    [shared.allPosts removeObjectAtIndex:tag];
 }
 
 
@@ -907,7 +793,9 @@
     if([title isEqualToString:@"Dislike"]) {
 
         [_cellToDelete swipeToOriginWithCompletion:^{
-            [self dislikePost:_cellToDelete.tag];
+            
+            [shared dislikePostAtIndex:_cellToDelete.tag updateArray:YES];
+            
             _cellToDelete = nil;
         }];
         
@@ -923,11 +811,17 @@
              [title isEqualToString:@"Spam"] ||
              [title isEqualToString:@"Other"])
     {
-        [self reportPost:_cellToDelete.tag];
+        [shared reportPostAtIndex:_cellToDelete.tag updateArray:YES];
+        
         [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
+        
     }else if([title isEqualToString:@"Yes"]) {
-        [self deletePost:_cellToDelete.tag];
+        
+        [shared deletePost:shared.allPosts[_cellToDelete.tag]];
+        [shared.allPosts removeObjectAtIndex:_cellToDelete.tag];
+        
         [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
+        
     }else{
         [_cellToDelete swipeToOriginWithCompletion:^{
         }];
@@ -937,13 +831,6 @@
 }
 
 #pragma mark - ViewPostViewControllerDelegate
-
-- (void)updateAllPostsArray:(NSInteger)index withPostObject:(NSDictionary *)postObject
-{
-    _allPosts[index] = postObject;
-    
-    [self.tableView reloadData];
-}
 
 -(void)refresh:(UIRefreshControl *)refresh
 {

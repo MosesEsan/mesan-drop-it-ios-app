@@ -13,6 +13,7 @@
 #import "UIFont+Montserrat.h"
 #import "CommentTableViewCell.h"
 #import "MHFacebookImageViewer.h"
+#import "DIDataManager.h"
 
 #define SUB_CONTAINER_FRAME self.view.bounds
 
@@ -34,6 +35,7 @@
     NSInteger likesCount;
     
     UIAlertView *reportPostAlertView;
+    DIDataManager *shared;
 }
 
 @property (nonatomic, strong) UILabel *postText;
@@ -62,6 +64,9 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    shared = [DIDataManager sharedManager];
+
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.title = @"Post";
@@ -615,7 +620,7 @@
         }else{
             
             //update array and database
-            [self.delegate reportPost:self.view.tag];
+            [shared reportPostAtIndex:self.view.tag updateArray:YES];
             
             ///close
             [self.navigationController popViewControllerAnimated:TRUE];
@@ -747,7 +752,8 @@
         
         //Update main array with new replies count value
         [_postObject setValue:[NSNumber numberWithInteger:repliesCount] forKey:@"totalReplies"];
-        [_delegate updateAllPostsArray:self.view.tag withPostObject:_postObject];
+        
+        [shared updatePostAtIndex:self.view.tag withPostObject:_postObject];
         
         [_tableView reloadData];
         
@@ -786,7 +792,7 @@
     if (sender.selected == YES) likesCount--;
     else likesCount++;
     
-    [self.delegate likePost:sender];
+    sender.selected = [shared likePostAtIndex:sender.tag updateArray:YES];
     
     //increment or decrement total likes
     [sender setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];

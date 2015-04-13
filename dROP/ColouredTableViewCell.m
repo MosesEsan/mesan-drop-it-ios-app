@@ -23,7 +23,7 @@
         self.backgroundColor = [UIColor clearColor];
         
         self.mainContainer = [[UIView alloc] init];
-        self.mainContainer.backgroundColor = [UIColor clearColor];
+        self.mainContainer.backgroundColor = [UIColor whiteColor];
         self.mainContainer.clipsToBounds = YES;
         //self.mainContainer.layer.borderWidth = 0.5f;
         //self.mainContainer.layer.borderColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:1].CGColor;
@@ -134,6 +134,11 @@
     CGRect labelFrame = CGRectMake(8, TOP_PADDING, width, postTextHeight);
     CGRect imageFrame = CGRectMake(8, 0, width, IMAGEVIEW_HEIGHT);
     CGRect actionViewFrame = CGRectMake(8, 0, width + 8, ACTIONS_VIEW_HEIGHT);
+    
+    CGFloat remainingSpace = CGRectGetWidth(actionViewFrame) / 3;
+    
+    CGRect dateFrame = CGRectMake(0, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
+    CGRect commentsFrame = CGRectMake(remainingSpace, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
     CGRect smileyFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
     
     if (postObject[@"parseObject"][@"pic"])
@@ -162,6 +167,8 @@
     self.postText.frame = labelFrame;
     self.postImage.frame = imageFrame;
     self.actionsView.frame = actionViewFrame;
+    self.date.frame = dateFrame;
+    self.comments.frame = commentsFrame;
     self.smiley.frame = smileyFrame;
     
     self.line.backgroundColor = [Config getSideColor:index];

@@ -20,7 +20,7 @@
     if (self)
     {
         // Initialization code
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor whiteColor];
         
         self.mainContainer = [[UIView alloc] init];
         self.mainContainer.backgroundColor = [UIColor clearColor];
@@ -81,7 +81,7 @@
         
         
         self.date = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, ACTIONS_VIEW_HEIGHT)];
-        self.date.backgroundColor = [UIColor clearColor];
+        self.date.backgroundColor = [UIColor yellowColor];
         self.date.textColor = DATE_COLOR;
         self.date.textAlignment = NSTextAlignmentLeft;
         self.date.font = DATE_FONT;
@@ -89,15 +89,15 @@
         
         //self.comments = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.actionsView.frame) - 90, 0, 90, ACTIONS_VIEW_HEIGHT)];
         self.comments = [[UILabel alloc] initWithFrame:CGRectMake(65, 0, 90, ACTIONS_VIEW_HEIGHT)];
-        self.comments.backgroundColor = [UIColor clearColor];
+        self.comments.backgroundColor = [UIColor purpleColor];
         self.comments.textColor = DATE_COLOR;
-        self.comments.textAlignment = NSTextAlignmentLeft;
+        self.comments.textAlignment = NSTextAlignmentCenter;
         self.comments.font = COMMENTS_FONT;
         [self.actionsView addSubview:self.comments];
         
         self.smiley = [UIButton buttonWithType:UIButtonTypeCustom];
         self.smiley.frame = CGRectMake((CGRectGetWidth(self.actionsView.frame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
-        self.smiley.backgroundColor = [UIColor clearColor];
+        self.smiley.backgroundColor = [UIColor greenColor];
         [self.smiley setImage:[UIImage imageNamed:@"SmileyGray"] forState:UIControlStateNormal];
         [self.smiley setImage:[UIImage imageNamed:@"SmileyBluish"] forState:UIControlStateSelected];
         [self.smiley setImage:[UIImage imageNamed:@"Sad"] forState:UIControlStateHighlighted];
@@ -142,6 +142,14 @@
     CGRect actionViewFrame = CGRectMake(0, 0, labelWidth + 8, ACTIONS_VIEW_HEIGHT);
     CGRect smileyFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
     
+    
+    CGFloat remainingSpace = CGRectGetWidth(actionViewFrame) - 65.0f;
+    remainingSpace = remainingSpace / 2;
+    
+    CGRect commentsFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - (65.0f + remainingSpace), 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
+    CGRect dateFrame = CGRectMake(0, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
+
+    
     if (postObject[@"parseObject"][@"pic"])
     {
         //Set Image View Frame
@@ -168,6 +176,8 @@
     self.postText.frame = labelFrame;
     self.postImage.frame = imageFrame;
     self.actionsView.frame = actionViewFrame;
+    self.date.frame = dateFrame;
+    self.comments.frame = commentsFrame;
     self.smiley.frame = smileyFrame;
     
     if (postObject[@"parseObject"][@"avatar"]){

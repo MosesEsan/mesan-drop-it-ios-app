@@ -10,6 +10,7 @@
 #import "Config.h"
 
 #import "MenuTableViewController.h"
+#import "DIDataManager.h"
 
 @interface AppDelegate ()
 {
@@ -39,6 +40,8 @@
         //[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     }
     
+    [DIDataManager sharedManager];
+
     HomeTableViewController *homeTableViewController = [[HomeTableViewController alloc] initWithStyle:UITableViewStylePlain];
     
     //Custom Code for  Menu Plugin
@@ -52,7 +55,7 @@
     RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController
                                                                     leftMenuViewController:leftMenuViewController
                                                                    rightMenuViewController:nil];
-    sideMenuViewController.backgroundImage = [UIImage imageNamed:@"Stars"];
+    sideMenuViewController.backgroundImage = [UIImage imageNamed:@"MenuBackground"];
     sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
     sideMenuViewController.delegate = self;
     sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
