@@ -10,7 +10,7 @@
 #import "Config.h"
 #import "UIFont+Montserrat.h"
 #import "MHFacebookImageViewer.h"
-#import "ViewPostTableViewController.h"
+#import "CommentsTableViewController.h"
 
 #define ADD_BOX_FRAME CGRectMake(10, 20 + 64.0f, ADD_POST_WIDTH, ADD_POST_HEIGHT)
 #define HEADER_HEIGHT 45.0f
@@ -240,7 +240,7 @@
 
 - (void)viewComments:(UITapGestureRecognizer *)gesture
 {
-    ViewPostTableViewController *viewComments = [[ViewPostTableViewController alloc] initWithNibName:nil bundle:nil];
+    CommentsTableViewController *viewComments = [[CommentsTableViewController alloc] initWithNibName:nil bundle:nil];
     viewComments.postObject = _postObject;
     viewComments.view.tag = _index;
     viewComments.showCloseButton = YES;

@@ -18,7 +18,7 @@
 #import "ProfileTableViewCell.h"
 
 #import "AddPostViewController.h"
-#import "ViewPostTableViewController.h"
+#import "CommentsTableViewController.h"
 
 #import "UIFont+Montserrat.h"
 #import "CCMBorderView.h"
@@ -472,7 +472,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ViewPostTableViewController *viewPost = [[ViewPostTableViewController alloc] initWithNibName:nil bundle:nil];
+    CommentsTableViewController *viewPost = [[CommentsTableViewController alloc] initWithNibName:nil bundle:nil];
     viewPost.postObject = shared.allPosts[indexPath.row];
     viewPost.view.tag = indexPath.row;
     [self.navigationController pushViewController:viewPost animated:YES];

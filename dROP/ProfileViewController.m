@@ -10,7 +10,7 @@
 #import "Config.h"
 #import "PostTextTableViewCell.h"
 #import "ColouredTableViewCell.h"
-#import "ViewPostTableViewController.h"
+#import "CommentsTableViewController.h"
 #import "UIFont+Montserrat.h"
 #import "InfoViewController.h"
 #import "CCMBorderView.h"
@@ -472,7 +472,7 @@
     if (indexPath.section == 0) postObject = _allPosts[indexPath.row];
     else postObject = _likedPosts[indexPath.row];
     
-    ViewPostTableViewController *viewPost = [[ViewPostTableViewController alloc] initWithNibName:nil bundle:nil];
+    CommentsTableViewController *viewPost = [[CommentsTableViewController alloc] initWithNibName:nil bundle:nil];
     viewPost.postObject = postObject;
     viewPost.view.tag = indexPath.row;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];

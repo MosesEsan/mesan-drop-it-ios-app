@@ -91,8 +91,7 @@
         
         self.smiley = [UIButton buttonWithType:UIButtonTypeCustom];
         self.smiley.frame = CGRectMake((CGRectGetWidth(self.actionsView.frame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
-        self.smiley.backgroundColor = [UIColor redColor
-                                       ];
+        self.smiley.backgroundColor = [UIColor clearColor];
         [self.smiley setImage:[UIImage imageNamed:@"SmileyGray"] forState:UIControlStateNormal];
         [self.smiley setImage:[UIImage imageNamed:@"SmileyBluish"] forState:UIControlStateSelected];
         [self.smiley setImage:[UIImage imageNamed:@"Sad"] forState:UIControlStateHighlighted];

@@ -12,7 +12,7 @@
 #import "Config.h"
 #import "JPSThumbnail.h"
 #import "JPSThumbnailAnnotation.h"
-#import "ViewPostTableViewController.h"
+#import "CommentsTableViewController.h"
 
 #import "RESideMenu.h"
 #import "DIDataManager.h"
@@ -206,7 +206,7 @@
         popup.dismissableByTouchingBackground = YES;
         */
         
-        ViewPostTableViewController *viewPost = [[ViewPostTableViewController alloc] initWithNibName:nil bundle:nil];
+        CommentsTableViewController *viewPost = [[CommentsTableViewController alloc] initWithNibName:nil bundle:nil];
         viewPost.postObject = mapView_.postObject;
         viewPost.view.tag = mapView_.index;
         viewPost.showCloseButton = YES;

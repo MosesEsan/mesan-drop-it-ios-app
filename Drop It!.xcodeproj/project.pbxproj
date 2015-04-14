@@ -70,7 +70,7 @@
 		27B404861AA8AD64007DC137 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B404851AA8AD64007DC137 /* Social.framework */; };
 		27B4048A1AA8ADBE007DC137 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B404891AA8ADBD007DC137 /* Accounts.framework */; };
 		27B4048F1AA8EDD1007DC137 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B4048E1AA8EDD1007DC137 /* Config.m */; };
-		27B404A21AA9F3FF007DC137 /* ViewPostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B404A11AA9F3FF007DC137 /* ViewPostTableViewController.m */; };
+		27B404A21AA9F3FF007DC137 /* CommentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B404A11AA9F3FF007DC137 /* CommentsTableViewController.m */; };
 		27B404D81AAB9570007DC137 /* LPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B404D61AAB9570007DC137 /* LPlaceholderTextView.m */; };
 		27B404DB1AABBEEC007DC137 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B404DA1AABBEEC007DC137 /* CommentTableViewCell.m */; };
 		27B96A941AAFBA4900AC4120 /* ABCIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B96A8E1AAFBA4900AC4120 /* ABCIntroView.m */; };
@@ -239,8 +239,8 @@
 		27B404851AA8AD64007DC137 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		27B404891AA8ADBD007DC137 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		27B4048E1AA8EDD1007DC137 /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
-		27B404A01AA9F3FF007DC137 /* ViewPostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewPostTableViewController.h; sourceTree = "<group>"; };
-		27B404A11AA9F3FF007DC137 /* ViewPostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewPostTableViewController.m; sourceTree = "<group>"; };
+		27B404A01AA9F3FF007DC137 /* CommentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsTableViewController.h; sourceTree = "<group>"; };
+		27B404A11AA9F3FF007DC137 /* CommentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsTableViewController.m; sourceTree = "<group>"; };
 		27B404D61AAB9570007DC137 /* LPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPlaceholderTextView.m; sourceTree = "<group>"; };
 		27B404D71AAB9570007DC137 /* LPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPlaceholderTextView.h; sourceTree = "<group>"; };
 		27B404D91AABBEEC007DC137 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
@@ -646,8 +646,8 @@
 				27A334981AA6367F008188FC /* HomeTableViewController.m */,
 				27B404411AA77B57007DC137 /* AddPostViewController.h */,
 				27B404421AA77B57007DC137 /* AddPostViewController.m */,
-				27B404A01AA9F3FF007DC137 /* ViewPostTableViewController.h */,
-				27B404A11AA9F3FF007DC137 /* ViewPostTableViewController.m */,
+				27B404A01AA9F3FF007DC137 /* CommentsTableViewController.h */,
+				27B404A11AA9F3FF007DC137 /* CommentsTableViewController.m */,
 				27BD28C41AD4545300185809 /* CollegeTableViewController.h */,
 				27BD28C51AD4545300185809 /* CollegeTableViewController.m */,
 			);
@@ -980,7 +980,7 @@
 				27BD28C61AD4545300185809 /* CollegeTableViewController.m in Sources */,
 				27A334771AA63525008188FC /* AppDelegate.m in Sources */,
 				278CF73A1AACFD0E00A13D4B /* ProfileViewController.m in Sources */,
-				27B404A21AA9F3FF007DC137 /* ViewPostTableViewController.m in Sources */,
+				27B404A21AA9F3FF007DC137 /* CommentsTableViewController.m in Sources */,
 				27B4041B1AA64057007DC137 /* PostTextTableViewCell.m in Sources */,
 				271320401AB77AA800CF23DB /* MapPostViewController.m in Sources */,
 				27B96A941AAFBA4900AC4120 /* ABCIntroView.m in Sources */,

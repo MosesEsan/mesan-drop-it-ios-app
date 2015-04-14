@@ -1,5 +1,5 @@
 //
-//  ViewPostTableViewController.h
+//  CommentsTableViewController.h
 //  dROP
 //
 //  Created by Moses Esan on 06/03/2015.
@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 
-@interface ViewPostTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface CommentsTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSDictionary *postObject;
 

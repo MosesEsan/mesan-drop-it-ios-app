@@ -1,12 +1,12 @@
 //
-//  ViewPostTableViewController.m
+//  CommentsTableViewController.m
 //  dROP
 //
 //  Created by Moses Esan on 06/03/2015.
 //  Copyright (c) 2015 Moses Esan. All rights reserved.
 //
 
-#import "ViewPostTableViewController.h"
+#import "CommentsTableViewController.h"
 #import "Config.h"
 #import <ParseUI/ParseUI.h>
 #import "LPlaceholderTextView.h"
@@ -17,7 +17,7 @@
 
 #define SUB_CONTAINER_FRAME self.view.bounds
 
-@interface ViewPostTableViewController ()<UITextViewDelegate>
+@interface CommentsTableViewController ()<UITextViewDelegate>
 {
     
     LPlaceholderTextView *commentTextView;
@@ -54,7 +54,7 @@
 
 @end
 
-@implementation ViewPostTableViewController
+@implementation CommentsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
