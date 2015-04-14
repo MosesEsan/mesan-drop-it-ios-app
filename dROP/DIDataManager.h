@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+
+#import <Parse/Parse.h>
+
 @interface DIDataManager : NSObject
 
 @property (nonatomic, strong) NSMutableArray *allPosts;
@@ -28,5 +31,9 @@
 
 - (void)reportPostAtIndex:(NSInteger)index updateArray:(BOOL)update;
 
+
+//Comments
+- (void)getCommentsForObject:(PFObject *)postObject
+                   withBlock:(void (^)(NSMutableArray *comments, NSError *error))completionBlock;
 
 @end

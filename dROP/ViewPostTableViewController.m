@@ -71,7 +71,7 @@
     
     self.title = @"Post";
     
-    allComments = [[NSMutableArray alloc] init];
+    //allComments = [[NSMutableArray alloc] init];
     
     //If the user is not the post authour
     //They can report the post
@@ -196,8 +196,19 @@
         
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
     }
+    
+    
+    [shared getCommentsForObject:_postObject[@"parseObject"] withBlock:^(NSMutableArray *comments, NSError *error){
         
-    [self queryForAllComments];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                [[Config alertViewWithTitle:error.domain withMessage:nil] show];
+            }else{
+                allComments = comments;
+                [_tableView reloadData];
+            }
+        });
+    }];
     
 }
 
@@ -223,15 +234,11 @@
     NSString *postDate = [Config calculateTime:_postObject[@"date"]];
     
 
-    CGFloat postTextHeight = [self calculateHeightForText:postText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
-    CGFloat height;
+    CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
+    CGFloat height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
     
     if (_postObject[@"parseObject"][@"pic"])
-    {
-        height = TOP_PADDING + postTextHeight + 10 + IMAGEVIEW_HEIGHT + 12 + ACTIONS_VIEW_HEIGHT + 2;        
-    }else{
-        height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 2;
-    }
+        height += 10 + IMAGEVIEW_HEIGHT;    
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXT_WIDTH, height)];
     headerView.backgroundColor = [UIColor whiteColor];
@@ -275,20 +282,22 @@
         [_postImage setupImageViewerWithPFFile:_postImage.file onOpen:nil onClose:nil];
     }
     
+    CGRect actionViewFrame = [subViewframes[@"actionViewframe"] CGRectValue];
+    CGFloat remainingSpace = CGRectGetWidth(actionViewFrame) / 3;
     
     _actionsView = [[UIView alloc] initWithFrame:[subViewframes[@"actionViewframe"] CGRectValue]];
     _actionsView.backgroundColor = [UIColor clearColor];
     [headerView addSubview:_actionsView];
 
-    _date = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, ACTIONS_VIEW_HEIGHT)];
-    _date.backgroundColor = [UIColor clearColor];
+    _date = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, remainingSpace, ACTIONS_VIEW_HEIGHT)];
+    _date.backgroundColor = [UIColor redColor];
     _date.textColor = DATE_COLOR;
     _date.textAlignment = NSTextAlignmentLeft;
     _date.font = DATE_FONT;
     _date.text = postDate;
     [_actionsView addSubview:_date];
     
-    _comments = [[UILabel alloc] initWithFrame:CGRectMake(65, 0, 90, ACTIONS_VIEW_HEIGHT)];
+    _comments = [[UILabel alloc] initWithFrame:CGRectMake(remainingSpace, 0, remainingSpace, ACTIONS_VIEW_HEIGHT)];
     _comments.backgroundColor = [UIColor clearColor];
     _comments.textColor = DATE_COLOR;
     _comments.textAlignment = NSTextAlignmentLeft;
@@ -353,141 +362,155 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [allComments count];
+    
+    
+    if (allComments == nil)
+    {
+        return 1;
+    }else{
+      return [allComments count];
+    }
 }
 
-- (CGFloat)calculateHeightForText:(NSString *)text withWidth:(CGFloat)width withFont:(UIFont *)font
-{
-    CGSize constraint = CGSizeMake(width, CGFLOAT_MAX);
-    CGSize size;
-    
-    NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
-    CGSize boundingBox = [text boundingRectWithSize:constraint
-                                            options:NSStringDrawingUsesLineFragmentOrigin
-                                         attributes:@{NSFontAttributeName:font}
-                                            context:context].size;
-    
-    size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height));
-    
-    return size.height;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *commentObject = allComments[indexPath.row];
-    NSString *commentText = commentObject[@"text"];
-    NSInteger smileyCount = [commentObject[@"totalLikes"] integerValue];
-    NSString *cellIdentifier = [NSString stringWithFormat:@"CommentCell%ld",(long)indexPath.row];
-    
-    
-    CommentTableViewCell *cell = (CommentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!cell)
-        cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    
-    // Configure the cell...
-    cell.commentText.text = commentObject[@"text"];
-    cell.date.text = [Config calculateTime:commentObject[@"date"]];
-    
-    //Set Label Frame
-    CGFloat postTextHeight = [Config calculateHeightForText:commentText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
-    CGRect labelFrame = cell.commentText.frame;
-    labelFrame.size.height = postTextHeight;
-    cell.commentText.frame = labelFrame;
-    
-    //Set Action View Frame
-    CGRect frame = cell.actionsView.frame;
-    frame.origin.y = labelFrame.origin.y + postTextHeight + 10;
-    cell.actionsView.frame = frame;
-    
-    
-    // Configure the cell...
-    [cell.smiley setTitle:[Config likesCount:smileyCount] forState:UIControlStateNormal];
-    
-    //if the user is the owner of the comment
-    //and the comment has likes, show the smiley button
-    //else hide it
-    if ([Config isPostAuthor:commentObject])
+    UITableViewCell *_cell;
+    if (allComments == nil)
     {
-        if (smileyCount > 0) cell.smiley.hidden = NO;
-        else cell.smiley.hidden = YES;
-    }
-    
-    //If the value for the disliked index is not YES,
-    //set the smiley selected state to the value of the liked index
-    if (![commentObject[@"disliked"] boolValue]){
-        cell.smiley.selected = [commentObject[@"liked"] boolValue];
+        _cell = [tableView dequeueReusableCellWithIdentifier:@"LoadingCell"];
+        if (!_cell)
+            _cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LoadingCell"];
+        
+        UIActivityIndicatorView *loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        loadingView.color = [UIColor grayColor];
+        loadingView.frame = CGRectMake(0, 0, WIDTH, 40.0f);
+        [loadingView startAnimating];
+        [_cell.contentView addSubview:loadingView];
+        
     }else{
-        //else  set the smiley selected state to NO
-        //set the smiley highlighted state to the value of the disliked index to indicate the user has disliked the post
-        cell.smiley.selected = NO;
-        cell.smiley.highlighted = [commentObject[@"disliked"] boolValue];
+        NSDictionary *commentObject = allComments[indexPath.row];
+        NSString *commentText = commentObject[@"text"];
+        NSInteger smileyCount = [commentObject[@"totalLikes"] integerValue];
+        NSString *cellIdentifier = [NSString stringWithFormat:@"CommentCell%ld",(long)indexPath.row];
+        
+        
+        CommentTableViewCell *cell = (CommentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!cell)
+            cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        
+        // Configure the cell...
+        cell.commentText.text = commentObject[@"text"];
+        cell.date.text = [Config calculateTime:commentObject[@"date"]];
+        
+        //Set Label Frame
+        CGFloat postTextHeight = [Config calculateHeightForText:commentText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
+        CGRect labelFrame = cell.commentText.frame;
+        labelFrame.size.height = postTextHeight;
+        cell.commentText.frame = labelFrame;
+        
+        //Set Action View Frame
+        CGRect frame = cell.actionsView.frame;
+        frame.origin.y = labelFrame.origin.y + postTextHeight + 10;
+        cell.actionsView.frame = frame;
+        
+        
+        // Configure the cell...
+        [cell.smiley setTitle:[Config likesCount:smileyCount] forState:UIControlStateNormal];
+        
+        //if the user is the owner of the comment
+        //and the comment has likes, show the smiley button
+        //else hide it
+        if ([Config isPostAuthor:commentObject])
+        {
+            if (smileyCount > 0) cell.smiley.hidden = NO;
+            else cell.smiley.hidden = YES;
+        }
+        
+        //If the value for the disliked index is not YES,
+        //set the smiley selected state to the value of the liked index
+        if (![commentObject[@"disliked"] boolValue]){
+            cell.smiley.selected = [commentObject[@"liked"] boolValue];
+        }else{
+            //else  set the smiley selected state to NO
+            //set the smiley highlighted state to the value of the disliked index to indicate the user has disliked the post
+            cell.smiley.selected = NO;
+            cell.smiley.highlighted = [commentObject[@"disliked"] boolValue];
+        }
+        
+        //If the user is not the comment authour
+        //They can like, dislike and report the comment
+        if (![Config isPostAuthor:commentObject])
+        {
+            cell.smiley.tag = indexPath.row;
+            [cell.smiley addTarget:self action:@selector(likeComment:) forControlEvents:UIControlEventTouchUpInside];
+            
+            __weak typeof(cell) weakSelf = cell;
+            
+            [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
+                                    color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
+                                     mode:MCSwipeTableViewCellModeExit
+                                    state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+                                        
+                                        _cellToDelete = weakSelf;
+                                        
+                                        
+                                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Options?"
+                                                                                            message:@"What would you like to do?"
+                                                                                           delegate:self
+                                                                                  cancelButtonTitle:@"Cancel"
+                                                                                  otherButtonTitles:@"Dislike", @"Report",nil];
+                                        [alertView show];
+                                    }];
+        }else if ([Config isPostAuthor:commentObject]){
+            
+            //If the user is th author of the post
+            //allow the user to be able to delete the post
+            __weak typeof(cell) weakSelf = cell;
+            
+            [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
+                                    color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
+                                     mode:MCSwipeTableViewCellModeExit
+                                    state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+                                        
+                                        _cellToDelete = weakSelf;
+                                        
+                                        
+                                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Comment"
+                                                                                            message:@"Are yu sure you want to delete this comment?"
+                                                                                           delegate:self
+                                                                                  cancelButtonTitle:@"No"
+                                                                                  otherButtonTitles:@"Yes",nil];
+                                        [alertView show];
+                                    }];
+        }
+        
+        
+        
+        
+        cell.tag = indexPath.row;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        _cell = cell;
     }
     
-    //If the user is not the comment authour
-    //They can like, dislike and report the comment
-    if (![Config isPostAuthor:commentObject])
-    {
-        cell.smiley.tag = indexPath.row;
-        [cell.smiley addTarget:self action:@selector(likeComment:) forControlEvents:UIControlEventTouchUpInside];
-        
-        __weak typeof(cell) weakSelf = cell;
-        
-        [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
-                                color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
-                                 mode:MCSwipeTableViewCellModeExit
-                                state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
-                                    
-                                    _cellToDelete = weakSelf;
-                                    
-                                    
-                                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Options?"
-                                                                                        message:@"What would you like to do?"
-                                                                                       delegate:self
-                                                                              cancelButtonTitle:@"Cancel"
-                                                                              otherButtonTitles:@"Dislike", @"Report",nil];
-                                    [alertView show];
-                                }];
-    }else if ([Config isPostAuthor:commentObject]){
-        
-        //If the user is th author of the post
-        //allow the user to be able to delete the post
-        __weak typeof(cell) weakSelf = cell;
-        
-        [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
-                                color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
-                                 mode:MCSwipeTableViewCellModeExit
-                                state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
-                                    
-                                    _cellToDelete = weakSelf;
-                                    
-                                    
-                                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Comment"
-                                                                                        message:@"Are yu sure you want to delete this comment?"
-                                                                                       delegate:self
-                                                                              cancelButtonTitle:@"No"
-                                                                              otherButtonTitles:@"Yes",nil];
-                                    [alertView show];
-                                }];
-    }
-    
-
-    
-    
-    cell.tag = indexPath.row;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    return cell;
+    return _cell;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PFObject *commentObject = allComments[indexPath.row];
-    NSString *commentText = commentObject[@"text"];
-    
-    CGFloat postTextHeight = [Config calculateHeightForText:commentText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
-    
-    return TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 2;
+    if (allComments == nil)
+    {
+        return 40.0f;
+    }else{
+        PFObject *commentObject = allComments[indexPath.row];
+        NSString *commentText = commentObject[@"text"];
+        
+        CGFloat postTextHeight = [Config calculateHeightForText:commentText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
+        
+        return TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 2;
+    }
 }
 
 
@@ -687,14 +710,6 @@
             PFQuery *query = [PFQuery queryWithClassName:COMMENTS_CLASS_NAME];
             [query whereKey:@"postId" equalTo:parseObject.objectId];
             [query orderByAscending:@"createdAt"];
-            /*
-             // If no objects are loaded in memory, we look to the cache first to fill the table
-             // and then subsequently do a query against the network.
-             if ([allComments count] == 0)
-             {
-             query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-             }
-             */
             query.limit = 20;
             
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -705,6 +720,8 @@
                     NSMutableArray *filteredComments = [Config filterComments:objects];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         allComments = filteredComments;
+                        
+                        
                         [_tableView reloadData];
                     });
                 }
@@ -740,7 +757,8 @@
         commentObject[@"deviceId"] = [Config deviceId];
         commentObject[@"postId"] = parseObject.objectId;
         commentObject[@"post"] = parseObject;
-        
+        commentObject[@"type"] = NEW_POST_TYPE;
+
         // Use PFACL to restrict future modifications to this object.
         PFACL *readOnlyACL = [PFACL ACL];
         [readOnlyACL setPublicReadAccess:YES];
@@ -773,6 +791,7 @@
                 NSLog(@"Successfully saved!");
                 NSLog(@"%@", commentObject);
                 
+                parseObject[@"type"] = NEW_POST_TYPE;
                 [parseObject addUniqueObject:commentObject.objectId forKey:@"replies"];
                 [parseObject saveInBackground];
             } else {

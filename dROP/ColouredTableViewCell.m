@@ -58,7 +58,7 @@
         
         self.postImage = [[PFImageView alloc] init];
         self.postImage.backgroundColor = [UIColor clearColor];
-        self.postImage.layer.cornerRadius = 5.0f;
+        self.postImage.layer.cornerRadius = 3.0f;
         self.postImage.image = [UIImage imageNamed:@"CoverPhotoPH.JPG"];
         self.postImage.clipsToBounds = YES;
         self.postImage.contentMode = UIViewContentModeScaleAspectFill;
@@ -85,13 +85,14 @@
         self.comments = [[UILabel alloc] initWithFrame:CGRectMake(65, 0, 90, ACTIONS_VIEW_HEIGHT)];
         self.comments.backgroundColor = [UIColor clearColor];
         self.comments.textColor = DATE_COLOR;
-        self.comments.textAlignment = NSTextAlignmentLeft;
+        self.comments.textAlignment = NSTextAlignmentCenter;
         self.comments.font = COMMENTS_FONT;
         [self.actionsView addSubview:self.comments];
         
         self.smiley = [UIButton buttonWithType:UIButtonTypeCustom];
         self.smiley.frame = CGRectMake((CGRectGetWidth(self.actionsView.frame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
-        self.smiley.backgroundColor = [UIColor clearColor];
+        self.smiley.backgroundColor = [UIColor redColor
+                                       ];
         [self.smiley setImage:[UIImage imageNamed:@"SmileyGray"] forState:UIControlStateNormal];
         [self.smiley setImage:[UIImage imageNamed:@"SmileyBluish"] forState:UIControlStateSelected];
         [self.smiley setImage:[UIImage imageNamed:@"Sad"] forState:UIControlStateHighlighted];

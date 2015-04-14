@@ -474,7 +474,7 @@
 
 + (BOOL)getLikeStatus:(PFObject *)postObject
 {
-    NSUUID *identifierForVendor = [[UIDevice currentDevice] identifierForVendor];
+   // NSUUID *identifierForVendor = [[UIDevice currentDevice] identifierForVendor];
     
     if (postObject[@"likes"] != nil)
     {
@@ -484,7 +484,7 @@
         {
             NSString *stringToCheck = (NSString *)[likes objectAtIndex:i];
             
-            if ([stringToCheck isEqualToString:[identifierForVendor UUIDString]]) {
+            if ([stringToCheck isEqualToString:[Config deviceId]]) {
                 return YES;
             }
         }
@@ -495,7 +495,7 @@
 
 + (BOOL)getDisLikeStatus:(PFObject *)postObject
 {
-    NSUUID *identifierForVendor = [[UIDevice currentDevice] identifierForVendor];
+    //NSUUID *identifierForVendor = [[UIDevice currentDevice] identifierForVendor];
     
     if (postObject[@"dislikes"] != nil)
     {
@@ -505,7 +505,7 @@
         {
             NSString *stringToCheck = (NSString *)[dislikes objectAtIndex:i];
             
-            if ([stringToCheck isEqualToString:[identifierForVendor UUIDString]]) {
+            if ([stringToCheck isEqualToString:[Config deviceId]]) {
                 return YES;
             }
         }
@@ -516,7 +516,7 @@
 
 + (BOOL)getReportStatus:(PFObject *)postObject
 {
-    NSUUID *identifierForVendor = [[UIDevice currentDevice] identifierForVendor];
+    //NSUUID *identifierForVendor = [[UIDevice currentDevice] identifierForVendor];
     
     if (postObject[@"reports"] != nil)
     {
@@ -530,7 +530,7 @@
             {
                 NSString *stringToCheck = (NSString *)[reports objectAtIndex:i];
                 
-                if ([stringToCheck isEqualToString:[identifierForVendor UUIDString]]) {
+                if ([stringToCheck isEqualToString:[Config deviceId]]) {
                     return YES;
                 }
             }
@@ -654,7 +654,7 @@
         }
     }
     
-    NSLog([NSString stringWithFormat:@"Final is -> %@",college]);
+    NSLog(@"Final is -> %@",college);
 
     return college;
 }
@@ -663,6 +663,8 @@
 + (NSString *)deviceId
 {
     NSUUID *identifierForVendor = [[UIDevice currentDevice] identifierForVendor];
+    
+    //return @"yes";
     
     return [identifierForVendor UUIDString];
 
@@ -678,13 +680,13 @@
 
 + (NSString *)repliesCount:(NSInteger)repliesCount
 {
-    /*
+    
     if (repliesCount > 0)
         return [NSString stringWithFormat:@"%ld cmts",repliesCount];
     else
         return [NSString stringWithFormat:@""];
-     */
-     return [NSString stringWithFormat:@"120 cmts"];
+     
+     //return [NSString stringWithFormat:@"120 cmts"];
 }
 
 + (NSDictionary *)subViewFrames:(NSDictionary *)postObject

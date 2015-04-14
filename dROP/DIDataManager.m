@@ -7,7 +7,6 @@
 //
 
 #import "DIDataManager.h"
-#import <Parse/Parse.h>
 #import "Config.h"
 
 @implementation DIDataManager
@@ -169,5 +168,49 @@
     PFObject *parseObject = postObject[@"parseObject"];
     [parseObject deleteInBackground];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - Comments
+//Retrieve Comments
+- (void)getCommentsForObject:(PFObject *)postObject
+                   withBlock:(void (^)(NSMutableArray *comments, NSError *error))completionBlock
+{
+    dispatch_queue_t commentsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(commentsQueue, ^{
+        
+        if ([Config checkInternetConnection])
+        {
+            PFQuery *query = [PFQuery queryWithClassName:COMMENTS_CLASS_NAME];
+            [query whereKey:@"postId" equalTo:postObject.objectId];
+            [query orderByAscending:@"createdAt"];
+            query.limit = 20;
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error) {
+                    NSLog(@"error in geo query!"); // todo why is this ever happening?
+                } else {
+                    NSMutableArray *filteredComments = [Config filterComments:objects];
+                    completionBlock(filteredComments, nil);
+                }
+            }];
+        }else{
+            NSError *error = [NSError errorWithDomain:@"No Internet Connection!" code:0
+                                             userInfo:[NSDictionary dictionaryWithObject:@"No Working Internet Connection." forKey:NSLocalizedDescriptionKey]];
+            completionBlock(nil, error);
+        }
+    });
+}
+
 
 @end

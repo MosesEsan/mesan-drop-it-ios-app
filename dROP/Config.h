@@ -62,7 +62,7 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define LEFT_PADDING 16.5f
 
 #define TEXT_WIDTH WIDTH - (LEFT_PADDING * 2)
-#define IMAGEVIEW_HEIGHT 160
+#define IMAGEVIEW_HEIGHT 180
 #define ACTIONS_VIEW_HEIGHT 28
 
 #define LINE_FRAME_WIDTH 33
