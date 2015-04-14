@@ -300,7 +300,7 @@
     _comments = [[UILabel alloc] initWithFrame:CGRectMake(remainingSpace, 0, remainingSpace, ACTIONS_VIEW_HEIGHT)];
     _comments.backgroundColor = [UIColor clearColor];
     _comments.textColor = DATE_COLOR;
-    _comments.textAlignment = NSTextAlignmentLeft;
+    _comments.textAlignment = NSTextAlignmentCenter;
     _comments.font = COMMENTS_FONT;
     _comments.text = [Config repliesCount:repliesCount];
     [_actionsView addSubview:_comments];
@@ -697,43 +697,7 @@
 
 
 #pragma mark - Main Methods
-//Retrieve Comments
-- (void)queryForAllComments
-{
-    dispatch_queue_t commentsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(commentsQueue, ^{
-        
-        if ([Config checkInternetConnection])
-        {
-            PFObject *parseObject = _postObject[@"parseObject"];
-            
-            PFQuery *query = [PFQuery queryWithClassName:COMMENTS_CLASS_NAME];
-            [query whereKey:@"postId" equalTo:parseObject.objectId];
-            [query orderByAscending:@"createdAt"];
-            query.limit = 20;
-            
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (error) {
-                    NSLog(@"error in geo query!"); // todo why is this ever happening?
-                } else {
-                    
-                    NSMutableArray *filteredComments = [Config filterComments:objects];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        allComments = filteredComments;
-                        
-                        
-                        [_tableView reloadData];
-                    });
-                }
-            }];
-            
-        }else{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
-            });
-        }
-    });
-}
+
 
 //Add New Comment
 - (void)addComment:(UIButton *)sender
