@@ -102,7 +102,7 @@
     //Set Default Locations
     NSDictionary *config = [[NSUserDefaults standardUserDefaults] objectForKey:@"DIConfig"];
     
-    //mode = (AppMode)[config[@"App Mode"] intValue];
+    mode = (AppMode)[config[@"App Mode"] intValue];
     
     return mode;
 }
@@ -694,7 +694,7 @@
     CGFloat postTextHeight = [Config calculateHeightForText:postObject[@"text"] withWidth:TEXT_WIDTH withFont:TEXT_FONT];
 
     //Set Label Frame
-    CGRect labelFrame = CGRectMake(LEFT_PADDING, TOP_PADDING, TEXT_WIDTH, 0);
+    CGRect labelFrame = CGRectMake(LEFT_PADDING, TOP_PADDING + (TOP_PADDING / 2), TEXT_WIDTH, 0);
     labelFrame.size.height = postTextHeight;
     
     CGRect imageFrame = CGRectMake(LEFT_PADDING, 0, TEXT_WIDTH, IMAGEVIEW_HEIGHT);

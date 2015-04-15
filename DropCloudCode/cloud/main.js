@@ -89,6 +89,7 @@ Parse.Cloud.afterSave("Posts", function(request) {
                     notification.set("message", message);
                     notification.set("type", type);
                     notification.set("recipient",userObject.get("deviceId"));
+                    notification.set("post", request.object);
 
                     notification.save(null, {
                         success: function(notification) {
@@ -173,6 +174,9 @@ Parse.Cloud.afterSave("Comments", function(request) {
                         notification.set("message", message);
                         notification.set("type", type);
                         notification.set("recipient",deviceId);
+                        notification.set("post", postObject);
+                        notification.set("comment", request.object);
+
 
                         notification.save(null, {
                             success: function(notification) {

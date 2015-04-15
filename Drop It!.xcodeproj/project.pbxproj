@@ -39,6 +39,7 @@
 		273E1AC51AB0B13200D41694 /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 273E1AC41AB0B13200D41694 /* TimelineTableViewCell.m */; };
 		273E42301ACC36EA0048964B /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 273E422F1ACC36EA0048964B /* MenuTableViewController.m */; };
 		274C88211AC0780B00C8FB72 /* AvocarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274C88201AC0780B00C8FB72 /* AvocarrotSDK.framework */; };
+		2773EB501ADEC2BC0023E005 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2773EB4F1ADEC2BC0023E005 /* NotificationTableViewCell.m */; };
 		2775C4701AC3437A00B19772 /* ProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2775C46F1AC3437A00B19772 /* ProfileTableViewCell.m */; };
 		2778CFC91AB9181600DD30CE /* RTSpinKitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2778CFC81AB9181600DD30CE /* RTSpinKitView.m */; };
 		278CF73A1AACFD0E00A13D4B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278CF7391AACFD0E00A13D4B /* ProfileViewController.m */; };
@@ -53,6 +54,7 @@
 		27A3347F1AA63525008188FC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A3347E1AA63525008188FC /* Images.xcassets */; };
 		27A3348E1AA63525008188FC /* DropItTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A3348D1AA63525008188FC /* DropItTests.m */; };
 		27A334991AA6367F008188FC /* HomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A334981AA6367F008188FC /* HomeTableViewController.m */; };
+		27B3988D1ADD35A100ED5C27 /* NotificationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B3988C1ADD35A100ED5C27 /* NotificationsTableViewController.m */; };
 		27B4041B1AA64057007DC137 /* PostTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B4041A1AA64057007DC137 /* PostTextTableViewCell.m */; };
 		27B404401AA66744007DC137 /* CoverPhotoPH.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 27B4043F1AA66744007DC137 /* CoverPhotoPH.JPG */; };
 		27B404431AA77B57007DC137 /* AddPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B404421AA77B57007DC137 /* AddPostViewController.m */; };
@@ -183,6 +185,8 @@
 		2748CBA01ACC7B1D004D4A5E /* Club4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Club4.jpg; sourceTree = "<group>"; };
 		2748CBA21ACC7B4D004D4A5E /* Club5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Club5.jpg; sourceTree = "<group>"; };
 		274C88201AC0780B00C8FB72 /* AvocarrotSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AvocarrotSDK.framework; sourceTree = "<group>"; };
+		2773EB4E1ADEC2BC0023E005 /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
+		2773EB4F1ADEC2BC0023E005 /* NotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
 		2775C46E1AC3437A00B19772 /* ProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewCell.h; sourceTree = "<group>"; };
 		2775C46F1AC3437A00B19772 /* ProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewCell.m; sourceTree = "<group>"; };
 		2778CFC71AB9181600DD30CE /* RTSpinKitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSpinKitView.h; sourceTree = "<group>"; };
@@ -219,6 +223,8 @@
 		27A3348D1AA63525008188FC /* DropItTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DropItTests.m; sourceTree = "<group>"; };
 		27A334971AA6367F008188FC /* HomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewController.h; sourceTree = "<group>"; };
 		27A334981AA6367F008188FC /* HomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewController.m; sourceTree = "<group>"; };
+		27B3988B1ADD35A100ED5C27 /* NotificationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsTableViewController.h; sourceTree = "<group>"; };
+		27B3988C1ADD35A100ED5C27 /* NotificationsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsTableViewController.m; sourceTree = "<group>"; };
 		27B404191AA64057007DC137 /* PostTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTextTableViewCell.h; sourceTree = "<group>"; };
 		27B4041A1AA64057007DC137 /* PostTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTextTableViewCell.m; sourceTree = "<group>"; };
 		27B404381AA6605E007DC137 /* Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
@@ -464,9 +470,11 @@
 		278CF74C1AAD3EFC00A13D4B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				27B3988A1ADD357D00ED5C27 /* Notification */,
 				273E422D1ACC36C10048964B /* Menu */,
-				27CBDF081ACB17E0004DEEE1 /* Home */,
 				27CBDF091ACB17F6004DEEE1 /* Profile */,
+				27CBDF081ACB17E0004DEEE1 /* Home */,
+				27B398891ADD355400ED5C27 /* College */,
 				2778CFC01AB8D69D00DD30CE /* Map */,
 				27CBDF0A1ACB1817004DEEE1 /* Events */,
 				279DA5EF1AC88D6300591B4C /* Articles */,
@@ -580,6 +588,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		27B398891ADD355400ED5C27 /* College */ = {
+			isa = PBXGroup;
+			children = (
+				27BD28C41AD4545300185809 /* CollegeTableViewController.h */,
+				27BD28C51AD4545300185809 /* CollegeTableViewController.m */,
+			);
+			name = College;
+			sourceTree = "<group>";
+		};
+		27B3988A1ADD357D00ED5C27 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				27B3988B1ADD35A100ED5C27 /* NotificationsTableViewController.h */,
+				27B3988C1ADD35A100ED5C27 /* NotificationsTableViewController.m */,
+				2773EB4E1ADEC2BC0023E005 /* NotificationTableViewCell.h */,
+				2773EB4F1ADEC2BC0023E005 /* NotificationTableViewCell.m */,
+			);
+			name = Notification;
+			sourceTree = "<group>";
+		};
 		27B96A8C1AAFBA3600AC4120 /* ABCIntroView */ = {
 			isa = PBXGroup;
 			children = (
@@ -648,8 +676,6 @@
 				27B404421AA77B57007DC137 /* AddPostViewController.m */,
 				27B404A01AA9F3FF007DC137 /* CommentsTableViewController.h */,
 				27B404A11AA9F3FF007DC137 /* CommentsTableViewController.m */,
-				27BD28C41AD4545300185809 /* CollegeTableViewController.h */,
-				27BD28C51AD4545300185809 /* CollegeTableViewController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -970,6 +996,7 @@
 			files = (
 				27B404431AA77B57007DC137 /* AddPostViewController.m in Sources */,
 				27B96AA31AAFBD1300AC4120 /* MCSwipeTableViewCell.m in Sources */,
+				27B3988D1ADD35A100ED5C27 /* NotificationsTableViewController.m in Sources */,
 				273E1AC51AB0B13200D41694 /* TimelineTableViewCell.m in Sources */,
 				27A334991AA6367F008188FC /* HomeTableViewController.m in Sources */,
 				27B404D81AAB9570007DC137 /* LPlaceholderTextView.m in Sources */,
@@ -977,6 +1004,7 @@
 				27131FDF1AB5C78100CF23DB /* MapViewController.m in Sources */,
 				27DE0C301AB9D44000DA0D9C /* JPSThumbnailAnnotation.m in Sources */,
 				27B96AAA1AAFBD7400AC4120 /* CCMBorderView.m in Sources */,
+				2773EB501ADEC2BC0023E005 /* NotificationTableViewCell.m in Sources */,
 				27BD28C61AD4545300185809 /* CollegeTableViewController.m in Sources */,
 				27A334771AA63525008188FC /* AppDelegate.m in Sources */,
 				278CF73A1AACFD0E00A13D4B /* ProfileViewController.m in Sources */,

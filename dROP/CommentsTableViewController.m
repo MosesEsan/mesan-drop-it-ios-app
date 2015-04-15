@@ -235,7 +235,7 @@
     
 
     CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
-    CGFloat height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
+    CGFloat height = (TOP_PADDING + (TOP_PADDING / 2)) + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + TOP_PADDING;
     
     if (_postObject[@"parseObject"][@"pic"])
         height += 10 + IMAGEVIEW_HEIGHT;    
@@ -290,7 +290,7 @@
     [headerView addSubview:_actionsView];
 
     _date = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, remainingSpace, ACTIONS_VIEW_HEIGHT)];
-    _date.backgroundColor = [UIColor redColor];
+    _date.backgroundColor = [UIColor clearColor];
     _date.textColor = DATE_COLOR;
     _date.textAlignment = NSTextAlignmentLeft;
     _date.font = DATE_FONT;

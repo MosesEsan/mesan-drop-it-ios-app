@@ -15,9 +15,9 @@
 @interface DIDataManager : NSObject
 
 @property (nonatomic, strong) NSMutableArray *allPosts;
-@property (nonatomic, strong) NSMutableArray *likes;
+//@property (nonatomic, strong) NSMutableArray *likes;
 @property (nonatomic, strong) UITableView *tableView;
-
+@property (nonatomic, strong) NSMutableArray *allNotifications;
 
 + (id)sharedManager;
 
@@ -35,5 +35,9 @@
 //Comments
 - (void)getCommentsForObject:(PFObject *)postObject
                    withBlock:(void (^)(NSMutableArray *comments, NSError *error))completionBlock;
+
+//Notifications
+- (void)getNotificationsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock;
+
 
 @end

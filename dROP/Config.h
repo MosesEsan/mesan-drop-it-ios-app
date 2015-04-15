@@ -91,6 +91,7 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define REWARDS_CLASS_NAME @"Rewards"
 #define CONFIGURATION_CLASS_NAME @"Config"
 #define ADS_CLASS_NAME @"Ads"
+#define NOTIFICATIONS_CLASS_NAME @"Notifications"
 
 #define NEW_POST_TYPE @"New"
 #define LIKE_POST_TYPE @"Like"

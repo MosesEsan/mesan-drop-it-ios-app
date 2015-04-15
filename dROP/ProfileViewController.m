@@ -18,7 +18,7 @@
 
 #import "MHFacebookImageViewer.h"
 #import "RESideMenu.h"
-
+#import "DIDataManager.h"
 
 
 @interface ProfileViewController ()
@@ -27,6 +27,7 @@
     NSDate *lastUpdated;
     
     BOOL showAlert;
+    DIDataManager *shared;
 }
 
 @property (nonatomic, strong) NSMutableArray *allPosts;
@@ -41,6 +42,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    shared = [DIDataManager sharedManager];
     
     self.title = @"Profile";
     
@@ -441,26 +444,10 @@
     
     CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:WIDTH - 55.0f withFont:TEXT_FONT];
     
-    CGFloat height = 0;
+    CGFloat height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
     
-    if ([Config cellType] == TIMELINE){
-        
-        height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 5;
-        
-        if (postObject[@"parseObject"][@"pic"])
-            height += 10 + IMAGEVIEW_HEIGHT;
-    }else if ([Config cellType] == COLOURED){
-        
-        if ([Config isPostAuthor:postObject])
-        {
-            height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
-            
-            if (postObject[@"parseObject"][@"pic"])
-                height += 10 + IMAGEVIEW_HEIGHT;
-        }else{
-            height = [Config calculateCellHeight:postObject];
-        }
-    }
+    if (postObject[@"parseObject"][@"pic"])
+        height += 10 + IMAGEVIEW_HEIGHT;
     
     return height;
 }
@@ -520,10 +507,18 @@
 {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     
+    
+    
     if([title isEqualToString:@"Dislike"]) {
         
         [_cellToDelete swipeToOriginWithCompletion:^{
-            //**[self dislikePost:_cellToDelete.tag];
+            
+            //Call dislike method
+            [self dislikePostAtIndex:_cellToDelete.tag];
+            
+            //Remove the cell
+            [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
+            
             _cellToDelete = nil;
         }];
         
@@ -539,11 +534,23 @@
              [title isEqualToString:@"Spam"] ||
              [title isEqualToString:@"Other"])
     {
-        //**[self reportPost:_cellToDelete.tag];
+        //Call report method
+        [self reportPostAtIndex:_cellToDelete.tag];
+        
+        //Remove the cell
         [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
+        
+        _cellToDelete = nil;
+        
     }else if([title isEqualToString:@"Yes"]) {
-        //**[self deletePost:_cellToDelete.tag];
+        
+        [shared deletePost:_allPosts[_cellToDelete.tag]];
+        [_allPosts removeObjectAtIndex:_cellToDelete.tag];
+        
+        //Remove the cell
         [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
+        
+        _cellToDelete = nil;
     }else{
         [_cellToDelete swipeToOriginWithCompletion:^{
         }];
@@ -552,6 +559,71 @@
     }
 }
 
+- (void)dislikePostAtIndex:(NSInteger)index
+{
+    NSDictionary *postObject = _likedPosts[index];
+    
+    BOOL highlighted = [postObject[@"disliked"] boolValue];
+    
+    [postObject setValue:[NSNumber numberWithBool:!highlighted] forKey:@"disliked"];
+    
+    //get the Parse Object and Modify Local Object
+    PFObject *parseObject = postObject[@"parseObject"];
+    if (highlighted == NO)
+    {
+        //Dislike Post
+        [parseObject addUniqueObject:[Config deviceId] forKey:@"dislikes"];
+        [parseObject removeObject:[Config deviceId] forKey:@"likes"];
+        
+        parseObject[@"type"] = DISLIKE_POST_TYPE;
+        
+        //If user had previously liked this photo
+        //decrement the likes numn=ber
+        BOOL liked = [postObject[@"liked"] boolValue];
+        if(liked == YES)
+        {
+            //decrement number
+            NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
+            likesCount--;
+            [postObject setValue:[NSNumber numberWithInteger:likesCount] forKey:@"totalLikes"];
+            //attn set sender value
+        }
+        
+        [postObject setValue:[NSNumber numberWithBool:NO] forKey:@"liked"];
+    }
+    
+    //Update Remote Object
+    [parseObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if(error)
+            //_cellToDelete.highlighted = highlighted; //return it to its previous state
+            NSLog(@"Notdisliked");
+        /****attn*/
+    }];
+    
+    //Remove the object from lIked post array
+    [_likedPosts removeObjectAtIndex:index];
+}
+
+- (void)reportPostAtIndex:(NSInteger)index
+{
+    NSDictionary *postObject = _likedPosts[index];
+    
+    //get the Parse Object and Report Post
+    PFObject *parseObject = postObject[@"parseObject"];
+    [parseObject addUniqueObject:[Config deviceId] forKey:@"reports"];
+    
+    parseObject[@"type"] = REPORT_POST_TYPE;
+    
+    [parseObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if(error)
+            //_cellToDelete.highlighted = highlighted; //return it to its previous state
+            NSLog(@"NotReported");
+        /****attn*/
+    }];
+    
+    //Remove the object from lIked post array
+    [_likedPosts removeObjectAtIndex:index];
+}
 
 /*
 #pragma mark - Navigation

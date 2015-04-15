@@ -34,18 +34,14 @@
     if (self = [super init]) {
         
         _allPosts = [[NSMutableArray alloc] init];
-        _likes = [[NSMutableArray alloc] init];
+        //_likes = [[NSMutableArray alloc] init];
+        _allNotifications = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
-- (void)updatePostAtIndex:(NSInteger)index withPostObject:(NSDictionary *)postObject
-{
-    _allPosts[index] = postObject;
-    
-    [self.tableView reloadData];
-}
-
+#pragma mark - Posts
+//Like Post
 - (BOOL)likePostAtIndex:(NSInteger)index updateArray:(BOOL)update
 {
     NSDictionary *postObject = _allPosts[index];
@@ -97,6 +93,7 @@
     return !selected;
 }
 
+//Dislike Post
 - (void)dislikePostAtIndex:(NSInteger)index updateArray:(BOOL)update
 {
     NSDictionary *postObject = _allPosts[index];
@@ -138,9 +135,11 @@
         /****attn*/
     }];
     
-    [self updatePostAtIndex:index withPostObject:postObject];
+    if (update)
+        [self updatePostAtIndex:index withPostObject:postObject];
 }
 
+//Report Post
 - (void)reportPostAtIndex:(NSInteger)index updateArray:(BOOL)update
 {
     NSDictionary *postObject = _allPosts[index];
@@ -162,6 +161,7 @@
         [_allPosts removeObjectAtIndex:index];
 }
 
+//Delete Post
 - (void)deletePost:(NSDictionary *)postObject
 {
     //get the Parse Object
@@ -169,6 +169,13 @@
     [parseObject deleteInBackground];
 }
 
+//Update Post Object and reload Table
+- (void)updatePostAtIndex:(NSInteger)index withPostObject:(NSDictionary *)postObject
+{
+    _allPosts[index] = postObject;
+    
+    [self.tableView reloadData];
+}
 
 
 
@@ -208,6 +215,64 @@
             NSError *error = [NSError errorWithDomain:@"No Internet Connection!" code:0
                                              userInfo:[NSDictionary dictionaryWithObject:@"No Working Internet Connection." forKey:NSLocalizedDescriptionKey]];
             completionBlock(nil, error);
+        }
+    });
+}
+
+
+#pragma mark - Notifications
+- (void)getNotificationsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock
+{
+    dispatch_queue_t userNotificationQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(userNotificationQueue, ^{
+        
+        if ([Config checkInternetConnection])
+        {
+            PFQuery *query = [PFQuery queryWithClassName:NOTIFICATIONS_CLASS_NAME];
+                        
+            [query whereKey:@"recipient" equalTo:[Config deviceId]];
+            [query orderByDescending:@"createdAt"];
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error) {
+                    NSLog(@"error in geo query!");
+                } else {
+                    
+                    NSMutableArray *filteredNotifications = [[NSMutableArray alloc] init];
+                    
+                    for (PFObject *parseObject in objects)
+                    {
+                        NSString *notificationText = parseObject[@"message"];
+                        PFObject *postObject = parseObject[@"post"];
+                        //PFObject *commentObject = parseObject[@"comment"];
+                        
+                        NSDictionary *notificationObject = @{
+                                                             @"text" : notificationText,
+                                                             @"date" : parseObject.createdAt,
+                                                             @"postObject" : postObject,
+                                                             //@"commentObject" : commentObject,
+                                                             @"parseObject" : parseObject
+                                                             };
+                        
+                        [filteredNotifications addObject:notificationObject.mutableCopy];
+                    }
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        _allNotifications = filteredNotifications;
+                        
+                        completionBlock(YES, nil);
+                    });
+                }
+            }];
+        }else{
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSError *error = [NSError errorWithDomain:@"No Internet Connection!" code:0
+                                                 userInfo:[NSDictionary dictionaryWithObject:@"No Working Internet Connection." forKey:NSLocalizedDescriptionKey]];
+                completionBlock(NO, error);
+                
+            });
         }
     });
 }

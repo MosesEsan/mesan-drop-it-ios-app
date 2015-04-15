@@ -11,6 +11,7 @@
 #import "ProfileViewController.h"
 #import "MapViewController.h"
 #import "CollegeTableViewController.h"
+#import "NotificationsTableViewController.h"
 #import "Config.h"
 
 #define TABLEVIEW_HEIGHT HEIGHT - 70
@@ -25,6 +26,7 @@
 @property (strong, nonatomic) MapViewController *mapViewController;
 
 @property (strong, nonatomic) CollegeTableViewController *collegeViewController;
+@property (strong, nonatomic) NotificationsTableViewController *notificationViewController;
 
 
 @property (strong, readwrite, nonatomic) UIViewController *currentViewController;
@@ -58,6 +60,7 @@
     
     
     _collegeViewController = [[CollegeTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    _notificationViewController = [[NotificationsTableViewController alloc] initWithStyle:UITableViewStylePlain];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -85,15 +88,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 4;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height = CGRectGetHeight(tableView.frame) / 5;
     
-    if (indexPath.row == 0)
-        return height * 2;
+    //if (indexPath.row == 0)
+      //  return height * 1;
     
     return height;
 }
@@ -130,14 +133,19 @@
     {
         imageString = @"Marker";
         menuTitle = @"MAP";
+    }else if (indexPath.row == 3)
+    {
+        imageString = @"Notification";
+        menuTitle = @"NOTIFICATIONS";
     }
     
     cell.backgroundColor = [UIColor clearColor];
     
     CGFloat height = CGRectGetHeight(tableView.frame) / 5;
-    
+    /*
     if (indexPath.row == 0)
         height = height * 2;
+    */
     
     UIButton *icon = [[UIButton alloc] initWithFrame:CGRectMake((150 / 2) - 22.50f, (height / 2) - 22.50f, 45.0f, 45.0f)];
     icon.backgroundColor = colour;
@@ -157,8 +165,6 @@
     iconTitle.textAlignment = NSTextAlignmentCenter;
     
     [cell.contentView addSubview:iconTitle];
-    
-    // Configure the cell...
     
     return cell;
 }
@@ -180,6 +186,8 @@
         
     }else if (indexPath.row == 3){
         newContentViewController = _mapViewController;
+    }else if (indexPath.row == 4){
+        newContentViewController = _notificationViewController;
     }
     
     if (newContentViewController != _currentViewController)

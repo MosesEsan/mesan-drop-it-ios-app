@@ -770,8 +770,6 @@
     sender.selected = [shared likePostAtIndex:sender.tag updateArray:YES];
 }
 
-
-
 - (void)deletePost:(NSInteger)tag
 {
     NSDictionary *postObject = shared.allPosts[tag];
@@ -813,14 +811,20 @@
     {
         [shared reportPostAtIndex:_cellToDelete.tag updateArray:YES];
         
+        //Remove the cell
         [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
+        
+        _cellToDelete = nil;
         
     }else if([title isEqualToString:@"Yes"]) {
         
         [shared deletePost:shared.allPosts[_cellToDelete.tag]];
         [shared.allPosts removeObjectAtIndex:_cellToDelete.tag];
         
+        //Remove the cell
         [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
+        
+        _cellToDelete = nil;
         
     }else{
         [_cellToDelete swipeToOriginWithCompletion:^{
