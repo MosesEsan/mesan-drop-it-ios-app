@@ -10,11 +10,15 @@
 #import <CoreLocation/CoreLocation.h>
 
 
+#import "DIDataManager.h"
+
+
 @interface CommentsTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSDictionary *postObject;
 
 @property (nonatomic) BOOL showCloseButton;
 
+@property (nonatomic) ViewType viewType;
 
 @end

@@ -32,6 +32,10 @@
 		2713203D1AB76E9200CF23DB /* peach2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2713203C1AB76E9200CF23DB /* peach2.png */; };
 		271320401AB77AA800CF23DB /* MapPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2713203F1AB77AA800CF23DB /* MapPostViewController.m */; };
 		27173F8E1ADB01BE0087B29E /* DIDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 27173F8D1ADB01BE0087B29E /* DIDataManager.m */; };
+		2723A5E01AE2A3DC00C0605D /* Chartrand.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2723A5DF1AE2A3DC00C0605D /* Chartrand.otf */; };
+		2723A5E21AE2A44600C0605D /* Broadmoor.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2723A5E11AE2A44600C0605D /* Broadmoor.ttf */; };
+		2723A5E51AE2A46400C0605D /* BernerBasisschrift2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2723A5E31AE2A46400C0605D /* BernerBasisschrift2.ttf */; };
+		2723A5E61AE2A46400C0605D /* BernerBasisschrift1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2723A5E41AE2A46400C0605D /* BernerBasisschrift1.ttf */; };
 		272925081ABB7C0800A271D4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272925071ABB7C0800A271D4 /* AdSupport.framework */; };
 		2729250A1ABB7C1300A271D4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272925091ABB7C1300A271D4 /* CoreTelephony.framework */; };
 		2729251D1ABC59AB00A271D4 /* ColouredTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2729251C1ABC59AB00A271D4 /* ColouredTableViewCell.m */; };
@@ -167,6 +171,10 @@
 		2713203F1AB77AA800CF23DB /* MapPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPostViewController.m; sourceTree = "<group>"; };
 		27173F8C1ADB01BE0087B29E /* DIDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIDataManager.h; sourceTree = "<group>"; };
 		27173F8D1ADB01BE0087B29E /* DIDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIDataManager.m; sourceTree = "<group>"; };
+		2723A5DF1AE2A3DC00C0605D /* Chartrand.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chartrand.otf; sourceTree = "<group>"; };
+		2723A5E11AE2A44600C0605D /* Broadmoor.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Broadmoor.ttf; sourceTree = "<group>"; };
+		2723A5E31AE2A46400C0605D /* BernerBasisschrift2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BernerBasisschrift2.ttf; sourceTree = "<group>"; };
+		2723A5E41AE2A46400C0605D /* BernerBasisschrift1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BernerBasisschrift1.ttf; sourceTree = "<group>"; };
 		272925071ABB7C0800A271D4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		272925091ABB7C1300A271D4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		2729251B1ABC59AB00A271D4 /* ColouredTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColouredTableViewCell.h; sourceTree = "<group>"; };
@@ -413,6 +421,10 @@
 				27CBDF1C1ACB771A004DEEE1 /* cocacolaii.ttf */,
 				27CBDF1E1ACB7754004DEEE1 /* BANANASP.TTF */,
 				27EFDB3B1ACDA45F00C13D94 /* BELSHAW_.TTF */,
+				2723A5DF1AE2A3DC00C0605D /* Chartrand.otf */,
+				2723A5E11AE2A44600C0605D /* Broadmoor.ttf */,
+				2723A5E31AE2A46400C0605D /* BernerBasisschrift2.ttf */,
+				2723A5E41AE2A46400C0605D /* BernerBasisschrift1.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -885,6 +897,7 @@
 				27B404401AA66744007DC137 /* CoverPhotoPH.JPG in Resources */,
 				27CBDEE31AC99B1E004DEEE1 /* lady6.png in Resources */,
 				27CBDEDF1AC99B1E004DEEE1 /* lady2.png in Resources */,
+				2723A5E51AE2A46400C0605D /* BernerBasisschrift2.ttf in Resources */,
 				271320211AB7669F00CF23DB /* grapes.png in Resources */,
 				279DA5E21AC757D100591B4C /* strawberry3.png in Resources */,
 				27CBDEE61AC99B1E004DEEE1 /* lady9.png in Resources */,
@@ -909,6 +922,7 @@
 				27B96A981AAFBA4900AC4120 /* Profile.png in Resources */,
 				279DA5FC1AC8926900591B4C /* lovingdublin.png in Resources */,
 				271320221AB7669F00CF23DB /* kiwi.png in Resources */,
+				2723A5E01AE2A3DC00C0605D /* Chartrand.otf in Resources */,
 				27B96A951AAFBA4900AC4120 /* Add.png in Resources */,
 				271320311AB76E3B00CF23DB /* grapes2.png in Resources */,
 				27B96AA71AAFBD5C00AC4120 /* cross@2x.png in Resources */,
@@ -927,10 +941,12 @@
 				27CBDEF21AC99B1E004DEEE1 /* man7.png in Resources */,
 				27CBDEEB1AC99B1E004DEEE1 /* lady14.png in Resources */,
 				27CBDEF51AC99B1E004DEEE1 /* man10.png in Resources */,
+				2723A5E61AE2A46400C0605D /* BernerBasisschrift1.ttf in Resources */,
 				27CBDEE11AC99B1E004DEEE1 /* lady4.png in Resources */,
 				271320331AB76E4300CF23DB /* orange2.png in Resources */,
 				27CBDEF31AC99B1E004DEEE1 /* man8.png in Resources */,
 				27CBDEED1AC99B1E004DEEE1 /* man2.png in Resources */,
+				2723A5E21AE2A44600C0605D /* Broadmoor.ttf in Resources */,
 				27CBDEE71AC99B1E004DEEE1 /* lady10.png in Resources */,
 				2713203B1AB76E7100CF23DB /* watermelon2.png in Resources */,
 				27CBDEEC1AC99B1E004DEEE1 /* man1.png in Resources */,

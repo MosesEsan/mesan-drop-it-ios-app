@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import <CoreText/CoreText.h>
 
 #ifndef dROP_Config_h
 #define dROP_Config_h
@@ -197,6 +198,11 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 //+ (UIImage *) imageWithImage:(UIImage *)image scaledToMaxWidth:(CGFloat)width maxHeight:(CGFloat)height;
 //+ (UIImage *) imageWithImage: (UIImage*) sourceImage scaledToWidth: (float) i_width;
 
++ (NSString *)getNotificationText:(NSDictionary *)notificationObject;
+
++ (UIImageView *)getNotificationType:(NSDictionary *)notificationObject withFrame:(CGRect)frame;
+
++ (NSMutableAttributedString *)createTextWithObject:(NSDictionary *)notificationObject;
 
 @end
 

@@ -67,7 +67,9 @@
     menuBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
     [menuBtn addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
-    
+
+    self.tableView.contentInset = UIEdgeInsetsMake(6, 0, 0, 0);
+
     //Add Refresh Control
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self
@@ -119,7 +121,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSDictionary *notificationObject = shared.allNotifications[indexPath.row];
-    CGFloat max = [shared.allNotifications count] - 1;
     
     PFObject *parseObject = notificationObject[@"parseObject"];
     
@@ -130,12 +131,10 @@
         cell = [[NotificationTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     
     [cell setFrameWithObject:notificationObject forIndex:indexPath.row];
-    /*
-    if (indexPath.row != max)
-        cell.bottomBorder.frame = CGRectMake(0, CGRectGetHeight(cell.mainContainer.frame) - 0.5f, CGRectGetWidth(cell.mainContainer.frame), .5f);
-    */
+    
+    //if (indexPath.row != max)
+    cell.bottomBorder.frame = CGRectMake(0, CGRectGetHeight(cell.mainContainer.frame) - 0.5f, CGRectGetWidth(cell.mainContainer.frame), .5f);
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
     
     cell.tag = indexPath.row;
     cell.selectionStyle= UITableViewCellSelectionStyleNone;
@@ -147,14 +146,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *notificationObject = shared.allNotifications[indexPath.row];
-    
-    NSString *notificationText = notificationObject[@"text"];
-    
-    CGFloat notificationTextHeight = [Config calculateHeightForText:notificationText withWidth:WIDTH - 55.0f withFont:TEXT_FONT];
-    
-    CGFloat height = TOP_PADDING + notificationTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
-    
-    return height;
+    return [NotificationTableViewCell getCellHeight:notificationObject];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -162,10 +154,34 @@
     NSDictionary *notificationObject = shared.allNotifications[indexPath.row];
     
     CommentsTableViewController *viewPost = [[CommentsTableViewController alloc] initWithNibName:nil bundle:nil];
-    viewPost.postObject = notificationObject[@"postObject"];
+    viewPost.postObject = [Config createPostObject:notificationObject[@"postObject"]];
     viewPost.view.tag = indexPath.row;
+    //viewPost.viewType = NOTIFICATIONS;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     [self.navigationController pushViewController:viewPost animated:YES];
+}
+
+-(void)refresh:(UIRefreshControl *)refresh
+{
+    [refresh endRefreshing];
+    
+    dispatch_queue_t queriesQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queriesQueue, ^{
+        
+        [shared getNotificationsWithBlock:^(BOOL reload, NSError *error) {
+            
+            if (!error && reload)
+            {
+                [self.tableView reloadData];
+            }else if (error){
+                
+                if (error.code == 0 && showAlert) {
+                    [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
+                    showAlert = NO;
+                }
+            }
+        }];
+    });
 }
 
 /*

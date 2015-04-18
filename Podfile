@@ -13,6 +13,7 @@ pod 'NJKWebViewProgress'
 #pod 'MSSlidingPanelController'
 pod 'RESideMenu', '~> 4.0.7'
 pod 'Facebook-iOS-SDK'
+pod 'TTTAttributedLabel'
 
 #pod 'UIWebView+Progress', :git => 'git@github.com:ishkawa/UIWebView-Progress.git'
 #pod 'CRGradientNavigationBar'

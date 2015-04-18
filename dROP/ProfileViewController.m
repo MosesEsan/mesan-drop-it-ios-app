@@ -30,9 +30,6 @@
     DIDataManager *shared;
 }
 
-@property (nonatomic, strong) NSMutableArray *allPosts;
-@property (nonatomic, strong) NSMutableArray *likedPosts;
-
 @property (nonatomic, strong) MCSwipeTableViewCell *cellToDelete;
 
 @end
@@ -49,15 +46,7 @@
     
     showAlert = NO;
     
-    _allPosts = [[NSMutableArray alloc] init];
-    _likedPosts = [[NSMutableArray alloc] init];
-    
-    dispatch_queue_t queriesQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queriesQueue, ^{
-        [self queryForUsersPosts];
-        [self queryForLikedPosts];
-        [self queryForUsersPoints];
-    });
+    [self getData];
     
     //Menu
     UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -140,124 +129,67 @@
     rankLabel.text = [NSString stringWithFormat:@"%@ (%@)",usersInfo[@"Rank"],usersInfo[@"Points"]];
     
     if ([Config checkLastUpdated:lastUpdated withMaxDifference:20])
-        [self queryForUsersPoints];
+        [self getData];
     
     [self.tableView reloadData];
 }
 
-- (void)queryForUsersPosts
+- (void)getData
 {
-    dispatch_queue_t userPostQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(userPostQueue, ^{
+    dispatch_queue_t queriesQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queriesQueue, ^{
         
-        if ([Config checkInternetConnection])
-        {
-            PFQuery *query = [PFQuery queryWithClassName:POSTS_CLASS_NAME];
-            [query whereKey:@"deviceId" equalTo:[Config deviceId]];
-            [query orderByDescending:@"createdAt"];
+        [shared getUsersPostsWithBlock:^(BOOL reload, NSError *error) {
             
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (error) {
-                    NSLog(@"error in geo query!");
-                } else {
-                    
-                    NSMutableArray *filteredPost = [Config filterPosts:objects];
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        _allPosts = filteredPost;
-                        
-                        [self.tableView reloadData];
-                    });
-                }
-            }];
-        }else{
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (showAlert == YES)
-                {
+            if (!error && reload)
+            {
+                [self.tableView reloadData];
+            }else if (error){
+                
+                if (error.code == 0 && showAlert) {
                     [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
                     showAlert = NO;
                 }
-            });
-        }
-    });
-}
-
-- (void)queryForLikedPosts
-{
-    dispatch_queue_t userPostQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(userPostQueue, ^{
+            }
+        }];
         
-        if ([Config checkInternetConnection])
-        {
-            NSArray *deviceId = @[[Config deviceId]];
+        [shared getLikedPostsWithBlock:^(BOOL reload, NSError *error) {
             
-            PFQuery *query = [PFQuery queryWithClassName:POSTS_CLASS_NAME];
-            [query whereKey:@"likes" containedIn:deviceId];
-            [query orderByDescending:@"createdAt"];
-            
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (error) {
-                    NSLog(@"error in geo query!");
-                } else {
-                    
-                    NSMutableArray *filteredPost = [Config filterPosts:objects];
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        _likedPosts = filteredPost;
-                        
-                        [self.tableView reloadData];
-                    });
-                }
-            }];
-        }else{
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (showAlert == YES)
-                {
+            if (!error && reload)
+            {
+                [self.tableView reloadData];
+            }else if (error){
+                
+                if (error.code == 0 && showAlert) {
                     [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
                     showAlert = NO;
                 }
-            });
-        }
+            }
+        }];
+        
+        [shared getLikedPostsWithBlock:^(BOOL update, NSError *error) {
+            
+            if (!error && update)
+            {
+                lastUpdated = [NSDate date];
+                
+                NSDictionary *usersInfo  = [Config userPoints];
+                
+                rankLabel.text = [NSString stringWithFormat:@"%@ (%@)",usersInfo[@"Rank"],usersInfo[@"Points"]];
+                
+            }else if (error){
+                
+                if (error.code == 0 && showAlert) {
+                    [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
+                    showAlert = NO;
+                }
+            }
+        }];
     });
 }
 
-- (void)queryForUsersPoints
-{
-    dispatch_queue_t usersPointsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(usersPointsQueue, ^{
-        
-        if ([Config checkInternetConnection])
-        {
-            PFQuery *query = [PFQuery queryWithClassName:USERS_CLASS_NAME];
-            [query whereKey:@"deviceId" equalTo:[Config deviceId]];
-            
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (error) {
-                    NSLog(@"error in geo query!"); // todo why is this ever happening?
-                } else {
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        lastUpdated = [NSDate date];
-                        
-                        if ([objects count] > 0)
-                        {
-                            NSInteger points = [objects[0][@"points"] integerValue];
-                            
-                            NSDictionary *usersInfo  = [Config updateUserPoints:points];
-                            
-                            rankLabel.text = [NSString stringWithFormat:@"%@ (%@)",usersInfo[@"Rank"],usersInfo[@"Points"]];
-                            
-                        }
-                    });
-                }
-            }];
-        }
-    });
-}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -274,8 +206,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     
-    if (section == 0) return [_allPosts count];
-    else return [_likedPosts count];
+    if (section == 0) return [shared.myPosts count];
+    else return [shared.likedPosts count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -285,11 +217,11 @@
     NSString *cellIdentifier;
     
     if (indexPath.section == 0) {
-        postObject = _allPosts[indexPath.row];
-        max = [_allPosts count] - 1;
+        postObject = shared.myPosts[indexPath.row];
+        max = [shared.myPosts count] - 1;
     }else{
-        postObject = _likedPosts[indexPath.row];
-        max = [_likedPosts count] - 1;
+        postObject = shared.likedPosts[indexPath.row];
+        max = [shared.likedPosts count] - 1;
     }
 
     NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
@@ -437,8 +369,8 @@
 {
     NSDictionary *postObject;
     
-    if (indexPath.section == 0) postObject = _allPosts[indexPath.row];
-    else postObject = _likedPosts[indexPath.row];
+    if (indexPath.section == 0) postObject = shared.myPosts[indexPath.row];
+    else postObject = shared.likedPosts[indexPath.row];
     
     NSString *postText = postObject[@"text"];
     
@@ -456,12 +388,13 @@
 {
     NSDictionary *postObject;
     
-    if (indexPath.section == 0) postObject = _allPosts[indexPath.row];
-    else postObject = _likedPosts[indexPath.row];
+    if (indexPath.section == 0) postObject = shared.myPosts[indexPath.row];
+    else postObject = shared.likedPosts[indexPath.row];
     
     CommentsTableViewController *viewPost = [[CommentsTableViewController alloc] initWithNibName:nil bundle:nil];
     viewPost.postObject = postObject;
     viewPost.view.tag = indexPath.row;
+    viewPost.viewType = PROFILE;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     [self.navigationController pushViewController:viewPost animated:YES];
 }
@@ -472,7 +405,7 @@
     PFObject *newObject = [info objectForKey:@"newObject"];
     
     //1 - Add New Post Array to the first position of the array
-    [_allPosts insertObject:[Config createPostObject:newObject] atIndex:0];
+    [shared.myPosts insertObject:[Config createPostObject:newObject] atIndex:0];
     
     [self.tableView reloadData];
 }
@@ -497,8 +430,7 @@
 {
     [refresh endRefreshing];
     
-    [self queryForUsersPosts];
-    [self queryForUsersPoints];
+    [self getData];
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -507,14 +439,12 @@
 {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     
-    
-    
-    if([title isEqualToString:@"Dislike"]) {
-        
+    if([title isEqualToString:@"Dislike"])
+    {
         [_cellToDelete swipeToOriginWithCompletion:^{
             
             //Call dislike method
-            [self dislikePostAtIndex:_cellToDelete.tag];
+            [shared dislikePostAtIndex:_cellToDelete.tag forView:PROFILE];
             
             //Remove the cell
             [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
@@ -535,94 +465,26 @@
              [title isEqualToString:@"Other"])
     {
         //Call report method
-        [self reportPostAtIndex:_cellToDelete.tag];
+        [shared reportPostAtIndex:_cellToDelete.tag forView:PROFILE];
         
         //Remove the cell
         [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
         
         _cellToDelete = nil;
         
+        
     }else if([title isEqualToString:@"Yes"]) {
         
-        [shared deletePost:_allPosts[_cellToDelete.tag]];
-        [_allPosts removeObjectAtIndex:_cellToDelete.tag];
+        //Call delete method
+        [shared deletePostAtIndex:_cellToDelete.tag forView:HOME];
         
         //Remove the cell
         [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
         
         _cellToDelete = nil;
     }else{
-        [_cellToDelete swipeToOriginWithCompletion:^{
-        }];
-        
         _cellToDelete = nil;
     }
-}
-
-- (void)dislikePostAtIndex:(NSInteger)index
-{
-    NSDictionary *postObject = _likedPosts[index];
-    
-    BOOL highlighted = [postObject[@"disliked"] boolValue];
-    
-    [postObject setValue:[NSNumber numberWithBool:!highlighted] forKey:@"disliked"];
-    
-    //get the Parse Object and Modify Local Object
-    PFObject *parseObject = postObject[@"parseObject"];
-    if (highlighted == NO)
-    {
-        //Dislike Post
-        [parseObject addUniqueObject:[Config deviceId] forKey:@"dislikes"];
-        [parseObject removeObject:[Config deviceId] forKey:@"likes"];
-        
-        parseObject[@"type"] = DISLIKE_POST_TYPE;
-        
-        //If user had previously liked this photo
-        //decrement the likes numn=ber
-        BOOL liked = [postObject[@"liked"] boolValue];
-        if(liked == YES)
-        {
-            //decrement number
-            NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
-            likesCount--;
-            [postObject setValue:[NSNumber numberWithInteger:likesCount] forKey:@"totalLikes"];
-            //attn set sender value
-        }
-        
-        [postObject setValue:[NSNumber numberWithBool:NO] forKey:@"liked"];
-    }
-    
-    //Update Remote Object
-    [parseObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if(error)
-            //_cellToDelete.highlighted = highlighted; //return it to its previous state
-            NSLog(@"Notdisliked");
-        /****attn*/
-    }];
-    
-    //Remove the object from lIked post array
-    [_likedPosts removeObjectAtIndex:index];
-}
-
-- (void)reportPostAtIndex:(NSInteger)index
-{
-    NSDictionary *postObject = _likedPosts[index];
-    
-    //get the Parse Object and Report Post
-    PFObject *parseObject = postObject[@"parseObject"];
-    [parseObject addUniqueObject:[Config deviceId] forKey:@"reports"];
-    
-    parseObject[@"type"] = REPORT_POST_TYPE;
-    
-    [parseObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if(error)
-            //_cellToDelete.highlighted = highlighted; //return it to its previous state
-            NSLog(@"NotReported");
-        /****attn*/
-    }];
-    
-    //Remove the object from lIked post array
-    [_likedPosts removeObjectAtIndex:index];
 }
 
 /*

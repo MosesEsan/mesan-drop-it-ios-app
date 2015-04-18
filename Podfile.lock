@@ -46,6 +46,7 @@ PODS:
   - NJKWebViewProgress/ProgressView (0.2.3)
   - RESideMenu (4.0.7)
   - STTweetLabel (3.1.16)
+  - TTTAttributedLabel (1.13.3)
 
 DEPENDENCIES:
   - CCMPopup
@@ -57,6 +58,7 @@ DEPENDENCIES:
   - NJKWebViewProgress
   - RESideMenu (~> 4.0.7)
   - STTweetLabel
+  - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   Bolts: f8e2f94edbf9fec7bb8de5ecaaa3aa6b7de6f64e
@@ -69,5 +71,6 @@ SPEC CHECKSUMS:
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
   STTweetLabel: f249ed62963dd73e88a6ff6ab2e871c48b0b5c31
+  TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
 
 COCOAPODS: 0.36.1

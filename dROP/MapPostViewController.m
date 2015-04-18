@@ -243,6 +243,7 @@
     CommentsTableViewController *viewComments = [[CommentsTableViewController alloc] initWithNibName:nil bundle:nil];
     viewComments.postObject = _postObject;
     viewComments.view.tag = _index;
+    viewComments.viewType = HOME;
     viewComments.showCloseButton = YES;
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewComments];

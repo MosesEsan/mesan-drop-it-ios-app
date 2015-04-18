@@ -26,23 +26,18 @@
         self.mainContainer = [[UIView alloc] init];
         self.mainContainer.backgroundColor = [UIColor whiteColor];
         self.mainContainer.clipsToBounds = YES;
-        //self.mainContainer.layer.borderWidth = 0.5f;
-        //self.mainContainer.layer.borderColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:1].CGColor;
         [self.contentView addSubview:self.mainContainer];
         
-        self.line = [[UIView alloc] init];
-        self.line.layer.borderWidth = 0.7f;
-        [self.mainContainer addSubview:self.line];
+        self.type = [[UIImageView alloc] init];
+        self.type.layer.borderWidth = 0.7f;
+        self.type.backgroundColor = [UIColor purpleColor];
         
         self.postContainer = [[UIView alloc] init];
-        self.postContainer.backgroundColor = [UIColor whiteColor];
-        //self.postContainer.layer.borderWidth = 1.5f;
-        //self.postContainer.layer.borderColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.6f].CGColor;
-        //self.postContainer.layer.cornerRadius = 4.0f;
+        self.postContainer.backgroundColor = [UIColor clearColor];
         self.postContainer.clipsToBounds = YES;
         [self.mainContainer addSubview:self.postContainer];
         
-        self.postText = [[UILabel alloc] init];
+        self.postText = [[TTTAttributedLabel alloc] init];
         self.postText.backgroundColor = [UIColor clearColor];
         self.postText.numberOfLines = 0;
         self.postText.textColor = TEXT_COLOR;
@@ -82,45 +77,86 @@
 
 - (void)setFrameWithObject:(NSDictionary *)notificationObject forIndex:(NSInteger)index
 {
-    CGFloat postTextHeight = [Config calculateHeightForText:notificationObject[@"text"] withWidth:WIDTH - 55.5f withFont:TEXT_FONT];
-    
-    CGFloat cellHeight = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
-    
-    CGRect mainContainerFrame = CGRectMake(CONTAINER_FRAME_X, 0,
-                                           WIDTH - (CONTAINER_FRAME_X + (CONTAINER_FRAME_X / 2) + 2), cellHeight);
-    
-    CGRect lineFrame = CGRectMake(0, 0, COLOURED_BAR_WIDTH, cellHeight);
-    CGRect postContainerFrame = CGRectMake(COLOURED_BAR_WIDTH, 0, CGRectGetWidth(mainContainerFrame) - COLOURED_BAR_WIDTH, cellHeight); //1 Added to cover up left border
-    
-    CGFloat width = CGRectGetWidth(postContainerFrame) - (8 * 2);
-    CGRect labelFrame = CGRectMake(8, TOP_PADDING, width, postTextHeight);
-    CGRect actionViewFrame = CGRectMake(8, 0, width + 8, ACTIONS_VIEW_HEIGHT);
-    
-    CGFloat remainingSpace = CGRectGetWidth(actionViewFrame) / 3;
-    
-    CGRect dateFrame = CGRectMake(0, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
+    CGFloat postContainerWidth = [NotificationTableViewCell getPostContainerWidth:notificationObject];
+    CGFloat notificationTextHeight = [NotificationTableViewCell getnotificationTextHeight:notificationObject];
+    CGFloat cellHeight = [NotificationTableViewCell getCellHeight:notificationObject];
 
-    //Set Action View Frame
-    actionViewFrame.origin.y = labelFrame.origin.y + postTextHeight + 10;
+    CGRect mainContainerFrame = CGRectMake(0, 0, WIDTH, cellHeight);
+    CGRect lineFrame = CGRectMake(CONTAINER_FRAME_X + 5, (cellHeight - TYPE_WIDTH) / 2, TYPE_WIDTH, TYPE_WIDTH);
+    CGRect postContainerFrame = CGRectMake(CONTAINER_FRAME_X + 5 + TYPE_WIDTH, 0, postContainerWidth, cellHeight);
+    
+    CGFloat width = CGRectGetWidth(postContainerFrame) - 12;
+    CGRect labelFrame = CGRectMake(12, NOTIFICATION_PADDING, width, notificationTextHeight);
+    CGRect actionViewFrame = CGRectMake(12, labelFrame.origin.y + notificationTextHeight + 2, width, 20);
+    CGRect dateFrame = CGRectMake(0, 0, CGRectGetWidth(actionViewFrame) / 3, 20);
+
+    self.type = [Config getNotificationType:notificationObject withFrame:lineFrame];
+    [self.mainContainer addSubview:self.type];
     
     //Set Frames
-    self.line.frame = lineFrame;
-    
     self.mainContainer.frame = mainContainerFrame;
     self.postContainer.frame = postContainerFrame;
     self.postText.frame = labelFrame;
     self.actionsView.frame = actionViewFrame;
     self.date.frame = dateFrame;
     
-    self.line.backgroundColor = [Config getSideColor:index];
-    self.line.layer.borderColor = [Config getSideColor:index].CGColor;
     [self setValues:notificationObject];
 }
 
 - (void)setValues:(NSDictionary *)notificationObject
 {
-    self.postText.text = notificationObject[@"text"];
+    // If you're using a simple `NSString` for your text,
+    // assign to the `text` property last so it can inherit other label properties.
+    NSString *text = [NSString stringWithFormat:@"%@ \"%@\"",[Config getNotificationText:notificationObject], notificationObject[@"text"]];
+
+    //self.postText.text = text;
+    
+    [self.postText setText:text afterInheritingLabelAttributesAndConfiguringWithBlock:^ NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        
+        NSRange boldRange = [[mutableAttributedString string] rangeOfString:[Config getNotificationText:notificationObject] options:NSCaseInsensitiveSearch];
+        NSRange colouredRange = [[mutableAttributedString string] rangeOfString:[NSString stringWithFormat:@"\"%@\"", notificationObject[@"text"]]
+                                                                        options:NSCaseInsensitiveSearch];
+        
+        // Core Text APIs use C functions without a direct bridge to UIFont. See Apple's "Core Text Programming Guide" to learn how to configure string attributes.
+        UIFont *boldSystemFont = [UIFont fontWithName:@"AvenirNext-DemiBold" size:13.5f];
+        
+        CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)boldSystemFont.fontName, boldSystemFont.pointSize, NULL);
+        
+        if (font) {
+            [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)font range:boldRange];
+            //[mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName
+              //                              value:(id)[DATE_COLOR CGColor]
+                //                            range:colouredRange];
+            CFRelease(font);
+        }
+        
+        return mutableAttributedString;
+    }];
+    
     self.date.text = [Config calculateTime:notificationObject[@"date"]];
+}
+
++ (CGFloat)getPostContainerWidth:(NSDictionary *)notificationObject
+{
+    return  WIDTH - CONTAINER_FRAME_X - 5 - TYPE_WIDTH - 9;
+}
+
++ (CGFloat)getnotificationTextHeight:(NSDictionary *)notificationObject
+{
+    CGFloat postContainerWidth = [self getPostContainerWidth:notificationObject];
+    
+    NSString *text = [NSString stringWithFormat:@"%@ \"%@\"",[Config getNotificationText:notificationObject], notificationObject[@"text"]];
+    
+    return [Config calculateHeightForText:text
+                                withWidth:postContainerWidth
+                                 withFont:TEXT_FONT];
+}
+
++ (CGFloat)getCellHeight:(NSDictionary *)notificationObject
+{
+    CGFloat notificationTextHeight = [self getnotificationTextHeight:notificationObject];
+    
+    return NOTIFICATION_PADDING + notificationTextHeight + 2 + 20 + NOTIFICATION_PADDING;
 }
 
 - (void)awakeFromNib {

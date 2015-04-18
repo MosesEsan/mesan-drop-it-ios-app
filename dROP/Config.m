@@ -577,7 +577,7 @@
         }
         
     }else{
-        
+        /*
         //Get all the keys
         NSArray *keys = [availableLocations allKeys];
         
@@ -596,6 +596,9 @@
                 i = [availableLocations count];
             }
         }
+        */
+        
+        isAllowedToAdd = YES;
     }
     
     return isAllowedToAdd;
@@ -1174,6 +1177,80 @@
     
     return newImage;
 }
+
++ (NSString *)getNotificationText:(NSDictionary *)notificationObject
+{
+    NSString *text;
+    
+    NSString *type = notificationObject[@"type"];
+    
+    if ([type isEqualToString:@"Like"]){
+        text = @"Someone liked your post:";
+    }else if ([type isEqualToString:@"Dislike"]){
+        text = @"Someone disliked your post:";
+    }else if ([type isEqualToString:@"Report"]){
+        text = @"Someone reported your post:";
+    }else if ([type isEqualToString:@"NewComment"]){
+        text = @"Someone left a comment on your post:";
+    }else if ([type isEqualToString:@"LikeComment"]){
+        text = @"Someone liked your comment:";
+    }else if ([type isEqualToString:@"DislikeComment"]){
+        text = @"Someone disliked your comment:";
+    }else if ([type isEqualToString:@"ReportComment"]){
+        text = @"Someone reported your comment:";
+    }
+    
+    return text;
+}
+
++ (UIImageView *)getNotificationType:(NSDictionary *)notificationObject withFrame:(CGRect)frame
+{
+    NSString *typeImageString;
+    UIColor *color = [UIColor yellowColor];
+    
+    NSString *type = notificationObject[@"type"];
+
+    
+    if ([type isEqualToString:@"Like"] || [type isEqualToString:@"LikeComment"]){
+        typeImageString = @"SmileyBluish";
+        color = BAR_TINT_COLOR2;
+    }else if ([type isEqualToString:@"Dislike"] || [type isEqualToString:@"DislikeComment"]){
+        typeImageString = @"Sad";
+        color = [UIColor redColor];
+    }else if ([type isEqualToString:@"Report"] || [type isEqualToString:@"ReportComment"]){
+        typeImageString = @"Report";
+        color = [UIColor redColor];
+    }else if ([type isEqualToString:@"NewComment"]){
+        typeImageString = @"Comment2";
+        color = DATE_COLOR;
+    }
+    
+    return [Config imageViewFrame:frame
+                 withImage:[UIImage imageNamed:typeImageString]
+                 withColor:color];
+}
+
+- (NSMutableAttributedString *)createTextWithObject:(NSDictionary *)notificationObject
+{
+    NSMutableAttributedString *mutableAttributedString;
+    
+    NSRange boldRange = [[mutableAttributedString string] rangeOfString:[Config getNotificationText:notificationObject] options:NSCaseInsensitiveSearch];
+    NSRange colouredRange = [[mutableAttributedString string] rangeOfString:@"sit amet" options:NSCaseInsensitiveSearch];
+    
+    // Core Text APIs use C functions without a direct bridge to UIFont. See Apple's "Core Text Programming Guide" to learn how to configure string attributes.
+    UIFont *boldSystemFont = [UIFont fontWithName:@"AvenirNext-DemiBold" size:14.0f];
+    
+    
+    CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)boldSystemFont.fontName, boldSystemFont.pointSize, NULL);
+    if (font) {
+        [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)font range:boldRange];
+        //[mutableAttributedString addAttribute:kTTTStrikeOutAttributeName value:@YES range:strikeRange];
+        CFRelease(font);
+    }
+    
+    return mutableAttributedString;
+}
+
 
 - (void)unUsedCodes
 {

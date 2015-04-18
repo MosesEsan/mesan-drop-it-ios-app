@@ -74,7 +74,7 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     shared = [DIDataManager sharedManager];
-    shared.tableView = self.tableView;
+    shared.homeTableView = self.tableView;
 
     showAlert = NO;
     
@@ -472,10 +472,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CommentsTableViewController *viewPost = [[CommentsTableViewController alloc] initWithNibName:nil bundle:nil];
-    viewPost.postObject = shared.allPosts[indexPath.row];
-    viewPost.view.tag = indexPath.row;
-    [self.navigationController pushViewController:viewPost animated:YES];
+    CommentsTableViewController *viewComments = [[CommentsTableViewController alloc] initWithNibName:nil bundle:nil];
+    viewComments.postObject = shared.allPosts[indexPath.row];
+    viewComments.view.tag = indexPath.row;
+    viewComments.viewType = HOME;
+    [self.navigationController pushViewController:viewComments animated:YES];
 }
 
 #pragma mark - UIActionSheet Delegate
@@ -572,7 +573,7 @@
     
     _currentLocation = currentLocation;
     
-    [self queryForAllPostsNearLocation];
+    [self getData];
     
     
     //If app is not in testing mode, take the current location into consideration
@@ -609,7 +610,7 @@
     
     [self.tableView reloadData];
     
-    [self queryForAllPostsNearLocation];
+    [self getData];
 }
 
 
@@ -621,7 +622,11 @@
         || college == nil)
     {
         layoutLabel.text = @"DropIt";
-        layoutLabel.font = [UIFont fontWithName:@"Belshaw" size:27.0f];
+        layoutLabel.font = [UIFont fontWithName:@"Chartrand" size:27.0f];
+        
+        //Belshaw
+        //Chartrand
+        //BernerBasisschrift1
     }else{
         layoutLabel.text = [Config college];
         layoutLabel.font = [UIFont fontWithName:@"AvenirNext-Medium" size:17.0f];
@@ -645,78 +650,35 @@
     //Add Loading View
     [spinner startAnimating];
     
-    [self queryForAllPostsNearLocation];
+    [self getData];
 }
 
 
 
 //Methods
-
-- (void)queryForAllPostsNearLocation
+- (void)getData
 {
     //NSLog(@"%@",[NSDate date]);
     
     dispatch_queue_t postsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(postsQueue, ^{
         
-        if ([Config checkInternetConnection])
-        {
-            PFQuery *query = [PFQuery queryWithClassName:POSTS_CLASS_NAME];
-            [query orderByDescending:@"createdAt"];
+        [shared getPostsWithBlock:^(BOOL reload, NSError *error) {
             
-            //If app is not in testing mode, take the current location into consideration
-            if ([Config appMode] != TESTING)
+            if (!error && reload)
             {
-                //If the current default college is not all, take the college name into consideration
-                if (![[Config college] isEqualToString:ALL_COLLEGES])
-                {
-                    [query whereKey:@"college" containsString:[Config college]];
-                }else{
-                    /*
-                    if (self.currentLocation != nil)
-                    {
-                        // Query for posts sort of kind of near users current location.
-                        PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:_currentLocation.coordinate.latitude
-                                                                   longitude:_currentLocation.coordinate.longitude];
-                        
-                        [query whereKey:@"location" nearGeoPoint:point withinKilometers:ONE_HALF_MILE_RADIUS_KM];
-                    }else{
-                        NSLog(@"%s got a nil location!", __PRETTY_FUNCTION__);
-                    }
-                    */
-                }
-                
-            }
-            
-            //[query whereKey:@"objectId" equalTo:@"vc4OtBkcUN"];
-            query.limit = 20;
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (error) {
-                    NSLog(@"error in geo query!"); // todo why is this ever happening?
-                } else {
-                    //[self filterPost:objects];
-                    
-                    [self setEmptyDatasetDelegate];
-                    NSMutableArray *filteredPost = [Config filterPosts:objects];
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        shared.allPosts = filteredPost;
-                        [spinner stopAnimating];
-                        [self.tableView reloadData];
-                        
-                    });
-                }
-            }];
-        }else{
-            dispatch_async(dispatch_get_main_queue(), ^{
+                [self setEmptyDatasetDelegate];
                 [spinner stopAnimating];
-                if (showAlert == YES)
-                {
+                [self.tableView reloadData];
+            }else if (error){
+                
+                [spinner stopAnimating];
+                if (error.code == 0 && showAlert) {
                     [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
                     showAlert = NO;
                 }
-            });
-        }
+            }
+        }];
     });
 }
 
@@ -767,9 +729,10 @@
 - (void)likePost:(UIButton *)sender
 {
     //change its state
-    sender.selected = [shared likePostAtIndex:sender.tag updateArray:YES];
+    sender.selected = [shared likePostAtIndex:sender.tag forView:HOME];
 }
 
+/*
 - (void)deletePost:(NSInteger)tag
 {
     NSDictionary *postObject = shared.allPosts[tag];
@@ -780,7 +743,7 @@
     
     [shared.allPosts removeObjectAtIndex:tag];
 }
-
+*/
 
 #pragma mark - UIAlertViewDelegate
 
@@ -792,7 +755,7 @@
 
         [_cellToDelete swipeToOriginWithCompletion:^{
             
-            [shared dislikePostAtIndex:_cellToDelete.tag updateArray:YES];
+            [shared dislikePostAtIndex:_cellToDelete.tag forView:HOME];
             
             _cellToDelete = nil;
         }];
@@ -809,7 +772,7 @@
              [title isEqualToString:@"Spam"] ||
              [title isEqualToString:@"Other"])
     {
-        [shared reportPostAtIndex:_cellToDelete.tag updateArray:YES];
+        [shared reportPostAtIndex:_cellToDelete.tag forView:HOME];
         
         //Remove the cell
         [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
@@ -818,8 +781,7 @@
         
     }else if([title isEqualToString:@"Yes"]) {
         
-        [shared deletePost:shared.allPosts[_cellToDelete.tag]];
-        [shared.allPosts removeObjectAtIndex:_cellToDelete.tag];
+        [shared deletePostAtIndex:_cellToDelete.tag forView:HOME];
         
         //Remove the cell
         [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:_cellToDelete]] withRowAnimation:UITableViewRowAnimationFade];
@@ -840,7 +802,7 @@
 {
     [refresh endRefreshing];
     
-    [self queryForAllPostsNearLocation];
+    [self getData];
 }
 
 - (void)showIntroView

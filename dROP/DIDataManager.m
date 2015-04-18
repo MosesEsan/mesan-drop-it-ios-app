@@ -34,17 +34,210 @@
     if (self = [super init]) {
         
         _allPosts = [[NSMutableArray alloc] init];
-        //_likes = [[NSMutableArray alloc] init];
+        _myPosts = [[NSMutableArray alloc] init];
+        _likedPosts = [[NSMutableArray alloc] init];
         _allNotifications = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 #pragma mark - Posts
-//Like Post
-- (BOOL)likePostAtIndex:(NSInteger)index updateArray:(BOOL)update
+- (void)getPostsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock
 {
-    NSDictionary *postObject = _allPosts[index];
+    dispatch_queue_t postsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(postsQueue, ^{
+        
+        if ([Config checkInternetConnection])
+        {
+            PFQuery *query = [PFQuery queryWithClassName:POSTS_CLASS_NAME];
+            [query orderByDescending:@"createdAt"];
+            
+            //If app is not in testing mode, take the current location into consideration
+            if ([Config appMode] != TESTING)
+            {
+                //If the current default college is not all, take the college name into consideration
+                if (![[Config college] isEqualToString:ALL_COLLEGES])
+                {
+                    [query whereKey:@"college" containsString:[Config college]];
+                }else{
+                    /*
+                     if (self.currentLocation != nil)
+                     {
+                     // Query for posts sort of kind of near users current location.
+                     PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:_currentLocation.coordinate.latitude
+                     longitude:_currentLocation.coordinate.longitude];
+                     
+                     [query whereKey:@"location" nearGeoPoint:point withinKilometers:ONE_HALF_MILE_RADIUS_KM];
+                     }else{
+                     NSLog(@"%s got a nil location!", __PRETTY_FUNCTION__);
+                     }
+                     */
+                }
+            }
+            
+            //[query whereKey:@"objectId" equalTo:@"vc4OtBkcUN"];
+            query.limit = 20;
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error) {
+                    NSLog(@"error in geo query!"); // todo why is this ever happening?
+                } else {
+                    
+                    NSMutableArray *filteredPost = [Config filterPosts:objects];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        _allPosts = filteredPost;
+                        
+                        completionBlock(YES, nil);
+                    });
+                }
+            }];
+        }else{
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSError *error = [NSError errorWithDomain:@"No Internet Connection!" code:0
+                                                 userInfo:[NSDictionary dictionaryWithObject:@"No Working Internet Connection." forKey:NSLocalizedDescriptionKey]];
+                completionBlock(NO, error);
+            });
+        }
+    });
+}
+
+- (void)getUsersPostsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock
+
+{
+    dispatch_queue_t userPostQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(userPostQueue, ^{
+        
+        if ([Config checkInternetConnection])
+        {
+            PFQuery *query = [PFQuery queryWithClassName:POSTS_CLASS_NAME];
+            [query whereKey:@"deviceId" equalTo:[Config deviceId]];
+            [query orderByDescending:@"createdAt"];
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error) {
+                    NSLog(@"error in geo query!");
+                } else {
+                    
+                    NSMutableArray *filteredPost = [Config filterPosts:objects];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        _myPosts = filteredPost;
+                        
+                        completionBlock(YES, nil);
+                    });
+                }
+            }];
+        }else{
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSError *error = [NSError errorWithDomain:@"No Internet Connection!" code:0
+                                                 userInfo:[NSDictionary dictionaryWithObject:@"No Working Internet Connection." forKey:NSLocalizedDescriptionKey]];
+                completionBlock(NO, error);
+            });
+        }
+    });
+}
+
+- (void)getLikedPostsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock
+{
+    dispatch_queue_t userPostQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(userPostQueue, ^{
+        
+        if ([Config checkInternetConnection])
+        {
+            NSArray *deviceId = @[[Config deviceId]];
+            
+            PFQuery *query = [PFQuery queryWithClassName:POSTS_CLASS_NAME];
+            [query whereKey:@"likes" containedIn:deviceId];
+            [query orderByDescending:@"createdAt"];
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error) {
+                    NSLog(@"error in geo query!");
+                } else {
+                    
+                    NSMutableArray *filteredPost = [Config filterPosts:objects];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        _likedPosts = filteredPost;
+                        
+                        completionBlock(YES, nil);
+                    });
+                }
+            }];
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSError *error = [NSError errorWithDomain:@"No Internet Connection!" code:0
+                                                 userInfo:[NSDictionary dictionaryWithObject:@"No Working Internet Connection." forKey:NSLocalizedDescriptionKey]];
+                completionBlock(NO, error);
+            });
+        }
+    });
+}
+
+- (void)getUsersPoints:(void (^)(BOOL update, NSError *error))completionBlock
+{
+    dispatch_queue_t usersPointsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(usersPointsQueue, ^{
+        
+        if ([Config checkInternetConnection])
+        {
+            PFQuery *query = [PFQuery queryWithClassName:USERS_CLASS_NAME];
+            [query whereKey:@"deviceId" equalTo:[Config deviceId]];
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error) {
+                    NSLog(@"error in geo query!"); // todo why is this ever happening?
+                } else {
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if ([objects count] > 0)
+                        {
+                            NSInteger points = [objects[0][@"points"] integerValue];
+                            
+                            [Config updateUserPoints:points];
+                            
+                            completionBlock(YES, nil);
+                            
+                        }else{
+                            
+                            completionBlock(NO, nil);
+                        }
+                    });
+                }
+            }];
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSError *error = [NSError errorWithDomain:@"No Internet Connection!" code:0
+                                                 userInfo:[NSDictionary dictionaryWithObject:@"No Working Internet Connection." forKey:NSLocalizedDescriptionKey]];
+                completionBlock(NO, error);
+            });
+        }
+    });
+}
+
+
+- (NSDictionary *)getPostAtIndex:(NSInteger)index forView:(ViewType)viewType
+{
+    NSDictionary *postObject;
+    
+    if (viewType == HOME)
+    {
+        postObject = _allPosts[index];
+    }else if (viewType == PROFILE){
+        postObject = _likedPosts[index];
+    }
+    
+    return postObject;
+}
+
+//Like Post
+- (BOOL)likePostAtIndex:(NSInteger)index forView:(ViewType)viewType
+{
+    NSDictionary *postObject = [self getPostAtIndex:index forView:viewType];
     
     BOOL selected = [postObject[@"liked"] boolValue];
     NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
@@ -85,18 +278,18 @@
         /****attn*/
     }];
     
-    if (update)
-        [self updatePostAtIndex:index withPostObject:postObject];
-    
+    /****IMPORTANT***/
+    [self updatePostAtIndex:index withPostObject:postObject forView:viewType];
+    /****IMPORTANT***/
     
     //change the button state
     return !selected;
 }
 
 //Dislike Post
-- (void)dislikePostAtIndex:(NSInteger)index updateArray:(BOOL)update
+- (void)dislikePostAtIndex:(NSInteger)index forView:(ViewType)viewType
 {
-    NSDictionary *postObject = _allPosts[index];
+    NSDictionary *postObject = [self getPostAtIndex:index forView:viewType];
     
     BOOL highlighted = [postObject[@"disliked"] boolValue];
     
@@ -135,14 +328,15 @@
         /****attn*/
     }];
     
-    if (update)
-        [self updatePostAtIndex:index withPostObject:postObject];
+    /****IMPORTANT***/
+    [self updatePostAtIndex:index withPostObject:postObject forView:viewType];
+    /****IMPORTANT***/
 }
 
 //Report Post
-- (void)reportPostAtIndex:(NSInteger)index updateArray:(BOOL)update
+- (void)reportPostAtIndex:(NSInteger)index forView:(ViewType)viewType
 {
-    NSDictionary *postObject = _allPosts[index];
+    NSDictionary *postObject = [self getPostAtIndex:index forView:viewType];
     
     //get the Parse Object and Report Post
     PFObject *parseObject = postObject[@"parseObject"];
@@ -157,35 +351,47 @@
         /****attn*/
     }];
     
-    if(update)
-        [_allPosts removeObjectAtIndex:index];
+    [self removePostObjectAtIndex:index withPostObject:postObject forView:viewType];
 }
 
 //Delete Post
-- (void)deletePost:(NSDictionary *)postObject
+- (void)deletePostAtIndex:(NSInteger)index forView:(ViewType)viewType
 {
+    NSDictionary *postObject = [self getPostAtIndex:index forView:viewType];
+    
     //get the Parse Object
     PFObject *parseObject = postObject[@"parseObject"];
     [parseObject deleteInBackground];
+
+    [self removePostObjectAtIndex:index withPostObject:postObject forView:viewType];
 }
 
 //Update Post Object and reload Table
-- (void)updatePostAtIndex:(NSInteger)index withPostObject:(NSDictionary *)postObject
+- (void)updatePostAtIndex:(NSInteger)index
+           withPostObject:(NSDictionary *)postObject
+                  forView:(ViewType)view
 {
-    _allPosts[index] = postObject;
-    
-    [self.tableView reloadData];
+    if (view == HOME)
+    {
+        _allPosts[index] = postObject;
+        
+        [self.homeTableView reloadData];
+    }else if (view == PROFILE){
+        _likedPosts[index] = postObject;
+        
+        [self.profileTableView reloadData];
+    }
 }
 
-
-
-
-
-
-
-
-
-
+- (void)removePostObjectAtIndex:(NSInteger)index
+                 withPostObject:(NSDictionary *)postObject
+                        forView:(ViewType)viewType
+{
+    if (viewType == HOME)
+        [_allPosts removeObjectAtIndex:index];
+    else if (viewType == PROFILE)
+        [_likedPosts removeObjectAtIndex:index];
+}
 
 
 #pragma mark - Comments
@@ -229,7 +435,8 @@
         if ([Config checkInternetConnection])
         {
             PFQuery *query = [PFQuery queryWithClassName:NOTIFICATIONS_CLASS_NAME];
-                        
+            [query includeKey:@"post"];
+            [query includeKey:@"comment8"];
             [query whereKey:@"recipient" equalTo:[Config deviceId]];
             [query orderByDescending:@"createdAt"];
             
@@ -244,13 +451,13 @@
                     {
                         NSString *notificationText = parseObject[@"message"];
                         PFObject *postObject = parseObject[@"post"];
-                        //PFObject *commentObject = parseObject[@"comment"];
+                        NSString *type = parseObject[@"type"];
                         
                         NSDictionary *notificationObject = @{
                                                              @"text" : notificationText,
                                                              @"date" : parseObject.createdAt,
                                                              @"postObject" : postObject,
-                                                             //@"commentObject" : commentObject,
+                                                             @"type" : type,
                                                              @"parseObject" : parseObject
                                                              };
                         

@@ -209,6 +209,7 @@
         CommentsTableViewController *viewPost = [[CommentsTableViewController alloc] initWithNibName:nil bundle:nil];
         viewPost.postObject = mapView_.postObject;
         viewPost.view.tag = mapView_.index;
+        viewPost.viewType = HOME;
         viewPost.showCloseButton = YES;
         
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewPost];

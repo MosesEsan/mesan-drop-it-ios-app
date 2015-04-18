@@ -8,29 +8,40 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
-
 #import <Parse/Parse.h>
+
+typedef enum : NSUInteger {
+    HOME,
+    PROFILE,
+} ViewType;
 
 @interface DIDataManager : NSObject
 
 @property (nonatomic, strong) NSMutableArray *allPosts;
-//@property (nonatomic, strong) NSMutableArray *likes;
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *myPosts;
+@property (nonatomic, strong) NSMutableArray *likedPosts;
 @property (nonatomic, strong) NSMutableArray *allNotifications;
+
+@property (nonatomic, strong) UITableView *homeTableView;
+@property (nonatomic, strong) UITableView *profileTableView;
+@property (nonatomic, strong) UITableView *notificationTableView;
+
 
 + (id)sharedManager;
 
-- (void)updatePostAtIndex:(NSInteger)index withPostObject:(NSDictionary *)postObject;
+- (void)getPostsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock;
+- (void)getUsersPostsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock;
+- (void)getLikedPostsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock;
+- (void)getUsersPoints:(void (^)(BOOL update, NSError *error))completionBlock;
 
-- (BOOL)likePostAtIndex:(NSInteger)index updateArray:(BOOL)update;
 
-- (void)dislikePostAtIndex:(NSInteger)index updateArray:(BOOL)update;
+- (BOOL)likePostAtIndex:(NSInteger)index forView:(ViewType)viewType;
+- (void)dislikePostAtIndex:(NSInteger)index forView:(ViewType)viewType;
+- (void)reportPostAtIndex:(NSInteger)index forView:(ViewType)viewType;
+- (void)deletePostAtIndex:(NSInteger)index forView:(ViewType)viewType;
+- (void)updatePostAtIndex:(NSInteger)index withPostObject:(NSDictionary *)postObject forView:(ViewType)view;
 
-- (void)deletePost:(NSDictionary *)postObject;
-
-- (void)reportPostAtIndex:(NSInteger)index updateArray:(BOOL)update;
-
+//- (void)updatePostAtIndex:(NSInteger)index withPostObject:(NSDictionary *)postObject;
 
 //Comments
 - (void)getCommentsForObject:(PFObject *)postObject

@@ -65,7 +65,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.tableView.frame = CGRectMake(0, 0, (self.view.frame.size.width / 2) - 20, CGRectGetHeight(self.view.frame) - 70);
+    self.tableView.frame = CGRectMake(0, 0, (self.view.frame.size.width / 2) - 20, CGRectGetHeight(self.view.frame) - 20);
 }
 
 - (void)setHomeTableViewController:(HomeTableViewController *)homeTableViewController
@@ -133,7 +133,7 @@
     {
         imageString = @"Marker";
         menuTitle = @"MAP";
-    }else if (indexPath.row == 3)
+    }else if (indexPath.row == 4)
     {
         imageString = @"Notification";
         menuTitle = @"NOTIFICATIONS";

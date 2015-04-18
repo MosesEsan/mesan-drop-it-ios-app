@@ -92,7 +92,7 @@
     
     lastUpdated = nil;
     
-    /*
+    
     for (NSString* family in [UIFont familyNames])
     {
         NSLog(@"%@", family);
@@ -102,7 +102,7 @@
             NSLog(@"  %@", name);
         }
     }
-    */
+    
     return YES;
 }
 

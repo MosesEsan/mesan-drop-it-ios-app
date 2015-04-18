@@ -13,7 +13,6 @@
 #import "UIFont+Montserrat.h"
 #import "CommentTableViewCell.h"
 #import "MHFacebookImageViewer.h"
-#import "DIDataManager.h"
 
 #define SUB_CONTAINER_FRAME self.view.bounds
 
@@ -642,8 +641,8 @@
             //do nothing
         }else{
             
-            //update array and database
-            [shared reportPostAtIndex:self.view.tag updateArray:YES];
+            //Call report method
+            [shared reportPostAtIndex:_cellToDelete.tag forView:_viewType];
             
             ///close
             [self.navigationController popViewControllerAnimated:TRUE];
@@ -735,7 +734,7 @@
         //Update main array with new replies count value
         [_postObject setValue:[NSNumber numberWithInteger:repliesCount] forKey:@"totalReplies"];
         
-        [shared updatePostAtIndex:self.view.tag withPostObject:_postObject];
+        [shared updatePostAtIndex:self.view.tag withPostObject:_postObject forView:_viewType];
         
         [_tableView reloadData];
         
@@ -775,7 +774,7 @@
     if (sender.selected == YES) likesCount--;
     else likesCount++;
     
-    sender.selected = [shared likePostAtIndex:sender.tag updateArray:YES];
+    sender.selected = [shared likePostAtIndex:sender.tag forView:_viewType];
     
     //increment or decrement total likes
     [sender setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
