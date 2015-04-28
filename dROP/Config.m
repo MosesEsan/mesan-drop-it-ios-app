@@ -562,7 +562,7 @@
     BOOL isAllowedToAdd = NO;
     NSDictionary *availableLocations = [Config availableLocations];
     
-    //If the current default college is not all, check against location
+    //If the current default college is not all, check against users current location and the default college location
     if (![[Config college] isEqualToString:ALL_COLLEGES] &&
         [availableLocations objectForKey:[Config college]] != nil)
     {

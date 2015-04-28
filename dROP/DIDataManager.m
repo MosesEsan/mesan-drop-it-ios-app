@@ -43,6 +43,7 @@
 
 #pragma mark - Posts
 - (void)getPostsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock
+          currentLocation:(CLLocation *)currentLocation
 {
     dispatch_queue_t postsQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(postsQueue, ^{
@@ -60,18 +61,17 @@
                 {
                     [query whereKey:@"college" containsString:[Config college]];
                 }else{
-                    /*
-                     if (self.currentLocation != nil)
+                    
+                     if (currentLocation != nil)
                      {
-                     // Query for posts sort of kind of near users current location.
-                     PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:_currentLocation.coordinate.latitude
-                     longitude:_currentLocation.coordinate.longitude];
+                         // Query for posts sort of kind of near users current location.
+                         PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:currentLocation.coordinate.latitude
+                                                                    longitude:currentLocation.coordinate.longitude];
                      
-                     [query whereKey:@"location" nearGeoPoint:point withinKilometers:ONE_HALF_MILE_RADIUS_KM];
+                         [query whereKey:@"location" nearGeoPoint:point withinKilometers:ONE_HALF_MILE_RADIUS_KM];
                      }else{
-                     NSLog(@"%s got a nil location!", __PRETTY_FUNCTION__);
+                         NSLog(@"%s got a nil location!", __PRETTY_FUNCTION__);
                      }
-                     */
                 }
             }
             

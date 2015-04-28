@@ -109,8 +109,6 @@
     // assign to the `text` property last so it can inherit other label properties.
     NSString *text = [NSString stringWithFormat:@"%@ \"%@\"",[Config getNotificationText:notificationObject], notificationObject[@"text"]];
 
-    //self.postText.text = text;
-    
     [self.postText setText:text afterInheritingLabelAttributesAndConfiguringWithBlock:^ NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
         
         NSRange boldRange = [[mutableAttributedString string] rangeOfString:[Config getNotificationText:notificationObject] options:NSCaseInsensitiveSearch];

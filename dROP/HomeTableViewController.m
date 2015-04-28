@@ -26,7 +26,7 @@
 #import "ABCIntroView.h"
 
 #import "MHFacebookImageViewer.h"
-#import "RTSpinKitView.h"
+#import "MBProgressHUD.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "JDFTooltipView.h"
 
@@ -50,7 +50,8 @@
     
     
     ABCIntroView *introView;
-    RTSpinKitView *spinner;
+    
+    MBProgressHUD *hud;
     
     BOOL showAlert;
     
@@ -80,7 +81,9 @@
     
     //Menu
     UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    menuBtn.frame = CGRectMake(0, 0, 23.0f, 23.0f);
+    menuBtn.frame = CGRectMake(0, 130, 23.0f, 23.0f);
+    menuBtn.imageEdgeInsets = UIEdgeInsetsMake(4.0f, 0.0f, 0.0f, 0.0f);
+
     [menuBtn setImage:[Config drawListImage] forState:UIControlStateNormal];
     [menuBtn setClipsToBounds:YES];
     menuBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -99,7 +102,8 @@
 
     UIButton *addNewButton = [UIButton buttonWithType:UIButtonTypeCustom];
     addNewButton.frame = CGRectMake(0, 0, 23, 23);
-    [addNewButton setImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
+    [addNewButton setImage:[UIImage imageNamed:@"Add2"] forState:UIControlStateNormal];
+    addNewButton.imageEdgeInsets = UIEdgeInsetsMake(1.0f, 1.0f, 1.0f, 1.0f);
     [addNewButton setClipsToBounds:YES];
     addNewButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
     [addNewButton addTarget:self action:@selector(addNewPost:) forControlEvents:UIControlEventTouchUpInside];
@@ -143,10 +147,11 @@
     [self showIntroView];
     
     //Add Loading View
-    spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleWanderingCubes color:BAR_TINT_COLOR2];
-    spinner.center = CGPointMake(CGRectGetWidth(self.view.frame) / 2, (CGRectGetHeight(self.view.frame) / 2) - 40);
-    [spinner startAnimating];
-    [self.view addSubview:spinner];
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.color = [UIColor whiteColor];
+    hud.labelColor = DATE_COLOR;
+    hud.activityIndicatorColor = DATE_COLOR;
+    hud.labelText = @"Loading Posts";
     
     
     //If app is in production mode, initialize Ad
@@ -622,9 +627,11 @@
         || college == nil)
     {
         layoutLabel.text = @"DropIt";
-        layoutLabel.font = [UIFont fontWithName:@"Chartrand" size:27.0f];
+        //layoutLabel.font = [UIFont fontWithName:@"Chartrand" size:23.0f];
+        layoutLabel.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:22.0f];
+
         
-        //Belshaw
+        //Belshaw - 27
         //Chartrand
         //BernerBasisschrift1
     }else{
@@ -648,7 +655,7 @@
     [self.tableView reloadData];
     
     //Add Loading View
-    [spinner startAnimating];
+    [hud show:YES];
     
     [self getData];
 }
@@ -668,17 +675,17 @@
             if (!error && reload)
             {
                 [self setEmptyDatasetDelegate];
-                [spinner stopAnimating];
+                [hud hide:YES];
                 [self.tableView reloadData];
             }else if (error){
                 
-                [spinner stopAnimating];
+                [hud hide:YES];
                 if (error.code == 0 && showAlert) {
                     [[Config alertViewWithTitle:@"No Internet Connection" withMessage:nil] show];
                     showAlert = NO;
                 }
             }
-        }];
+        } currentLocation:self.currentLocation];
     });
 }
 
@@ -828,7 +835,7 @@
         tooltip.textColour = [UIColor whiteColor];
         tooltip.font= [UIFont fontWithName:@"HelveticaNeue-Medium" size:12.5f];
         
-        [tooltip show];
+        //[tooltip show];
     }
 }
 

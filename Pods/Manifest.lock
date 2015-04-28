@@ -38,6 +38,7 @@ PODS:
   - FormatterKit/UnitOfInformationFormatter (1.8.0)
   - FormatterKit/URLRequestFormatter (1.8.0)
   - JDFTooltips (1.0)
+  - MBProgressHUD (0.9.1)
   - Montserrat (1.0.0)
   - NJKWebViewProgress (0.2.3):
     - NJKWebViewProgress/Core (= 0.2.3)
@@ -54,6 +55,7 @@ DEPENDENCIES:
   - Facebook-iOS-SDK
   - FormatterKit
   - JDFTooltips
+  - MBProgressHUD (~> 0.9.1)
   - Montserrat
   - NJKWebViewProgress
   - RESideMenu (~> 4.0.7)
@@ -67,6 +69,7 @@ SPEC CHECKSUMS:
   Facebook-iOS-SDK: 6d05532c97e9c542f8d87f94b7f6ee217493d00b
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   JDFTooltips: 439e3f1010b5e689e8438f66fce8448726e59897
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   Montserrat: 05ccfd6f44aadfd81b2bc3655f759099983be06e
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   RESideMenu: f24c508404b49c667344c54aba7e590883533958

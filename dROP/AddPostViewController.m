@@ -46,7 +46,7 @@
                                                                                     action:@selector(close:)];
     self.navigationItem.leftBarButtonItem = exitButtonItem;
     
-    UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 59, 30)];
+    UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 55, 34)];
     postButton.backgroundColor = BAR_TINT_COLOR2;
     postButton.layer.cornerRadius = 4.0f;
     [postButton setTitle:@"Drop" forState:UIControlStateNormal];
@@ -90,7 +90,7 @@
     UIButton *cameraButton = [[UIButton alloc] initWithFrame:CGRectMake(2, 0, 50, CGRectGetHeight(footer.frame))];
     cameraButton.backgroundColor = [UIColor clearColor];
     [cameraButton setImage:[UIImage imageNamed:@"Camera"] forState:UIControlStateNormal];
-    [cameraButton setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 7, 18)];
+    [cameraButton setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 7, 13)];
     [cameraButton addTarget:self action:@selector(addPhoto:) forControlEvents:UIControlEventTouchUpInside];
     [footer addSubview:cameraButton];
     

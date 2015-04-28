@@ -29,7 +29,8 @@ typedef enum : NSUInteger {
 
 + (id)sharedManager;
 
-- (void)getPostsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock;
+- (void)getPostsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock
+          currentLocation:(CLLocation *)currentLocation;
 - (void)getUsersPostsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock;
 - (void)getLikedPostsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock;
 - (void)getUsersPoints:(void (^)(BOOL update, NSError *error))completionBlock;
