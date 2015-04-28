@@ -43,6 +43,13 @@ Drop It is an anonymous social media app that allows you to anonymously find out
   <li>Timeline View Redesigned and App Main colour changed</li>
 </ul>
 
+<b>Version 0.4 (New Features)</b>
+<ul>
+<li>College Portal (Find out what is going on in othere colleges)</li>
+<li>Recevive Notifications when user likes/reports your comment or post</li>
+<li>Notification View (for viewing all your notifications)</li>
+</ul>
+
 <b>Screenshots (All screenshot available at https://www.dropbox.com/sh/8mok74atxnyrtmq/AAAOqMBqMMAhgsPX5RMq9IpIa?dl=0)</b> 
 
 <img src="https://github.com/d08115858/DropIt/blob/master/Screenshot/Version%200.2/App%20Store/4%20(640%20x%201096)/Timeline(4).png" alt="Timeline Feed" height="500" width="300" align="left">
