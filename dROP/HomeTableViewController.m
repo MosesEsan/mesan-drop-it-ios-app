@@ -16,6 +16,7 @@
 #import "TimelineTableViewCell.h"
 #import "ColouredTableViewCell.h"
 #import "ProfileTableViewCell.h"
+#import "FlirtTableViewCell.h"
 
 #import "AddPostViewController.h"
 #import "CommentsTableViewController.h"
@@ -31,6 +32,7 @@
 #import "JDFTooltipView.h"
 
 #import "RESideMenu.h"
+#import "PopMenu.h"
 #import "DIDataManager.h"
 
 
@@ -244,52 +246,37 @@
     NSDictionary *postObject = shared.allPosts[indexPath.row];
     NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
     PFObject *parseObject = postObject[@"parseObject"];
+    NSString *postType = postObject[@"postType"];
 
     DITableViewCell *cell;
     
     //Check the type in other to know which type of cell to display
     PostCellType type = [Config cellType];
     
-    if (type == TIMELINE)
+    if ([postType isEqualToString:POST_TYPE_FLIRT])
     {
-        NSString *cellIdentifier = [NSString stringWithFormat:@"TimelineCell%@",parseObject.objectId];
-        TimelineTableViewCell *_cell = (TimelineTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        NSString *cellIdentifier = [NSString stringWithFormat:@"FlirtCell%@",parseObject.objectId];
+        FlirtTableViewCell *_cell = (FlirtTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (!_cell)
-            _cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        
-        _cell = [self setTimelineCellFrames:_cell withPostObject:postObject forIndex:indexPath.row];
+            _cell = [[FlirtTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
         cell = _cell;
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }else{
         
-    }else if (type == COLOURED){
-        /*
-        if ([Config isPostAuthor:postObject])
-        {*/
-            NSString *cellIdentifier = [NSString stringWithFormat:@"ColouredCell%@",parseObject.objectId];
-            ColouredTableViewCell *_cell = (ColouredTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-            if (!_cell)
-                _cell = [[ColouredTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-            
-            cell = _cell;
-            /*
-            
-        }else{
-            NSString *cellIdentifier = [NSString stringWithFormat:@"ProfileCell%@",parseObject.objectId];
-            ProfileTableViewCell *_cell = (ProfileTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-            if (!_cell)
-                _cell = [[ProfileTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-            
-            cell = _cell;
-        }
-        */
-        [cell setFrameWithObject:postObject forIndex:indexPath.row];
+        NSString *cellIdentifier = [NSString stringWithFormat:@"ColouredCell%@",parseObject.objectId];
+        ColouredTableViewCell *_cell = (ColouredTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!_cell)
+            _cell = [[ColouredTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
-        if (indexPath.row != ([shared.allPosts count] - 1))
-            cell.bottomBorder.frame = CGRectMake(0, CGRectGetHeight(cell.mainContainer.frame) - 0.5f, CGRectGetWidth(cell.mainContainer.frame), .5f);
-        
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        cell = _cell;
     }
+    
+    [cell setFrameWithObject:postObject forIndex:indexPath.row];
+    
+    if (indexPath.row != ([shared.allPosts count] - 1))
+        cell.bottomBorder.frame = CGRectMake(0, CGRectGetHeight(cell.mainContainer.frame) - 0.5f, CGRectGetWidth(cell.mainContainer.frame), .5f);
+    
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     if (parseObject[@"pic"])
     {
@@ -410,32 +397,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *postObject = shared.allPosts[indexPath.row];
-    NSString *postText = postObject[@"text"];
     
-    CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:WIDTH - 55.0f withFont:TEXT_FONT];
-    
-    CGFloat height = 0;
-    
-    if ([Config cellType] == TIMELINE){
-        
-        height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 5;
-        
-        if (postObject[@"parseObject"][@"pic"])
-            height += 10 + IMAGEVIEW_HEIGHT;
-    }else if ([Config cellType] == COLOURED){
-        
-       // if ([Config isPostAuthor:postObject])
-     //   {
-             height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
-            
-            if (postObject[@"parseObject"][@"pic"])
-                height += 10 + IMAGEVIEW_HEIGHT;
-       // }else{
-         //   height = [Config calculateCellHeight:postObject];
-      //  }
-    }
-
-    return height;
+    if ([postObject[@"postType"] isEqualToString:POST_TYPE_FLIRT])
+        return [FlirtTableViewCell getCellHeight:postObject];
+    else
+        return [ColouredTableViewCell getCellHeight:postObject];
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
@@ -507,6 +473,23 @@
 
 - (void)addNewPost:(UIBarButtonItem *)sender
 {
+    
+    //
+    
+    NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:2];
+    MenuItem *menuItem = [[MenuItem alloc] initWithTitle:@"Flirt" iconName:@"Flirt2" glowColor:[UIColor whiteColor]];
+    [items addObject:menuItem];
+    
+    menuItem = [[MenuItem alloc] initWithTitle:@"Post" iconName:@"Post" glowColor:[UIColor colorWithRed:0.000 green:0.840 blue:0.000 alpha:1.000]];
+    [items addObject:menuItem];
+    
+    PopMenu *popMenu = [[PopMenu alloc] initWithFrame:self.view.bounds items:items];
+    popMenu.perRowItemCount = 2;
+    [popMenu showMenuAtView:self.view];
+    
+    
+    /*
+    
     AddPostViewController *addNewPost = [[AddPostViewController alloc] initWithNibName:nil bundle:nil];
     addNewPost.dataSource = self;
     
@@ -526,6 +509,7 @@
     popup.presentingController = self;
     
     [self presentViewController:addNC animated:YES completion:nil];
+     */
 }
 
 /*

@@ -34,6 +34,8 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define APPSFIRE_CLIENT_KEY @"E2AA41E624CEF2A92F9FA86501D0EA30"
 #define APPSFIRE_CLIENT_SECRET @"226b76189b85d2bbad5905024da9cfd2"
 
+#define POST_TYPE_FLIRT @"flirt"
+
 
 //#44B7C7 -- //1ABEC3 -- 1199D6
 #define BAR_TINT_COLOR2 [UIColor colorWithRed:17/255.0f green:153/255.0f blue:214/255.0f alpha:1.0f]

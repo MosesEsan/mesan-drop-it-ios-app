@@ -15,5 +15,5 @@
 @property (nonatomic, strong) UIImageView *bubble;
 
 @property (nonatomic, strong) UIImageView *triangle;
-
+@property (nonatomic, strong) UILabel *postText;
 @end

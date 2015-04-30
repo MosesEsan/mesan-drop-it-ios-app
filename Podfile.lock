@@ -45,9 +45,14 @@ PODS:
     - NJKWebViewProgress/ProgressView (= 0.2.3)
   - NJKWebViewProgress/Core (0.2.3)
   - NJKWebViewProgress/ProgressView (0.2.3)
+  - pop (1.0.7)
+  - PopMenu (2.2):
+    - pop
+    - XHRealTimeBlur
   - RESideMenu (4.0.7)
   - STTweetLabel (3.1.16)
   - TTTAttributedLabel (1.13.3)
+  - XHRealTimeBlur (1.7)
 
 DEPENDENCIES:
   - CCMPopup
@@ -58,6 +63,7 @@ DEPENDENCIES:
   - MBProgressHUD (~> 0.9.1)
   - Montserrat
   - NJKWebViewProgress
+  - PopMenu
   - RESideMenu (~> 4.0.7)
   - STTweetLabel
   - TTTAttributedLabel
@@ -72,8 +78,11 @@ SPEC CHECKSUMS:
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   Montserrat: 05ccfd6f44aadfd81b2bc3655f759099983be06e
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
+  pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
+  PopMenu: 416e0a41b35f1d5fbc74ef8f96891ac5bcb4abfe
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
   STTweetLabel: f249ed62963dd73e88a6ff6ab2e871c48b0b5c31
   TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
+  XHRealTimeBlur: 661fadd5691ba2d349758e8fd5fbdb499ac55f8c
 
-COCOAPODS: 0.36.1
+COCOAPODS: 0.36.4

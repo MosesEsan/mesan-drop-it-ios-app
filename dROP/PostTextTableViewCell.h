@@ -11,5 +11,5 @@
 
 @interface PostTextTableViewCell : DITableViewCell
 
-
+@property (nonatomic, strong) UILabel *postText;
 @end
