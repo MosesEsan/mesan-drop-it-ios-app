@@ -13,5 +13,5 @@
 
 @property (nonatomic, strong) UIView *postContainer;
 @property (nonatomic, strong) UIImageView *profilePic;
-
+@property (nonatomic, strong) UILabel *postText;
 @end

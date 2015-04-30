@@ -25,8 +25,6 @@
         self.mainContainer = [[UIView alloc] init];
         self.mainContainer.backgroundColor = [UIColor whiteColor];
         self.mainContainer.clipsToBounds = YES;
-        //self.mainContainer.layer.borderWidth = 0.5f;
-        //self.mainContainer.layer.borderColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:1].CGColor;
         [self.contentView addSubview:self.mainContainer];
         
         self.line = [[UIView alloc] init];
@@ -35,9 +33,6 @@
         
         self.postContainer = [[UIView alloc] init];
         self.postContainer.backgroundColor = [UIColor whiteColor];
-        //self.postContainer.layer.borderWidth = 1.5f;
-        //self.postContainer.layer.borderColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:.6f].CGColor;
-        //self.postContainer.layer.cornerRadius = 4.0f;
         self.postContainer.clipsToBounds = YES;
         [self.mainContainer addSubview:self.postContainer];
         
@@ -117,9 +112,8 @@
 
 - (void)setFrameWithObject:(NSDictionary *)postObject forIndex:(NSInteger)index
 {
-    CGFloat postTextHeight = [Config calculateHeightForText:postObject[@"text"] withWidth:WIDTH - 55.5f withFont:TEXT_FONT];
-    
-    CGFloat cellHeight = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
+    CGFloat postTextHeight = [ColouredTableViewCell getPostTextHeight:postObject];
+    CGFloat cellHeight = [ColouredTableViewCell getCellHeight:postObject];
     
     if (postObject[@"parseObject"][@"pic"])
         cellHeight =  cellHeight + 10 + IMAGEVIEW_HEIGHT;
@@ -198,6 +192,28 @@
     // Configure the view for the selected state
 }
 
+//---0-
++ (CGFloat)getPostTextHeight:(NSDictionary *)postObject
+{
+    PFObject *parseObject = postObject[@"parseObject"];
+    
+    NSString *text = [NSString stringWithFormat:@"%@: %@, %@. ?%@",parseObject[@"flirtLocation"], parseObject[@"gender"],parseObject[@"hairColor"], postObject[@"text"]];
+    
+    return [Config calculateHeightForText:text
+                                withWidth:WIDTH - 55.0f
+                                 withFont:TEXT_FONT];
+}
 
++ (CGFloat)getCellHeight:(NSDictionary *)postObject
+{
+    CGFloat postTextHeight = [ColouredTableViewCell getPostTextHeight:postObject];
+    
+    CGFloat height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
+    
+    if (postObject[@"parseObject"][@"pic"])
+        height += 10 + IMAGEVIEW_HEIGHT;
+    
+    return height;
+}
 
 @end

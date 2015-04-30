@@ -17,7 +17,6 @@
 
 @property (nonatomic, strong) UIView *mainContainer;
 
-@property (nonatomic, strong) UILabel *postText;
 @property (nonatomic, strong) PFImageView *postImage;
 @property (nonatomic, strong) UIView *actionsView;
 @property (nonatomic, strong) CALayer *bottomBorder;
@@ -27,5 +26,8 @@
 @property (nonatomic, strong) UILabel *comments;
 
 - (void)setFrameWithObject:(NSDictionary *)postObject forIndex:(NSInteger)index;
+
++ (CGFloat)getPostTextHeight:(NSDictionary *)postObject;
++ (CGFloat)getCellHeight:(NSDictionary *)postObject;
 
 @end

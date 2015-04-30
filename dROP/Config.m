@@ -404,6 +404,7 @@
     NSInteger repliesCount = [parseObject[@"replies"] count];
     BOOL liked = [Config getLikeStatus:parseObject];
     BOOL disliked = [Config getDisLikeStatus:parseObject];
+    NSString *postType = parseObject[@"postType"];
     
     NSDictionary *postObject = @{
                                  @"text" : postText,
@@ -412,7 +413,8 @@
                                  @"totalLikes" : [NSNumber numberWithInteger:likesCount],
                                  @"totalReplies" : [NSNumber numberWithInteger:repliesCount],
                                  @"date" : parseObject.createdAt,
-                                 @"parseObject" : parseObject
+                                 @"parseObject" : parseObject,
+                                 @"postType" : postType
                                  };
     
     return postObject.mutableCopy;

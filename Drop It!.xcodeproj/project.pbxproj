@@ -46,6 +46,7 @@
 		2773EB501ADEC2BC0023E005 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2773EB4F1ADEC2BC0023E005 /* NotificationTableViewCell.m */; };
 		2775C4701AC3437A00B19772 /* ProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2775C46F1AC3437A00B19772 /* ProfileTableViewCell.m */; };
 		2778CFC91AB9181600DD30CE /* RTSpinKitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2778CFC81AB9181600DD30CE /* RTSpinKitView.m */; };
+		277C9D7E1AF24F4500184365 /* FlirtTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 277C9D7D1AF24F4500184365 /* FlirtTableViewCell.m */; };
 		278CF73A1AACFD0E00A13D4B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278CF7391AACFD0E00A13D4B /* ProfileViewController.m */; };
 		278CF7441AAD2EDF00A13D4B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 278CF7431AAD2EDF00A13D4B /* Reachability.m */; };
 		278CF74F1AAD409600A13D4B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278CF74E1AAD409600A13D4B /* AVFoundation.framework */; };
@@ -199,6 +200,8 @@
 		2775C46F1AC3437A00B19772 /* ProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewCell.m; sourceTree = "<group>"; };
 		2778CFC71AB9181600DD30CE /* RTSpinKitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSpinKitView.h; sourceTree = "<group>"; };
 		2778CFC81AB9181600DD30CE /* RTSpinKitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSpinKitView.m; sourceTree = "<group>"; };
+		277C9D7C1AF24F4500184365 /* FlirtTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlirtTableViewCell.h; sourceTree = "<group>"; };
+		277C9D7D1AF24F4500184365 /* FlirtTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlirtTableViewCell.m; sourceTree = "<group>"; };
 		278CF7381AACFD0E00A13D4B /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		278CF7391AACFD0E00A13D4B /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		278CF7421AAD2EDF00A13D4B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -475,6 +478,8 @@
 				2729251C1ABC59AB00A271D4 /* ColouredTableViewCell.m */,
 				2775C46E1AC3437A00B19772 /* ProfileTableViewCell.h */,
 				2775C46F1AC3437A00B19772 /* ProfileTableViewCell.m */,
+				277C9D7C1AF24F4500184365 /* FlirtTableViewCell.h */,
+				277C9D7D1AF24F4500184365 /* FlirtTableViewCell.m */,
 			);
 			name = "Table View Cells";
 			sourceTree = "<group>";
@@ -1029,6 +1034,7 @@
 				271320401AB77AA800CF23DB /* MapPostViewController.m in Sources */,
 				27B96A941AAFBA4900AC4120 /* ABCIntroView.m in Sources */,
 				272925201ABC692A00A271D4 /* DITableViewCell.m in Sources */,
+				277C9D7E1AF24F4500184365 /* FlirtTableViewCell.m in Sources */,
 				27A334741AA63525008188FC /* main.m in Sources */,
 				278CF7441AAD2EDF00A13D4B /* Reachability.m in Sources */,
 				2778CFC91AB9181600DD30CE /* RTSpinKitView.m in Sources */,
