@@ -24,7 +24,7 @@
 @property (nonatomic, strong) UILabel *date;
 @property (nonatomic, strong) UIButton *smiley;
 @property (nonatomic, strong) UILabel *comments;
-
+@property (nonatomic, strong) UIAlertView *alertView;
 - (void)setFrameWithObject:(NSDictionary *)postObject forIndex:(NSInteger)index;
 
 + (CGFloat)getPostTextHeight:(NSDictionary *)postObject;

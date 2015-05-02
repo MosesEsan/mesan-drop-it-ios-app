@@ -168,7 +168,7 @@
         [myAd setFrequency:5 startPosition:3];
         
         // Show ad
-        [myAd loadAdForPlacement: @"7ba813875be128917a7afe4f9550b23f1523fba2"];
+        //[myAd loadAdForPlacement: @"7ba813875be128917a7afe4f9550b23f1523fba2"];
     }
 }
 
@@ -271,6 +271,7 @@
         cell = _cell;
     }
     
+    cell.bottomBorder.backgroundColor = [tableView separatorColor].CGColor;
     [cell setFrameWithObject:postObject forIndex:indexPath.row];
     
     if (indexPath.row != ([shared.allPosts count] - 1))
@@ -307,6 +308,8 @@
         cell.smiley.highlighted = [postObject[@"disliked"] boolValue];
     }
     
+    
+    
     //If the user is not the post authour
     //They can like, dislike and report the post
     if (![Config isPostAuthor:postObject])
@@ -314,49 +317,49 @@
         cell.smiley.tag = indexPath.row;
         [cell.smiley addTarget:self action:@selector(likePost:) forControlEvents:UIControlEventTouchUpInside];
         
-        __weak typeof(cell) weakSelf = cell;
+        ///If the post is a flirt post - user can report only
+        if ([postType isEqualToString:POST_TYPE_FLIRT])
+        {
+            cell.alertView = [[UIAlertView alloc] initWithTitle:@"Report Post"
+                                                        message:@"Please tell us what is wrong with ths post."
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Offensive content", @"Spam", @"Other", nil];
+        }else{
+            cell.alertView = [[UIAlertView alloc] initWithTitle:@"Options?"
+                                                        message:@"What would you like to do?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Dislike", @"Report",nil];
+        }
         
-        [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
-                                 color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
-                                  mode:MCSwipeTableViewCellModeExit
-                                 state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
-                                     
-                                     _cellToDelete = weakSelf;
-                                     
-                                     
-                                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Options?"
-                                                                                         message:@"What would you like to do?"
-                                                                                        delegate:self
-                                                                               cancelButtonTitle:@"Cancel"
-                                                                               otherButtonTitles:@"Dislike", @"Report",nil];
-                                     [alertView show];
-                                 }];
     }else if ([Config isPostAuthor:postObject]){
         
-        //If the user is th author of the post
+        //If the user is the author of the post
         //allow the user to be able to delete the post
-        __weak typeof(cell) weakSelf = cell;
-        
-        [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
-                                color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
-                                 mode:MCSwipeTableViewCellModeExit
-                                state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
-                                    
-                                    _cellToDelete = weakSelf;
-                                    
-                                    
-                                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Post"
-                                                                                        message:@"Are yu sure you want to delete this post?"
-                                                                                       delegate:self
-                                                                              cancelButtonTitle:@"No"
-                                                                              otherButtonTitles:@"Yes",nil];
-                                    [alertView show];
-                                }];
+        cell.alertView = [[UIAlertView alloc] initWithTitle:@"Delete Post"
+                                                    message:@"Are yu sure you want to delete this post?"
+                                                   delegate:self
+                                          cancelButtonTitle:@"No"
+                                          otherButtonTitles:@"Yes",nil];
     }
+    
+
+    __weak typeof(cell) weakSelf = cell;
+    
+    [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
+                            color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
+                             mode:MCSwipeTableViewCellModeExit
+                            state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+                                
+                                _cellToDelete = weakSelf;
+                                
+                                [weakSelf.alertView show];
+                            }];
     
     cell.tag = indexPath.row;
     cell.selectionStyle= UITableViewCellSelectionStyleNone;
-    cell.bottomBorder.backgroundColor = [tableView separatorColor].CGColor;
+    
     
     return cell;
 }

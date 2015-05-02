@@ -29,6 +29,11 @@
         self.mainContainer.clipsToBounds = YES;
         [self.contentView addSubview:self.mainContainer];
         
+        
+        self.overlay = [[UIView alloc] init];
+        self.overlay.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.6];
+        [self.mainContainer addSubview:self.overlay];
+        
         self.line = [[UIView alloc] init];
         self.line.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9];
         [self.mainContainer addSubview:self.line];
@@ -47,6 +52,10 @@
         self.imageV.imageEdgeInsets = UIEdgeInsetsMake(5.f, 5.f, 5.f, 5.f);
         [self.line addSubview:self.imageV];
         
+        self.overlay2 = [[UIView alloc] init];
+        self.overlay2.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.6];
+        self.overlay2.clipsToBounds = YES;
+        [self.mainContainer addSubview:self.overlay2];
         
         self.postContainer = [[UIView alloc] init];
         self.postContainer.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9];
@@ -104,11 +113,11 @@
         self.smiley = [UIButton buttonWithType:UIButtonTypeCustom];
         self.smiley.frame = CGRectMake((CGRectGetWidth(self.actionsView.frame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
         self.smiley.backgroundColor = [UIColor clearColor];
-        [self.smiley setImage:[UIImage imageNamed:@"SmileyGray"] forState:UIControlStateNormal];
-        [self.smiley setImage:[UIImage imageNamed:@"SmileyBluish"] forState:UIControlStateSelected];
-        [self.smiley setImage:[UIImage imageNamed:@"Sad"] forState:UIControlStateHighlighted];
+        [self.smiley setImage:[UIImage imageNamed:@"Love"] forState:UIControlStateNormal];
+        [self.smiley setImage:[UIImage imageNamed:@"Loved"] forState:UIControlStateSelected];
         [self.smiley setTitleColor:DATE_COLOR forState:UIControlStateNormal];
-        [self.smiley setTitleColor:BAR_TINT_COLOR2 forState:UIControlStateSelected];
+        [self.smiley setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+        
         self.smiley.titleLabel.font = LIKES_FONT;
         self.smiley.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         
@@ -174,11 +183,13 @@
     }
     
     //Set Frames
+    self.overlay.frame = lineFrame;
     self.line.frame = lineFrame;
     self.imageV.frame = roundFrame;
     self.imageV.layer.cornerRadius = CGRectGetWidth(self.imageV.frame) / 2;
     
     self.mainContainer.frame = mainContainerFrame;
+    self.overlay2.frame = postContainerFrame;
     self.postContainer.frame = postContainerFrame;
     self.postText.frame = labelFrame;
     self.postImage.frame = imageFrame;
@@ -202,14 +213,14 @@
     
     PFObject *parseObject = postObject[@"parseObject"];
     
-    NSString *text = [NSString stringWithFormat:@"%@: %@, %@. ?%@",parseObject[@"flirtLocation"], parseObject[@"gender"],parseObject[@"hairColor"], postObject[@"text"]];
+    NSString *text = [NSString stringWithFormat:@"%@: %@, %@. %@",parseObject[@"flirtLocation"], parseObject[@"gender"],parseObject[@"hairColor"], postObject[@"text"]];
     
     [self.postText setText:text afterInheritingLabelAttributesAndConfiguringWithBlock:^ NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
         
         NSRange boldRange = [[mutableAttributedString string] rangeOfString:parseObject[@"flirtLocation"] options:NSCaseInsensitiveSearch];
 
         // Core Text APIs use C functions without a direct bridge to UIFont. See Apple's "Core Text Programming Guide" to learn how to configure string attributes.
-        UIFont *boldSystemFont = [UIFont fontWithName:@"AvenirNext-Bold" size:14.0f];
+        UIFont *boldSystemFont = [UIFont fontWithName:@"AvenirNext-DemiBold" size:14.0f];
         
         CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)boldSystemFont.fontName, boldSystemFont.pointSize, NULL);
         
