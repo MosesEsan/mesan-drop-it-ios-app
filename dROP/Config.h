@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define APPSFIRE_CLIENT_SECRET @"226b76189b85d2bbad5905024da9cfd2"
 
 #define POST_TYPE_FLIRT @"flirt"
+#define POST_TYPE_POST @"post"
 
 
 //#44B7C7 -- //1ABEC3 -- 1199D6
@@ -64,6 +65,8 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define TOP_PADDING 12
 #define LEFT_PADDING 16.5f
 
+#define L_PADDING 10.0f
+
 #define TEXT_WIDTH WIDTH - (LEFT_PADDING * 2)
 #define IMAGEVIEW_HEIGHT 180
 #define ACTIONS_VIEW_HEIGHT 28
@@ -71,7 +74,8 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define LINE_FRAME_WIDTH 33
 #define BUBBLE_FRAME_WIDTH 14
 
-#define CONTAINER_FRAME_X 7.5f
+//#define CONTAINER_FRAME_X 7.5f
+#define CONTAINER_FRAME_X 0
 #define COLOURED_BAR_WIDTH 0.0f
 
 #define PROFILE_PIC_WIDTH 43.0f

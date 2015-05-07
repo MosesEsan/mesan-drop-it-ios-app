@@ -10,6 +10,7 @@
 #import "Config.h"
 #import "UIFont+Montserrat.h"
 #import "LPlaceholderTextView.h"
+#import "DIDataManager.h"
 #import <Parse/Parse.h>
 
 #define ADD_BOX_FRAME CGRectMake(0, 0, ADD_POST_WIDTH, ADD_POST_HEIGHT)
@@ -26,6 +27,7 @@
     
     UIButton *removePicture;
 
+    DIDataManager *shared;
 }
 
 @property (nonatomic, strong) UIImageView *photoPreview;
@@ -41,12 +43,14 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    shared = [DIDataManager sharedManager];
+    
     UIBarButtonItem *exitButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
                                                                                     target:self
                                                                                     action:@selector(close:)];
     self.navigationItem.leftBarButtonItem = exitButtonItem;
     
-    UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 55, 34)];
+    UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 32)];
     postButton.backgroundColor = BAR_TINT_COLOR2;
     postButton.layer.cornerRadius = 4.0f;
     [postButton setTitle:@"Drop" forState:UIControlStateNormal];
@@ -72,7 +76,7 @@
     [messageTextView setPlaceholderText:postPlaceholderText];
     [messageTextView setTextColor:TEXT_COLOR];
     messageTextView.delegate = self;
-    [messageTextView setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:15.0f]];
+    [messageTextView setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:18.0f]];
     messageTextView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:messageTextView];
     
@@ -309,7 +313,7 @@
         if ([Config checkInternetConnection])
         {
             // 1. Get Users Current Location
-            CLLocation *currentLocation = [self.dataSource getUserCurrentLocation];
+            CLLocation *currentLocation = shared.currentLocation;
             CLLocationCoordinate2D currentCoordinate = currentLocation.coordinate;
             PFGeoPoint *currentPoint = [PFGeoPoint geoPointWithLatitude:currentCoordinate.latitude
                                                               longitude:currentCoordinate.longitude];
@@ -322,6 +326,7 @@
                 postObject[@"deviceId"] = [Config deviceId];
                 postObject[@"location"] = currentPoint;
                 postObject[@"type"] = NEW_POST_TYPE;
+                postObject[@"postType"] = POST_TYPE_POST;
                 postObject[@"college"] = [Config getClosestLocation:currentLocation];
                 postObject[@"avatar"] = [Config people];
                 

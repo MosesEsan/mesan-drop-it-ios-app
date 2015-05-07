@@ -9,15 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@protocol AddPostViewControllerDataSource <NSObject>
-
-- (CLLocation *)getUserCurrentLocation;
-
-@end
-
 @interface AddPostViewController : UIViewController
-
-@property (nonatomic, weak) id<AddPostViewControllerDataSource> dataSource;
 
 
 @end

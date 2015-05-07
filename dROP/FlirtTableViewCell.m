@@ -8,7 +8,7 @@
 
 #import "FlirtTableViewCell.h"
 
-#define LINE_WIDTH 48
+#define LINE_WIDTH 0//48
 #define LEFT_PADDING 16.5f
 
 #define POST_TEXT_WIDTH WIDTH - 16.5f - (LEFT_PADDING * 2)
@@ -29,13 +29,18 @@
         self.mainContainer.clipsToBounds = YES;
         [self.contentView addSubview:self.mainContainer];
         
-        
         self.overlay = [[UIView alloc] init];
         self.overlay.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.6];
         [self.mainContainer addSubview:self.overlay];
         
+        
+        self.whiteOverlay = [[UIView alloc] init];
+        self.whiteOverlay.backgroundColor =  [[UIColor whiteColor] colorWithAlphaComponent:0.9];
+        [self.mainContainer addSubview:self.whiteOverlay];
+        
         self.line = [[UIView alloc] init];
-        self.line.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9];
+        self.line.backgroundColor = [UIColor clearColor];
+        self.line.clipsToBounds = YES;
         [self.mainContainer addSubview:self.line];
         
         
@@ -52,13 +57,9 @@
         self.imageV.imageEdgeInsets = UIEdgeInsetsMake(5.f, 5.f, 5.f, 5.f);
         [self.line addSubview:self.imageV];
         
-        self.overlay2 = [[UIView alloc] init];
-        self.overlay2.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.6];
-        self.overlay2.clipsToBounds = YES;
-        [self.mainContainer addSubview:self.overlay2];
         
         self.postContainer = [[UIView alloc] init];
-        self.postContainer.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9];
+        self.postContainer.backgroundColor = [UIColor clearColor];
         self.postContainer.clipsToBounds = YES;
         [self.mainContainer addSubview:self.postContainer];
         
@@ -141,28 +142,24 @@
     CGFloat postTextHeight = [FlirtTableViewCell getPostTextHeight:postObject];
     CGFloat cellHeight = [FlirtTableViewCell getCellHeight:postObject];
     
-    if (postObject[@"parseObject"][@"pic"])
-        cellHeight =  cellHeight + 10 + IMAGEVIEW_HEIGHT;
     
-    CGRect mainContainerFrame = CGRectMake(CONTAINER_FRAME_X, 0,
-                                           WIDTH - (CONTAINER_FRAME_X + (CONTAINER_FRAME_X / 2) + 2), cellHeight);
+    CGRect mainContainerFrame = CGRectMake(0, 0, WIDTH, cellHeight);
     
-    CGRect lineFrame = CGRectMake(0, 0, LINE_WIDTH, cellHeight);
-    CGRect roundFrame = CGRectMake(8, cellHeight / 4, 40.0f, 40.0f);
+    CGRect lineFrame = CGRectMake(L_PADDING, 0, LINE_WIDTH, cellHeight);
+    CGRect roundFrame = CGRectMake(0, cellHeight / 4, 40.0f, 40.0f);
     
+    CGRect postContainerFrame = CGRectMake(L_PADDING + LINE_WIDTH, 0, CGRectGetWidth(mainContainerFrame) - (L_PADDING * 2) - LINE_WIDTH, cellHeight);
     
-    CGRect postContainerFrame = CGRectMake(LINE_WIDTH, 0, CGRectGetWidth(mainContainerFrame) - LINE_WIDTH, cellHeight); //1 Added to cover up left border
-    
-    CGFloat width = CGRectGetWidth(postContainerFrame) - (8 * 2);
-    CGRect labelFrame = CGRectMake(8, TOP_PADDING, width, postTextHeight);
-    CGRect imageFrame = CGRectMake(8, 0, width, IMAGEVIEW_HEIGHT);
-    CGRect actionViewFrame = CGRectMake(8, 0, width + 8, ACTIONS_VIEW_HEIGHT);
+    CGRect labelFrame = CGRectMake(0, TOP_PADDING, CGRectGetWidth(postContainerFrame), postTextHeight);
+    CGRect imageFrame = CGRectMake(0, 0, CGRectGetWidth(postContainerFrame), IMAGEVIEW_HEIGHT);
+    CGRect actionViewFrame = CGRectMake(0, 0, CGRectGetWidth(postContainerFrame), ACTIONS_VIEW_HEIGHT);
     
     CGFloat remainingSpace = CGRectGetWidth(actionViewFrame) / 3;
     
     CGRect dateFrame = CGRectMake(0, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
     CGRect commentsFrame = CGRectMake(remainingSpace, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
     CGRect smileyFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
+    
     
     if (postObject[@"parseObject"][@"pic"])
     {
@@ -183,13 +180,13 @@
     }
     
     //Set Frames
-    self.overlay.frame = lineFrame;
     self.line.frame = lineFrame;
     self.imageV.frame = roundFrame;
     self.imageV.layer.cornerRadius = CGRectGetWidth(self.imageV.frame) / 2;
     
     self.mainContainer.frame = mainContainerFrame;
-    self.overlay2.frame = postContainerFrame;
+    self.overlay.frame = mainContainerFrame;
+    self.whiteOverlay.frame = mainContainerFrame;
     self.postContainer.frame = postContainerFrame;
     self.postText.frame = labelFrame;
     self.postImage.frame = imageFrame;

@@ -8,10 +8,6 @@
 
 #import "ColouredTableViewCell.h"
 
-#define LEFT_PADDING 16.5f
-
-#define POST_TEXT_WIDTH WIDTH - 16.5f - (LEFT_PADDING * 2)
-
 @implementation ColouredTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -24,7 +20,7 @@
         
         self.mainContainer = [[UIView alloc] init];
         self.mainContainer.backgroundColor = [UIColor whiteColor];
-        self.mainContainer.clipsToBounds = YES;
+        //self.mainContainer.clipsToBounds = YES;
         [self.contentView addSubview:self.mainContainer];
         
         self.line = [[UIView alloc] init];
@@ -32,8 +28,8 @@
         [self.mainContainer addSubview:self.line];
         
         self.postContainer = [[UIView alloc] init];
-        self.postContainer.backgroundColor = [UIColor whiteColor];
-        self.postContainer.clipsToBounds = YES;
+        self.postContainer.backgroundColor = [UIColor clearColor];
+        //self.postContainer.clipsToBounds = YES;
         [self.mainContainer addSubview:self.postContainer];
         
         self.postText = [[UILabel alloc] init];
@@ -76,7 +72,6 @@
         self.date.font = DATE_FONT;
         [self.actionsView addSubview:self.date];
         
-        //self.comments = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.actionsView.frame) - 90, 0, 90, ACTIONS_VIEW_HEIGHT)];
         self.comments = [[UILabel alloc] initWithFrame:CGRectMake(65, 0, 90, ACTIONS_VIEW_HEIGHT)];
         self.comments.backgroundColor = [UIColor clearColor];
         self.comments.textColor = DATE_COLOR;
@@ -118,19 +113,15 @@
     if (postObject[@"parseObject"][@"pic"])
         cellHeight =  cellHeight + 10 + IMAGEVIEW_HEIGHT;
     
-    CGRect mainContainerFrame = CGRectMake(CONTAINER_FRAME_X, 0,
-                                           WIDTH - (CONTAINER_FRAME_X + (CONTAINER_FRAME_X / 2) + 2), cellHeight);
+    CGRect mainContainerFrame = CGRectMake(0, 0, WIDTH, cellHeight);
     
-    CGRect lineFrame = CGRectMake(0, 0, COLOURED_BAR_WIDTH, cellHeight);
-    CGRect postContainerFrame = CGRectMake(COLOURED_BAR_WIDTH, 0, CGRectGetWidth(mainContainerFrame) - COLOURED_BAR_WIDTH, cellHeight); //1 Added to cover up left border
+    CGRect postContainerFrame = CGRectMake(L_PADDING, 0, CGRectGetWidth(mainContainerFrame) - (L_PADDING * 2), cellHeight);
+    CGRect labelFrame = CGRectMake(0, TOP_PADDING, CGRectGetWidth(postContainerFrame), postTextHeight);
+    CGRect imageFrame = CGRectMake(0, 0, CGRectGetWidth(postContainerFrame), IMAGEVIEW_HEIGHT);
     
-    CGFloat width = CGRectGetWidth(postContainerFrame) - (8 * 2);
-    CGRect labelFrame = CGRectMake(8, TOP_PADDING, width, postTextHeight);
-    CGRect imageFrame = CGRectMake(8, 0, width, IMAGEVIEW_HEIGHT);
-    CGRect actionViewFrame = CGRectMake(8, 0, width + 8, ACTIONS_VIEW_HEIGHT);
+    CGRect actionViewFrame = CGRectMake(0, 0, CGRectGetWidth(postContainerFrame), ACTIONS_VIEW_HEIGHT);
     
     CGFloat remainingSpace = CGRectGetWidth(actionViewFrame) / 3;
-    
     CGRect dateFrame = CGRectMake(0, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
     CGRect commentsFrame = CGRectMake(remainingSpace, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
     CGRect smileyFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
@@ -139,7 +130,6 @@
     {
         //Set Image View Frame
         imageFrame.origin.y = labelFrame.origin.y + postTextHeight + 7;
-        imageFrame.size.height = IMAGEVIEW_HEIGHT;
         
         //Set Action View Frame
         actionViewFrame.origin.y = imageFrame.origin.y + imageFrame.size.height + 10;
@@ -154,8 +144,6 @@
     }
     
     //Set Frames
-    self.line.frame = lineFrame;
-    
     self.mainContainer.frame = mainContainerFrame;
     self.postContainer.frame = postContainerFrame;
     self.postText.frame = labelFrame;
@@ -192,7 +180,6 @@
     // Configure the view for the selected state
 }
 
-//---0-
 + (CGFloat)getPostTextHeight:(NSDictionary *)postObject
 {
     PFObject *parseObject = postObject[@"parseObject"];
@@ -208,7 +195,7 @@
 {
     CGFloat postTextHeight = [ColouredTableViewCell getPostTextHeight:postObject];
     
-    CGFloat height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
+    CGFloat height = TOP_PADDING + postTextHeight + 10 + ACTIONS_VIEW_HEIGHT + 5;
     
     if (postObject[@"parseObject"][@"pic"])
         height += 10 + IMAGEVIEW_HEIGHT;

@@ -41,7 +41,7 @@
 //Ad
 #import <AvocarrotSDK/AvocarrotInstream.h>
 
-@interface HomeTableViewController ()<AddPostViewControllerDataSource, CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, AVInstreamAdDelegate, UIActionSheetDelegate>
+@interface HomeTableViewController ()<CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, AVInstreamAdDelegate, UIActionSheetDelegate>
 {
     UILabel *layoutLabel;
     UIBarButtonItem *addNew;
@@ -55,9 +55,12 @@
     
     MBProgressHUD *hud;
     
+    PopMenu *popMenu;
+    
     BOOL showAlert;
     
     DIDataManager *shared;
+    
 }
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -118,6 +121,7 @@
     self.tableView.backgroundColor = TABLEVIEW2_COLOR;
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.showsVerticalScrollIndicator = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(newPostAdded:)
@@ -143,7 +147,7 @@
     [self.tableView addSubview:refreshControl];
     
     //Table header
-    [self tableHeader];
+    //[self tableHeader];
     
     //Check if Intro View has to be shown
     [self showIntroView];
@@ -480,38 +484,57 @@
     //
     
     NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:2];
-    MenuItem *menuItem = [[MenuItem alloc] initWithTitle:@"Flirt" iconName:@"Flirt2" glowColor:[UIColor whiteColor]];
+    MenuItem *menuItem = [[MenuItem alloc] initWithTitle:@"Flirt" iconName:@"Flirt2" glowColor:[UIColor clearColor]];
     [items addObject:menuItem];
     
-    menuItem = [[MenuItem alloc] initWithTitle:@"Post" iconName:@"Post" glowColor:[UIColor colorWithRed:0.000 green:0.840 blue:0.000 alpha:1.000]];
+    menuItem = [[MenuItem alloc] initWithTitle:@"Post" iconName:@"Post" glowColor:[UIColor clearColor]];
     [items addObject:menuItem];
+
     
-    PopMenu *popMenu = [[PopMenu alloc] initWithFrame:self.view.bounds items:items];
-    popMenu.perRowItemCount = 2;
+    if (!popMenu) {
+        popMenu = [[PopMenu alloc] initWithFrame:self.view.bounds items:items];
+        popMenu.perRowItemCount = 2;
+        popMenu.menuAnimationType = kPopMenuAnimationTypeNetEase;
+    }
+    if (popMenu.isShowed) {
+        return;
+    }
+    popMenu.didSelectedItemCompletion = ^(MenuItem *selectedItem) {
+        NSLog(@"%@",selectedItem.title);
+        
+        NSString *title = selectedItem.title;
+        
+        if([title isEqualToString:@"Flirt"]) {
+            
+            
+        }else{
+            AddPostViewController *addNewPost = [[AddPostViewController alloc] initWithNibName:nil bundle:nil];
+            
+            UINavigationController *addNC = [[UINavigationController alloc] initWithRootViewController:addNewPost];
+            // self.homeNavigationController.navigationBar.barStyle = BAR_STYLE;
+            addNC.navigationBar.barTintColor = [UIColor whiteColor];
+            addNC.navigationBar.tintColor = BAR_TINT_COLOR2;
+            addNC.navigationBar.translucent = NO;
+            
+            
+            CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
+            popup.destinationBounds = [[UIScreen mainScreen] bounds];
+            popup.presentedController = addNC;
+            
+            popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+            popup.backgroundViewAlpha = 3.0f;
+            popup.presentingController = self;
+            
+            [self presentViewController:addNC animated:YES completion:nil];
+        }
+    };
+    
     [popMenu showMenuAtView:self.view];
     
     
     /*
     
-    AddPostViewController *addNewPost = [[AddPostViewController alloc] initWithNibName:nil bundle:nil];
-    addNewPost.dataSource = self;
-    
-    UINavigationController *addNC = [[UINavigationController alloc] initWithRootViewController:addNewPost];
-   // self.homeNavigationController.navigationBar.barStyle = BAR_STYLE;
-    addNC.navigationBar.barTintColor = [UIColor whiteColor];
-    addNC.navigationBar.tintColor = BAR_TINT_COLOR2;
-    addNC.navigationBar.translucent = NO;
-    
-    
-    CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
-    popup.destinationBounds = [[UIScreen mainScreen] bounds];
-    popup.presentedController = addNC;
-    
-    popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
-    popup.backgroundViewAlpha = 3.0f;
-    popup.presentingController = self;
-    
-    [self presentViewController:addNC animated:YES completion:nil];
+
      */
 }
 
@@ -564,6 +587,7 @@
     }
     
     _currentLocation = currentLocation;
+    shared.currentLocation = currentLocation;
     
     [self getData];
     

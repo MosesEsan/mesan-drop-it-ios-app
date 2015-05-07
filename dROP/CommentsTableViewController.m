@@ -14,6 +14,7 @@
 #import "CommentTableViewCell.h"
 #import "MHFacebookImageViewer.h"
 
+#import "TTTAttributedLabel.h"
 #define SUB_CONTAINER_FRAME self.view.bounds
 
 @interface CommentsTableViewController ()<UITextViewDelegate>
@@ -37,7 +38,10 @@
     DIDataManager *shared;
 }
 
-@property (nonatomic, strong) UILabel *postText;
+
+@property (nonatomic, strong) UIView *postContainer;
+@property (nonatomic, strong) TTTAttributedLabel *postText;
+
 @property (nonatomic, strong) PFImageView *postImage;
 @property (nonatomic, strong) UIView *actionsView;
 
@@ -227,20 +231,31 @@
 
 - (void)tableHeader
 {
-    NSString *postText = _postObject[@"text"];
     likesCount = [_postObject[@"totalLikes"] integerValue];
     NSInteger repliesCount = [_postObject[@"totalReplies"] integerValue];
     NSString *postDate = [Config calculateTime:_postObject[@"date"]];
     
-
-    CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
-    CGFloat height = (TOP_PADDING + (TOP_PADDING / 2)) + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + TOP_PADDING;
+    PFObject *parseObject = _postObject[@"parseObject"];
     
-    if (_postObject[@"parseObject"][@"pic"])
-        height += 10 + IMAGEVIEW_HEIGHT;    
+    NSString *postText = [self getPostText:_postObject];
+    CGFloat postTextHeight = [self getPostTextHeight:_postObject];
+    CGFloat height = [self getHeight:_postObject];
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXT_WIDTH, height)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, height)];
     headerView.backgroundColor = [UIColor whiteColor];
+    
+    if ([_postObject[@"postType"] isEqualToString:POST_TYPE_FLIRT])
+    {
+        headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Hearts2"]];
+        
+        UIView *overlay = [[UIView alloc] initWithFrame:headerView.frame];
+        overlay.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.6];
+        [headerView addSubview:overlay];
+        
+        UIView *whiteOverlay = [[UIView alloc] initWithFrame:headerView.frame];
+        whiteOverlay.backgroundColor =  [[UIColor whiteColor] colorWithAlphaComponent:0.9];
+        [headerView addSubview:whiteOverlay];
+    }
 
     CALayer *bottomBorder = [CALayer layer];
     bottomBorder.frame = CGRectMake(0, height - 1.0f,
@@ -248,32 +263,62 @@
     bottomBorder.backgroundColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:1].CGColor;
     [headerView.layer addSublayer:bottomBorder];
     
-    //Set Frames
-    NSDictionary *subViewframes = [Config subViewFrames:_postObject];
-    //_cell.actionsView.frame = [subViewframes[@"actionViewframe"] CGRectValue];
+    CGRect postContainerFrame = CGRectMake(L_PADDING, 0, CGRectGetWidth(headerView.frame) - (L_PADDING * 2), height);
     
-    _postText = [[UILabel alloc] initWithFrame:[subViewframes[@"postTextFrame"] CGRectValue]];
-    _postText.backgroundColor = [UIColor clearColor];
-    _postText.numberOfLines = 0;
-    _postText.textColor = TEXT_COLOR;
-    _postText.textAlignment = NSTextAlignmentLeft;
-    _postText.font = TEXT_FONT;
-    _postText.text = postText;
-    _postText.clipsToBounds = YES;
-    _postText.userInteractionEnabled = YES;
-    [headerView addSubview:_postText];
+    CGRect labelFrame = CGRectMake(0, TOP_PADDING, CGRectGetWidth(postContainerFrame), postTextHeight);
+    CGRect imageFrame = CGRectMake(0, 0, CGRectGetWidth(postContainerFrame), IMAGEVIEW_HEIGHT);
+    CGRect actionViewFrame = CGRectMake(0, 0, CGRectGetWidth(postContainerFrame), ACTIONS_VIEW_HEIGHT);
+    
+    CGFloat remainingSpace = CGRectGetWidth(actionViewFrame) / 3;
+    
+    CGRect dateFrame = CGRectMake(0, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
+    CGRect commentsFrame = CGRectMake(remainingSpace, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
+    CGRect smileyFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
     
     
     if (_postObject[@"parseObject"][@"pic"])
     {
         //Set Image View Frame
-        _postImage = [[PFImageView alloc] initWithFrame:[subViewframes[@"imageFrame"] CGRectValue]];
+        imageFrame.origin.y = labelFrame.origin.y + postTextHeight + 7;
+        imageFrame.size.height = IMAGEVIEW_HEIGHT;
+        
+        //Set Action View Frame
+        actionViewFrame.origin.y = imageFrame.origin.y + imageFrame.size.height + 10;
+    }else{
+        
+        //Set Image View Frame
+        imageFrame.origin.y = 0;
+        imageFrame.size.height = 0;
+        
+        //Set Action View Frame
+        actionViewFrame.origin.y = labelFrame.origin.y + postTextHeight + 10;
+    }
+    
+    self.postContainer = [[UIView alloc] initWithFrame:postContainerFrame];
+    self.postContainer.backgroundColor = [UIColor clearColor];
+    self.postContainer.clipsToBounds = YES;
+    [headerView addSubview:self.postContainer];
+    
+    _postText = [[TTTAttributedLabel alloc] initWithFrame:labelFrame];
+    _postText.backgroundColor = [UIColor clearColor];
+    _postText.numberOfLines = 0;
+    _postText.textColor = TEXT_COLOR;
+    _postText.textAlignment = NSTextAlignmentLeft;
+    _postText.font = TEXT_FONT;
+    _postText.clipsToBounds = YES;
+    _postText.userInteractionEnabled = YES;
+    [self.postContainer addSubview:_postText];
+    
+    if (_postObject[@"parseObject"][@"pic"])
+    {
+        //Set Image View Frame
+        _postImage = [[PFImageView alloc] initWithFrame:imageFrame];
         _postImage.backgroundColor = [UIColor clearColor];
         _postImage.layer.cornerRadius = 5.0f;
         _postImage.image = [UIImage imageNamed:@"CoverPhotoPH.JPG"];
         _postImage.clipsToBounds = YES;
         _postImage.contentMode = UIViewContentModeScaleAspectFill;
-        [headerView addSubview:_postImage];
+        [self.postContainer addSubview:_postImage];
         
         _postImage.file = _postObject[@"parseObject"][@"pic"];
         [_postImage loadInBackground];
@@ -281,14 +326,11 @@
         [_postImage setupImageViewerWithPFFile:_postImage.file onOpen:nil onClose:nil];
     }
     
-    CGRect actionViewFrame = [subViewframes[@"actionViewframe"] CGRectValue];
-    CGFloat remainingSpace = CGRectGetWidth(actionViewFrame) / 3;
-    
-    _actionsView = [[UIView alloc] initWithFrame:[subViewframes[@"actionViewframe"] CGRectValue]];
+    _actionsView = [[UIView alloc] initWithFrame:actionViewFrame];
     _actionsView.backgroundColor = [UIColor clearColor];
-    [headerView addSubview:_actionsView];
+    [self.postContainer addSubview:_actionsView];
 
-    _date = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, remainingSpace, ACTIONS_VIEW_HEIGHT)];
+    _date = [[UILabel alloc] initWithFrame:dateFrame];
     _date.backgroundColor = [UIColor clearColor];
     _date.textColor = DATE_COLOR;
     _date.textAlignment = NSTextAlignmentLeft;
@@ -296,7 +338,7 @@
     _date.text = postDate;
     [_actionsView addSubview:_date];
     
-    _comments = [[UILabel alloc] initWithFrame:CGRectMake(remainingSpace, 0, remainingSpace, ACTIONS_VIEW_HEIGHT)];
+    _comments = [[UILabel alloc] initWithFrame:commentsFrame];
     _comments.backgroundColor = [UIColor clearColor];
     _comments.textColor = DATE_COLOR;
     _comments.textAlignment = NSTextAlignmentCenter;
@@ -305,13 +347,9 @@
     [_actionsView addSubview:_comments];
     
     _smiley = [UIButton buttonWithType:UIButtonTypeCustom];
-    _smiley.frame = CGRectMake((CGRectGetWidth(_actionsView.frame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
+    _smiley.frame = smileyFrame;
     _smiley.backgroundColor = [UIColor clearColor];
-    [_smiley setImage:[UIImage imageNamed:@"SmileyGray"] forState:UIControlStateNormal];
-    [_smiley setImage:[UIImage imageNamed:@"SmileyBluish"] forState:UIControlStateSelected];
-    [_smiley setImage:[UIImage imageNamed:@"Sad"] forState:UIControlStateHighlighted];
     [_smiley setTitleColor:DATE_COLOR forState:UIControlStateNormal];
-    [_smiley setTitleColor:BAR_TINT_COLOR2 forState:UIControlStateSelected];
     _smiley.titleLabel.font = LIKES_FONT;
     _smiley.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     _smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 33, 5.2f, 15);
@@ -343,9 +381,69 @@
     }else{
         _smiley.highlighted = [_postObject[@"disliked"] boolValue];
     }
+    
+    
+    if ([_postObject[@"postType"] isEqualToString:POST_TYPE_FLIRT])
+    {
+        [_postText setText:postText afterInheritingLabelAttributesAndConfiguringWithBlock:^ NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+            
+            NSRange boldRange = [[mutableAttributedString string] rangeOfString:parseObject[@"flirtLocation"] options:NSCaseInsensitiveSearch];
+            
+            // Core Text APIs use C functions without a direct bridge to UIFont. See Apple's "Core Text Programming Guide" to learn how to configure string attributes.
+            UIFont *boldSystemFont = [UIFont fontWithName:@"AvenirNext-DemiBold" size:14.0f];
+            
+            CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)boldSystemFont.fontName, boldSystemFont.pointSize, NULL);
+            
+            if (font) {
+                [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)font range:boldRange];
+                
+                CFRelease(font);
+            }
+            
+            return mutableAttributedString;
+        }];
+        
+        [self.smiley setImage:[UIImage imageNamed:@"Love"] forState:UIControlStateNormal];
+        [self.smiley setImage:[UIImage imageNamed:@"Loved"] forState:UIControlStateSelected];
+        [self.smiley setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    }else{
+        _postText.text = postText;
+        [self.smiley setImage:[UIImage imageNamed:@"SmileyGray"] forState:UIControlStateNormal];
+        [self.smiley setImage:[UIImage imageNamed:@"SmileyBluish"] forState:UIControlStateSelected];
+        [self.smiley setImage:[UIImage imageNamed:@"Sad"] forState:UIControlStateHighlighted];
+        [self.smiley setTitleColor:BAR_TINT_COLOR2 forState:UIControlStateSelected];
+    }
 
     self.tableView.tableHeaderView = headerView;
 }
+
+
+- (NSString *)getPostText:(NSDictionary *)postObject
+{
+    PFObject *parseObject = postObject[@"parseObject"];
+    
+    if ([_postObject[@"postType"] isEqualToString:POST_TYPE_FLIRT])
+    {
+        return [NSString stringWithFormat:@"%@:  %@, %@. %@",parseObject[@"flirtLocation"], parseObject[@"gender"],parseObject[@"hairColor"], postObject[@"text"]];
+    }else{
+        return postObject[@"text"];
+    }
+}
+
+
+
+- (CGFloat)getPostTextHeight:(NSDictionary *)postObject
+{
+    return [Config calculateHeightForText:[self getPostText:postObject]
+                                withWidth:WIDTH - 55.0f
+                                 withFont:TEXT_FONT];
+}
+
+- (CGFloat)getHeight:(NSDictionary *)postObject
+{
+    return (TOP_PADDING + (TOP_PADDING / 2)) + [self getPostTextHeight:postObject] + 12 + ACTIONS_VIEW_HEIGHT + 3;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -22,6 +22,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) NSMutableArray *likedPosts;
 @property (nonatomic, strong) NSMutableArray *allNotifications;
 
+@property (nonatomic, strong) CLLocation *currentLocation;
+
 @property (nonatomic, strong) UITableView *homeTableView;
 @property (nonatomic, strong) UITableView *profileTableView;
 @property (nonatomic, strong) UITableView *notificationTableView;
