@@ -77,6 +77,9 @@
 {
     [super viewDidLoad];
     
+    self.title = @"Home";
+    self.tabBarItem.image = [UIImage imageNamed:@"Home"];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     shared = [DIDataManager sharedManager];

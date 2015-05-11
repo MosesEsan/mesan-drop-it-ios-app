@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "RESideMenu.h"
 
-
 @class HomeTableViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, RESideMenuDelegate>

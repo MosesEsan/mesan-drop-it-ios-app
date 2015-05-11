@@ -43,6 +43,7 @@
     shared = [DIDataManager sharedManager];
     
     self.title = @"Profile";
+    self.tabBarItem.image = [Config people];
     
     showAlert = NO;
     

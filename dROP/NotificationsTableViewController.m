@@ -38,6 +38,7 @@
     shared = [DIDataManager sharedManager];
 
     self.title = @"Notifications";
+    self.tabBarItem.image = [UIImage imageNamed:@"Notification"];
     
     showAlert = NO;
         
