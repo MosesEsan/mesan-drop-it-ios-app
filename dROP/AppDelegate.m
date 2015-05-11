@@ -12,11 +12,31 @@
 #import "MenuTableViewController.h"
 #import "DIDataManager.h"
 
+#import "HomeTableViewController.h"
+#import "ProfileViewController.h"
+#import "MapViewController.h"
+#import "CollegeTableViewController.h"
+#import "NotificationsTableViewController.h"
+
+
 @interface AppDelegate ()
 {
     NSDate *lastUpdated;
     MenuTableViewController *_menuTableViewController;
+    
+    
 }
+
+@property (strong, nonatomic) UITabBarController *tabBarController;
+
+
+@property (strong, nonatomic) ProfileViewController *profileViewController;
+@property (strong, nonatomic) HomeTableViewController *homeTableViewController;
+@property (strong, nonatomic) CollegeTableViewController *collegeViewController;
+@property (strong, nonatomic) MapViewController *mapViewController;
+@property (strong, nonatomic) NotificationsTableViewController *notificationViewController;
+
+
 
 @end
 
@@ -44,6 +64,21 @@
 
     HomeTableViewController *homeTableViewController = [[HomeTableViewController alloc] initWithStyle:UITableViewStylePlain];
     
+    _profileViewController = [[ProfileViewController alloc] initWithNibName:nil bundle:nil];
+    _homeTableViewController = [[HomeTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    _collegeViewController = [[CollegeTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    _notificationViewController = [[NotificationsTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    
+    UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:self.profileViewController];
+    UINavigationController *homeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.homeTableViewController];
+    UINavigationController *collegeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.collegeViewController];
+    UINavigationController *notificationNavigationController = [[UINavigationController alloc] initWithRootViewController:self.notificationViewController];
+
+    
+    
+    
+    
+    
     //Custom Code for  Menu Plugin
     // Create content and menu controllers
     //
@@ -51,6 +86,7 @@
     MenuTableViewController *leftMenuViewController = [[MenuTableViewController alloc] init];
     leftMenuViewController.homeTableViewController = homeTableViewController;
     
+    /*
     // Create side menu controller
     RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController
                                                                     leftMenuViewController:leftMenuViewController
@@ -67,12 +103,26 @@
     sideMenuViewController.contentViewInPortraitOffsetCenterX  = -40.f;
     sideMenuViewController.contentViewScaleValue = 0.9f;
     
+    */
+    
+    
+    //View Controllers
+    NSArray *viewControllers =
+    [NSArray arrayWithObjects:profileNavigationController, homeNavigationController, collegeNavigationController, notificationNavigationController, nil];
+    
+    //Create tab bar
+    self.tabBarController = [[UITabBarController alloc] init];
+    
+    //set the view controllers for the tab bar controller
+    [self.tabBarController setViewControllers:viewControllers];
+    
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    [self.window setRootViewController:sideMenuViewController];
+    [self.window setRootViewController:self.tabBarController];
         
     //Make the window visible
     [self.window makeKeyAndVisible];
