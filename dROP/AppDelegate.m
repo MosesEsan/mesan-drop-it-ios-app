@@ -86,6 +86,26 @@
     MenuTableViewController *leftMenuViewController = [[MenuTableViewController alloc] init];
     leftMenuViewController.homeTableViewController = homeTableViewController;
     
+    _profileViewController.title = @"Profile";
+    _profileViewController.tabBarItem.image = [[UIImage imageNamed:@"User"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    _profileViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"User"];
+    _profileViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(1, 1, 1, 1);
+
+    
+    _homeTableViewController.title = @"Home";
+    _homeTableViewController.tabBarItem.image = [[UIImage imageNamed:@"Home"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    _homeTableViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"Home"];
+    
+    _collegeViewController.title = @"Colleges";
+    _collegeViewController.tabBarItem.image = [[UIImage imageNamed:@"University"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    _collegeViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"University"];
+    
+    _notificationViewController.title = @"Notifications";
+    _notificationViewController.tabBarItem.image = [[UIImage imageNamed:@"Notification"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    _notificationViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"Notification"];
+    
+    
+    
     /*
     // Create side menu controller
     RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController
@@ -115,6 +135,38 @@
     
     //set the view controllers for the tab bar controller
     [self.tabBarController setViewControllers:viewControllers];
+    
+    
+    UIColor *backgroundColor = BAR_TINT_COLOR2;
+    
+    // set the bar background color
+    [[UITabBar appearance] setBackgroundImage:[AppDelegate imageFromColor:backgroundColor forSize:CGSizeMake(320, 49) withCornerRadius:0]];
+    
+   
+    // set the text color for unselected state
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+
+    
+    UIColor *titleHighlightedColor = BAR_TINT_COLOR2;
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       titleHighlightedColor, UITextAttributeTextColor,
+                                                       nil] forState:UIControlStateHighlighted];
+    
+    
+    // selected state
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:BAR_TINT_COLOR2, UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setSelectedImageTintColor:BAR_TINT_COLOR2];
+    
+    // remove the shadow
+    [[UITabBar appearance] setShadowImage:nil];
+    
+    
+    // Set the dark color to selected tab (the dimmed background)
+    [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor whiteColor] forSize:CGSizeMake(64, 49) withCornerRadius:0]];
+    
+    
+    self.tabBarController.selectedViewController=[self.tabBarController.viewControllers objectAtIndex:1];
     
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -204,6 +256,36 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
++ (UIImage *)imageFromColor:(UIColor *)color forSize:(CGSize)size withCornerRadius:(CGFloat)radius
+{
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // Begin a new image that will be the new image with the rounded corners
+    // (here with the size of an UIImageView)
+    UIGraphicsBeginImageContext(size);
+    
+    // Add a clip before drawing anything, in the shape of an rounded rect
+    [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius] addClip];
+    // Draw your image
+    [image drawInRect:rect];
+    
+    // Get the image, here setting the UIImageView image
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // Lets forget about that we were drawing
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 @end

@@ -43,21 +43,13 @@
     shared = [DIDataManager sharedManager];
     
     self.title = @"Profile";
-    self.tabBarItem.image = [Config people];
+
     
     showAlert = NO;
     
     [self getData];
     
-    //Menu
-    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    menuBtn.frame = CGRectMake(0, 0, 23.0f, 23.0f);
-    [menuBtn setImage:[Config drawListImage] forState:UIControlStateNormal];
-    [menuBtn setClipsToBounds:YES];
-    menuBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [menuBtn addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
-    
+    //Info
     UIButton *info = [UIButton buttonWithType:UIButtonTypeCustom];
     info.frame = CGRectMake(0, 0, 22, 22);
     [info setImage:[UIImage imageNamed:@"Info"] forState:UIControlStateNormal];

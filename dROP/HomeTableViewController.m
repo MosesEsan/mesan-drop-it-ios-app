@@ -30,6 +30,7 @@
 #import "MBProgressHUD.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "JDFTooltipView.h"
+#import "VCFloatingActionButton.h"
 
 #import "RESideMenu.h"
 #import "PopMenu.h"
@@ -41,7 +42,7 @@
 //Ad
 #import <AvocarrotSDK/AvocarrotInstream.h>
 
-@interface HomeTableViewController ()<CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, AVInstreamAdDelegate, UIActionSheetDelegate>
+@interface HomeTableViewController ()<CLLocationManagerDelegate, ABCIntroViewDelegate, ABCIntroViewDatasource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, AVInstreamAdDelegate, UIActionSheetDelegate, floatMenuDelegate>
 {
     UILabel *layoutLabel;
     UIBarButtonItem *addNew;
@@ -77,8 +78,6 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Home";
-    self.tabBarItem.image = [UIImage imageNamed:@"Home"];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -88,6 +87,7 @@
     showAlert = NO;
     
     //Menu
+    /*
     UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     menuBtn.frame = CGRectMake(0, 130, 23.0f, 23.0f);
     menuBtn.imageEdgeInsets = UIEdgeInsetsMake(4.0f, 0.0f, 0.0f, 0.0f);
@@ -98,6 +98,7 @@
     [menuBtn addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
     
+    */
     //TitleView
     layoutLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
     layoutLabel.textAlignment = NSTextAlignmentCenter;
@@ -107,7 +108,7 @@
     self.navigationItem.titleView = layoutLabel;
     
     [self updateNavBar];
-
+/*
     UIButton *addNewButton = [UIButton buttonWithType:UIButtonTypeCustom];
     addNewButton.frame = CGRectMake(0, 0, 23, 23);
     [addNewButton setImage:[UIImage imageNamed:@"Add2"] forState:UIControlStateNormal];
@@ -117,7 +118,22 @@
     [addNewButton addTarget:self action:@selector(addNewPost:) forControlEvents:UIControlEventTouchUpInside];
     addNew = [[UIBarButtonItem alloc] initWithCustomView:addNewButton];
     
+    */
+    
+    CGRect floatFrame = CGRectMake([UIScreen mainScreen].bounds.size.width - 44 - 20, 200, 23, 23);
+    
+    //CGRectMake(CGRectGetWidth(self.view.frame) - 50, 20, 23, 23)
+    
+    VCFloatingActionButton *addButton = [[VCFloatingActionButton alloc]initWithFrame:floatFrame normalImage:[UIImage imageNamed:@"Add2"] andPressedImage:[UIImage imageNamed:@"Close_White"] withScrollview:nil];
+    addButton.imageArray = @[@"Flirt2",@"Post"];
+    addButton.labelArray = @[@"Flirt",@"Post"];
+    addButton.delegate = self;
+    addButton.buttonView.frame = CGRectMake(WIDTH - 40, 30, 23, 23);
+    addNew = [[UIBarButtonItem alloc] initWithCustomView:addButton];
+    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    
     
     //Configure TableView
     self.tableView.backgroundColor = [UIColor whiteColor];
@@ -539,6 +555,33 @@
     
 
      */
+}
+
+-(void)didSelectMenuOptionAtIndex:(NSInteger)row
+{
+    if(row == 0) {
+        
+        
+    }else{
+        AddPostViewController *addNewPost = [[AddPostViewController alloc] initWithNibName:nil bundle:nil];
+        
+        UINavigationController *addNC = [[UINavigationController alloc] initWithRootViewController:addNewPost];
+        // self.homeNavigationController.navigationBar.barStyle = BAR_STYLE;
+        addNC.navigationBar.barTintColor = [UIColor whiteColor];
+        addNC.navigationBar.tintColor = BAR_TINT_COLOR2;
+        addNC.navigationBar.translucent = NO;
+        
+        
+        CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
+        popup.destinationBounds = [[UIScreen mainScreen] bounds];
+        popup.presentedController = addNC;
+        
+        popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+        popup.backgroundViewAlpha = 3.0f;
+        popup.presentingController = self;
+        
+        [self presentViewController:addNC animated:YES completion:nil];
+    }
 }
 
 /*

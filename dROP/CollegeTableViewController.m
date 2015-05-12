@@ -22,9 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Colleges";
-    self.tabBarItem.image = [UIImage imageNamed:@"University"];
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -36,37 +33,6 @@
     self.tableView.tableHeaderView = tableHeader;
     
     availableLocations = [Config availableLocations];
-    /*
-    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    closeButton.frame = CGRectMake(0, 0, 44, 44);
-    closeButton.backgroundColor = [UIColor clearColor];
-    [closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIImageView *closeImageview =
-    [Config imageViewFrame:CGRectMake(0, 12.0f, 20, 20)
-                 withImage:[UIImage imageNamed:@"Close2"]
-                 withColor:[UIColor whiteColor]];
-    closeImageview.userInteractionEnabled = YES;
-    closeImageview.backgroundColor = [UIColor clearColor];
-    [closeButton addSubview:closeImageview];
-    
-    UITapGestureRecognizer *close = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(close:)];
-    [closeImageview addGestureRecognizer:close];
-    */
-    UIButton *menuBtn = [Config menuButton];
-    [menuBtn addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
-    
-    //TitleView
-    UILabel *layoutLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 37)];
-    layoutLabel.textAlignment = NSTextAlignmentCenter;
-    layoutLabel.text = @"Switch College";
-    layoutLabel.textColor = [UIColor colorWithRed:235/255.0f green:237/255.0f blue:236/255.0f alpha:1.0f];
-    layoutLabel.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:19.0f];
-    layoutLabel.backgroundColor = [UIColor clearColor];
-    layoutLabel.textColor = [UIColor whiteColor];
-    layoutLabel.userInteractionEnabled = YES;
-    self.navigationItem.titleView = layoutLabel;
 }
 
 - (void)viewWillAppear:(BOOL)animated

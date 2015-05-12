@@ -36,9 +36,6 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     shared = [DIDataManager sharedManager];
-
-    self.title = @"Notifications";
-    self.tabBarItem.image = [UIImage imageNamed:@"Notification"];
     
     showAlert = NO;
         
@@ -60,15 +57,6 @@
         }];
     });
     
-    //Menu
-    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    menuBtn.frame = CGRectMake(0, 0, 23.0f, 23.0f);
-    [menuBtn setImage:[Config drawListImage] forState:UIControlStateNormal];
-    [menuBtn setClipsToBounds:YES];
-    menuBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [menuBtn addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
-
     self.tableView.contentInset = UIEdgeInsetsMake(6, 0, 0, 0);
 
     //Add Refresh Control
