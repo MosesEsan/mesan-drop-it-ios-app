@@ -104,7 +104,7 @@
     
     mode = (AppMode)[config[@"App Mode"] intValue];
     
-    return mode;
+    return TESTING;
 }
 
 + (PostCellType)cellType

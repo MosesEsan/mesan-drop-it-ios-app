@@ -28,6 +28,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    self.navigationItem.title = @"Colleges";
+    
     UIView *tableHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 10.0f)];
     tableHeader.backgroundColor = [UIColor clearColor];
     self.tableView.tableHeaderView = tableHeader;

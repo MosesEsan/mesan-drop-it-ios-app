@@ -19,5 +19,8 @@
 @property (nonatomic, strong) UIButton *imageV;
 @property (nonatomic, strong) TTTAttributedLabel *postText;
 
+@property (nonatomic, strong) UIButton *comment;
+
+
 @end
 

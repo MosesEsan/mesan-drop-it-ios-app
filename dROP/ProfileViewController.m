@@ -8,8 +8,11 @@
 
 #import "ProfileViewController.h"
 #import "Config.h"
-#import "PostTextTableViewCell.h"
+
+
 #import "ColouredTableViewCell.h"
+#import "FlirtTableViewCell.h"
+
 #import "CommentsTableViewController.h"
 #import "UIFont+Montserrat.h"
 #import "InfoViewController.h"
@@ -42,7 +45,7 @@
     
     shared = [DIDataManager sharedManager];
     
-    self.title = @"Profile";
+    self.navigationItem.title = @"Profile";
 
     
     showAlert = NO;
@@ -203,6 +206,8 @@
     else return [shared.likedPosts count];
 }
 
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *postObject;
@@ -219,24 +224,54 @@
 
     NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
     PFObject *parseObject = postObject[@"parseObject"];
+    NSString *postType = postObject[@"postType"];
     
+    
+    
+    
+    
+    ///---
+    
+    
+    DITableViewCell *cell;
+    
+    //Check the type in other to know which type of cell to display
+    PostCellType type = [Config cellType];
+        
+
     if (indexPath.section == 0) {
         cellIdentifier = [NSString stringWithFormat:@"MyPostCell%@",parseObject.objectId];
     }else{
         cellIdentifier = [NSString stringWithFormat:@"LikedPostCell%@",parseObject.objectId];
     }
     
-    ColouredTableViewCell *cell = (ColouredTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!cell)
-        cell = [[ColouredTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    if ([postType isEqualToString:POST_TYPE_FLIRT])
+    {
+        
+        NSString *cellIdentifier = [NSString stringWithFormat:@"My%@Cell%@",postType,parseObject.objectId];
+        
+        
+        FlirtTableViewCell *_cell = (FlirtTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!_cell)
+            _cell = [[FlirtTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        
+        cell = _cell;
+    }else{
+        
+        NSString *cellIdentifier = [NSString stringWithFormat:@"My%@Cell%@",postType,parseObject.objectId];
+        
+        ColouredTableViewCell *_cell = (ColouredTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!_cell)
+            _cell = [[ColouredTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        
+        cell = _cell;
+    }
     
+    cell.bottomBorder.backgroundColor = [tableView separatorColor].CGColor;
     [cell setFrameWithObject:postObject forIndex:indexPath.row];
-
     
     if (indexPath.row != max)
-        cell.bottomBorder.frame = CGRectMake(0, CGRectGetHeight(cell.mainContainer.frame) - 0.5f, CGRectGetWidth(cell.mainContainer.frame), .5f);
-    
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        cell.bottomBorder.frame = CGRectMake(0, CGRectGetHeight(cell.mainContainer.frame) - 0.5f, CGRectGetWidth(cell.mainContainer.frame), .5f);tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     if (parseObject[@"pic"])
     {
@@ -267,6 +302,9 @@
         cell.smiley.highlighted = [postObject[@"disliked"] boolValue];
     }
     
+    //----0-
+    
+    
     //If the user is not the post authour
     //They can like, dislike and report the post
     if (![Config isPostAuthor:postObject])
@@ -274,49 +312,48 @@
         cell.smiley.tag = indexPath.row;
         [cell.smiley addTarget:self action:@selector(likePost:) forControlEvents:UIControlEventTouchUpInside];
         
-        __weak typeof(cell) weakSelf = cell;
+        ///If the post is a flirt post - user can report only
+        if ([postType isEqualToString:POST_TYPE_FLIRT])
+        {
+            cell.alertView = [[UIAlertView alloc] initWithTitle:@"Report Post"
+                                                        message:@"Please tell us what is wrong with ths post."
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Offensive content", @"Spam", @"Other", nil];
+        }else{
+            cell.alertView = [[UIAlertView alloc] initWithTitle:@"Options?"
+                                                        message:@"What would you like to do?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Dislike", @"Report",nil];
+        }
         
-        [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
-                                color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
-                                 mode:MCSwipeTableViewCellModeExit
-                                state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
-                                    
-                                    _cellToDelete = weakSelf;
-                                    
-                                    
-                                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Options?"
-                                                                                        message:@"What would you like to do?"
-                                                                                       delegate:self
-                                                                              cancelButtonTitle:@"Cancel"
-                                                                              otherButtonTitles:@"Dislike", @"Report",nil];
-                                    [alertView show];
-                                }];
     }else if ([Config isPostAuthor:postObject]){
         
-        //If the user is th author of the post
+        //If the user is the author of the post
         //allow the user to be able to delete the post
-        __weak typeof(cell) weakSelf = cell;
-        
-        [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
-                                color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
-                                 mode:MCSwipeTableViewCellModeExit
-                                state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
-                                    
-                                    _cellToDelete = weakSelf;
-                                    
-                                    
-                                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Post"
-                                                                                        message:@"Are yu sure you want to delete this post?"
-                                                                                       delegate:self
-                                                                              cancelButtonTitle:@"No"
-                                                                              otherButtonTitles:@"Yes",nil];
-                                    [alertView show];
-                                }];
+        cell.alertView = [[UIAlertView alloc] initWithTitle:@"Delete Post"
+                                                    message:@"Are yu sure you want to delete this post?"
+                                                   delegate:self
+                                          cancelButtonTitle:@"No"
+                                          otherButtonTitles:@"Yes",nil];
     }
+    
+    
+    __weak typeof(cell) weakSelf = cell;
+    
+    [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
+                            color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
+                             mode:MCSwipeTableViewCellModeExit
+                            state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+                                
+                                _cellToDelete = weakSelf;
+                                
+                                [weakSelf.alertView show];
+                            }];
     
     cell.tag = indexPath.row;
     cell.selectionStyle= UITableViewCellSelectionStyleNone;
-    cell.bottomBorder.backgroundColor = [tableView separatorColor].CGColor;
     
     return cell;
 }
@@ -357,7 +394,6 @@
     return sectionHeaderView;
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *postObject;
@@ -365,16 +401,10 @@
     if (indexPath.section == 0) postObject = shared.myPosts[indexPath.row];
     else postObject = shared.likedPosts[indexPath.row];
     
-    NSString *postText = postObject[@"text"];
-    
-    CGFloat postTextHeight = [Config calculateHeightForText:postText withWidth:WIDTH - 55.0f withFont:TEXT_FONT];
-    
-    CGFloat height = TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 3;
-    
-    if (postObject[@"parseObject"][@"pic"])
-        height += 10 + IMAGEVIEW_HEIGHT;
-    
-    return height;
+    if ([postObject[@"postType"] isEqualToString:POST_TYPE_FLIRT])
+        return [FlirtTableViewCell getCellHeight:postObject];
+    else
+        return [ColouredTableViewCell getCellHeight:postObject];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

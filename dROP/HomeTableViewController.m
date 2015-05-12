@@ -12,10 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 #import "DITableViewCell.h"
-#import "PostTextTableViewCell.h"
-#import "TimelineTableViewCell.h"
 #import "ColouredTableViewCell.h"
-#import "ProfileTableViewCell.h"
 #import "FlirtTableViewCell.h"
 
 #import "AddPostViewController.h"
@@ -387,38 +384,6 @@
     return cell;
 }
 
-- (PostTextTableViewCell *)setListCellFrames:(PostTextTableViewCell *)_cell withPostObject:(NSDictionary *)postObject
-{
-    //Set Frames
-    NSDictionary *subViewframes = [Config subViewFrames:postObject];
-    
-    _cell.postText.frame = [subViewframes[@"postTextFrame"] CGRectValue];
-    _cell.postImage.frame = [subViewframes[@"imageFrame"] CGRectValue];
-    _cell.actionsView.frame = [subViewframes[@"actionViewframe"] CGRectValue];
-    
-    return _cell;
-}
-
-- (TimelineTableViewCell *)setTimelineCellFrames:(TimelineTableViewCell *)_cell withPostObject:(NSDictionary *)postObject forIndex:(NSInteger)index
-{
-    //Set Frames
-    NSDictionary *subViewframes = [Config subViewFrames2:postObject];
-    _cell.line.frame = [subViewframes[@"lineFrame"] CGRectValue];
-    _cell.lineBorder.frame = [subViewframes[@"lineBorderFrame"] CGRectValue];
-    _cell.bubble.frame = [subViewframes[@"bubbleFrame"] CGRectValue];
-    _cell.triangle.frame = [subViewframes[@"triangleFrame"] CGRectValue];
-    
-    _cell.mainContainer.frame = [subViewframes[@"containerFrame"] CGRectValue];
-    _cell.postText.frame = [subViewframes[@"postTextFrame"] CGRectValue];
-    _cell.postImage.frame = [subViewframes[@"imageFrame"] CGRectValue];
-    _cell.actionsView.frame = [subViewframes[@"actionViewframe"] CGRectValue];
-    
-    //UIColor *rColor = [Config getBubbleColor];
-    //_cell.bubble.layer.borderColor = rColor.CGColor;
-    _cell.bubble.layer.borderColor = [Config getSideColor:index].CGColor;
-    
-    return _cell;
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -111,10 +111,28 @@
         self.comments.font = COMMENTS_FONT;
         [self.actionsView addSubview:self.comments];
         
+        //--
+        self.comment = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.comment.backgroundColor = [UIColor clearColor];
+        [self.comment setImage:[UIImage imageNamed:@"Comment_lighter"] forState:UIControlStateNormal];
+        [self.comment setTitleColor:DATE_COLOR forState:UIControlStateNormal];
+        [self.comment setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+        
+        self.comment.titleLabel.font = LIKES_FONT;
+        self.comment.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        
+        self.comment.imageEdgeInsets = UIEdgeInsetsMake(6.2f, 41, 6.2f, 8);
+        self.comment.titleEdgeInsets = UIEdgeInsetsMake(2, -60, 0, 30);
+        
+        //[self.actionsView addSubview:self.comment];
+        
+        //---
+        
+        
+        
         self.smiley = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.smiley.frame = CGRectMake((CGRectGetWidth(self.actionsView.frame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
         self.smiley.backgroundColor = [UIColor clearColor];
-        [self.smiley setImage:[UIImage imageNamed:@"Love"] forState:UIControlStateNormal];
+        [self.smiley setImage:[UIImage imageNamed:@"Love_lighter"] forState:UIControlStateNormal];
         [self.smiley setImage:[UIImage imageNamed:@"Loved"] forState:UIControlStateSelected];
         [self.smiley setTitleColor:DATE_COLOR forState:UIControlStateNormal];
         [self.smiley setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
@@ -122,7 +140,7 @@
         self.smiley.titleLabel.font = LIKES_FONT;
         self.smiley.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         
-        self.smiley.imageEdgeInsets = UIEdgeInsetsMake(5.2f, 39, 5.2f, 8);
+        self.smiley.imageEdgeInsets = UIEdgeInsetsMake(5.0f, 39, 5.0f, 8);
         self.smiley.titleEdgeInsets = UIEdgeInsetsMake(2, -60, 0, 30);
         
         [self.actionsView addSubview:self.smiley];
@@ -156,9 +174,12 @@
     
     CGFloat remainingSpace = CGRectGetWidth(actionViewFrame) / 3;
     
+    NSLog(@"%f",remainingSpace);
     CGRect dateFrame = CGRectMake(0, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
     CGRect commentsFrame = CGRectMake(remainingSpace, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
     CGRect smileyFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
+    CGRect commentFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - (65.0f * 2), 0, 65.0f, ACTIONS_VIEW_HEIGHT);
+    //CGRect commentFrame = CGRectMake(remainingSpace + 5, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
     
     
     if (postObject[@"parseObject"][@"pic"])
@@ -194,6 +215,7 @@
     self.date.frame = dateFrame;
     self.comments.frame = commentsFrame;
     self.smiley.frame = smileyFrame;
+    self.comment.frame = commentFrame;
     
     //self.imageV.backgroundColor = [Config getSideColor:index];
     [self setValues:postObject];
@@ -206,6 +228,7 @@
     
     self.date.text = [Config calculateTime:postObject[@"date"]];
     self.comments.text = [Config repliesCount:repliesCount];
+    [self.comment setTitle:[Config likesCount:repliesCount] forState:UIControlStateNormal];
     [self.smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
     
     PFObject *parseObject = postObject[@"parseObject"];

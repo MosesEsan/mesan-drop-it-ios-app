@@ -87,23 +87,26 @@
     leftMenuViewController.homeTableViewController = homeTableViewController;
     
     _profileViewController.title = @"Profile";
-    _profileViewController.tabBarItem.image = [[UIImage imageNamed:@"User"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    _profileViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"User"];
-    _profileViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(1, 1, 1, 1);
+    _profileViewController.tabBarItem.image = [[UIImage imageNamed:@"User2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    _profileViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"User2"];
+    //_profileViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(8, 0, -8, 0);
 
     
-    _homeTableViewController.title = @"Home";
+    //_homeTableViewController.title = @"Home";
     _homeTableViewController.tabBarItem.image = [[UIImage imageNamed:@"Home"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     _homeTableViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"Home"];
+    _homeTableViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(8, 0, -8, 0);
+
     
     _collegeViewController.title = @"Colleges";
     _collegeViewController.tabBarItem.image = [[UIImage imageNamed:@"University"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     _collegeViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"University"];
+    //_collegeViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(8, 0, -8, 0);
     
-    _notificationViewController.title = @"Notifications";
+    //_notificationViewController.title = @"Notifications";
     _notificationViewController.tabBarItem.image = [[UIImage imageNamed:@"Notification"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     _notificationViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"Notification"];
-    
+    _notificationViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(8, 0, -8, 0);
     
     
     /*

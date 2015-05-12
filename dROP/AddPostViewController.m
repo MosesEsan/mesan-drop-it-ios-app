@@ -50,7 +50,7 @@
                                                                                     action:@selector(close:)];
     self.navigationItem.leftBarButtonItem = exitButtonItem;
     
-    UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 32)];
+    UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 63, 31)];
     postButton.backgroundColor = BAR_TINT_COLOR2;
     postButton.layer.cornerRadius = 4.0f;
     [postButton setTitle:@"Drop" forState:UIControlStateNormal];
