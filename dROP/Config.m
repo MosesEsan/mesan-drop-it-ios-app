@@ -1187,19 +1187,19 @@
     NSString *type = notificationObject[@"type"];
     
     if ([type isEqualToString:@"Like"]){
-        text = @"Someone liked your post:";
+        text = @"Someone LIKED your post:";
     }else if ([type isEqualToString:@"Dislike"]){
-        text = @"Someone disliked your post:";
+        text = @"Someone DISLIKED your post:";
     }else if ([type isEqualToString:@"Report"]){
-        text = @"Someone reported your post:";
+        text = @"Someone REPORTED your post:";
     }else if ([type isEqualToString:@"NewComment"]){
-        text = @"Someone left a comment on your post:";
+        text = @"Someone COMMENTED on your post:";
     }else if ([type isEqualToString:@"LikeComment"]){
-        text = @"Someone liked your comment:";
+        text = @"Someone LIKED your comment:";
     }else if ([type isEqualToString:@"DislikeComment"]){
-        text = @"Someone disliked your comment:";
+        text = @"Someone DISLIKED your comment:";
     }else if ([type isEqualToString:@"ReportComment"]){
-        text = @"Someone reported your comment:";
+        text = @"Someone REPORTED your comment:";
     }
     
     return text;
@@ -1214,16 +1214,16 @@
 
     
     if ([type isEqualToString:@"Like"] || [type isEqualToString:@"LikeComment"]){
-        typeImageString = @"SmileyBluish";
+        typeImageString = @"Liked";
         color = BAR_TINT_COLOR2;
     }else if ([type isEqualToString:@"Dislike"] || [type isEqualToString:@"DislikeComment"]){
-        typeImageString = @"Sad";
+        typeImageString = @"Disliked";
         color = [UIColor redColor];
     }else if ([type isEqualToString:@"Report"] || [type isEqualToString:@"ReportComment"]){
-        typeImageString = @"Report";
+        typeImageString = @"Reported";
         color = [UIColor redColor];
     }else if ([type isEqualToString:@"NewComment"]){
-        typeImageString = @"Comment2";
+        typeImageString = @"Commented";
         color = DATE_COLOR;
     }
     
@@ -1231,6 +1231,32 @@
                  withImage:[UIImage imageNamed:typeImageString]
                  withColor:color];
 }
+
+
++ (NSArray *)getNotificationTypeInfo:(NSDictionary *)notificationObject
+{
+    NSString *typeImageString;
+    UIColor *color = [UIColor yellowColor];
+    
+    NSString *type = notificationObject[@"type"];
+    
+    if ([type isEqualToString:@"Like"] || [type isEqualToString:@"LikeComment"]){
+        typeImageString = @"Liked2";
+        color = BAR_TINT_COLOR2;
+    }else if ([type isEqualToString:@"Dislike"] || [type isEqualToString:@"DislikeComment"]){
+        typeImageString = @"Disliked2";
+        color = [UIColor redColor];
+    }else if ([type isEqualToString:@"Report"] || [type isEqualToString:@"ReportComment"]){
+        typeImageString = @"Reported2";
+        color = [UIColor redColor];
+    }else if ([type isEqualToString:@"NewComment"]){
+        typeImageString = @"Commented2";
+        color = DATE_COLOR;
+    }
+    
+    return @[typeImageString, color];
+}
+
 
 - (NSMutableAttributedString *)createTextWithObject:(NSDictionary *)notificationObject
 {

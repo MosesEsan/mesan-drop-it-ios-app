@@ -208,6 +208,7 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 + (NSString *)getNotificationText:(NSDictionary *)notificationObject;
 
 + (UIImageView *)getNotificationType:(NSDictionary *)notificationObject withFrame:(CGRect)frame;
++ (NSArray *)getNotificationTypeInfo:(NSDictionary *)notificationObject;
 
 + (NSMutableAttributedString *)createTextWithObject:(NSDictionary *)notificationObject;
 

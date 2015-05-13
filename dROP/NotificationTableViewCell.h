@@ -7,31 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ParseUI/ParseUI.h>
-#import "Config.h"
+#import "DITableViewCell.h"
 
 #import "TTTAttributedLabel.h"
 
+@interface NotificationTableViewCell : DITableViewCell
 
-#define NOTIFICATION_PADDING 6
-#define TYPE_WIDTH 20
-
-
-@interface NotificationTableViewCell : UITableViewCell
-
-@property (nonatomic, strong) UIImageView *type;
-
-@property (nonatomic, strong) UIView *mainContainer;
 @property (nonatomic, strong) UIView *postContainer;
-
+@property (nonatomic, strong) UIButton *imageV;
 @property (nonatomic, strong) TTTAttributedLabel *postText;
-@property (nonatomic, strong) UIView *actionsView;
-@property (nonatomic, strong) CALayer *bottomBorder;
 
-@property (nonatomic, strong) UILabel *date;
-
-- (void)setFrameWithObject:(NSDictionary *)notificationObject forIndex:(NSInteger)index;
-+ (CGFloat)getCellHeight:(NSDictionary *)notificationObject;
+@property (nonatomic, strong) UIButton *comment;
 
 
 @end
+

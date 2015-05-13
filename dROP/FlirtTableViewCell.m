@@ -8,10 +8,18 @@
 
 #import "FlirtTableViewCell.h"
 
-#define LINE_WIDTH 48
 #define LEFT_PADDING 16.5f
-
+//48
 #define POST_TEXT_WIDTH WIDTH - 16.5f - (LEFT_PADDING * 2)
+
+
+#define LINE_WIDTH 45
+
+#define HEART_WIDTH L_PADDING * 2 + (L_PADDING / 2)
+#define POST_CONTAINER_WIDTH MAIN_CONTAINER_WIDTH - LINE_WIDTH
+
+
+#define MAIN_WIDTH WIDTH - LINE_WIDTH - 10
 
 @implementation FlirtTableViewCell
 
@@ -24,7 +32,7 @@
         self.backgroundColor = [UIColor clearColor];
         
         self.mainContainer = [[UIView alloc] init];
-        self.mainContainer.backgroundColor = [UIColor whiteColor];
+        self.mainContainer.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 0);
         self.mainContainer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Hearts2"]];
         self.mainContainer.clipsToBounds = YES;
         [self.contentView addSubview:self.mainContainer];
@@ -33,18 +41,20 @@
         self.overlay.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.6];
         [self.mainContainer addSubview:self.overlay];
         
-        
         self.whiteOverlay = [[UIView alloc] init];
         self.whiteOverlay.backgroundColor =  [[UIColor whiteColor] colorWithAlphaComponent:0.9];
         [self.mainContainer addSubview:self.whiteOverlay];
         
+        
+        //Left Side - View
         self.line = [[UIView alloc] init];
+        self.line.frame = CGRectMake(0, 0, LINE_WIDTH, 0);
         self.line.backgroundColor = [UIColor clearColor];
         self.line.clipsToBounds = YES;
         [self.mainContainer addSubview:self.line];
         
-        
         self.imageV = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.imageV.frame = CGRectMake(L_PADDING, 0, HEART_WIDTH, HEART_WIDTH);
         self.imageV.backgroundColor = [UIColor redColor];
         //[BAR_TINT_COLOR2 colorWithAlphaComponent:0.3];//[UIColor whiteColor];
         //self.profilePic.layer.borderWidth = .2f;
@@ -58,11 +68,13 @@
         
         
         self.postContainer = [[UIView alloc] init];
+        self.postContainer.frame = CGRectMake(LINE_WIDTH, 0, CGRectGetWidth(self.mainContainer.frame) - (LINE_WIDTH + 5), 0);
         self.postContainer.backgroundColor = [UIColor clearColor];
         self.postContainer.clipsToBounds = YES;
         [self.mainContainer addSubview:self.postContainer];
         
         self.postText = [[TTTAttributedLabel alloc] init];
+        self.postText.frame = CGRectMake(0, TOP_PADDING, CGRectGetWidth(self.postContainer.frame), 0);
         self.postText.backgroundColor = [UIColor clearColor];
         self.postText.numberOfLines = 0;
         self.postText.textColor = TEXT_COLOR;
@@ -70,14 +82,11 @@
         self.postText.font = TEXT_FONT;
         self.postText.clipsToBounds = YES;
         self.postText.userInteractionEnabled = YES;
-        /*
-         self.postText.attributesText = @{NSForegroundColorAttributeName: TEXT_COLOR, NSFontAttributeName: TEXT_FONT};
-         self.postText.attributesHashtag = @{NSForegroundColorAttributeName: BAR_TINT_COLOR2, NSFontAttributeName: TEXT_FONT};
-         */
         [self.postContainer addSubview:self.postText];
         
         
         self.postImage = [[PFImageView alloc] init];
+        self.postImage.frame = CGRectMake(0, 0, CGRectGetWidth(self.postContainer.frame), IMAGEVIEW_HEIGHT);
         self.postImage.backgroundColor = [UIColor clearColor];
         self.postImage.layer.cornerRadius = 3.0f;
         self.postImage.image = [UIImage imageNamed:@"CoverPhotoPH.JPG"];
@@ -86,7 +95,8 @@
         self.postImage.userInteractionEnabled = YES;
         [self.postContainer addSubview:self.postImage];
         
-        self.actionsView = [[UIView alloc] initWithFrame:CGRectMake(LEFT_PADDING * 3, 0, WIDTH - (LEFT_PADDING * 3), ACTIONS_VIEW_HEIGHT)];
+        self.actionsView = [[UIView alloc] init];
+        self.actionsView.frame = CGRectMake(0, 0, CGRectGetWidth(self.postContainer.frame), ACTIONS_VIEW_HEIGHT);
         self.actionsView.backgroundColor = [UIColor clearColor];
         [self.postContainer addSubview:self.actionsView];
         
@@ -94,16 +104,17 @@
         self.bottomBorder.frame = CGRectMake(0, ACTIONS_VIEW_HEIGHT - .5f, CGRectGetWidth(self.actionsView.frame), .5f);
         // [self.actionsView.layer addSublayer:self.bottomBorder];
         
+        CGFloat postw = CGRectGetWidth(self.postContainer.frame);
+        CGFloat width = postw / 3;
         
-        self.date = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, ACTIONS_VIEW_HEIGHT)];
+        self.date = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, ACTIONS_VIEW_HEIGHT)];
         self.date.backgroundColor = [UIColor clearColor];
         self.date.textColor = DATE_COLOR;
         self.date.textAlignment = NSTextAlignmentLeft;
         self.date.font = DATE_FONT;
         [self.actionsView addSubview:self.date];
         
-        //self.comments = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.actionsView.frame) - 90, 0, 90, ACTIONS_VIEW_HEIGHT)];
-        self.comments = [[UILabel alloc] initWithFrame:CGRectMake(65, 0, 90, ACTIONS_VIEW_HEIGHT)];
+        self.comments = [[UILabel alloc] initWithFrame:CGRectMake(width, 0, width, ACTIONS_VIEW_HEIGHT)];
         self.comments.backgroundColor = [UIColor clearColor];
         self.comments.textColor = DATE_COLOR;
         self.comments.textAlignment = NSTextAlignmentCenter;
@@ -127,9 +138,8 @@
         
         //---
         
-        
-        
         self.smiley = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.smiley.frame = CGRectMake(CGRectGetWidth(self.actionsView.frame) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
         self.smiley.backgroundColor = [UIColor clearColor];
         [self.smiley setImage:[UIImage imageNamed:@"Love_lighter"] forState:UIControlStateNormal];
         [self.smiley setImage:[UIImage imageNamed:@"Loved"] forState:UIControlStateSelected];
@@ -159,28 +169,34 @@
     CGFloat postTextHeight = [FlirtTableViewCell getPostTextHeight:postObject];
     CGFloat cellHeight = [FlirtTableViewCell getCellHeight:postObject];
     
+    CGRect mainContainerFrame =  self.mainContainer.frame;
+    mainContainerFrame.size.height = cellHeight;
+    self.mainContainer.frame = mainContainerFrame;
+    self.overlay.frame = mainContainerFrame;
+    self.whiteOverlay.frame = mainContainerFrame;
+
+    CGRect lineFrame =  self.line.frame;
+    lineFrame.size.height = cellHeight;
+    self.line.frame = lineFrame;
     
-    CGRect mainContainerFrame = CGRectMake(0, 0, WIDTH, cellHeight);
+    CGRect roundFrame =  self.imageV.frame;
+    roundFrame.origin.y = (cellHeight / 2) - (HEART_WIDTH / 2);
+    self.imageV.frame = roundFrame;
+    self.imageV.layer.cornerRadius = CGRectGetWidth(self.imageV.frame) / 2;
     
-    CGRect lineFrame = CGRectMake(L_PADDING, 0, LINE_WIDTH, cellHeight);
-    CGRect roundFrame = CGRectMake(0, cellHeight / 4, LINE_WIDTH / 2, LINE_WIDTH / 2);
+    CGRect postContainerFrame =  self.postContainer.frame;
+    postContainerFrame.size.height = cellHeight;
+    self.postContainer.frame = postContainerFrame;
     
+    CGRect labelFrame =  self.postText.frame;
+    labelFrame.size.height = postTextHeight;
+    self.postText.frame = labelFrame;
+
+   // NSLog(@"Main container width is %f - Postcontainer width is %f",CGRectGetWidth(mainContainerFrame),CGRectGetWidth(postContainerFrame));
+
     
-    CGRect postContainerFrame = CGRectMake(L_PADDING + LINE_WIDTH, 0, CGRectGetWidth(mainContainerFrame) - (L_PADDING + (L_PADDING / 2)) - LINE_WIDTH, cellHeight);
-    
-    CGRect labelFrame = CGRectMake(0, TOP_PADDING, CGRectGetWidth(postContainerFrame), postTextHeight);
-    CGRect imageFrame = CGRectMake(0, 0, CGRectGetWidth(postContainerFrame), IMAGEVIEW_HEIGHT);
-    CGRect actionViewFrame = CGRectMake(0, 0, CGRectGetWidth(postContainerFrame), ACTIONS_VIEW_HEIGHT);
-    
-    CGFloat remainingSpace = CGRectGetWidth(actionViewFrame) / 3;
-    
-    NSLog(@"%f",remainingSpace);
-    CGRect dateFrame = CGRectMake(0, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
-    CGRect commentsFrame = CGRectMake(remainingSpace, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
-    CGRect smileyFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
-    CGRect commentFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - (65.0f * 2), 0, 65.0f, ACTIONS_VIEW_HEIGHT);
-    //CGRect commentFrame = CGRectMake(remainingSpace + 5, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
-    
+    CGRect actionViewFrame = self.actionsView.frame;
+    CGRect imageFrame = self.postImage.frame;
     
     if (postObject[@"parseObject"][@"pic"])
     {
@@ -200,24 +216,9 @@
         actionViewFrame.origin.y = labelFrame.origin.y + postTextHeight + 10;
     }
     
-    //Set Frames
-    self.line.frame = lineFrame;
-    self.imageV.frame = roundFrame;
-    self.imageV.layer.cornerRadius = CGRectGetWidth(self.imageV.frame) / 2;
-    
-    self.mainContainer.frame = mainContainerFrame;
-    self.overlay.frame = mainContainerFrame;
-    self.whiteOverlay.frame = mainContainerFrame;
-    self.postContainer.frame = postContainerFrame;
-    self.postText.frame = labelFrame;
     self.postImage.frame = imageFrame;
     self.actionsView.frame = actionViewFrame;
-    self.date.frame = dateFrame;
-    self.comments.frame = commentsFrame;
-    self.smiley.frame = smileyFrame;
-    self.comment.frame = commentFrame;
-    
-    //self.imageV.backgroundColor = [Config getSideColor:index];
+
     [self setValues:postObject];
 }
 
@@ -274,7 +275,7 @@
     NSString *text = [NSString stringWithFormat:@"%@:  %@, %@. %@",parseObject[@"flirtLocation"], parseObject[@"gender"],parseObject[@"hairColor"], postObject[@"text"]];
     
     return [Config calculateHeightForText:text
-                                withWidth:WIDTH - 55.0f
+                                withWidth:MAIN_WIDTH
                                  withFont:TEXT_FONT];
 }
 
