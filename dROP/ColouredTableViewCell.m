@@ -115,7 +115,7 @@
     
     CGRect mainContainerFrame = CGRectMake(0, 0, WIDTH, cellHeight);
     
-    CGRect postContainerFrame = CGRectMake(L_PADDING, 0, CGRectGetWidth(mainContainerFrame) - (L_PADDING * 2), cellHeight);
+    CGRect postContainerFrame = CGRectMake(L_PADDING, 0, CGRectGetWidth(mainContainerFrame) - (L_PADDING + (L_PADDING / 2)), cellHeight);
     CGRect labelFrame = CGRectMake(0, TOP_PADDING, CGRectGetWidth(postContainerFrame), postTextHeight);
     CGRect imageFrame = CGRectMake(0, 0, CGRectGetWidth(postContainerFrame), IMAGEVIEW_HEIGHT);
     

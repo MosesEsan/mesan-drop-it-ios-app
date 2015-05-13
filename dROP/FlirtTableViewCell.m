@@ -8,7 +8,7 @@
 
 #import "FlirtTableViewCell.h"
 
-#define LINE_WIDTH 0//48
+#define LINE_WIDTH 48
 #define LEFT_PADDING 16.5f
 
 #define POST_TEXT_WIDTH WIDTH - 16.5f - (LEFT_PADDING * 2)
@@ -45,7 +45,6 @@
         
         
         self.imageV = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.imageV.frame = CGRectMake(5, TOP_PADDING, 30.0f, 30.0f);
         self.imageV.backgroundColor = [UIColor redColor];
         //[BAR_TINT_COLOR2 colorWithAlphaComponent:0.3];//[UIColor whiteColor];
         //self.profilePic.layer.borderWidth = .2f;
@@ -164,9 +163,10 @@
     CGRect mainContainerFrame = CGRectMake(0, 0, WIDTH, cellHeight);
     
     CGRect lineFrame = CGRectMake(L_PADDING, 0, LINE_WIDTH, cellHeight);
-    CGRect roundFrame = CGRectMake(0, cellHeight / 4, 40.0f, 40.0f);
+    CGRect roundFrame = CGRectMake(0, cellHeight / 4, LINE_WIDTH / 2, LINE_WIDTH / 2);
     
-    CGRect postContainerFrame = CGRectMake(L_PADDING + LINE_WIDTH, 0, CGRectGetWidth(mainContainerFrame) - (L_PADDING * 2) - LINE_WIDTH, cellHeight);
+    
+    CGRect postContainerFrame = CGRectMake(L_PADDING + LINE_WIDTH, 0, CGRectGetWidth(mainContainerFrame) - (L_PADDING + (L_PADDING / 2)) - LINE_WIDTH, cellHeight);
     
     CGRect labelFrame = CGRectMake(0, TOP_PADDING, CGRectGetWidth(postContainerFrame), postTextHeight);
     CGRect imageFrame = CGRectMake(0, 0, CGRectGetWidth(postContainerFrame), IMAGEVIEW_HEIGHT);

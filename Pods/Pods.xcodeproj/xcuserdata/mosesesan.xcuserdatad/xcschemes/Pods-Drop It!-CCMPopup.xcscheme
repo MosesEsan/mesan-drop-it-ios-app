@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6B1081FBDA6F227C4C38E682"
+               BlueprintIdentifier = "5BE1C64D73C280D31F66772C"
                BuildableName = "libPods-Drop It!-CCMPopup.a"
                BlueprintName = "Pods-Drop It!-CCMPopup"
                ReferencedContainer = "container:Pods.xcodeproj">

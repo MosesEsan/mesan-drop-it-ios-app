@@ -74,28 +74,16 @@
     UINavigationController *collegeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.collegeViewController];
     UINavigationController *notificationNavigationController = [[UINavigationController alloc] initWithRootViewController:self.notificationViewController];
 
-    
-    
-    
-    
-    
-    //Custom Code for  Menu Plugin
-    // Create content and menu controllers
-    //
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeTableViewController];
-    MenuTableViewController *leftMenuViewController = [[MenuTableViewController alloc] init];
-    leftMenuViewController.homeTableViewController = homeTableViewController;
-    
     _profileViewController.title = @"Profile";
     _profileViewController.tabBarItem.image = [[UIImage imageNamed:@"User2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     _profileViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"User2"];
     //_profileViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(8, 0, -8, 0);
 
     
-    //_homeTableViewController.title = @"Home";
-    _homeTableViewController.tabBarItem.image = [[UIImage imageNamed:@"Home"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    _homeTableViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"Home"];
-    _homeTableViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(8, 0, -8, 0);
+    _homeTableViewController.title = @"Home";
+    _homeTableViewController.tabBarItem.image = [[UIImage imageNamed:@"Home2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    _homeTableViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"Home2"];
+    //_homeTableViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(8, 0, -8, 0);
 
     
     _collegeViewController.title = @"Colleges";
@@ -103,31 +91,10 @@
     _collegeViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"University"];
     //_collegeViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(8, 0, -8, 0);
     
-    //_notificationViewController.title = @"Notifications";
+    _notificationViewController.title = @"Notifications";
     _notificationViewController.tabBarItem.image = [[UIImage imageNamed:@"Notification"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     _notificationViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"Notification"];
-    _notificationViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(8, 0, -8, 0);
-    
-    
-    /*
-    // Create side menu controller
-    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController
-                                                                    leftMenuViewController:leftMenuViewController
-                                                                   rightMenuViewController:nil];
-    sideMenuViewController.backgroundImage = [UIImage imageNamed:@"MenuBackground"];
-    sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
-    sideMenuViewController.delegate = self;
-    sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
-    sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
-    sideMenuViewController.contentViewShadowOpacity = 0.6;
-    sideMenuViewController.contentViewShadowRadius = 12;
-    sideMenuViewController.contentViewShadowEnabled = YES;
-    sideMenuViewController.contentViewInLandscapeOffsetCenterX = 30.f;
-    sideMenuViewController.contentViewInPortraitOffsetCenterX  = -40.f;
-    sideMenuViewController.contentViewScaleValue = 0.9f;
-    
-    */
-    
+    //_notificationViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(8, 0, -8, 0);
     
     //View Controllers
     NSArray *viewControllers =
@@ -139,12 +106,8 @@
     //set the view controllers for the tab bar controller
     [self.tabBarController setViewControllers:viewControllers];
     
-    
-    UIColor *backgroundColor = BAR_TINT_COLOR2;
-    
     // set the bar background color
-    [[UITabBar appearance] setBackgroundImage:[AppDelegate imageFromColor:backgroundColor forSize:CGSizeMake(320, 49) withCornerRadius:0]];
-    
+    [[UITabBar appearance] setBackgroundImage:[AppDelegate imageFromColor:BAR_TINT_COLOR2 forSize:CGSizeMake(320, 49) withCornerRadius:0]];
    
     // set the text color for unselected state
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
@@ -155,7 +118,6 @@
                                                        titleHighlightedColor, UITextAttributeTextColor,
                                                        nil] forState:UIControlStateHighlighted];
     
-    
     // selected state
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:BAR_TINT_COLOR2, UITextAttributeTextColor, nil] forState:UIControlStateSelected];
     [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
@@ -164,13 +126,10 @@
     // remove the shadow
     [[UITabBar appearance] setShadowImage:nil];
     
-    
     // Set the dark color to selected tab (the dimmed background)
     [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor whiteColor] forSize:CGSizeMake(64, 49) withCornerRadius:0]];
     
-    
     self.tabBarController.selectedViewController=[self.tabBarController.viewControllers objectAtIndex:1];
-    
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
@@ -196,7 +155,7 @@
     }
     
     lastUpdated = nil;
-    
+    /*
     
     for (NSString* family in [UIFont familyNames])
     {
@@ -208,6 +167,7 @@
         }
     }
     
+    */
     return YES;
 }
 
