@@ -43,6 +43,9 @@
 {
     UILabel *layoutLabel;
     UIBarButtonItem *addNew;
+    UIBarButtonItem *flirt;
+    UIBarButtonItem *negativeSpacer;
+    UIBarButtonItem *positveSpacer;
     
     UIView *tableHeader;
     UILabel *toolTipLocation; //Hack
@@ -83,19 +86,6 @@
 
     showAlert = NO;
     
-    //Menu
-    /*
-    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    menuBtn.frame = CGRectMake(0, 130, 23.0f, 23.0f);
-    menuBtn.imageEdgeInsets = UIEdgeInsetsMake(4.0f, 0.0f, 0.0f, 0.0f);
-
-    [menuBtn setImage:[Config drawListImage] forState:UIControlStateNormal];
-    [menuBtn setClipsToBounds:YES];
-    menuBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [menuBtn addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
-    
-    */
     //TitleView
     layoutLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
     layoutLabel.textAlignment = NSTextAlignmentCenter;
@@ -105,32 +95,42 @@
     self.navigationItem.titleView = layoutLabel;
     
     [self updateNavBar];
-/*
-    UIButton *addNewButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    addNewButton.frame = CGRectMake(0, 0, 23, 23);
-    [addNewButton setImage:[UIImage imageNamed:@"Add2"] forState:UIControlStateNormal];
-    addNewButton.imageEdgeInsets = UIEdgeInsetsMake(1.0f, 1.0f, 1.0f, 1.0f);
-    [addNewButton setClipsToBounds:YES];
-    addNewButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [addNewButton addTarget:self action:@selector(addNewPost:) forControlEvents:UIControlEventTouchUpInside];
-    addNew = [[UIBarButtonItem alloc] initWithCustomView:addNewButton];
+
+    //Negative Spacer
+    negativeSpacer = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                       target:nil action:nil];
+    negativeSpacer.width = -3;
     
-    */
+    positveSpacer = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                      target:nil action:nil];
+    positveSpacer.width = 22;
+    
     
     CGRect floatFrame = CGRectMake([UIScreen mainScreen].bounds.size.width - 44 - 20, 200, 23, 23);
-    
-    //CGRectMake(CGRectGetWidth(self.view.frame) - 50, 20, 23, 23)
     
     VCFloatingActionButton *addButton = [[VCFloatingActionButton alloc]initWithFrame:floatFrame normalImage:[UIImage imageNamed:@"Add2"] andPressedImage:[UIImage imageNamed:@"Close_White"] withScrollview:nil];
     addButton.imageArray = @[@"Flirt2",@"Post"];
     addButton.labelArray = @[@"Flirt",@"Post"];
     addButton.delegate = self;
     addButton.buttonView.frame = CGRectMake(WIDTH - 40, 30, 23, 23);
+    addButton.frame = CGRectMake(0, 0, 23, 23);
     addNew = [[UIBarButtonItem alloc] initWithCustomView:addButton];
     
+    //Flirt Button
+    UIButton *flirtButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    flirtButton.frame = CGRectMake(0, 0, 28, 28);
+    flirtButton.layer.borderWidth = 2.0f;
+    flirtButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    flirtButton.layer.cornerRadius = CGRectGetWidth(flirtButton.frame) / 2;
+    flirtButton.backgroundColor = [UIColor redColor];
+    [flirtButton setImage:[UIImage imageNamed:@"Heart_filled"] forState:UIControlStateNormal];
+    flirtButton.imageEdgeInsets = UIEdgeInsetsMake(7, 7, 7, 7);
+    //[flirtButton addTarget:self action:@selector(dislikePost) forControlEvents:UIControlEventTouchUpInside];
+    flirt = [[UIBarButtonItem alloc] initWithCustomView:flirtButton];
+    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
-    
     
     //Configure TableView
     self.tableView.backgroundColor = [UIColor whiteColor];
@@ -329,6 +329,8 @@
     }
     
     
+    __weak typeof(cell) weakSelf = cell;
+    
     
     //If the user is not the post authour
     //They can like, dislike and report the post
@@ -346,11 +348,16 @@
                                               cancelButtonTitle:@"Cancel"
                                               otherButtonTitles:@"Offensive content", @"Spam", @"Other", nil];
         }else{
-            cell.alertView = [[UIAlertView alloc] initWithTitle:@"Options?"
-                                                        message:@"What would you like to do?"
-                                                       delegate:self
-                                              cancelButtonTitle:@"Cancel"
-                                              otherButtonTitles:@"Dislike", @"Report",nil];
+            
+            [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
+                                    color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
+                                     mode:MCSwipeTableViewCellModeExit
+                                    state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+                                        
+                                        _cellToDelete = weakSelf;
+                                        
+                                        [self dislikePost];
+                                    }];
         }
         
     }else if ([Config isPostAuthor:postObject]){
@@ -362,20 +369,20 @@
                                                    delegate:self
                                           cancelButtonTitle:@"No"
                                           otherButtonTitles:@"Yes",nil];
+        
+        [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
+                                color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
+                                 mode:MCSwipeTableViewCellModeExit
+                                state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+                                    
+                                    _cellToDelete = weakSelf;
+                                    
+                                    [weakSelf.alertView show];
+                                }];
     }
     
 
-    __weak typeof(cell) weakSelf = cell;
-    
-    [cell setSwipeGestureWithView:[Config viewWithImageName:@"cross"]
-                            color:[UIColor colorWithRed:232.0 / 255.0 green:61.0 / 255.0 blue:14.0 / 255.0 alpha:1.0]
-                             mode:MCSwipeTableViewCellModeExit
-                            state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
-                                
-                                _cellToDelete = weakSelf;
-                                
-                                [weakSelf.alertView show];
-                            }];
+
     
     cell.tag = indexPath.row;
     cell.selectionStyle= UITableViewCellSelectionStyleNone;
@@ -602,18 +609,18 @@
     
     [self getData];
     
-    
     //If app is not in testing mode, take the current location into consideration
     if ([Config appMode] != TESTING)
     {
         if ([Config checkAddPermission:_currentLocation] == YES)
         {
-            self.navigationItem.rightBarButtonItem = addNew;
+            [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addNew, positveSpacer, flirt, nil]];
+            
         }else{
             self.navigationItem.rightBarButtonItem = nil;
         }
     }else{
-        self.navigationItem.rightBarButtonItem = addNew;
+        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addNew, positveSpacer, flirt, nil]];
     }
 }
 
@@ -773,6 +780,16 @@
     [shared.allPosts removeObjectAtIndex:tag];
 }
 */
+
+- (void)dislikePost
+{
+    [_cellToDelete swipeToOriginWithCompletion:^{
+        
+        [shared dislikePostAtIndex:_cellToDelete.tag forView:HOME];
+        
+        _cellToDelete = nil;
+    }];
+}
 
 #pragma mark - UIAlertViewDelegate
 

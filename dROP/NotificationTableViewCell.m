@@ -48,14 +48,12 @@
         self.imageV = [UIButton buttonWithType:UIButtonTypeCustom];
         self.imageV.frame = CGRectMake(L_PADDING, 0, HEART_WIDTH, HEART_WIDTH);
         //[BAR_TINT_COLOR2 colorWithAlphaComponent:0.3];//[UIColor whiteColor];
-        //self.profilePic.layer.borderWidth = .2f;
-        self.imageV.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        self.imageV.layer.borderWidth = 1.0f;
         self.imageV.contentMode = UIViewContentModeScaleAspectFit;
         self.imageV.layer.masksToBounds = YES;
         self.imageV.clipsToBounds = YES;
         self.imageV.imageEdgeInsets = UIEdgeInsetsMake(5.f, 5.f, 5.f, 5.f);
         [self.line addSubview:self.imageV];
-        
         
         self.postContainer = [[UIView alloc] init];
         self.postContainer.frame = CGRectMake(ICON_WIDTH, 0, CGRectGetWidth(self.mainContainer.frame) - (ICON_WIDTH + 5), 0);
@@ -124,7 +122,7 @@
     
     NSArray *typeInfo = [Config getNotificationTypeInfo:notificationObject];
     [self.imageV setImage:[UIImage imageNamed:typeInfo[0]] forState:UIControlStateNormal];
-    self.imageV.backgroundColor = typeInfo[1];
+    self.imageV.layer.borderColor = [typeInfo[1] CGColor];
 
     
     CGRect postContainerFrame =  self.postContainer.frame;

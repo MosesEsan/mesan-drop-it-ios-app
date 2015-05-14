@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C83678BBE2BB9AF90C5B66CD"
+               BlueprintIdentifier = "EE690E144EFF59D29A44AB14"
                BuildableName = "libPods-Drop It!-Montserrat.a"
                BlueprintName = "Pods-Drop It!-Montserrat"
                ReferencedContainer = "container:Pods.xcodeproj">

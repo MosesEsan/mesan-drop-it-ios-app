@@ -1240,17 +1240,15 @@
     
     NSString *type = notificationObject[@"type"];
     
-    if ([type isEqualToString:@"Like"] || [type isEqualToString:@"LikeComment"]){
-        typeImageString = @"Liked2";
+    if ([type isEqualToString:@"Like"] || [type isEqualToString:@"LikeComment"]
+        || [type isEqualToString:@"Dislike"] || [type isEqualToString:@"DislikeComment"]){
+        typeImageString = @"Liked";
         color = BAR_TINT_COLOR2;
-    }else if ([type isEqualToString:@"Dislike"] || [type isEqualToString:@"DislikeComment"]){
-        typeImageString = @"Disliked2";
-        color = [UIColor redColor];
     }else if ([type isEqualToString:@"Report"] || [type isEqualToString:@"ReportComment"]){
-        typeImageString = @"Reported2";
+        typeImageString = @"Reported";
         color = [UIColor redColor];
     }else if ([type isEqualToString:@"NewComment"]){
-        typeImageString = @"Commented2";
+        typeImageString = @"Commented";
         color = DATE_COLOR;
     }
     

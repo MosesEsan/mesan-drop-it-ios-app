@@ -80,29 +80,42 @@
     //They can report the post
     if (![Config isPostAuthor:_postObject])
     {
-        //Report Button
-        UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        reportButton.frame = CGRectMake(0, 0, 44, 44);
-        reportButton.backgroundColor = [UIColor clearColor];
-        [reportButton addTarget:self action:@selector(reportPost:) forControlEvents:UIControlEventTouchUpInside];
-        
-        UIImageView *reportImageview =
-        [Config imageViewFrame:CGRectMake(24.0f, 12.0f, 20, 20)
-                     withImage:[UIImage imageNamed:@"Report"]
-                     withColor:[UIColor whiteColor]];
-        reportImageview.userInteractionEnabled = YES;
-        reportImageview.backgroundColor = [UIColor clearColor];
-        [reportButton addSubview:reportImageview];
-        
-        UITapGestureRecognizer *report = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reportPost:)];
-        [reportImageview addGestureRecognizer:report];
-
+        //Negative Spacer
         UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
                                            initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                            target:nil action:nil];
-        negativeSpacer.width = -8;
-        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:reportButton], nil]];
-        //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:reportButton];
+        negativeSpacer.width = -3;
+        
+        //Report Button
+        UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        reportButton.frame = CGRectMake(0, 0, 23, 23);
+        reportButton.backgroundColor = [UIColor clearColor];
+        [reportButton setImage:[UIImage imageNamed:@"Reported2"] forState:UIControlStateNormal];
+        reportButton.imageEdgeInsets = UIEdgeInsetsMake(3, 1, -2, 1);
+        [reportButton addTarget:self action:@selector(reportPost:) forControlEvents:UIControlEventTouchUpInside];
+    
+        if (![_postObject[@"postType"] isEqualToString:POST_TYPE_FLIRT])
+        {
+            //Dislike Button
+            UIButton *dislikeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            dislikeButton.frame = CGRectMake(0, 0, 23, 23);
+            dislikeButton.backgroundColor = [UIColor clearColor];
+            [dislikeButton setImage:[UIImage imageNamed:@"Dislike"] forState:UIControlStateNormal];
+            dislikeButton.imageEdgeInsets = UIEdgeInsetsMake(4, 1, -2, 1);
+            [dislikeButton addTarget:self action:@selector(dislikePost) forControlEvents:UIControlEventTouchUpInside];
+            
+            
+            UIBarButtonItem *positveSpacer = [[UIBarButtonItem alloc]
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                              target:nil action:nil];
+            positveSpacer.width = 22;
+            
+            
+            
+            [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:dislikeButton], positveSpacer, [[UIBarButtonItem alloc] initWithCustomView:reportButton], nil]];
+        }else{
+            [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:reportButton], nil]];
+        }
     }
     
     //Main View - Tableview, Textfield etc
@@ -263,7 +276,7 @@
     bottomBorder.backgroundColor = [UIColor colorWithRed:216/255.0f green:216/255.0f blue:216/255.0f alpha:1].CGColor;
     [headerView.layer addSublayer:bottomBorder];
     
-    CGRect postContainerFrame = CGRectMake(L_PADDING, 0, CGRectGetWidth(headerView.frame) - (L_PADDING * 2), height);
+    CGRect postContainerFrame = CGRectMake(L_PADDING, 0, CGRectGetWidth(headerView.frame) - (L_PADDING + (L_PADDING / 2)), height);
     
     CGRect labelFrame = CGRectMake(0, TOP_PADDING, CGRectGetWidth(postContainerFrame), postTextHeight);
     CGRect imageFrame = CGRectMake(0, 0, CGRectGetWidth(postContainerFrame), IMAGEVIEW_HEIGHT);
@@ -273,7 +286,7 @@
     
     CGRect dateFrame = CGRectMake(0, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
     CGRect commentsFrame = CGRectMake(remainingSpace, 0, remainingSpace, ACTIONS_VIEW_HEIGHT);
-    CGRect smileyFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - 65.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
+    CGRect smileyFrame = CGRectMake((CGRectGetWidth(actionViewFrame)) - 60.0f, 0, 65.0f, ACTIONS_VIEW_HEIGHT);
     
     
     if (_postObject[@"parseObject"][@"pic"])
@@ -727,6 +740,9 @@
     [UIView commitAnimations];
 }
 
+
+
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     
@@ -740,7 +756,7 @@
         }else{
             
             //Call report method
-            [shared reportPostAtIndex:_cellToDelete.tag forView:_viewType];
+            [shared reportPostAtIndex:self.view.tag forView:_viewType];
             
             ///close
             [self.navigationController popViewControllerAnimated:TRUE];
@@ -876,6 +892,20 @@
     
     //increment or decrement total likes
     [sender setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
+}
+
+//Dislike Post
+- (void)dislikePost
+{
+    //If user previously liked the post
+    if (_smiley.selected == YES) likesCount--;
+    
+    [shared dislikePostAtIndex:self.view.tag forView:_viewType];
+    
+    //increment or decrement total likes
+    [_smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
+    _smiley.selected = NO;
+    _smiley.highlighted = YES;
 }
 
 //Report Post
