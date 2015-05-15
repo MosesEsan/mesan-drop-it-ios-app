@@ -16,6 +16,8 @@
 #import "FlirtTableViewCell.h"
 
 #import "AddPostViewController.h"
+#import "AddFlirtViewController.h"
+
 #import "CommentsTableViewController.h"
 
 #import "UIFont+Montserrat.h"
@@ -108,6 +110,17 @@
     positveSpacer.width = 22;
     
     
+    UIButton *addNewButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    addNewButton.frame = CGRectMake(0, 0, 23, 23);
+    [addNewButton setImage:[UIImage imageNamed:@"Add2"] forState:UIControlStateNormal];
+    addNewButton.imageEdgeInsets = UIEdgeInsetsMake(1.0f, 1.0f, 1.0f, 1.0f);
+    [addNewButton setClipsToBounds:YES];
+    addNewButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [addNewButton addTarget:self action:@selector(addNewPost:) forControlEvents:UIControlEventTouchUpInside];
+    addNew = [[UIBarButtonItem alloc] initWithCustomView:addNewButton];
+    
+    
+    /*
     CGRect floatFrame = CGRectMake([UIScreen mainScreen].bounds.size.width - 44 - 20, 200, 23, 23);
     
     VCFloatingActionButton *addButton = [[VCFloatingActionButton alloc]initWithFrame:floatFrame normalImage:[UIImage imageNamed:@"Add2"] andPressedImage:[UIImage imageNamed:@"Close_White"] withScrollview:nil];
@@ -118,6 +131,8 @@
     addButton.frame = CGRectMake(0, 0, 23, 23);
     addNew = [[UIBarButtonItem alloc] initWithCustomView:addButton];
     
+     */
+    
     //Flirt Button
     UIButton *flirtButton = [UIButton buttonWithType:UIButtonTypeCustom];
     flirtButton.frame = CGRectMake(0, 0, 28, 28);
@@ -127,7 +142,7 @@
     flirtButton.backgroundColor = [UIColor redColor];
     [flirtButton setImage:[UIImage imageNamed:@"Heart_filled"] forState:UIControlStateNormal];
     flirtButton.imageEdgeInsets = UIEdgeInsetsMake(7, 7, 7, 7);
-    //[flirtButton addTarget:self action:@selector(dislikePost) forControlEvents:UIControlEventTouchUpInside];
+    [flirtButton addTarget:self action:@selector(addNewFlirt:) forControlEvents:UIControlEventTouchUpInside];
     flirt = [[UIBarButtonItem alloc] initWithCustomView:flirtButton];
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -471,67 +486,69 @@
 
 - (void)addNewPost:(UIBarButtonItem *)sender
 {
+    AddPostViewController *addNewPost = [[AddPostViewController alloc] initWithNibName:nil bundle:nil];
     
-    //
+    UINavigationController *addNC = [[UINavigationController alloc] initWithRootViewController:addNewPost];
+    // self.homeNavigationController.navigationBar.barStyle = BAR_STYLE;
+    addNC.navigationBar.barTintColor = [UIColor whiteColor];
+    addNC.navigationBar.tintColor = BAR_TINT_COLOR2;
+    addNC.navigationBar.translucent = NO;
     
-    NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:2];
-    MenuItem *menuItem = [[MenuItem alloc] initWithTitle:@"Flirt" iconName:@"Flirt2" glowColor:[UIColor clearColor]];
-    [items addObject:menuItem];
     
-    menuItem = [[MenuItem alloc] initWithTitle:@"Post" iconName:@"Post" glowColor:[UIColor clearColor]];
-    [items addObject:menuItem];
+    CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
+    popup.destinationBounds = [[UIScreen mainScreen] bounds];
+    popup.presentedController = addNC;
+    
+    popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+    popup.backgroundViewAlpha = 3.0f;
+    popup.presentingController = self;
+    
+    [self presentViewController:addNC animated:YES completion:nil];
+}
 
+- (void)addNewFlirt:(UIBarButtonItem *)sender
+{
+    AddFlirtViewController *addNewFlirt = [[AddFlirtViewController alloc] initWithNibName:nil bundle:nil];
     
-    if (!popMenu) {
-        popMenu = [[PopMenu alloc] initWithFrame:self.view.bounds items:items];
-        popMenu.perRowItemCount = 2;
-        popMenu.menuAnimationType = kPopMenuAnimationTypeNetEase;
-    }
-    if (popMenu.isShowed) {
-        return;
-    }
-    popMenu.didSelectedItemCompletion = ^(MenuItem *selectedItem) {
-        NSLog(@"%@",selectedItem.title);
-        
-        NSString *title = selectedItem.title;
-        
-        if([title isEqualToString:@"Flirt"]) {
-            
-            
-        }else{
-            AddPostViewController *addNewPost = [[AddPostViewController alloc] initWithNibName:nil bundle:nil];
-            
-            UINavigationController *addNC = [[UINavigationController alloc] initWithRootViewController:addNewPost];
-            // self.homeNavigationController.navigationBar.barStyle = BAR_STYLE;
-            addNC.navigationBar.barTintColor = [UIColor whiteColor];
-            addNC.navigationBar.tintColor = BAR_TINT_COLOR2;
-            addNC.navigationBar.translucent = NO;
-            
-            
-            CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
-            popup.destinationBounds = [[UIScreen mainScreen] bounds];
-            popup.presentedController = addNC;
-            
-            popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
-            popup.backgroundViewAlpha = 3.0f;
-            popup.presentingController = self;
-            
-            [self presentViewController:addNC animated:YES completion:nil];
-        }
-    };
-    
-    [popMenu showMenuAtView:self.view];
+    UINavigationController *addNC = [[UINavigationController alloc] initWithRootViewController:addNewFlirt];
+    // self.homeNavigationController.navigationBar.barStyle = BAR_STYLE;
+    addNC.navigationBar.barTintColor = [UIColor whiteColor];
+    addNC.navigationBar.tintColor = BAR_TINT_COLOR2;
+    addNC.navigationBar.translucent = NO;
     
     
-    /*
+    CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
+    popup.destinationBounds = [[UIScreen mainScreen] bounds];
+    popup.presentedController = addNC;
     
-
-     */
+    popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+    popup.backgroundViewAlpha = 3.0f;
+    popup.presentingController = self;
+    
+    [self presentViewController:addNC animated:YES completion:nil];
 }
 
 -(void)didSelectMenuOptionAtIndex:(NSInteger)row
 {
     if(row == 0) {
+        AddFlirtViewController *addNewFlirt = [[AddFlirtViewController alloc] initWithNibName:nil bundle:nil];
+        
+        UINavigationController *addNC = [[UINavigationController alloc] initWithRootViewController:addNewFlirt];
+        // self.homeNavigationController.navigationBar.barStyle = BAR_STYLE;
+        addNC.navigationBar.barTintColor = [UIColor whiteColor];
+        addNC.navigationBar.tintColor = BAR_TINT_COLOR2;
+        addNC.navigationBar.translucent = NO;
+        
+        
+        CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
+        popup.destinationBounds = [[UIScreen mainScreen] bounds];
+        popup.presentedController = addNC;
+        
+        popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+        popup.backgroundViewAlpha = 3.0f;
+        popup.presentingController = self;
+        
+        [self presentViewController:addNC animated:YES completion:nil];
         
         
     }else{

@@ -133,6 +133,11 @@
 		27EFDB3C1ACDA45F00C13D94 /* BELSHAW_.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 27EFDB3B1ACDA45F00C13D94 /* BELSHAW_.TTF */; };
 		27F655371ADAF2B4003AEB1B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F655341ADAF2B4003AEB1B /* Parse.framework */; };
 		27F655391ADAF2B4003AEB1B /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F655361ADAF2B4003AEB1B /* ParseUI.framework */; };
+		27FE30DD1B06334A009B394C /* AddFlirtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FE30DC1B06334A009B394C /* AddFlirtViewController.m */; };
+		27FE30E11B06335F009B394C /* FlirtPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FE30DF1B06335F009B394C /* FlirtPickerView.m */; };
+		27FE30E61B06336A009B394C /* JVFloatLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FE30E21B06336A009B394C /* JVFloatLabeledTextView.m */; };
+		27FE30E71B06336A009B394C /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FE30E31B06336A009B394C /* JVFloatLabeledTextField.m */; };
+		27FE30EA1B0633F7009B394C /* NSString+TextDirectionality.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FE30E91B0633F7009B394C /* NSString+TextDirectionality.m */; };
 		2FC357E59019DA43FFE75718 /* libPods-Drop It!.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF015556396258EBEA913BC /* libPods-Drop It!.a */; };
 /* End PBXBuildFile section */
 
@@ -340,6 +345,16 @@
 		27EFDB3B1ACDA45F00C13D94 /* BELSHAW_.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = BELSHAW_.TTF; sourceTree = "<group>"; };
 		27F655341ADAF2B4003AEB1B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		27F655361ADAF2B4003AEB1B /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		27FE30DB1B06334A009B394C /* AddFlirtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFlirtViewController.h; sourceTree = "<group>"; };
+		27FE30DC1B06334A009B394C /* AddFlirtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFlirtViewController.m; sourceTree = "<group>"; };
+		27FE30DF1B06335F009B394C /* FlirtPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlirtPickerView.m; sourceTree = "<group>"; };
+		27FE30E01B06335F009B394C /* FlirtPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlirtPickerView.h; sourceTree = "<group>"; };
+		27FE30E21B06336A009B394C /* JVFloatLabeledTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatLabeledTextView.m; sourceTree = "<group>"; };
+		27FE30E31B06336A009B394C /* JVFloatLabeledTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatLabeledTextField.m; sourceTree = "<group>"; };
+		27FE30E41B06336A009B394C /* JVFloatLabeledTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatLabeledTextField.h; sourceTree = "<group>"; };
+		27FE30E51B06336A009B394C /* JVFloatLabeledTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatLabeledTextView.h; sourceTree = "<group>"; };
+		27FE30E81B0633F7009B394C /* NSString+TextDirectionality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TextDirectionality.h"; sourceTree = "<group>"; };
+		27FE30E91B0633F7009B394C /* NSString+TextDirectionality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TextDirectionality.m"; sourceTree = "<group>"; };
 		39C11CF79E8FBB5E252EBBA2 /* Pods-dROP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dROP.release.xcconfig"; path = "Pods/Target Support Files/Pods-dROP/Pods-dROP.release.xcconfig"; sourceTree = "<group>"; };
 		41D7FC332F4A70DBA52539F7 /* Pods-Drop It!.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Drop It!.release.xcconfig"; path = "Pods/Target Support Files/Pods-Drop It!/Pods-Drop It!.release.xcconfig"; sourceTree = "<group>"; };
 		5B45C3F4981671AD7FFC8629 /* Pods-dROP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dROP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-dROP/Pods-dROP.debug.xcconfig"; sourceTree = "<group>"; };
@@ -522,6 +537,7 @@
 		278CF74D1AAD3F0A00A13D4B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				27FE30DE1B06334E009B394C /* JVFloatLabeledTextField */,
 				2776AD601B016C4100449865 /* VCFloatingActionButton */,
 				277170641AD07FE500AFF514 /* Fonts */,
 				27CBDF141ACB1E82004DEEE1 /* Reachability */,
@@ -712,8 +728,12 @@
 				27A334981AA6367F008188FC /* HomeTableViewController.m */,
 				27B404411AA77B57007DC137 /* AddPostViewController.h */,
 				27B404421AA77B57007DC137 /* AddPostViewController.m */,
+				27FE30DB1B06334A009B394C /* AddFlirtViewController.h */,
+				27FE30DC1B06334A009B394C /* AddFlirtViewController.m */,
 				27B404A01AA9F3FF007DC137 /* CommentsTableViewController.h */,
 				27B404A11AA9F3FF007DC137 /* CommentsTableViewController.m */,
+				27FE30E01B06335F009B394C /* FlirtPickerView.h */,
+				27FE30DF1B06335F009B394C /* FlirtPickerView.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -791,6 +811,19 @@
 				27EC539F1AB3F68500CC2A10 /* Done@2x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		27FE30DE1B06334E009B394C /* JVFloatLabeledTextField */ = {
+			isa = PBXGroup;
+			children = (
+				27FE30E81B0633F7009B394C /* NSString+TextDirectionality.h */,
+				27FE30E91B0633F7009B394C /* NSString+TextDirectionality.m */,
+				27FE30E21B06336A009B394C /* JVFloatLabeledTextView.m */,
+				27FE30E31B06336A009B394C /* JVFloatLabeledTextField.m */,
+				27FE30E41B06336A009B394C /* JVFloatLabeledTextField.h */,
+				27FE30E51B06336A009B394C /* JVFloatLabeledTextView.h */,
+			);
+			name = JVFloatLabeledTextField;
 			sourceTree = "<group>";
 		};
 		488E64E64531AA34639045DB /* Frameworks */ = {
@@ -1037,10 +1070,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27FE30DD1B06334A009B394C /* AddFlirtViewController.m in Sources */,
 				27B404431AA77B57007DC137 /* AddPostViewController.m in Sources */,
 				27B96AA31AAFBD1300AC4120 /* MCSwipeTableViewCell.m in Sources */,
 				27B3988D1ADD35A100ED5C27 /* NotificationsTableViewController.m in Sources */,
 				273E1AC51AB0B13200D41694 /* TimelineTableViewCell.m in Sources */,
+				27FE30EA1B0633F7009B394C /* NSString+TextDirectionality.m in Sources */,
 				27A334991AA6367F008188FC /* HomeTableViewController.m in Sources */,
 				27B404D81AAB9570007DC137 /* LPlaceholderTextView.m in Sources */,
 				2729251D1ABC59AB00A271D4 /* ColouredTableViewCell.m in Sources */,
@@ -1054,6 +1089,7 @@
 				278CF73A1AACFD0E00A13D4B /* ProfileViewController.m in Sources */,
 				27B404A21AA9F3FF007DC137 /* CommentsTableViewController.m in Sources */,
 				27B4041B1AA64057007DC137 /* PostTextTableViewCell.m in Sources */,
+				27FE30E11B06335F009B394C /* FlirtPickerView.m in Sources */,
 				271320401AB77AA800CF23DB /* MapPostViewController.m in Sources */,
 				2776AD681B016C4100449865 /* VCFloatingActionButton.m in Sources */,
 				27B96A941AAFBA4900AC4120 /* ABCIntroView.m in Sources */,
@@ -1061,9 +1097,11 @@
 				277C9D7E1AF24F4500184365 /* FlirtTableViewCell.m in Sources */,
 				27A334741AA63525008188FC /* main.m in Sources */,
 				278CF7441AAD2EDF00A13D4B /* Reachability.m in Sources */,
+				27FE30E71B06336A009B394C /* JVFloatLabeledTextField.m in Sources */,
 				2778CFC91AB9181600DD30CE /* RTSpinKitView.m in Sources */,
 				27DE0C321AB9D44000DA0D9C /* JPSThumnail.m in Sources */,
 				27B4048F1AA8EDD1007DC137 /* Config.m in Sources */,
+				27FE30E61B06336A009B394C /* JVFloatLabeledTextView.m in Sources */,
 				278CF78E1AAE49EA00A13D4B /* InfoViewController.m in Sources */,
 				27DE0C311AB9D44000DA0D9C /* JPSThumbnailAnnotationView.m in Sources */,
 				2775C4701AC3437A00B19772 /* ProfileTableViewCell.m in Sources */,
