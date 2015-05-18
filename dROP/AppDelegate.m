@@ -19,7 +19,13 @@
 #import "NotificationsTableViewController.h"
 
 
-@interface AppDelegate ()
+#import "AddPostViewController.h"
+#import "AddFlirtViewController.h"
+
+#import "BROptionsButton.h"
+
+
+@interface AppDelegate ()<BROptionButtonDelegate>
 {
     NSDate *lastUpdated;
     MenuTableViewController *_menuTableViewController;
@@ -86,6 +92,14 @@
     //_homeTableViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(8, 0, -8, 0);
 
     
+    
+    AddFlirtViewController *addNewFlirt = [[AddFlirtViewController alloc] initWithNibName:nil bundle:nil];
+    addNewFlirt.title = @"Add";
+    addNewFlirt.tabBarItem.image = [[UIImage imageNamed:@"Add2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    addNewFlirt.tabBarItem.selectedImage = [UIImage imageNamed:@"Add2"];
+
+    
+    
     _collegeViewController.title = @"Colleges";
     _collegeViewController.tabBarItem.image = [[UIImage imageNamed:@"University"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     _collegeViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"University"];
@@ -98,13 +112,19 @@
     
     //View Controllers
     NSArray *viewControllers =
-    [NSArray arrayWithObjects:profileNavigationController, homeNavigationController, collegeNavigationController, notificationNavigationController, nil];
+    [NSArray arrayWithObjects:profileNavigationController, homeNavigationController, addNewFlirt, collegeNavigationController, notificationNavigationController, nil];
     
     //Create tab bar
     self.tabBarController = [[UITabBarController alloc] init];
     
+    
     //set the view controllers for the tab bar controller
     [self.tabBarController setViewControllers:viewControllers];
+    
+    BROptionsButton *brOption = [[BROptionsButton alloc] initWithTabBar:self.tabBarController.tabBar forItemIndex:2 delegate:self];
+   
+    [brOption setImage:[UIImage imageNamed:@"Pen"] forBROptionsButtonState:BROptionsButtonStateNormal];
+    [brOption setImage:[UIImage imageNamed:@"Close_White"] forBROptionsButtonState:BROptionsButtonStateOpened];
     
     // set the bar background color
     [[UITabBar appearance] setBackgroundImage:[AppDelegate imageFromColor:BAR_TINT_COLOR2 forSize:CGSizeMake(320, 49) withCornerRadius:0]];
@@ -250,5 +270,34 @@
     
     return image;
 }
+
+
+#pragma mark - BROptionButtonDelegate
+
+// number of items
+- (NSInteger)brOptionsButtonNumberOfItems:(BROptionsButton *)brOptionsButton
+{
+    return 2;
+}
+
+// respond to selection (show viewController, animation, alert...)
+- (void)brOptionsButton:(BROptionsButton *)brOptionsButton didSelectItem:(BROptionItem *)item
+{
+    //[self setSelectedIndex:brOptionsButton.locationIndexInTabBar];
+}
+
+
+- (UIImage*)brOptionsButton:(BROptionsButton *)brOptionsButton imageForItemAtIndex:(NSInteger)index
+{
+    UIImage *image = [UIImage imageNamed:@"Apple"];
+    
+    return image;
+}
+
+// do any setups before displaying the button
+- (void)brOptionsButton:(BROptionsButton*)optionsButton willDisplayButtonItem:(BROptionItem*)button {
+    button.backgroundColor = [UIColor colorWithRed:10/255.0f green:91/255.0f blue:128/255.0f alpha:1.0f];
+}
+
 
 @end

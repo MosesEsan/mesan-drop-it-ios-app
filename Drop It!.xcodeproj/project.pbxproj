@@ -138,6 +138,8 @@
 		27FE30E61B06336A009B394C /* JVFloatLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FE30E21B06336A009B394C /* JVFloatLabeledTextView.m */; };
 		27FE30E71B06336A009B394C /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FE30E31B06336A009B394C /* JVFloatLabeledTextField.m */; };
 		27FE30EA1B0633F7009B394C /* NSString+TextDirectionality.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FE30E91B0633F7009B394C /* NSString+TextDirectionality.m */; };
+		27FE30F11B0A3C09009B394C /* BROptionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FE30EE1B0A3C09009B394C /* BROptionItem.m */; };
+		27FE30F21B0A3C09009B394C /* BROptionsButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FE30F01B0A3C09009B394C /* BROptionsButton.m */; };
 		2FC357E59019DA43FFE75718 /* libPods-Drop It!.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF015556396258EBEA913BC /* libPods-Drop It!.a */; };
 /* End PBXBuildFile section */
 
@@ -355,6 +357,10 @@
 		27FE30E51B06336A009B394C /* JVFloatLabeledTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatLabeledTextView.h; sourceTree = "<group>"; };
 		27FE30E81B0633F7009B394C /* NSString+TextDirectionality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TextDirectionality.h"; sourceTree = "<group>"; };
 		27FE30E91B0633F7009B394C /* NSString+TextDirectionality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TextDirectionality.m"; sourceTree = "<group>"; };
+		27FE30ED1B0A3C09009B394C /* BROptionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BROptionItem.h; sourceTree = "<group>"; };
+		27FE30EE1B0A3C09009B394C /* BROptionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BROptionItem.m; sourceTree = "<group>"; };
+		27FE30EF1B0A3C09009B394C /* BROptionsButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BROptionsButton.h; sourceTree = "<group>"; };
+		27FE30F01B0A3C09009B394C /* BROptionsButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BROptionsButton.m; sourceTree = "<group>"; };
 		39C11CF79E8FBB5E252EBBA2 /* Pods-dROP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dROP.release.xcconfig"; path = "Pods/Target Support Files/Pods-dROP/Pods-dROP.release.xcconfig"; sourceTree = "<group>"; };
 		41D7FC332F4A70DBA52539F7 /* Pods-Drop It!.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Drop It!.release.xcconfig"; path = "Pods/Target Support Files/Pods-Drop It!/Pods-Drop It!.release.xcconfig"; sourceTree = "<group>"; };
 		5B45C3F4981671AD7FFC8629 /* Pods-dROP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dROP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-dROP/Pods-dROP.debug.xcconfig"; sourceTree = "<group>"; };
@@ -537,6 +543,10 @@
 		278CF74D1AAD3F0A00A13D4B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				27FE30ED1B0A3C09009B394C /* BROptionItem.h */,
+				27FE30EE1B0A3C09009B394C /* BROptionItem.m */,
+				27FE30EF1B0A3C09009B394C /* BROptionsButton.h */,
+				27FE30F01B0A3C09009B394C /* BROptionsButton.m */,
 				27FE30DE1B06334E009B394C /* JVFloatLabeledTextField */,
 				2776AD601B016C4100449865 /* VCFloatingActionButton */,
 				277170641AD07FE500AFF514 /* Fonts */,
@@ -1083,12 +1093,14 @@
 				2776AD661B016C4100449865 /* floatTableViewCell.m in Sources */,
 				27DE0C301AB9D44000DA0D9C /* JPSThumbnailAnnotation.m in Sources */,
 				27B96AAA1AAFBD7400AC4120 /* CCMBorderView.m in Sources */,
+				27FE30F11B0A3C09009B394C /* BROptionItem.m in Sources */,
 				2773EB501ADEC2BC0023E005 /* NotificationTableViewCell.m in Sources */,
 				27BD28C61AD4545300185809 /* CollegeTableViewController.m in Sources */,
 				27A334771AA63525008188FC /* AppDelegate.m in Sources */,
 				278CF73A1AACFD0E00A13D4B /* ProfileViewController.m in Sources */,
 				27B404A21AA9F3FF007DC137 /* CommentsTableViewController.m in Sources */,
 				27B4041B1AA64057007DC137 /* PostTextTableViewCell.m in Sources */,
+				27FE30F21B0A3C09009B394C /* BROptionsButton.m in Sources */,
 				27FE30E11B06335F009B394C /* FlirtPickerView.m in Sources */,
 				271320401AB77AA800CF23DB /* MapPostViewController.m in Sources */,
 				2776AD681B016C4100449865 /* VCFloatingActionButton.m in Sources */,

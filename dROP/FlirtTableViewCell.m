@@ -33,12 +33,14 @@
         
         self.mainContainer = [[UIView alloc] init];
         self.mainContainer.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 0);
-        self.mainContainer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Hearts2"]];
+       // self.mainContainer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Hearts2"]];
+        self.mainContainer.backgroundColor = [UIColor whiteColor];
+
         self.mainContainer.clipsToBounds = YES;
         [self.contentView addSubview:self.mainContainer];
         
         self.overlay = [[UIView alloc] init];
-        self.overlay.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.6];
+        self.overlay.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5];
         [self.mainContainer addSubview:self.overlay];
         
         self.whiteOverlay = [[UIView alloc] init];
