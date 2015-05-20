@@ -78,8 +78,8 @@ typedef enum {
 @optional
 /*! just like UITableViewDelegate cusomize the button before displaying 
  */
-- (void)brOptionsButton:(BROptionsButton*)optionsButton
-  willDisplayButtonItem:(BROptionItem*)button;
+- (BROptionItem *)willDisplayButtonItem:(BROptionItem*)button
+                    forItemAtIndex:(NSInteger)index;
 
 - (NSString*)brOptionsButton:(BROptionsButton*)brOptionsButton
          titleForItemAtIndex:(NSInteger)index;

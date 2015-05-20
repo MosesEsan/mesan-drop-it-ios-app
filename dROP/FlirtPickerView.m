@@ -20,7 +20,12 @@
         
         self.clipsToBounds = YES;
         
-        _textField = [[UITextField alloc] initWithFrame:CGRectMake(15.0f, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
+        _textFieldImage = [[UIImageView alloc] initWithFrame:CGRectMake(5, (CGRectGetHeight(self.frame) / 2) - 10, 20.0f, 20.0f)];
+        _textFieldImage.backgroundColor = [UIColor clearColor];
+        [self addSubview:_textFieldImage];
+        
+        _textField = [[UITextField alloc] initWithFrame:CGRectMake(32.0f, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
+        _textField.backgroundColor = [UIColor clearColor];
         _textField.borderStyle = UITextBorderStyleNone;
         _textField.textAlignment = NSTextAlignmentLeft;
         _textField.font = [UIFont fontWithName:@"AvenirNext-Medium" size:18.0f];

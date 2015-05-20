@@ -18,6 +18,7 @@ PODS:
   - Facebook-iOS-SDK/ShareKit (4.0.1):
     - Bolts (~> 1.0)
     - Facebook-iOS-SDK/CoreKit
+  - Firebase (2.2.2)
   - FormatterKit (1.8.0):
     - FormatterKit/AddressFormatter (= 1.8.0)
     - FormatterKit/ArrayFormatter (= 1.8.0)
@@ -38,6 +39,9 @@ PODS:
   - FormatterKit/UnitOfInformationFormatter (1.8.0)
   - FormatterKit/URLRequestFormatter (1.8.0)
   - JDFTooltips (1.0)
+  - JSQMessagesViewController (7.0.2):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
   - MBProgressHUD (0.9.1)
   - Montserrat (1.0.0)
   - NJKWebViewProgress (0.2.3):
@@ -58,8 +62,10 @@ DEPENDENCIES:
   - CCMPopup
   - DZNEmptyDataSet
   - Facebook-iOS-SDK
+  - Firebase (>= 2.2.2)
   - FormatterKit
   - JDFTooltips
+  - JSQMessagesViewController
   - MBProgressHUD (~> 0.9.1)
   - Montserrat
   - NJKWebViewProgress
@@ -73,8 +79,11 @@ SPEC CHECKSUMS:
   CCMPopup: e41fad5b8a0823c9cddea8eab6d431670c9dabe5
   DZNEmptyDataSet: 741da409081a4bf707c949c964623a6ad1799772
   Facebook-iOS-SDK: 6d05532c97e9c542f8d87f94b7f6ee217493d00b
+  Firebase: e35cdd2561bf4fea9c1e384e9400a9c173d19e47
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   JDFTooltips: 439e3f1010b5e689e8438f66fce8448726e59897
+  JSQMessagesViewController: bb6649691182b1899dc52b42266ad69efc473510
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   Montserrat: 05ccfd6f44aadfd81b2bc3655f759099983be06e
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
@@ -85,4 +94,4 @@ SPEC CHECKSUMS:
   TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
   XHRealTimeBlur: 661fadd5691ba2d349758e8fd5fbdb499ac55f8c
 
-COCOAPODS: 0.36.4
+COCOAPODS: 0.36.1

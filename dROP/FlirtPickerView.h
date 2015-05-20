@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) NSString *placeHolder;
 
+@property (nonatomic, strong) UIImageView *textFieldImage;
 @property (nonatomic, strong) UITextField *textField;
 
 

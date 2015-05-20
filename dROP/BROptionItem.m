@@ -39,7 +39,7 @@ const CGFloat kBROptionsItemDefaultItemHeight = 40;
 
 - (void)LayoutTheButton {
     self.layer.cornerRadius = self.frame.size.height/2;
-    self.backgroundColor = [UIColor blueColor];
+    //self.backgroundColor = [UIColor blueColor];
     
     //self.layer.shadowColor = [UIColor blackColor].CGColor;
     self.layer.shadowOffset = CGSizeMake(0.0, 1);
@@ -51,7 +51,7 @@ const CGFloat kBROptionsItemDefaultItemHeight = 40;
 // overriding super class methods
 - (void)setImage:(UIImage *)image forState:(UIControlState)state {
     [super setImage:image forState:state];
-    self.backgroundColor = [UIColor clearColor];
+    //self.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark - touch events

@@ -15,6 +15,9 @@
 #import "MHFacebookImageViewer.h"
 
 #import "TTTAttributedLabel.h"
+
+#import "ChatViewController.h"
+
 #define SUB_CONTAINER_FRAME self.view.bounds
 
 @interface CommentsTableViewController ()<UITextViewDelegate>
@@ -94,28 +97,34 @@
         reportButton.imageEdgeInsets = UIEdgeInsetsMake(3, 1, -2, 1);
         [reportButton addTarget:self action:@selector(reportPost:) forControlEvents:UIControlEventTouchUpInside];
     
+        //Other Button
+        UIButton *otherButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        otherButton.frame = CGRectMake(0, 0, 23, 23);
+        otherButton.backgroundColor = [UIColor clearColor];
+        
+        
         if (![_postObject[@"postType"] isEqualToString:POST_TYPE_FLIRT])
         {
             //Dislike Button
-            UIButton *dislikeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            dislikeButton.frame = CGRectMake(0, 0, 23, 23);
-            dislikeButton.backgroundColor = [UIColor clearColor];
-            [dislikeButton setImage:[UIImage imageNamed:@"Dislike"] forState:UIControlStateNormal];
-            dislikeButton.imageEdgeInsets = UIEdgeInsetsMake(4, 1, -2, 1);
-            [dislikeButton addTarget:self action:@selector(dislikePost) forControlEvents:UIControlEventTouchUpInside];
-            
-            
-            UIBarButtonItem *positveSpacer = [[UIBarButtonItem alloc]
-                                              initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                              target:nil action:nil];
-            positveSpacer.width = 22;
-            
-            
-            
-            [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:dislikeButton], positveSpacer, [[UIBarButtonItem alloc] initWithCustomView:reportButton], nil]];
+            [otherButton setImage:[UIImage imageNamed:@"Dislike"] forState:UIControlStateNormal];
+            otherButton.imageEdgeInsets = UIEdgeInsetsMake(4, 1, -2, 1);
+            [otherButton addTarget:self action:@selector(dislikePost) forControlEvents:UIControlEventTouchUpInside];
         }else{
-            [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:reportButton], nil]];
+            //Chat Button
+            otherButton.frame = CGRectMake(0, 0, 25, 25);
+            [otherButton setImage:[UIImage imageNamed:@"Chat"] forState:UIControlStateNormal];
+            otherButton.imageEdgeInsets = UIEdgeInsetsMake(2, 0, -2, 0);
+            [otherButton addTarget:self action:@selector(chatWithOP) forControlEvents:UIControlEventTouchUpInside];
         }
+        
+        
+        UIBarButtonItem *positveSpacer = [[UIBarButtonItem alloc]
+                                          initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                          target:nil action:nil];
+        positveSpacer.width = 22;
+        
+        
+        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:otherButton], positveSpacer, [[UIBarButtonItem alloc] initWithCustomView:reportButton], nil]];
     }
     
     //Main View - Tableview, Textfield etc
@@ -1089,6 +1098,17 @@
     
     //Remove the comment object from the array
     [allComments removeObjectAtIndex:tag];
+}
+
+- (void)chatWithOP
+{
+    ChatViewController *chatView = [ChatViewController messagesViewController];
+    chatView.hidesBottomBarWhenPushed = YES;
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    [self.navigationController pushViewController:chatView animated:YES];
+
 }
 
 /*

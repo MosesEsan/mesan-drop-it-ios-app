@@ -54,6 +54,12 @@
 #define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK_ShareKit 0
 #define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK_ShareKit 1
 
+// Firebase
+#define COCOAPODS_POD_AVAILABLE_Firebase
+#define COCOAPODS_VERSION_MAJOR_Firebase 2
+#define COCOAPODS_VERSION_MINOR_Firebase 2
+#define COCOAPODS_VERSION_PATCH_Firebase 2
+
 // FormatterKit
 #define COCOAPODS_POD_AVAILABLE_FormatterKit
 #define COCOAPODS_VERSION_MAJOR_FormatterKit 1
@@ -119,6 +125,18 @@
 #define COCOAPODS_VERSION_MAJOR_JDFTooltips 1
 #define COCOAPODS_VERSION_MINOR_JDFTooltips 0
 #define COCOAPODS_VERSION_PATCH_JDFTooltips 0
+
+// JSQMessagesViewController
+#define COCOAPODS_POD_AVAILABLE_JSQMessagesViewController
+#define COCOAPODS_VERSION_MAJOR_JSQMessagesViewController 7
+#define COCOAPODS_VERSION_MINOR_JSQMessagesViewController 0
+#define COCOAPODS_VERSION_PATCH_JSQMessagesViewController 2
+
+// JSQSystemSoundPlayer
+#define COCOAPODS_POD_AVAILABLE_JSQSystemSoundPlayer
+#define COCOAPODS_VERSION_MAJOR_JSQSystemSoundPlayer 2
+#define COCOAPODS_VERSION_MINOR_JSQSystemSoundPlayer 0
+#define COCOAPODS_VERSION_PATCH_JSQSystemSoundPlayer 1
 
 // MBProgressHUD
 #define COCOAPODS_POD_AVAILABLE_MBProgressHUD

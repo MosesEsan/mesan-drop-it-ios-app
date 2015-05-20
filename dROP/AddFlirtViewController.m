@@ -16,6 +16,10 @@
 #import "DIDataManager.h"
 #import <Parse/Parse.h>
 
+#define GENDER_TEXT @"I'm looking at"
+#define HAIR_TEXT @"with hair"
+
+
 const static CGFloat kJVFieldHeight = 64.0f;
 const static CGFloat kJVFieldLeftMargin = 15.0f;
 const static CGFloat kJVFieldRightMargin = 15.0f;
@@ -23,6 +27,7 @@ const static CGFloat kJVFieldRightMargin = 15.0f;
 const static CGFloat kJVFieldFontSize = 18.0f;
 
 const static CGFloat kJVFieldFloatingLabelFontSize = 13.0f;
+
 
 
 //Y Values
@@ -45,6 +50,9 @@ const static CGFloat flirtY = kJVFieldHeight + 1 + kJVFieldHeight + 1 + kJVField
     
     int characterCount;
     UILabel *characterCountLabel;
+    
+    BOOL keyboardVisible;
+    CGSize kbSize;
 }
 
 @end
@@ -68,6 +76,7 @@ const static CGFloat flirtY = kJVFieldHeight + 1 + kJVFieldHeight + 1 + kJVField
     self.view.backgroundColor = [UIColor whiteColor];
         
     shared = [DIDataManager sharedManager];
+    keyboardVisible= NO;
     
     UIBarButtonItem *exitButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
                                                                                     target:self
@@ -116,10 +125,13 @@ const static CGFloat flirtY = kJVFieldHeight + 1 + kJVFieldHeight + 1 + kJVField
     UIColor *floatingLabelColor = [UIColor purpleColor]; //bar_tint_color
     
     genderField = [[FlirtPickerView alloc] initWithFrame:CGRectMake(0, genderY, CGRectGetWidth(self.view.frame) - (kJVFieldLeftMargin + kJVFieldRightMargin), kJVFieldHeight)];
-    genderField.placeHolder = @"I'm looking at";
+    genderField.placeHolder = GENDER_TEXT;
     genderField.pickerView.dataSource = self;
     genderField.pickerView.delegate = self;
+    genderField.textFieldImage.image = [UIImage imageNamed:@"Gender"];
     [self.view addSubview:genderField];
+    
+    
     
     //Bottom Border
     UIView *div1 = [[UIView alloc] initWithFrame:CGRectMake(0, kJVFieldHeight, CGRectGetWidth(self.view.frame), 1)];
@@ -129,9 +141,11 @@ const static CGFloat flirtY = kJVFieldHeight + 1 + kJVFieldHeight + 1 + kJVField
     //-----------
     
     hairField = [[FlirtPickerView alloc] initWithFrame:CGRectMake(0, hairY, CGRectGetWidth(self.view.frame) - (kJVFieldLeftMargin + kJVFieldRightMargin), kJVFieldHeight)];
-    hairField.placeHolder = @"with hair";
+    hairField.placeHolder = HAIR_TEXT;
     hairField.pickerView.dataSource = self;
     hairField.pickerView.delegate = self;
+    hairField.textFieldImage.image = [UIImage imageNamed:@"Hair"];
+
     [self.view addSubview:hairField];
     
     UIView *div2 = [[UIView alloc] initWithFrame:CGRectMake(0, hairField.frame.origin.y + kJVFieldHeight, CGRectGetWidth(self.view.frame), 1)];
@@ -192,8 +206,8 @@ const static CGFloat flirtY = kJVFieldHeight + 1 + kJVFieldHeight + 1 + kJVField
 
 - (void)setPickerOptions
 {
-    componentOptions = @[@[@"", @"Male", @"Female"],
-                         @[@"", @"Blonde", @"Brunette", @"Black"]];
+    componentOptions = @[@[GENDER_TEXT, @"Male", @"Female"],
+                         @[HAIR_TEXT, @"Blonde", @"Brunette", @"Black"]];
     
     [genderField.pickerView reloadAllComponents];
 }
@@ -208,9 +222,9 @@ const static CGFloat flirtY = kJVFieldHeight + 1 + kJVFieldHeight + 1 + kJVField
     {
         CGRect frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame) - (kJVFieldLeftMargin + kJVFieldRightMargin), kJVFieldHeight);
         pickerLabel = [[UILabel alloc] initWithFrame:frame];
-        pickerLabel.textAlignment = NSTextAlignmentLeft;
+        pickerLabel.textAlignment = NSTextAlignmentCenter;
         pickerLabel.backgroundColor = [UIColor clearColor];
-        pickerLabel.font = [UIFont fontWithName:@"AvenirNext-Medium" size:18.0f];
+        pickerLabel.font = [UIFont fontWithName:@"AvenirNext-Medium" size:19.0f];
     }
     
     //pickerLabel.textColor = [UIColor brownColor];
@@ -314,13 +328,21 @@ const static CGFloat flirtY = kJVFieldHeight + 1 + kJVFieldHeight + 1 + kJVField
     // Resign first responder to dismiss the keyboard and capture in-flight autocorrect suggestions
    // [messageTextView resignFirstResponder];
     
-    NSInteger row = [genderField.pickerView selectedRowInComponent:0];
-    NSString *genderText = componentOptions[0][row];
+    //NSInteger row = [genderField.pickerView selectedRowInComponent:0];
+    NSString *genderText = genderField.textField.text;
+    //componentOptions[0][row];
+    
     NSInteger genderLength = [genderText length];
     
-    row = [hairField.pickerView selectedRowInComponent:0];
-    NSString *hairText = componentOptions[1][row];
+    if ([genderText isEqualToString:GENDER_TEXT]) genderLength = 0;
+    
+    //row = [hairField.pickerView selectedRowInComponent:0];
+    NSString *hairText = hairField.textField.text;
+    //componentOptions[1][row];
+    
     NSInteger hairLength = [hairText length];
+
+    if ([hairText isEqualToString:HAIR_TEXT]) hairLength = 0;
     
     NSInteger locationLength = [[locationField text] length];
     NSInteger flirtLength = [[flirtField text] length];
@@ -450,6 +472,10 @@ const static CGFloat flirtY = kJVFieldHeight + 1 + kJVFieldHeight + 1 + kJVField
 - (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView
 {
     //Has Focus
+    //If the keyyboard is already visible, move up the frame
+    if (keyboardVisible)
+        [self moveFrameUp];
+
     return YES;
 }
 
@@ -488,39 +514,15 @@ const static CGFloat flirtY = kJVFieldHeight + 1 + kJVFieldHeight + 1 + kJVField
 }
 
 #pragma mark - UITextView Delegate Methods
-- (void)keyboardWillShow:(NSNotification*)aNotification
+- (void)keyboardWillShow:(NSNotification *)aNotification
 {
+    keyboardVisible = YES;
+    
+    NSDictionary* info = [aNotification userInfo];
+    kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
     if ([flirtField isFirstResponder]) {
-        // ...............
-        NSDictionary* info = [aNotification userInfo];
-        
-        CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-        
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.3]; // if you want to slide up the view
-        
-        //gender field
-        CGRect frame = genderField.frame;
-        frame.origin.y = 64.0f + frame.origin.y - kbSize.height;
-        genderField.frame = frame;
-        
-        //hair field
-        frame = hairField.frame;
-        frame.origin.y = 64.0f +frame.origin.y - kbSize.height;
-        hairField.frame = frame;
-        
-        //location field
-        frame = locationField.frame;
-        frame.origin.y = 64.0f +frame.origin.y - kbSize.height;
-        locationField.frame = frame;
-        
-        //flirt field
-        frame = flirtField.frame;
-        frame.origin.y = 64.0f +frame.origin.y - kbSize.height;
-        flirtField.frame = frame;
-        
-        [UIView commitAnimations];
+        [self moveFrameUp];
         
     }else {
         
@@ -531,6 +533,8 @@ const static CGFloat flirtY = kJVFieldHeight + 1 + kJVFieldHeight + 1 + kJVField
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
+    keyboardVisible = NO;
+
     //Move caption to original position
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3]; // if you want to slide up the view
@@ -560,7 +564,33 @@ const static CGFloat flirtY = kJVFieldHeight + 1 + kJVFieldHeight + 1 + kJVField
     
 }
 
-
+- (void)moveFrameUp
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+    
+    //gender field
+    CGRect frame = genderField.frame;
+    frame.origin.y = (64.0f + genderY) - kbSize.height;
+    genderField.frame = frame;
+    
+    //hair field
+    frame = hairField.frame;
+    frame.origin.y = (64.0f + hairY) - kbSize.height;
+    hairField.frame = frame;
+    
+    //location field
+    frame = locationField.frame;
+    frame.origin.y = (64.0f + locationY) - kbSize.height;
+    locationField.frame = frame;
+    
+    //flirt field
+    frame = flirtField.frame;
+    frame.origin.y = (64.0f + flirtY) - kbSize.height;
+    flirtField.frame = frame;
+    
+    [UIView commitAnimations];
+}
 
 /*
 #pragma mark - Navigation

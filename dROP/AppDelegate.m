@@ -23,7 +23,8 @@
 #import "AddFlirtViewController.h"
 
 #import "BROptionsButton.h"
-
+#import "CCMBorderView.h"
+#import "CCMPopupTransitioning.h"
 
 @interface AppDelegate ()<BROptionButtonDelegate>
 {
@@ -31,6 +32,7 @@
     MenuTableViewController *_menuTableViewController;
     
     
+    DIDataManager *shared;
 }
 
 @property (strong, nonatomic) UITabBarController *tabBarController;
@@ -66,14 +68,15 @@
         //[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     }
     
-    [DIDataManager sharedManager];
-
-    HomeTableViewController *homeTableViewController = [[HomeTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    
+    shared = [DIDataManager sharedManager];
     
     _profileViewController = [[ProfileViewController alloc] initWithNibName:nil bundle:nil];
     _homeTableViewController = [[HomeTableViewController alloc] initWithStyle:UITableViewStylePlain];
     _collegeViewController = [[CollegeTableViewController alloc] initWithStyle:UITableViewStylePlain];
     _notificationViewController = [[NotificationsTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    
+    
     
     UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:self.profileViewController];
     UINavigationController *homeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.homeTableViewController];
@@ -112,7 +115,7 @@
     
     //View Controllers
     NSArray *viewControllers =
-    [NSArray arrayWithObjects:profileNavigationController, homeNavigationController, addNewFlirt, collegeNavigationController, notificationNavigationController, nil];
+    [NSArray arrayWithObjects:homeNavigationController, profileNavigationController, addNewFlirt, collegeNavigationController, notificationNavigationController, nil];
     
     //Create tab bar
     self.tabBarController = [[UITabBarController alloc] init];
@@ -140,7 +143,7 @@
     
     // selected state
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:BAR_TINT_COLOR2, UITextAttributeTextColor, nil] forState:UIControlStateSelected];
-    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+    //[[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setSelectedImageTintColor:BAR_TINT_COLOR2];
     
     // remove the shadow
@@ -149,7 +152,7 @@
     // Set the dark color to selected tab (the dimmed background)
     [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor whiteColor] forSize:CGSizeMake(64, 49) withCornerRadius:0]];
     
-    self.tabBarController.selectedViewController=[self.tabBarController.viewControllers objectAtIndex:1];
+    self.tabBarController.selectedViewController=[self.tabBarController.viewControllers objectAtIndex:0];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
@@ -277,26 +280,105 @@
 // number of items
 - (NSInteger)brOptionsButtonNumberOfItems:(BROptionsButton *)brOptionsButton
 {
-    return 2;
+    NSInteger number = 2;
+    
+    //If app is not in testing mode, take the current location into consideration
+    if ([Config appMode] != TESTING &&
+        [Config checkAddPermission:shared.currentLocation] == NO)
+    {
+        number = 1;
+    }
+    
+    return number;
 }
 
 // respond to selection (show viewController, animation, alert...)
 - (void)brOptionsButton:(BROptionsButton *)brOptionsButton didSelectItem:(BROptionItem *)item
 {
     //[self setSelectedIndex:brOptionsButton.locationIndexInTabBar];
+    
+    NSInteger index = item.index;
+    
+    if (index == 1) [self addNewFlirt];
+    else if (index == 0) [self addNewPost];
 }
 
 
 - (UIImage*)brOptionsButton:(BROptionsButton *)brOptionsButton imageForItemAtIndex:(NSInteger)index
 {
-    UIImage *image = [UIImage imageNamed:@"Apple"];
+    UIImage *image;
+    if (index == 1) image = [UIImage imageNamed:@"Heart_filled"];
+    else if (index == 0) image = [UIImage imageNamed:@"Add2"];
     
     return image;
 }
 
 // do any setups before displaying the button
-- (void)brOptionsButton:(BROptionsButton*)optionsButton willDisplayButtonItem:(BROptionItem*)button {
-    button.backgroundColor = [UIColor colorWithRed:10/255.0f green:91/255.0f blue:128/255.0f alpha:1.0f];
+- (BROptionItem *)willDisplayButtonItem:(BROptionItem*)button forItemAtIndex:(NSInteger)index
+{
+    if (index == 1) {
+        //flirtButton.frame = CGRectMake(0, 0, 28, 28);
+        button.backgroundColor = [UIColor redColor];
+        button.imageEdgeInsets = UIEdgeInsetsMake(7, 7, 7, 7);
+    }
+    else if (index == 0){
+        button.backgroundColor = BAR_TINT_COLOR2;
+        button.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+
+    }
+    
+    button.layer.borderWidth = 2.0f;
+    button.layer.borderColor = [[UIColor whiteColor] CGColor];
+    button.layer.cornerRadius = CGRectGetWidth(button.frame) / 2;
+    
+
+    return button;
+}
+
+
+- (void)addNewPost
+{
+    AddPostViewController *addNewPost = [[AddPostViewController alloc] initWithNibName:nil bundle:nil];
+    
+    UINavigationController *addNC = [[UINavigationController alloc] initWithRootViewController:addNewPost];
+    // self.homeNavigationController.navigationBar.barStyle = BAR_STYLE;
+    addNC.navigationBar.barTintColor = [UIColor whiteColor];
+    addNC.navigationBar.tintColor = BAR_TINT_COLOR2;
+    addNC.navigationBar.translucent = NO;
+    
+    
+    CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
+    popup.destinationBounds = [[UIScreen mainScreen] bounds];
+    popup.presentedController = addNC;
+    
+    popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+    popup.backgroundViewAlpha = 3.0f;
+    popup.presentingController = _homeTableViewController;
+    
+    
+    [_homeTableViewController presentViewController:addNC animated:YES completion:nil];
+}
+
+- (void)addNewFlirt
+{
+    AddFlirtViewController *addNewFlirt = [[AddFlirtViewController alloc] initWithNibName:nil bundle:nil];
+    
+    UINavigationController *addNC = [[UINavigationController alloc] initWithRootViewController:addNewFlirt];
+    // self.homeNavigationController.navigationBar.barStyle = BAR_STYLE;
+    addNC.navigationBar.barTintColor = [UIColor whiteColor];
+    addNC.navigationBar.tintColor = BAR_TINT_COLOR2;
+    addNC.navigationBar.translucent = NO;
+    
+    CCMPopupTransitioning *popup = [CCMPopupTransitioning sharedInstance];
+    popup.destinationBounds = [[UIScreen mainScreen] bounds];
+    popup.presentedController = addNC;
+    
+    popup.backgroundViewColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+    popup.backgroundViewAlpha = 3.0f;
+    popup.presentingController = _homeTableViewController;
+    
+    
+    [_homeTableViewController presentViewController:addNC animated:YES completion:nil];
 }
 
 

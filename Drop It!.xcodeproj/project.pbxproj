@@ -127,6 +127,11 @@
 		27DE0C301AB9D44000DA0D9C /* JPSThumbnailAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE0C2C1AB9D44000DA0D9C /* JPSThumbnailAnnotation.m */; };
 		27DE0C311AB9D44000DA0D9C /* JPSThumbnailAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE0C2E1AB9D44000DA0D9C /* JPSThumbnailAnnotationView.m */; };
 		27DE0C321AB9D44000DA0D9C /* JPSThumnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE0C2F1AB9D44000DA0D9C /* JPSThumnail.m */; };
+		27E49C841B0BDB6E00DE45FE /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E49C831B0BDB6E00DE45FE /* ChatViewController.m */; };
+		27E49C871B0BDD1100DE45FE /* DemoModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E49C861B0BDD1100DE45FE /* DemoModelData.m */; };
+		27E49C8A1B0BEB1200DE45FE /* ChatDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E49C891B0BEB1200DE45FE /* ChatDataModel.m */; };
+		27E49C8C1B0C048600DE45FE /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E49C8B1B0C048600DE45FE /* libicucore.dylib */; };
+		27E49C8E1B0C04AB00DE45FE /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E49C8D1B0C04AB00DE45FE /* libc++.dylib */; };
 		27EC53A01AB3F68500CC2A10 /* MHFacebookImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EC539C1AB3F68500CC2A10 /* MHFacebookImageViewer.m */; };
 		27EC53A11AB3F68500CC2A10 /* Done.png in Resources */ = {isa = PBXBuildFile; fileRef = 27EC539E1AB3F68500CC2A10 /* Done.png */; };
 		27EC53A21AB3F68500CC2A10 /* Done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27EC539F1AB3F68500CC2A10 /* Done@2x.png */; };
@@ -340,6 +345,14 @@
 		27DE0C2D1AB9D44000DA0D9C /* JPSThumbnailAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPSThumbnailAnnotationView.h; sourceTree = "<group>"; };
 		27DE0C2E1AB9D44000DA0D9C /* JPSThumbnailAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPSThumbnailAnnotationView.m; sourceTree = "<group>"; };
 		27DE0C2F1AB9D44000DA0D9C /* JPSThumnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPSThumnail.m; sourceTree = "<group>"; };
+		27E49C821B0BDB6E00DE45FE /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		27E49C831B0BDB6E00DE45FE /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		27E49C851B0BDD1100DE45FE /* DemoModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoModelData.h; sourceTree = "<group>"; };
+		27E49C861B0BDD1100DE45FE /* DemoModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoModelData.m; sourceTree = "<group>"; };
+		27E49C881B0BEB1200DE45FE /* ChatDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatDataModel.h; path = Images.xcassets/ChatDataModel.h; sourceTree = "<group>"; };
+		27E49C891B0BEB1200DE45FE /* ChatDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatDataModel.m; path = Images.xcassets/ChatDataModel.m; sourceTree = "<group>"; };
+		27E49C8B1B0C048600DE45FE /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		27E49C8D1B0C04AB00DE45FE /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		27EC539B1AB3F68500CC2A10 /* MHFacebookImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHFacebookImageViewer.h; sourceTree = "<group>"; };
 		27EC539C1AB3F68500CC2A10 /* MHFacebookImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHFacebookImageViewer.m; sourceTree = "<group>"; };
 		27EC539E1AB3F68500CC2A10 /* Done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Done.png; sourceTree = "<group>"; };
@@ -374,6 +387,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27E49C8E1B0C04AB00DE45FE /* libc++.dylib in Frameworks */,
+				27E49C8C1B0C048600DE45FE /* libicucore.dylib in Frameworks */,
 				27B4048A1AA8ADBE007DC137 /* Accounts.framework in Frameworks */,
 				272925081ABB7C0800A271D4 /* AdSupport.framework in Frameworks */,
 				27B404651AA8AC2F007DC137 /* AudioToolbox.framework in Frameworks */,
@@ -528,6 +543,7 @@
 		278CF74C1AAD3EFC00A13D4B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				27E49C811B0BDB3B00DE45FE /* Chat */,
 				27B3988A1ADD357D00ED5C27 /* Notification */,
 				273E422D1ACC36C10048964B /* Menu */,
 				27CBDF091ACB17F6004DEEE1 /* Profile */,
@@ -804,6 +820,19 @@
 			name = JPSThumbnailAnnotation;
 			sourceTree = "<group>";
 		};
+		27E49C811B0BDB3B00DE45FE /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				27E49C821B0BDB6E00DE45FE /* ChatViewController.h */,
+				27E49C831B0BDB6E00DE45FE /* ChatViewController.m */,
+				27E49C851B0BDD1100DE45FE /* DemoModelData.h */,
+				27E49C861B0BDD1100DE45FE /* DemoModelData.m */,
+				27E49C881B0BEB1200DE45FE /* ChatDataModel.h */,
+				27E49C891B0BEB1200DE45FE /* ChatDataModel.m */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
 		27EC539A1AB3F68500CC2A10 /* MHFBImageViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -829,8 +858,8 @@
 				27FE30E81B0633F7009B394C /* NSString+TextDirectionality.h */,
 				27FE30E91B0633F7009B394C /* NSString+TextDirectionality.m */,
 				27FE30E21B06336A009B394C /* JVFloatLabeledTextView.m */,
-				27FE30E31B06336A009B394C /* JVFloatLabeledTextField.m */,
 				27FE30E41B06336A009B394C /* JVFloatLabeledTextField.h */,
+				27FE30E31B06336A009B394C /* JVFloatLabeledTextField.m */,
 				27FE30E51B06336A009B394C /* JVFloatLabeledTextView.h */,
 			);
 			name = JVFloatLabeledTextField;
@@ -839,6 +868,8 @@
 		488E64E64531AA34639045DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27E49C8D1B0C04AB00DE45FE /* libc++.dylib */,
+				27E49C8B1B0C048600DE45FE /* libicucore.dylib */,
 				27F655341ADAF2B4003AEB1B /* Parse.framework */,
 				27F655361ADAF2B4003AEB1B /* ParseUI.framework */,
 				274C88201AC0780B00C8FB72 /* AvocarrotSDK.framework */,
@@ -1089,6 +1120,7 @@
 				27A334991AA6367F008188FC /* HomeTableViewController.m in Sources */,
 				27B404D81AAB9570007DC137 /* LPlaceholderTextView.m in Sources */,
 				2729251D1ABC59AB00A271D4 /* ColouredTableViewCell.m in Sources */,
+				27E49C8A1B0BEB1200DE45FE /* ChatDataModel.m in Sources */,
 				27131FDF1AB5C78100CF23DB /* MapViewController.m in Sources */,
 				2776AD661B016C4100449865 /* floatTableViewCell.m in Sources */,
 				27DE0C301AB9D44000DA0D9C /* JPSThumbnailAnnotation.m in Sources */,
@@ -1102,10 +1134,12 @@
 				27B4041B1AA64057007DC137 /* PostTextTableViewCell.m in Sources */,
 				27FE30F21B0A3C09009B394C /* BROptionsButton.m in Sources */,
 				27FE30E11B06335F009B394C /* FlirtPickerView.m in Sources */,
+				27E49C871B0BDD1100DE45FE /* DemoModelData.m in Sources */,
 				271320401AB77AA800CF23DB /* MapPostViewController.m in Sources */,
 				2776AD681B016C4100449865 /* VCFloatingActionButton.m in Sources */,
 				27B96A941AAFBA4900AC4120 /* ABCIntroView.m in Sources */,
 				272925201ABC692A00A271D4 /* DITableViewCell.m in Sources */,
+				27E49C841B0BDB6E00DE45FE /* ChatViewController.m in Sources */,
 				277C9D7E1AF24F4500184365 /* FlirtTableViewCell.m in Sources */,
 				27A334741AA63525008188FC /* main.m in Sources */,
 				278CF7441AAD2EDF00A13D4B /* Reachability.m in Sources */,

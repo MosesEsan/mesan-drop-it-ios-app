@@ -43,11 +43,12 @@
         [[self.tabBar.items objectAtIndex:self.locationIndexInTabBar] setEnabled:NO];
         
         CGPoint buttonLocation = [self buttonLocaitonForIndex:self.locationIndexInTabBar];
-        CGRect myRect = CGRectMake(0.0, 0.0, 60, 49);
+        CGRect myRect = CGRectMake(0.0, 0.0, 64, 50);
         self.frame = myRect;
         self.center = buttonLocation;
-        self.backgroundColor = [UIColor colorWithRed:13/255.0f green:122/255.0f blue:171/255.0f alpha:1.0f];
+        self.backgroundColor = [UIColor colorWithRed:13/255.0f green:122/255.0f blue:171/255.0f alpha:.9f];
 
+        
         //self.layer.cornerRadius = 6;
         self.clipsToBounds = YES;
         self.layer.zPosition = MAXFLOAT;
@@ -67,7 +68,8 @@
 - (void)setupSubviews {
     
     const CGFloat leftRightMargin = 10;
-    const CGRect imagesRect = CGRectInset(self.bounds, leftRightMargin, leftRightMargin);
+    //const
+    CGRect imagesRect = CGRectInset(self.bounds, leftRightMargin, leftRightMargin);
    
     UIImageView *closedImageView = [[UIImageView alloc] initWithFrame:imagesRect];
     closedImageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -75,6 +77,7 @@
     [self addSubview:closedImageView];
     self.closedStateImage = closedImageView;
     
+    imagesRect.origin.y = imagesRect.origin.y + 5;
     UIImageView *openedImageView = [[UIImageView alloc] initWithFrame:imagesRect];
     openedImageView.contentMode = closedImageView.contentMode;
     openedImageView.backgroundColor = closedImageView.backgroundColor;
@@ -318,6 +321,19 @@
 - (BROptionItem*)createButtonItemAtIndex:(NSInteger)index {
     
     BROptionItem *brOptionItem = [[BROptionItem alloc] initWithIndex:index];
+    
+    
+    if([self.delegate respondsToSelector:@selector(willDisplayButtonItem:forItemAtIndex:)]) {
+        
+        
+        BROptionItem *buttonItem = [self.delegate willDisplayButtonItem:brOptionItem
+                                                    forItemAtIndex:index];
+        if(buttonItem != nil) {
+            brOptionItem = buttonItem;
+        }
+    }
+    
+     
     [brOptionItem addTarget:self
                      action:@selector(buttonItemPressed:)
            forControlEvents:UIControlEventTouchUpInside];
@@ -340,6 +356,18 @@
             [brOptionItem setTitle:buttonTitle forState:UIControlStateNormal];
         }
     }
+    
+    /*
+    if([self.delegate respondsToSelector:@selector(brOptionsButton:backgroundForItemAtIndex:)]) {
+        
+        
+        UIColor *backgroundColor = [self.delegate brOptionsButton:self
+                                           backgroundForItemAtIndex:index];
+        if(backgroundColor != nil) {
+            brOptionItem.backgroundColor = backgroundColor;
+        }
+    }
+    */
     return brOptionItem;
 }
 
