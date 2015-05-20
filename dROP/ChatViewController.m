@@ -78,19 +78,30 @@
      *  self.inputToolbar.maximumHeight = 150;
      */
     
-    //This Particular Chat
+    //This Particular Chat - Use the PostId
      chatRef = [[Firebase alloc] initWithUrl: @"dropitchat.firebaseIO.com/SenderReceiver2015-05-2000:51:30"];
     
+    // This allows us to check if these were messages already stored on the server
+    // when we booted up (YES) or if they are new messages since we've started the app.
+    // This is so that we can batch together the initial messages' reloadData for a perf gain.
+    __block BOOL initialAdds = YES;
     
     // Attach a block to read the data at our posts reference
     [chatRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-        NSLog(@"%@", snapshot.value);
-        
-        [self receivedMessage:snapshot.value];
-    } withCancelBlock:^(NSError *error) {
-        NSLog(@"%@", error.description);
+
+        if (!initialAdds)
+        {
+            // Add the chat message to the array.
+            [self receivedMessage:snapshot.value];
+        }
     }];
     
+    // Value event fires right after we get the events already stored in the Firebase repo.
+    // We've gotten the initial messages stored on the server,
+    // set initialAdds=NO so that we'll reload after each additional childAdded event.
+    [chatRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        initialAdds = NO;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -170,6 +181,9 @@
     
     NSString *dateString = [dateFormatter stringFromDate:date];
     
+    
+    
+    //Save in Local Datasore first - use the returned objectId as the messageId
     
     //This particular chat message - to be stored with a autoid
     NSDictionary *chatMessage = @{

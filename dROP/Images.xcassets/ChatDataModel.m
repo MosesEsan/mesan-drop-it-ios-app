@@ -57,6 +57,82 @@
 
 #pragma mark - Class Methods - Actions
 
+//Called when user accepts chat invitation
++ (void)startNewConversation:(NSString *)senderId
+              withReceiverId:(NSString *)receiverId
+            withReceiverName:(NSString *)receiverName
+                  withPostId:(NSString *)postId
+{
+    PFObject *conversation = [PFObject objectWithClassName:@"ChatConversation"];
+    conversation[@"conversationId"] = [NSString stringWithFormat:@"Post%@Chat%@",postId,receiverId];
+    conversation[@"postId"] = postId;
+    conversation[@"senderId"] = senderId;
+    conversation[@"receiverId"] = receiverId;
+    conversation[@"receiverName"] = receiverName;
+    conversation[@"new"] = @YES;
+    [conversation pinInBackground];
+}
+
+//Called when Conversations View Controller is opened
++ (void)getConversationsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"ChatConversation"];
+    [query fromLocalDatastore];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            NSLog(@"error in geo query!");
+            completionBlock(NO, error);
+        } else {
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                completionBlock(YES, nil);
+            });
+        }
+    }];
+}
+
+//Called when Chat View Controller is opened
++ (void)getMessagesWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock
+          withConversationId:(NSString *)conversationId
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
+    [query whereKey:@"conversationId" equalTo:conversationId];
+    [query fromLocalDatastore];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            NSLog(@"error in geo query!");
+            completionBlock(NO, error);
+        } else {
+            
+    
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                completionBlock(YES, nil);
+            });
+        }
+    }];
+}
+
+//Save new message
++ (void)saveMessage:(NSString *)message
+ withConversationId:(NSString *)conversationId
+         withPostId:(NSString *)postId
+         withSenderId:(NSString *)senderId
+      withDisplayName:(NSString *)senderName
+             withDate:(NSDate *)date
+{
+    
+    PFObject *chatMessage = [PFObject objectWithClassName:@"Messages"];
+    chatMessage[@"conversationId"] = conversationId;
+    chatMessage[@"postId"] = postId;
+    chatMessage[@"senderId"] = senderId;
+    chatMessage[@"senderName"] = senderName;
+    chatMessage[@"message"] = message;
+    [chatMessage pinInBackground];
+}
+
 + (JSQMessage *)createTextMessage:(NSString *)message
                            withSenderId:(NSString *)senderId
                         withDisplayName:(NSString *)senderName

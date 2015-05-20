@@ -216,3 +216,110 @@ Parse.Cloud.afterSave("Comments", function(request) {
         }
     });
 });
+
+
+
+//request chat
+Parse.Cloud.define("requestChat", function(request, response) {
+
+    console.log(request)
+
+    // Our "Comment" class has a "text" key with the body of the comment itself
+    var requestBy = request.params.requestBy;
+    var postId = request.params.postId;
+
+    var Post = Parse.Object.extend("Posts");
+    var query = new Parse.Query(Post);
+    query.equalTo("objectId", postId);
+    query.find({
+        success: function(post) {
+            // The object was retrieved successfully.
+
+            if (post.length > 0)
+            {
+                postObject = post[0];
+
+                var requestTo = postObject.get("deviceId");
+
+                var Notification = Parse.Object.extend("Notifications");
+                var query = new Parse.Query(Notification);
+                query.equalTo("recipient", requestTo);
+                query.equalTo("requestBy", requestBy);
+                query.equalTo("postId", postId);
+                query.find({
+                    success: function (notifications) {
+                        // The object was retrieved successfully.
+
+
+                        if (notifications.length > 0) {
+                            response.error("Multiple Chat Request Cannot Be Sent! Please wait for user's response.");
+                        }else{
+                            //Create a notification object and save it
+                            var Notification = Parse.Object.extend("Notifications");
+                            var notification = new Notification();
+
+                            var message = "Someone requested a chat conversation with you: " + postObject.get('text');
+
+                            notification.set("message", message);
+                            notification.set("type", "ChatRequest");
+                            notification.set("recipient",requestTo);
+                            notification.set("requestBy",requestBy);
+                            notification.set("post", postObject);
+                            notification.set("postId", postId);
+
+
+                            notification.save(null, {
+                                success: function(notification) {
+                                    // Execute any logic that should take place after the object is saved.
+                                    //send push notification
+                                    var pushQuery = new Parse.Query(Parse.Installation);
+                                    pushQuery.equalTo('deviceId', requestTo);
+
+                                    Parse.Push.send({
+                                        where: pushQuery, // Set our Installation query
+                                        data: {
+                                            alert: message
+                                        }
+                                    }, {
+                                        success: function() {
+                                            // Push was successful
+                                            console.log("Chat Request Sent!")
+                                            response.success("Chat Request Sent!");
+                                        },
+                                        error: function(error) {
+                                            throw "Got an error " + error.code + " : " + error.message;
+
+                                            response.error("Chat Request Failed! Please try again.");
+                                            //Delete the notification
+                                        }
+                                    });
+                                },
+                                error: function(notification, error) {
+                                    // Execute any logic that should take place if the save fails.
+                                    // error is a Parse.Error with an error code and message.
+                                    alert('Failed to create new object, with error code: ' + error.message);
+                                    response.error("Chat Request Failed! Please try again.");
+                                }
+                            });
+                        }
+                    },
+                    error: function (object, error) {
+                        // The object was not retrieved successfully.
+                        // error is a Parse.Error with an error code and message.
+                        response.error("Chat Request Failed! Please try again.");
+                    }
+                });
+
+
+            }else{
+                response.error("Chat Request Failed! Please try again.");
+            }
+        },
+        error: function(object, error) {
+            // The object was not retrieved successfully.
+            // error is a Parse.Error with an error code and message.
+            response.error("Chat Request Failed! Please try again.");
+        }
+    });
+
+});

@@ -1102,13 +1102,39 @@
 
 - (void)chatWithOP
 {
+    PFObject *parseObject = _postObject[@"parseObject"];
+
+    //Check if a chat object exist in the local storage
+    //where post id = postId
+    [PFCloud callFunctionInBackground:@"requestChat"
+                       withParameters:@{@"requestBy": [Config deviceId], @"postId": parseObject.objectId}
+                                block:^(NSString *result, NSError *error) {
+                                    
+                                    NSString *message;
+                                    
+                                    if (!error) {
+                                        message = result;
+                                        
+                                    }else{
+                                        message =  error.userInfo[@"error"];
+                                    }
+                                    
+                                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                                                        message:message
+                                                                                       delegate:self
+                                                                              cancelButtonTitle:@"Ok"
+                                                                              otherButtonTitles:nil];
+                                    [alertView show];
+                                }];
+
+    /*
     ChatViewController *chatView = [ChatViewController messagesViewController];
     chatView.hidesBottomBarWhenPushed = YES;
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     [self.navigationController pushViewController:chatView animated:YES];
-
+*/
 }
 
 /*
