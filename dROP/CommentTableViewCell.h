@@ -13,11 +13,19 @@
 
 @interface CommentTableViewCell : MCSwipeTableViewCell
 
+
+@property (nonatomic, strong) UIView *line;
+@property (nonatomic, strong) UIButton *imageV;
+
+
 @property (nonatomic, strong) UILabel *commentText;
 @property (nonatomic, strong) UIView *actionsView;
 
 @property (nonatomic, strong) UILabel *date;
 @property (nonatomic, strong) UIButton *smiley;
 
+- (void)setFrameWithObject:(NSDictionary *)commentObject forIndex:(NSInteger)index;
+
++ (CGFloat)getCellHeight:(NSDictionary *)commentObject;
 
 @end

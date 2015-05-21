@@ -43,6 +43,7 @@
 		273E1AC51AB0B13200D41694 /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 273E1AC41AB0B13200D41694 /* TimelineTableViewCell.m */; };
 		273E42301ACC36EA0048964B /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 273E422F1ACC36EA0048964B /* MenuTableViewController.m */; };
 		274C88211AC0780B00C8FB72 /* AvocarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274C88201AC0780B00C8FB72 /* AvocarrotSDK.framework */; };
+		276B55601B0E441C00B423BC /* CommentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276B555F1B0E441C00B423BC /* CommentsTableViewController.m */; };
 		2773EB501ADEC2BC0023E005 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2773EB4F1ADEC2BC0023E005 /* NotificationTableViewCell.m */; };
 		2775C4701AC3437A00B19772 /* ProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2775C46F1AC3437A00B19772 /* ProfileTableViewCell.m */; };
 		2776AD661B016C4100449865 /* floatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2776AD621B016C4100449865 /* floatTableViewCell.m */; };
@@ -80,7 +81,6 @@
 		27B404861AA8AD64007DC137 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B404851AA8AD64007DC137 /* Social.framework */; };
 		27B4048A1AA8ADBE007DC137 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B404891AA8ADBD007DC137 /* Accounts.framework */; };
 		27B4048F1AA8EDD1007DC137 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B4048E1AA8EDD1007DC137 /* Config.m */; };
-		27B404A21AA9F3FF007DC137 /* CommentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B404A11AA9F3FF007DC137 /* CommentsTableViewController.m */; };
 		27B404D81AAB9570007DC137 /* LPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B404D61AAB9570007DC137 /* LPlaceholderTextView.m */; };
 		27B404DB1AABBEEC007DC137 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B404DA1AABBEEC007DC137 /* CommentTableViewCell.m */; };
 		27B96A941AAFBA4900AC4120 /* ABCIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B96A8E1AAFBA4900AC4120 /* ABCIntroView.m */; };
@@ -209,6 +209,7 @@
 		2748CBA01ACC7B1D004D4A5E /* Club4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Club4.jpg; sourceTree = "<group>"; };
 		2748CBA21ACC7B4D004D4A5E /* Club5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Club5.jpg; sourceTree = "<group>"; };
 		274C88201AC0780B00C8FB72 /* AvocarrotSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AvocarrotSDK.framework; sourceTree = "<group>"; };
+		276B555F1B0E441C00B423BC /* CommentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsTableViewController.m; sourceTree = "<group>"; };
 		2773EB4E1ADEC2BC0023E005 /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
 		2773EB4F1ADEC2BC0023E005 /* NotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
 		2775C46E1AC3437A00B19772 /* ProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewCell.h; sourceTree = "<group>"; };
@@ -277,7 +278,6 @@
 		27B404891AA8ADBD007DC137 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		27B4048E1AA8EDD1007DC137 /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
 		27B404A01AA9F3FF007DC137 /* CommentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsTableViewController.h; sourceTree = "<group>"; };
-		27B404A11AA9F3FF007DC137 /* CommentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsTableViewController.m; sourceTree = "<group>"; };
 		27B404D61AAB9570007DC137 /* LPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPlaceholderTextView.m; sourceTree = "<group>"; };
 		27B404D71AAB9570007DC137 /* LPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPlaceholderTextView.h; sourceTree = "<group>"; };
 		27B404D91AABBEEC007DC137 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
@@ -757,7 +757,7 @@
 				27FE30DB1B06334A009B394C /* AddFlirtViewController.h */,
 				27FE30DC1B06334A009B394C /* AddFlirtViewController.m */,
 				27B404A01AA9F3FF007DC137 /* CommentsTableViewController.h */,
-				27B404A11AA9F3FF007DC137 /* CommentsTableViewController.m */,
+				276B555F1B0E441C00B423BC /* CommentsTableViewController.m */,
 				27FE30E01B06335F009B394C /* FlirtPickerView.h */,
 				27FE30DF1B06335F009B394C /* FlirtPickerView.m */,
 			);
@@ -1130,13 +1130,13 @@
 				27BD28C61AD4545300185809 /* CollegeTableViewController.m in Sources */,
 				27A334771AA63525008188FC /* AppDelegate.m in Sources */,
 				278CF73A1AACFD0E00A13D4B /* ProfileViewController.m in Sources */,
-				27B404A21AA9F3FF007DC137 /* CommentsTableViewController.m in Sources */,
 				27B4041B1AA64057007DC137 /* PostTextTableViewCell.m in Sources */,
 				27FE30F21B0A3C09009B394C /* BROptionsButton.m in Sources */,
 				27FE30E11B06335F009B394C /* FlirtPickerView.m in Sources */,
 				27E49C871B0BDD1100DE45FE /* DemoModelData.m in Sources */,
 				271320401AB77AA800CF23DB /* MapPostViewController.m in Sources */,
 				2776AD681B016C4100449865 /* VCFloatingActionButton.m in Sources */,
+				276B55601B0E441C00B423BC /* CommentsTableViewController.m in Sources */,
 				27B96A941AAFBA4900AC4120 /* ABCIntroView.m in Sources */,
 				272925201ABC692A00A271D4 /* DITableViewCell.m in Sources */,
 				27E49C841B0BDB6E00DE45FE /* ChatViewController.m in Sources */,

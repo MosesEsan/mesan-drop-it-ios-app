@@ -56,7 +56,7 @@
         [self.line addSubview:self.imageV];
         
         self.postContainer = [[UIView alloc] init];
-        self.postContainer.frame = CGRectMake(ICON_WIDTH, 0, CGRectGetWidth(self.mainContainer.frame) - (ICON_WIDTH + 5), 0);
+        self.postContainer.frame = CGRectMake(ICON_WIDTH, 0, CGRectGetWidth(self.mainContainer.frame) - (ICON_WIDTH + 10), 0);
         self.postContainer.backgroundColor = [UIColor clearColor];
         self.postContainer.clipsToBounds = YES;
         [self.mainContainer addSubview:self.postContainer];

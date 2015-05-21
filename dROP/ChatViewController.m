@@ -94,32 +94,25 @@
     //Initialize Model to hold all data
     self.chatDataModel = [[ChatDataModel alloc] init];
     
-    //Create Avatars
-    //Sender - This is the current user
-    JSQMessagesAvatarImage *sendersImage =
-    [JSQMessagesAvatarImageFactory avatarImageWithImage:_sendersAvatar
-                                               diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     
-    
-    //Receiver - The person the user is chatting with
-    JSQMessagesAvatarImage *receiversImage =
-    [JSQMessagesAvatarImageFactory avatarImageWithImage:_recieversAvatar
-                                               diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
-    
-    self.avatars = @{ self.senderId : sendersImage,
-                      self.recieversId : receiversImage
-                      };
-    
-    
-    self.users = @{ self.senderId : self.senderDisplayName,
-                    self.recieversId : _recieversDisplayName
-                    };
-    
+    self.users = @{self.senderId : self.senderDisplayName,self.recieversId : _recieversDisplayName};
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
-    
     self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
     self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    //Create Avatars
+    //Sender - This is the current user
+    JSQMessagesAvatarImage *sendersImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:_sendersAvatar
+                                                                                      diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+    //Receiver - The person the user is chatting with
+    JSQMessagesAvatarImage *receiversImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:_recieversAvatar
+                                                                                        diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     
+    self.avatars = @{ self.senderId : sendersImage,self.recieversId : receiversImage};
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+
     
     //get the messages for this conversation thread
     [ChatDataModel getMessageswithConversationId:self.conversationId
@@ -209,36 +202,12 @@
     }
 }
 
-
-#pragma mark - JSQMessagesViewController method overrides
-
-- (void)didPressSendButton:(UIButton *)button
-           withMessageText:(NSString *)text
-                  senderId:(NSString *)senderId
-         senderDisplayName:(NSString *)senderDisplayName
-                      date:(NSDate *)date
-{
- 
-    /*  Sending a message. Your implementation of this method should do *at least* the following:
-     *
-     *  1. Play sound (optional)
-     *  2. Add new id<JSQMessageData> object to your data source
-     *  3. Call `finishSendingMessage`
-     */
- 
-    [JSQSystemSoundPlayer jsq_playMessageSentSound];
-    
-    [self saveMessage:text senderId:senderId senderDisplayName:senderDisplayName date:date];
-}
-
-
 - (void)saveMessage:(NSString *)text
            senderId:(NSString *)senderId
   senderDisplayName:(NSString *)senderDisplayName
                date:(NSDate *)date
 {
     //Save in Local Datasore first - use the returned objectId as the messageId
-    
     [ChatDataModel saveMessage:text
             withConversationId:self.conversationId
                     withPostId:self.postId
@@ -271,6 +240,9 @@
                            NSLog(@"Data could not be saved.");
                        } else {
                            NSLog(@"Data saved successfully.");
+                           
+                           //Push notification
+                           
                            JSQMessage *message =
                            [ChatDataModel createTextMessage:text
                                                withSenderId:senderId
@@ -286,6 +258,28 @@
                    }];
                }
            }];
+}
+
+
+#pragma mark - JSQMessagesViewController method overrides
+
+- (void)didPressSendButton:(UIButton *)button
+           withMessageText:(NSString *)text
+                  senderId:(NSString *)senderId
+         senderDisplayName:(NSString *)senderDisplayName
+                      date:(NSDate *)date
+{
+ 
+    /*  Sending a message. Your implementation of this method should do *at least* the following:
+     *
+     *  1. Play sound (optional)
+     *  2. Add new id<JSQMessageData> object to your data source
+     *  3. Call `finishSendingMessage`
+     */
+ 
+    [JSQSystemSoundPlayer jsq_playMessageSentSound];
+    
+    [self saveMessage:text senderId:senderId senderDisplayName:senderDisplayName date:date];
 }
 
 

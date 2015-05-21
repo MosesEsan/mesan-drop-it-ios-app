@@ -91,15 +91,15 @@
         
         //Report Button
         UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        reportButton.frame = CGRectMake(0, 0, 23, 23);
+        reportButton.frame = CGRectMake(0, 0, 25, 25);
         reportButton.backgroundColor = [UIColor clearColor];
         [reportButton setImage:[UIImage imageNamed:@"Reported2"] forState:UIControlStateNormal];
-        reportButton.imageEdgeInsets = UIEdgeInsetsMake(3, 1, -2, 1);
+        reportButton.imageEdgeInsets = UIEdgeInsetsMake(0, 1, 0, 1);
         [reportButton addTarget:self action:@selector(reportPost:) forControlEvents:UIControlEventTouchUpInside];
     
         //Other Button
         UIButton *otherButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        otherButton.frame = CGRectMake(0, 0, 23, 23);
+        otherButton.frame = CGRectMake(0, 0, 28, 28);
         otherButton.backgroundColor = [UIColor clearColor];
         
         
@@ -107,8 +107,20 @@
         {
             //Dislike Button
             [otherButton setImage:[UIImage imageNamed:@"Dislike"] forState:UIControlStateNormal];
+            //[otherButton setImage:[UIImage imageNamed:@"Sad_Red"] forState:UIControlStateNormal];
             otherButton.imageEdgeInsets = UIEdgeInsetsMake(4, 1, -2, 1);
             [otherButton addTarget:self action:@selector(dislikePost) forControlEvents:UIControlEventTouchUpInside];
+            
+            otherButton.backgroundColor = [UIColor redColor];
+            //otherButton.backgroundColor = [UIColor whiteColor];
+            otherButton.imageEdgeInsets = UIEdgeInsetsMake(6.5, 6.5, 6.5, 6.5);
+            //otherButton.imageEdgeInsets = UIEdgeInsetsMake(2.5, 2.5, 2.5, 2.5);
+            
+            otherButton.layer.borderWidth = 2.0f;
+            otherButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+            otherButton.layer.cornerRadius = CGRectGetWidth(otherButton.frame) / 2;
+            
+            
         }else{
             //Chat Button
             otherButton.frame = CGRectMake(0, 0, 25, 25);
@@ -509,33 +521,16 @@
         
     }else{
         NSDictionary *commentObject = allComments[indexPath.row];
-        NSString *commentText = commentObject[@"text"];
         NSInteger smileyCount = [commentObject[@"totalLikes"] integerValue];
         NSString *cellIdentifier = [NSString stringWithFormat:@"CommentCell%ld",(long)indexPath.row];
-        
         
         CommentTableViewCell *cell = (CommentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (!cell)
             cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    
+        //Set Frame
+        [cell setFrameWithObject:commentObject forIndex:indexPath.row];
         
-        // Configure the cell...
-        cell.commentText.text = commentObject[@"text"];
-        cell.date.text = [Config calculateTime:commentObject[@"date"]];
-        
-        //Set Label Frame
-        CGFloat postTextHeight = [Config calculateHeightForText:commentText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
-        CGRect labelFrame = cell.commentText.frame;
-        labelFrame.size.height = postTextHeight;
-        cell.commentText.frame = labelFrame;
-        
-        //Set Action View Frame
-        CGRect frame = cell.actionsView.frame;
-        frame.origin.y = labelFrame.origin.y + postTextHeight + 10;
-        cell.actionsView.frame = frame;
-        
-        
-        // Configure the cell...
-        [cell.smiley setTitle:[Config likesCount:smileyCount] forState:UIControlStateNormal];
         
         //if the user is the owner of the comment
         //and the comment has likes, show the smiley button
@@ -623,12 +618,9 @@
     {
         return 40.0f;
     }else{
-        PFObject *commentObject = allComments[indexPath.row];
-        NSString *commentText = commentObject[@"text"];
         
-        CGFloat postTextHeight = [Config calculateHeightForText:commentText withWidth:TEXT_WIDTH withFont:TEXT_FONT];
-        
-        return TOP_PADDING + postTextHeight + 12 + ACTIONS_VIEW_HEIGHT + 2;
+        NSDictionary *commentObject = allComments[indexPath.row];
+        return [CommentTableViewCell getCellHeight:commentObject];
     }
 }
 
