@@ -1104,37 +1104,57 @@
 {
     PFObject *parseObject = _postObject[@"parseObject"];
 
-    //Check if a chat object exist in the local storage
-    //where post id = postId
-    [PFCloud callFunctionInBackground:@"requestChat"
-                       withParameters:@{@"requestBy": [Config deviceId], @"postId": parseObject.objectId}
-                                block:^(NSString *result, NSError *error) {
-                                    
-                                    NSString *message;
-                                    
-                                    if (!error) {
-                                        message = result;
-                                        
-                                    }else{
-                                        message =  error.userInfo[@"error"];
-                                    }
-                                    
-                                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
-                                                                                        message:message
-                                                                                       delegate:self
-                                                                              cancelButtonTitle:@"Ok"
-                                                                              otherButtonTitles:nil];
-                                    [alertView show];
-                                }];
+    //Check if a conversation exist in the local storage
+    //If the conversation is not currently in the database
+    [ChatDataModel checkIfConversationExist:parseObject.objectId
+                               withSenderId:[Config deviceId]
+                             withReceiverId:parseObject[@"deviceId"]
+                                  withBlock:^(BOOL exist, PFObject *object, NSError *error) {
+                                      if (!error && !exist) {
+                                          //send Request
+                                          
+                                          [PFCloud callFunctionInBackground:@"requestChat"
+                                                             withParameters:@{@"requestBy": [Config deviceId], @"postId": parseObject.objectId}
+                                                                      block:^(NSString *result, NSError *error) {
+                                                                          
+                                                                          NSString *message;
+                                                                          
+                                                                          if (!error) {
+                                                                              message = result;
+                                                                              
+                                                                          }else{
+                                                                              message =  error.userInfo[@"error"];
+                                                                          }
+                                                                          
+                                                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                                                                                              message:message
+                                                                                                                             delegate:self
+                                                                                                                    cancelButtonTitle:@"Ok"
+                                                                                                                    otherButtonTitles:nil];
+                                                                          [alertView show];
+                                                                      }];
+                                
+                                      }else if (!error && exist){
+                                          ChatViewController *chatView = [ChatViewController messagesViewController];
+                                          chatView.hidesBottomBarWhenPushed = YES;
+                                          
+                                          chatView.postId = parseObject.objectId;
+                                          chatView.conversationId = object[@"conversationId"];
+                                          
+                                          chatView.senderId = object[@"senderId"];
+                                          chatView.senderDisplayName = @"ME";
+                                          chatView.sendersAvatar = [Config usersAvatar];
+                                          
+                                          chatView.recieversId = object[@"receiverId"];
+                                          chatView.recieversDisplayName = object[@"receiverName"];
+                                          chatView.sendersAvatar = [UIImage imageNamed:@"lady3"];
+                                          
+                                          self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+                                          
+                                          [self.navigationController pushViewController:chatView animated:YES];
+                                      }
+                                  }];
 
-    /*
-    ChatViewController *chatView = [ChatViewController messagesViewController];
-    chatView.hidesBottomBarWhenPushed = YES;
-    
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
-    [self.navigationController pushViewController:chatView animated:YES];
-*/
 }
 
 /*

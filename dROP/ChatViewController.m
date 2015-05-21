@@ -39,25 +39,6 @@
     self.title = @"Chat";
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Hearts2"]];
-
-    
-    /**
-     *  You MUST set your senderId and display name
-     */
-    self.senderId = @"7888-fhfj-788"; //[Config deviceId];
-    self.senderDisplayName = @"Moses Esan";
-    
-    //Initialize Model to hold all data
-    self.chatDataModel = [[ChatDataModel alloc] init];
-    self.chatDataModel.sendersId = @"7888-fhfj-788";//self.senderId;
-    self.chatDataModel.sendersName = self.senderDisplayName;
-    self.chatDataModel.sendersAvatar = [UIImage imageNamed:@"man4"];
-    
-    self.chatDataModel.recieversId = @"7888-fhfj-788";
-    self.chatDataModel.recieversName = @"Jenny O'Neill";
-    self.chatDataModel.recieversAvatar = [UIImage imageNamed:@"lady3"];
-    
-    [self.chatDataModel setUsersDetails];
     
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
@@ -79,28 +60,12 @@
      */
     
     //This Particular Chat - Use the PostId
-     chatRef = [[Firebase alloc] initWithUrl: @"dropitchat.firebaseIO.com/SenderReceiver2015-05-2000:51:30"];
-    
-    // This allows us to check if these were messages already stored on the server
-    // when we booted up (YES) or if they are new messages since we've started the app.
-    // This is so that we can batch together the initial messages' reloadData for a perf gain.
-    __block BOOL initialAdds = YES;
+    NSString *urlString = [NSString stringWithFormat:@"dropitchat.firebaseIO.com/%@",_conversationId];
+    chatRef = [[Firebase alloc] initWithUrl:urlString];
     
     // Attach a block to read the data at our posts reference
     [chatRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-
-        if (!initialAdds)
-        {
-            // Add the chat message to the array.
-            [self receivedMessage:snapshot.value];
-        }
-    }];
-    
-    // Value event fires right after we get the events already stored in the Firebase repo.
-    // We've gotten the initial messages stored on the server,
-    // set initialAdds=NO so that we'll reload after each additional childAdded event.
-    [chatRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        initialAdds = NO;
+        [self receivedMessage:snapshot.value];
     }];
 }
 
@@ -121,6 +86,71 @@
     
     self.collectionView.collectionViewLayout.springinessEnabled = [NSUserDefaults springinessSetting];
      */
+
+    
+    
+    self.chatMessages = [[NSMutableArray alloc] init];
+    
+    //Initialize Model to hold all data
+    self.chatDataModel = [[ChatDataModel alloc] init];
+    
+    //Create Avatars
+    //Sender - This is the current user
+    JSQMessagesAvatarImage *sendersImage =
+    [JSQMessagesAvatarImageFactory avatarImageWithImage:_sendersAvatar
+                                               diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+    
+    
+    //Receiver - The person the user is chatting with
+    JSQMessagesAvatarImage *receiversImage =
+    [JSQMessagesAvatarImageFactory avatarImageWithImage:_recieversAvatar
+                                               diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+    
+    self.avatars = @{ self.senderId : sendersImage,
+                      self.recieversId : receiversImage
+                      };
+    
+    
+    self.users = @{ self.senderId : self.senderDisplayName,
+                    self.recieversId : _recieversDisplayName
+                    };
+    
+    JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
+    
+    self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
+    self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+    
+    
+    //get the messages for this conversation thread
+    [ChatDataModel getMessageswithConversationId:self.conversationId
+                                       withBlock:^(BOOL reload, NSArray *objects, NSError *error) {
+                                           
+                                           if (!error)
+                                           {
+                                               if (reload){
+                                                   
+                                                   for (int i =0; i < [objects count]; i++) {
+                                                       
+                                                       //Get the messag
+                                                       PFObject *chatMessage = objects[i];
+                                                       
+                                                       //Create message object
+                                                       JSQMessage *message =
+                                                       [ChatDataModel createTextMessage:chatMessage[@"message"]
+                                                                           withSenderId:chatMessage[@"senderId"]
+                                                                        withDisplayName:chatMessage[@"senderName"]
+                                                                               withDate:chatMessage[@"date"]];
+                                                       
+                                                       //Add to array
+                                                       [self.chatMessages addObject:message];
+                                                       
+                                                   }
+                                                   
+                                                   //Finish
+                                                   //[self finishSendingMessageAnimated:YES];
+                                               }
+                                           }
+     }];
 }
 
 
@@ -138,17 +168,44 @@
     //If the user is not the sender of the message
     if (![chatMessage[@"userId"] isEqualToString:self.senderId])
     {
-        JSQMessage *message =
         
-        [ChatDataModel createTextMessage:chatMessage[@"message"]
-                            withSenderId:chatMessage[@"userId"]
-                         withDisplayName:chatMessage[@"name"]
-                                withDate:[NSDate date]];
+        NSString *messageId = chatMessage[@"messageId"];
         
         
-        [self.chatDataModel.chatMessages addObject:message];
+        //If the message is not currently in the database
+        [ChatDataModel checkIfMessageExist:messageId
+                                 WithBlock:^(BOOL exist, NSError *error){
+                                     
+                                     if (!error){
+                                         if (!exist) {
+                                             
+                                             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                                             [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+                                             NSDate *date = [dateFormatter dateFromString:chatMessage[@"date"]];
+                                             
+                                             //Save in Local Datasore and requery and reload table
+                                             
+                                             [ChatDataModel saveMessage:chatMessage[@"message"]
+                                                     withConversationId:self.conversationId
+                                                             withPostId:self.postId
+                                                           withSenderId:chatMessage[@"message"]
+                                                        withDisplayName:chatMessage[@"message"]
+                                                             withStatus:@""
+                                                               withDate:date
+                                                    withCompletionBlock:^(NSString *objectId, BOOL succeeed){
+                                                        
+                                                        if (succeeed){
+                                                            //requery
+                                                            
+                                                            //reload collection view
+                                                            [self.collectionView reloadData];
+                                                        }
+                                                    }];
+                                         }
+                                     }
+                                         
+                                 }];
         
-        [self finishSendingMessageAnimated:YES];
     }
 }
 
@@ -171,37 +228,67 @@
  
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
-    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId
-                                             senderDisplayName:senderDisplayName
-                                                          date:date
-                                                          text:text];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    
-    NSString *dateString = [dateFormatter stringFromDate:date];
-    
-    
-    
+    [self saveMessage:text senderId:senderId senderDisplayName:senderDisplayName date:date];
+}
+
+
+- (void)saveMessage:(NSString *)text
+           senderId:(NSString *)senderId
+  senderDisplayName:(NSString *)senderDisplayName
+               date:(NSDate *)date
+{
     //Save in Local Datasore first - use the returned objectId as the messageId
     
-    //This particular chat message - to be stored with a autoid
-    NSDictionary *chatMessage = @{
-                               @"userId" : self.senderId,
-                               @"name": self.senderDisplayName,
-                               @"message": text,
-                               @"date": dateString
-                               };
-
-    
-    // Write data to Firebase
-    Firebase *chatMessageRef = [chatRef childByAutoId];
-    [chatMessageRef setValue:chatMessage];
-    
-    [self.chatDataModel.chatMessages addObject:message];
-    
-    [self finishSendingMessageAnimated:YES];
+    [ChatDataModel saveMessage:text
+            withConversationId:self.conversationId
+                    withPostId:self.postId
+                  withSenderId:self.senderId
+               withDisplayName:self.senderDisplayName
+                    withStatus:@"Delivered"
+                      withDate:date
+           withCompletionBlock:^(NSString *objectId, BOOL succeeed){
+               
+               if (succeeed){
+                   
+                   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                   [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+                   NSString *dateString = [dateFormatter stringFromDate:date];
+                   
+                   //This particular chat message - to be stored with a autoid
+                   NSDictionary *chatMessage = @{
+                                                 @"messageId" : objectId,
+                                                 @"userId" : self.senderId,
+                                                 @"name": self.senderDisplayName,
+                                                 @"message": text,
+                                                 @"date": dateString,
+                                                 @"status": @"Delivered"
+                                                 };
+                   // Write data to Firebase
+                   Firebase *chatMessageRef = [chatRef childByAutoId];
+                   
+                   [chatMessageRef setValue:chatMessage withCompletionBlock:^(NSError *error, Firebase *ref) {
+                       if (error) {
+                           NSLog(@"Data could not be saved.");
+                       } else {
+                           NSLog(@"Data saved successfully.");
+                           JSQMessage *message =
+                           [ChatDataModel createTextMessage:text
+                                               withSenderId:senderId
+                                            withDisplayName:senderDisplayName
+                                                   withDate:date];
+                           
+                           //Add to array
+                           [self.chatMessages addObject:message];
+                           
+                           //Add new bubble
+                           [self finishSendingMessageAnimated:YES];
+                       }
+                   }];
+               }
+           }];
 }
+
+
 /*
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
@@ -210,7 +297,7 @@
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
                                               otherButtonTitles:@"Send photo", @"Send location", @"Send video", nil];
-    
+ 
     [sheet showFromToolbar:self.inputToolbar];
 }
 
@@ -219,7 +306,7 @@
     if (buttonIndex == actionSheet.cancelButtonIndex) {
         return;
     }
-    
+ 
     switch (buttonIndex) {
         case 0:
             [self.demoData addPhotoMediaMessage];
@@ -254,7 +341,7 @@
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView
        messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.chatDataModel.chatMessages objectAtIndex:indexPath.item];
+    return [self.chatMessages objectAtIndex:indexPath.item];
 }
 
 - (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView
@@ -267,13 +354,13 @@
      *  Otherwise, return your previously created bubble image data objects.
      */
     
-    JSQMessage *message = [self.chatDataModel.chatMessages objectAtIndex:indexPath.item];
+    JSQMessage *message = [self.chatMessages objectAtIndex:indexPath.item];
     
     if ([message.senderId isEqualToString:self.senderId]) {
-        return self.chatDataModel.outgoingBubbleImageData;
+        return self.outgoingBubbleImageData;
     }
     
-    return self.chatDataModel.incomingBubbleImageData;
+    return self.incomingBubbleImageData;
 }
 
 - (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -298,11 +385,11 @@
      *
      *  Override the defaults in `viewDidLoad`
      */
-    JSQMessage *message = [self.chatDataModel.chatMessages objectAtIndex:indexPath.item];
+    JSQMessage *message = [self.chatMessages objectAtIndex:indexPath.item];
     
     
     
-    return [self.chatDataModel.avatars objectForKey:message.senderId];
+    return [self.avatars objectForKey:message.senderId];
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -314,7 +401,7 @@
      *  Show a timestamp for every 3rd message
      */
     if (indexPath.item % 3 == 0) {
-        JSQMessage *message = [self.chatDataModel.chatMessages objectAtIndex:indexPath.item];
+        JSQMessage *message = [self.chatMessages objectAtIndex:indexPath.item];
         return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
     }
     
@@ -323,7 +410,7 @@
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessage *message = [self.chatDataModel.chatMessages objectAtIndex:indexPath.item];
+    JSQMessage *message = [self.chatMessages objectAtIndex:indexPath.item];
     
     /**
      *  iOS7-style sender name labels
@@ -333,7 +420,7 @@
     }
     
     if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.chatDataModel.chatMessages objectAtIndex:indexPath.item - 1];
+        JSQMessage *previousMessage = [self.chatMessages objectAtIndex:indexPath.item - 1];
         if ([[previousMessage senderId] isEqualToString:message.senderId]) {
             return nil;
         }
@@ -354,7 +441,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.chatDataModel.chatMessages count];
+    return [self.chatMessages count];
 }
 
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -378,7 +465,7 @@
      *  Instead, override the properties you want on `self.collectionView.collectionViewLayout` from `viewDidLoad`
      */
     
-    JSQMessage *msg = [self.chatDataModel.chatMessages objectAtIndex:indexPath.item];
+    JSQMessage *msg = [self.chatMessages objectAtIndex:indexPath.item];
     
     if (!msg.isMediaMessage) {
         
@@ -432,13 +519,13 @@
     /**
      *  iOS7-style sender name labels
      */
-    JSQMessage *currentMessage = [self.chatDataModel.chatMessages objectAtIndex:indexPath.item];
+    JSQMessage *currentMessage = [self.chatMessages objectAtIndex:indexPath.item];
     if ([[currentMessage senderId] isEqualToString:self.senderId]) {
         return 0.0f;
     }
     
     if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.chatDataModel.chatMessages objectAtIndex:indexPath.item - 1];
+        JSQMessage *previousMessage = [self.chatMessages objectAtIndex:indexPath.item - 1];
         if ([[previousMessage senderId] isEqualToString:[currentMessage senderId]]) {
             return 0.0f;
         }

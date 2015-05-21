@@ -21,41 +21,45 @@
     return self;
 }
 
-- (void)setUsersDetails
-{
-    //[self testMessages];
-    
-    self.chatMessages = [[NSMutableArray alloc] init];
-                         
-    //Create Avatars
-    //Sender - This is the current user
-    JSQMessagesAvatarImage *sendersImage =
-    [JSQMessagesAvatarImageFactory avatarImageWithImage:_sendersAvatar
-                                               diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
-    
-    
-    //Receiver - The person the user is chatting with
-    JSQMessagesAvatarImage *receiversImage =
-    [JSQMessagesAvatarImageFactory avatarImageWithImage:_recieversAvatar
-                                               diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
-    
-    self.avatars = @{ _sendersId : sendersImage,
-                      _recieversId : receiversImage
-                      };
-    
-    
-    self.users = @{ _sendersId : _sendersName,
-                    _recieversId : _recieversName
-                    };
-    
-    JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
-    
-    self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
-    self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
-    
-}
 
 #pragma mark - Class Methods - Actions
+
+
++ (void)checkIfConversationExist:(NSString *)postId
+                    withSenderId:(NSString *)senderId
+                  withReceiverId:(NSString *)receiverId
+                       withBlock:(void (^)(BOOL exist, PFObject *object, NSError *error))completionBlock
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"ChatConversation"];
+    [query whereKey:@"postId" equalTo:postId];
+    [query whereKey:@"senderId" equalTo:senderId];
+    [query whereKey:@"receiverId" equalTo:receiverId];
+    [query fromLocalDatastore];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                NSLog(@"error in geo query!");
+                completionBlock(NO, nil, error);
+            });
+            
+        } else {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if ([objects count] > 0)
+                {
+                    completionBlock(YES, objects[0],nil);
+                }else{
+                    
+                    completionBlock(NO, nil, nil);
+                }
+                
+            });
+        }
+    }];
+}
 
 //Called when user accepts chat invitation
 + (void)startNewConversation:(NSString *)senderId
@@ -94,8 +98,9 @@
 }
 
 //Called when Chat View Controller is opened
-+ (void)getMessagesWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock
-          withConversationId:(NSString *)conversationId
++ (void)getMessageswithConversationId:(NSString *)conversationId
+                            withBlock:(void (^)(BOOL reload, NSArray *objects, NSError *error))completionBlock
+
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
     [query whereKey:@"conversationId" equalTo:conversationId];
@@ -103,13 +108,13 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error) {
             NSLog(@"error in geo query!");
-            completionBlock(NO, error);
+            completionBlock(NO, nil, error);
         } else {
             
     
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                completionBlock(YES, nil);
+                completionBlock(YES, objects, nil);
             });
         }
     }];
@@ -119,9 +124,11 @@
 + (void)saveMessage:(NSString *)message
  withConversationId:(NSString *)conversationId
          withPostId:(NSString *)postId
-         withSenderId:(NSString *)senderId
-      withDisplayName:(NSString *)senderName
-             withDate:(NSDate *)date
+       withSenderId:(NSString *)senderId
+    withDisplayName:(NSString *)senderName
+         withStatus:(NSString *)status
+           withDate:(NSDate *)date
+withCompletionBlock:(void (^)(NSString *objectId, BOOL succeeed))completionBlock
 {
     
     PFObject *chatMessage = [PFObject objectWithClassName:@"Messages"];
@@ -130,7 +137,54 @@
     chatMessage[@"senderId"] = senderId;
     chatMessage[@"senderName"] = senderName;
     chatMessage[@"message"] = message;
-    [chatMessage pinInBackground];
+    chatMessage[@"status"] = status;
+    chatMessage[@"date"] = date;
+    
+    BOOL result = [chatMessage pin];
+     
+    if (result)
+    {
+        PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
+        PFObject *object = [query getFirstObject];
+        
+        completionBlock(object.objectId, YES);
+        
+    }else{
+        
+        completionBlock(nil, NO);
+    }
+}
+
++ (void)checkIfMessageExist:(NSString *)messageId
+                  WithBlock:(void (^)(BOOL exist, NSError *error))completionBlock
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
+    [query whereKey:@"messageId" equalTo:messageId];
+    [query fromLocalDatastore];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                NSLog(@"error in geo query!");
+                completionBlock(NO, error);
+            });
+            
+        } else {
+        
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if ([objects count] > 0)
+                {
+                    completionBlock(YES, nil);
+                }else{
+                    
+                    completionBlock(NO, nil);
+                }
+                
+            });
+        }
+    }];
 }
 
 + (JSQMessage *)createTextMessage:(NSString *)message
@@ -187,14 +241,14 @@
 
 
 #pragma mark - Testing Data - Actions
-
+/*
 - (void)testMessages
 {
-    /**
+    
      *  Load some fake messages for demo.
      *
      *  You should have a mutable array or orderedSet, or something.
-     */
+     
     self.chatMessages = [[NSMutableArray alloc] initWithObjects:
                      
                      [ChatDataModel createTextMessage:@"Welcome to JSQMessages: A messaging UI framework for iOS."
@@ -251,4 +305,5 @@
     
     [self.chatMessages addObject:locationMessage];
 }
+*/
 @end

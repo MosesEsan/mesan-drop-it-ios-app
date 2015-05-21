@@ -16,26 +16,30 @@
 
 @interface ChatDataModel : NSObject
 
-
-@property (strong, nonatomic) NSMutableArray *chatMessages;
-
-
-//Users
-@property (strong, nonatomic) NSString *sendersId;
-@property (strong, nonatomic) NSString *sendersName;
-@property (strong, nonatomic) UIImage *sendersAvatar;
-@property (strong, nonatomic) NSString *recieversId;
-@property (strong, nonatomic) NSString *recieversName;
-@property (strong, nonatomic) UIImage *recieversAvatar;
-
-@property (strong, nonatomic) NSDictionary *avatars;
-@property (strong, nonatomic) NSDictionary *users;
-
-@property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageData;
-@property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageData;
++ (void)saveMessage:(NSString *)message
+ withConversationId:(NSString *)conversationId
+         withPostId:(NSString *)postId
+       withSenderId:(NSString *)senderId
+    withDisplayName:(NSString *)senderName
+         withStatus:(NSString *)status
+           withDate:(NSDate *)date
+withCompletionBlock:(void (^)(NSString *objectId, BOOL succeeed))completionBlock;
 
 
-- (void)setUsersDetails;
++ (void)checkIfConversationExist:(NSString *)postId
+                    withSenderId:(NSString *)senderId
+                  withReceiverId:(NSString *)receiverId
+                       withBlock:(void (^)(BOOL exist, PFObject *object, NSError *error))completionBlock;
+
+
++ (void)checkIfMessageExist:(NSString *)messageId
+                  WithBlock:(void (^)(BOOL exist, NSError *error))completionBlock;
+
+
++ (void)getMessageswithConversationId:(NSString *)conversationId
+                            withBlock:(void (^)(BOOL reload, NSArray *objects, NSError *error))completionBlock;
+
+
 
 + (JSQMessage *)createTextMessage:(NSString *)message
                      withSenderId:(NSString *)senderId
