@@ -15,9 +15,8 @@
 #import "HomeTableViewController.h"
 #import "ProfileViewController.h"
 #import "MapViewController.h"
-#import "CollegeTableViewController.h"
+#import "ConversationTableViewController.h"
 #import "NotificationsTableViewController.h"
-
 
 #import "AddPostViewController.h"
 #import "AddFlirtViewController.h"
@@ -40,7 +39,7 @@
 
 @property (strong, nonatomic) ProfileViewController *profileViewController;
 @property (strong, nonatomic) HomeTableViewController *homeTableViewController;
-@property (strong, nonatomic) CollegeTableViewController *collegeViewController;
+@property (strong, nonatomic) ConversationTableViewController *conversationViewController;
 @property (strong, nonatomic) MapViewController *mapViewController;
 @property (strong, nonatomic) NotificationsTableViewController *notificationViewController;
 
@@ -73,14 +72,14 @@
     
     _profileViewController = [[ProfileViewController alloc] initWithNibName:nil bundle:nil];
     _homeTableViewController = [[HomeTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    _collegeViewController = [[CollegeTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    _conversationViewController = [[ConversationTableViewController alloc] initWithStyle:UITableViewStylePlain];
     _notificationViewController = [[NotificationsTableViewController alloc] initWithStyle:UITableViewStylePlain];
     
     
     
     UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:self.profileViewController];
     UINavigationController *homeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.homeTableViewController];
-    UINavigationController *collegeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.collegeViewController];
+    UINavigationController *collegeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.conversationViewController];
     UINavigationController *notificationNavigationController = [[UINavigationController alloc] initWithRootViewController:self.notificationViewController];
 
     _profileViewController.title = @"Profile";
@@ -103,9 +102,9 @@
 
     
     
-    _collegeViewController.title = @"Colleges";
-    _collegeViewController.tabBarItem.image = [[UIImage imageNamed:@"University"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    _collegeViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"University"];
+    _conversationViewController.title = @"Chat";
+    _conversationViewController.tabBarItem.image = [[UIImage imageNamed:@"Chat_filled"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    _conversationViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"Chat_filled"];
     //_collegeViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(8, 0, -8, 0);
     
     _notificationViewController.title = @"Notifications";

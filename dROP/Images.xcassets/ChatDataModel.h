@@ -16,6 +16,32 @@
 
 @interface ChatDataModel : NSObject
 
+
++ (id)sharedManager;
+
+//Indicates the conversation currently opened in the Chat View Controller
+//This means any new event received by the Conversation View Controller regarding this conversation
+//Does not have to be handled
+@property (nonatomic, strong) NSString *currentConversation;
+
+@property (strong, nonatomic) NSMutableArray *conversations;
+
+
+//Gets all converstions from the local datastore
+//Return Block -> reload (if new data was retrieved, Conversation View Controller needs to be reloaded), error (if an error occcurred)
+- (void)getConversationsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock;
+
+//Start a new conversation
+- (void)startNewConversationWithSenderId:(NSString *)senderId
+                          withReceiverId:(NSString *)receiverId
+                        withReceiverName:(NSString *)receiverName
+                              withPostId:(NSString *)postId
+                               withBlock:(void (^)(BOOL succeeded, NSError *error))completionBlock;
+
+//Returns the last message for the conversationId passed
++ (void)getLastMessageWithConversationId:(NSString *)conversationId
+                               withBlock:(void (^)(NSArray *objects, NSError *error))completionBlock;
+
 + (void)saveMessage:(NSString *)message
  withConversationId:(NSString *)conversationId
          withPostId:(NSString *)postId

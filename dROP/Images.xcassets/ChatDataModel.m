@@ -11,18 +11,105 @@
 
 @implementation ChatDataModel
 
-- (instancetype)init
+#pragma mark Singleton Methods
+//defines a static variable (but only global to this translation unit)) called sharedMyManager
+//initialised once and only once in sharedManager.
+//The way we ensure that it’s only created once is by using the dispatch_once method from Grand Central Dispatch (GCD). This is thread safe and handled entirely by the OS for you so that you don’t have to worry about it at all.
+
++ (id)sharedManager
 {
-    self = [super init];
+    static ChatDataModel *sharedMyManager = nil;
     
-    if (self)
-    {    }
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedMyManager = [[self alloc] init];
+    });
     
+    return sharedMyManager;
+}
+
+- (id)init {
+    if (self = [super init]) {
+        
+        _currentConversation = @"";
+        _conversations = [[NSMutableArray alloc] init];
+    }
     return self;
 }
 
-
 #pragma mark - Class Methods - Actions
+
+//Called when Conversations View Controller is opened
+- (void)getConversationsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Conversations"];
+    [query orderByDescending:@"date"];
+    [query fromLocalDatastore];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                NSLog(@"error in geo query!");
+                completionBlock(NO, error);
+            } else {
+                
+                for (PFObject *conversationObject in objects)
+                {
+                    [self createConversationObject:conversationObject];
+                }
+                
+                completionBlock(YES, nil);
+            }
+        });
+    }];
+}
+
+//Called when user accepts chat invitation
+- (void)startNewConversationWithSenderId:(NSString *)senderId
+                          withReceiverId:(NSString *)receiverId
+                        withReceiverName:(NSString *)receiverName
+                              withPostId:(NSString *)postId
+                               withBlock:(void (^)(BOOL succeeded, NSError *error))completionBlock
+{
+    PFObject *conversation = [PFObject objectWithClassName:@"Conversations"];
+    conversation[@"conversationId"] = [NSString stringWithFormat:@"Post%@Chat%@",postId,receiverId];
+    conversation[@"postId"] = postId;
+    conversation[@"senderId"] = senderId;
+    conversation[@"receiverId"] = receiverId;
+    conversation[@"receiverName"] = receiverName;
+    conversation[@"date"] = [NSDate date];
+    
+    [conversation pinInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        completionBlock(succeeded, error);
+    }];
+}
+
+//Called when Chat View Controller is opened
++ (void)getLastMessageWithConversationId:(NSString *)conversationId
+                            withBlock:(void (^)(NSArray *objects, NSError *error))completionBlock
+
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
+    [query whereKey:@"conversationId" equalTo:conversationId];
+    [query orderByDescending:@"date"];
+    [query fromLocalDatastore];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if (error) {
+                NSLog(@"error in geo query!");
+                completionBlock(nil, error);
+            }else{
+                completionBlock(objects, nil);
+            }
+        });
+    }];
+}
+
+
+
+
 
 
 + (void)checkIfConversationExist:(NSString *)postId
@@ -61,41 +148,6 @@
     }];
 }
 
-//Called when user accepts chat invitation
-+ (void)startNewConversation:(NSString *)senderId
-              withReceiverId:(NSString *)receiverId
-            withReceiverName:(NSString *)receiverName
-                  withPostId:(NSString *)postId
-{
-    PFObject *conversation = [PFObject objectWithClassName:@"ChatConversation"];
-    conversation[@"conversationId"] = [NSString stringWithFormat:@"Post%@Chat%@",postId,receiverId];
-    conversation[@"postId"] = postId;
-    conversation[@"senderId"] = senderId;
-    conversation[@"receiverId"] = receiverId;
-    conversation[@"receiverName"] = receiverName;
-    conversation[@"new"] = @YES;
-    [conversation pinInBackground];
-}
-
-//Called when Conversations View Controller is opened
-+ (void)getConversationsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock
-{
-    PFQuery *query = [PFQuery queryWithClassName:@"ChatConversation"];
-    [query fromLocalDatastore];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (error) {
-            NSLog(@"error in geo query!");
-            completionBlock(NO, error);
-        } else {
-            
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                completionBlock(YES, nil);
-            });
-        }
-    }];
-}
 
 //Called when Chat View Controller is opened
 + (void)getMessageswithConversationId:(NSString *)conversationId
@@ -237,6 +289,44 @@ withCompletionBlock:(void (^)(NSString *objectId, BOOL succeeed))completionBlock
                                                    displayName:senderName
                                                          media:videoItem];
     return videoMessage;
+}
+
+
+
+- (void)createConversationObject:(PFObject *)parseObject
+{
+    //Get the last message for the conversation
+    //If no messages, show date conversation started
+    [ChatDataModel getLastMessageWithConversationId:parseObject[@"conversationId"]
+                                          withBlock:^(NSArray *objects, NSError *error) {
+                                              
+                                              NSString *lastMessage = [NSString stringWithFormat:@"Started on %@",parseObject[@"date"]];
+                                              
+                                              if(!error)
+                                              {
+                                                  if([objects count] > 0)
+                                                  {
+                                                      PFObject *messageObject = objects[0];
+                                                      lastMessage = messageObject[@"message"];
+                                                  }
+                                                  
+                                              }else if (error){
+                                                  
+                                                  lastMessage = @"'Unable to get last message'";
+                                              }
+                                              
+                                              
+                                              NSDictionary *conversationObject = @{
+                                                                                   @"conversationId" : parseObject[@"conversationId"],
+                                                                                   @"postId" : parseObject[@"postId"],
+                                                                                   @"senderId" : parseObject[@"senderId"],
+                                                                                   @"receiverId" : parseObject[@"receiverId"],
+                                                                                   @"receiverName" : parseObject[@"receiverName"],
+                                                                                   @"date" : parseObject[@"date"],
+                                                                                   @"lastMessage" : lastMessage
+                                                                                   };
+                                              [self.conversations addObject:conversationObject.mutableCopy];
+                                          }];
 }
 
 

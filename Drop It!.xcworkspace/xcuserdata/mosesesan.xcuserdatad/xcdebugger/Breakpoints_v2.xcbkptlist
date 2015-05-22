@@ -122,13 +122,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "dROP/Images.xcassets/ChatDataModel.m"
-            timestampString = "453863023.558302"
+            timestampString = "454005263.754194"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "@implementation ChatDataModel"
-            landmarkType = "3">
+            startingLineNumber = "222"
+            endingLineNumber = "222"
+            landmarkName = "+createTextMessage:withSenderId:withDisplayName:withDate:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -107,14 +107,15 @@
     positveSpacer.width = 22;
     
     
-    UIButton *addNewButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    addNewButton.frame = CGRectMake(0, 0, 23, 23);
-    [addNewButton setImage:[UIImage imageNamed:@"Add2"] forState:UIControlStateNormal];
-    addNewButton.imageEdgeInsets = UIEdgeInsetsMake(1.0f, 1.0f, 1.0f, 1.0f);
-    [addNewButton setClipsToBounds:YES];
-    addNewButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    //[addNewButton addTarget:self action:@selector(addNewPost:) forControlEvents:UIControlEventTouchUpInside];
-    addNew = [[UIBarButtonItem alloc] initWithCustomView:addNewButton];
+    UIButton *collegeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    collegeButton.frame = CGRectMake(0, 0, 23, 23);
+    [collegeButton setImage:[UIImage imageNamed:@"University"] forState:UIControlStateNormal];
+    //collegeButton.imageEdgeInsets = UIEdgeInsetsMake(1.0f, 1.0f, 1.0f, 1.0f);
+    [collegeButton setClipsToBounds:YES];
+    collegeButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [collegeButton addTarget:self action:@selector(changeCollege:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *changeCollege = [[UIBarButtonItem alloc] initWithCustomView:collegeButton];
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:changeCollege, positveSpacer, nil]];
     
     
     /*
@@ -482,6 +483,12 @@
     }
 }
 
+- (void)changeCollege:(UIButton *)sender
+{
+    CollegeTableViewController *collegeViewController = [[CollegeTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:collegeViewController animated:YES];
+}
+
  /*
 
 - (void)viewProfile:(UIButton *)sender
@@ -539,6 +546,7 @@
     //If app is not in testing mode, take the current location into consideration
     if ([Config appMode] != TESTING)
     {
+        //If the user has the right to post
         if ([Config checkAddPermission:_currentLocation] == YES)
         {
             //**mose**[self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addNew, positveSpacer, flirt, nil]];

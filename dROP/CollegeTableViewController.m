@@ -37,16 +37,6 @@
     availableLocations = [Config availableLocations];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    self.navigationController.navigationBar.barStyle = BAR_STYLE;
-    self.navigationController.navigationBar.barTintColor = BAR_TINT_COLOR2;
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:235/255.0f green:237/255.0f blue:236/255.0f alpha:1.0f];
-    self.navigationController.navigationBar.translucent = NO;
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

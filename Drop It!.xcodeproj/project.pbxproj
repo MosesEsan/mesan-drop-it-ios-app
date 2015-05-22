@@ -43,6 +43,8 @@
 		273E1AC51AB0B13200D41694 /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 273E1AC41AB0B13200D41694 /* TimelineTableViewCell.m */; };
 		273E42301ACC36EA0048964B /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 273E422F1ACC36EA0048964B /* MenuTableViewController.m */; };
 		274C88211AC0780B00C8FB72 /* AvocarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274C88201AC0780B00C8FB72 /* AvocarrotSDK.framework */; };
+		275776011B0F2869006CA373 /* ConversationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 275776001B0F2869006CA373 /* ConversationTableViewController.m */; };
+		275776041B0F2C2E006CA373 /* ConversationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 275776031B0F2C2E006CA373 /* ConversationTableViewCell.m */; };
 		276B55601B0E441C00B423BC /* CommentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276B555F1B0E441C00B423BC /* CommentsTableViewController.m */; };
 		2773EB501ADEC2BC0023E005 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2773EB4F1ADEC2BC0023E005 /* NotificationTableViewCell.m */; };
 		2775C4701AC3437A00B19772 /* ProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2775C46F1AC3437A00B19772 /* ProfileTableViewCell.m */; };
@@ -128,7 +130,6 @@
 		27DE0C311AB9D44000DA0D9C /* JPSThumbnailAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE0C2E1AB9D44000DA0D9C /* JPSThumbnailAnnotationView.m */; };
 		27DE0C321AB9D44000DA0D9C /* JPSThumnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE0C2F1AB9D44000DA0D9C /* JPSThumnail.m */; };
 		27E49C841B0BDB6E00DE45FE /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E49C831B0BDB6E00DE45FE /* ChatViewController.m */; };
-		27E49C871B0BDD1100DE45FE /* DemoModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E49C861B0BDD1100DE45FE /* DemoModelData.m */; };
 		27E49C8A1B0BEB1200DE45FE /* ChatDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E49C891B0BEB1200DE45FE /* ChatDataModel.m */; };
 		27E49C8C1B0C048600DE45FE /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E49C8B1B0C048600DE45FE /* libicucore.dylib */; };
 		27E49C8E1B0C04AB00DE45FE /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E49C8D1B0C04AB00DE45FE /* libc++.dylib */; };
@@ -209,6 +210,10 @@
 		2748CBA01ACC7B1D004D4A5E /* Club4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Club4.jpg; sourceTree = "<group>"; };
 		2748CBA21ACC7B4D004D4A5E /* Club5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Club5.jpg; sourceTree = "<group>"; };
 		274C88201AC0780B00C8FB72 /* AvocarrotSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AvocarrotSDK.framework; sourceTree = "<group>"; };
+		275775FF1B0F2869006CA373 /* ConversationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationTableViewController.h; sourceTree = "<group>"; };
+		275776001B0F2869006CA373 /* ConversationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationTableViewController.m; sourceTree = "<group>"; };
+		275776021B0F2C2E006CA373 /* ConversationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationTableViewCell.h; sourceTree = "<group>"; };
+		275776031B0F2C2E006CA373 /* ConversationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationTableViewCell.m; sourceTree = "<group>"; };
 		276B555F1B0E441C00B423BC /* CommentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsTableViewController.m; sourceTree = "<group>"; };
 		2773EB4E1ADEC2BC0023E005 /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
 		2773EB4F1ADEC2BC0023E005 /* NotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
@@ -347,8 +352,6 @@
 		27DE0C2F1AB9D44000DA0D9C /* JPSThumnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPSThumnail.m; sourceTree = "<group>"; };
 		27E49C821B0BDB6E00DE45FE /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		27E49C831B0BDB6E00DE45FE /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
-		27E49C851B0BDD1100DE45FE /* DemoModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoModelData.h; sourceTree = "<group>"; };
-		27E49C861B0BDD1100DE45FE /* DemoModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoModelData.m; sourceTree = "<group>"; };
 		27E49C881B0BEB1200DE45FE /* ChatDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatDataModel.h; path = Images.xcassets/ChatDataModel.h; sourceTree = "<group>"; };
 		27E49C891B0BEB1200DE45FE /* ChatDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatDataModel.m; path = Images.xcassets/ChatDataModel.m; sourceTree = "<group>"; };
 		27E49C8B1B0C048600DE45FE /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -526,16 +529,8 @@
 				2729251F1ABC692A00A271D4 /* DITableViewCell.m */,
 				27B404191AA64057007DC137 /* PostTextTableViewCell.h */,
 				27B4041A1AA64057007DC137 /* PostTextTableViewCell.m */,
-				27B404D91AABBEEC007DC137 /* CommentTableViewCell.h */,
-				27B404DA1AABBEEC007DC137 /* CommentTableViewCell.m */,
 				273E1AC31AB0B13200D41694 /* TimelineTableViewCell.h */,
 				273E1AC41AB0B13200D41694 /* TimelineTableViewCell.m */,
-				2729251B1ABC59AB00A271D4 /* ColouredTableViewCell.h */,
-				2729251C1ABC59AB00A271D4 /* ColouredTableViewCell.m */,
-				2775C46E1AC3437A00B19772 /* ProfileTableViewCell.h */,
-				2775C46F1AC3437A00B19772 /* ProfileTableViewCell.m */,
-				277C9D7C1AF24F4500184365 /* FlirtTableViewCell.h */,
-				277C9D7D1AF24F4500184365 /* FlirtTableViewCell.m */,
 			);
 			name = "Table View Cells";
 			sourceTree = "<group>";
@@ -630,6 +625,8 @@
 				27B4048E1AA8EDD1007DC137 /* Config.m */,
 				27173F8C1ADB01BE0087B29E /* DIDataManager.h */,
 				27173F8D1ADB01BE0087B29E /* DIDataManager.m */,
+				27E49C881B0BEB1200DE45FE /* ChatDataModel.h */,
+				27E49C891B0BEB1200DE45FE /* ChatDataModel.m */,
 				278CF74D1AAD3F0A00A13D4B /* Third Party */,
 				27EC539A1AB3F68500CC2A10 /* MHFBImageViewController */,
 				278CF74C1AAD3EFC00A13D4B /* View Controllers */,
@@ -760,6 +757,12 @@
 				276B555F1B0E441C00B423BC /* CommentsTableViewController.m */,
 				27FE30E01B06335F009B394C /* FlirtPickerView.h */,
 				27FE30DF1B06335F009B394C /* FlirtPickerView.m */,
+				2729251B1ABC59AB00A271D4 /* ColouredTableViewCell.h */,
+				2729251C1ABC59AB00A271D4 /* ColouredTableViewCell.m */,
+				277C9D7C1AF24F4500184365 /* FlirtTableViewCell.h */,
+				277C9D7D1AF24F4500184365 /* FlirtTableViewCell.m */,
+				27B404D91AABBEEC007DC137 /* CommentTableViewCell.h */,
+				27B404DA1AABBEEC007DC137 /* CommentTableViewCell.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -771,6 +774,8 @@
 				278CF7391AACFD0E00A13D4B /* ProfileViewController.m */,
 				278CF78C1AAE49EA00A13D4B /* InfoViewController.h */,
 				278CF78D1AAE49EA00A13D4B /* InfoViewController.m */,
+				2775C46E1AC3437A00B19772 /* ProfileTableViewCell.h */,
+				2775C46F1AC3437A00B19772 /* ProfileTableViewCell.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -823,12 +828,12 @@
 		27E49C811B0BDB3B00DE45FE /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				275775FF1B0F2869006CA373 /* ConversationTableViewController.h */,
+				275776001B0F2869006CA373 /* ConversationTableViewController.m */,
 				27E49C821B0BDB6E00DE45FE /* ChatViewController.h */,
 				27E49C831B0BDB6E00DE45FE /* ChatViewController.m */,
-				27E49C851B0BDD1100DE45FE /* DemoModelData.h */,
-				27E49C861B0BDD1100DE45FE /* DemoModelData.m */,
-				27E49C881B0BEB1200DE45FE /* ChatDataModel.h */,
-				27E49C891B0BEB1200DE45FE /* ChatDataModel.m */,
+				275776021B0F2C2E006CA373 /* ConversationTableViewCell.h */,
+				275776031B0F2C2E006CA373 /* ConversationTableViewCell.m */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -1117,6 +1122,7 @@
 				27B3988D1ADD35A100ED5C27 /* NotificationsTableViewController.m in Sources */,
 				273E1AC51AB0B13200D41694 /* TimelineTableViewCell.m in Sources */,
 				27FE30EA1B0633F7009B394C /* NSString+TextDirectionality.m in Sources */,
+				275776041B0F2C2E006CA373 /* ConversationTableViewCell.m in Sources */,
 				27A334991AA6367F008188FC /* HomeTableViewController.m in Sources */,
 				27B404D81AAB9570007DC137 /* LPlaceholderTextView.m in Sources */,
 				2729251D1ABC59AB00A271D4 /* ColouredTableViewCell.m in Sources */,
@@ -1133,7 +1139,6 @@
 				27B4041B1AA64057007DC137 /* PostTextTableViewCell.m in Sources */,
 				27FE30F21B0A3C09009B394C /* BROptionsButton.m in Sources */,
 				27FE30E11B06335F009B394C /* FlirtPickerView.m in Sources */,
-				27E49C871B0BDD1100DE45FE /* DemoModelData.m in Sources */,
 				271320401AB77AA800CF23DB /* MapPostViewController.m in Sources */,
 				2776AD681B016C4100449865 /* VCFloatingActionButton.m in Sources */,
 				276B55601B0E441C00B423BC /* CommentsTableViewController.m in Sources */,
@@ -1150,6 +1155,7 @@
 				27FE30E61B06336A009B394C /* JVFloatLabeledTextView.m in Sources */,
 				278CF78E1AAE49EA00A13D4B /* InfoViewController.m in Sources */,
 				27DE0C311AB9D44000DA0D9C /* JPSThumbnailAnnotationView.m in Sources */,
+				275776011B0F2869006CA373 /* ConversationTableViewController.m in Sources */,
 				2775C4701AC3437A00B19772 /* ProfileTableViewCell.m in Sources */,
 				273E42301ACC36EA0048964B /* MenuTableViewController.m in Sources */,
 				27EC53A01AB3F68500CC2A10 /* MHFacebookImageViewer.m in Sources */,

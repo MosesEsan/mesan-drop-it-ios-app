@@ -10,7 +10,6 @@
 
 #import "JSQMessages.h"
 
-#import "DemoModelData.h"
 #import "ChatDataModel.h"
 
 //@class DemoMessagesViewController;
