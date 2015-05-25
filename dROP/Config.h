@@ -154,6 +154,7 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 + (NSString *)deviceId;
 
 + (NSString *)calculateTime:(id)time;
++ (NSString *)convertDate:(id)time;
 
 + (NSMutableArray *)filterPosts:(NSArray *)postObject;
 + (NSMutableDictionary *)createPostObject:(PFObject *)parseObject;

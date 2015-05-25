@@ -379,7 +379,111 @@
     
     return date;
 }
+//---
++ (NSString *)convertDate:(id)time
+{
+    NSLocale *locale = [NSLocale currentLocale];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    NSString *dateFormat;
+    
+    //Check if its this week
+    if ([self isDateThisWeek:time])
+    {
+        dateFormat = [NSDateFormatter dateFormatFromTemplate:@"EEEE" options:0 locale:locale];
+        
+        //Check if its today
+        NSDateFormatter *todayFormatter = [[NSDateFormatter alloc] init];
+        [todayFormatter setDateFormat:@"yyyyMMdd"];
+        
+        NSDate *today = [todayFormatter dateFromString:[todayFormatter stringFromDate:[NSDate date]]];
+        NSDate *passedDate = [todayFormatter dateFromString:[todayFormatter stringFromDate:time]];
+        
+        NSComparisonResult result = [today compare:passedDate];
+        
+        switch (result)
+        {
+            case NSOrderedSame:
+                dateFormat = [NSDateFormatter dateFormatFromTemplate:@"HH:mm" options:0 locale:locale];
+                break;
+            default:
+                // NSLog(@"Error Comparing Dates");
+                break;
+        }
+    }else{
+        dateFormat = [NSDateFormatter dateFormatFromTemplate:@"dd MMM" options:0 locale:locale];
+    }
+    
+    [formatter setDateFormat:dateFormat];
+    [formatter setLocale:locale];
+    
+    NSString *convertedTime = [formatter stringFromDate:time];
+    convertedTime = [convertedTime stringByReplacingOccurrencesOfString:@"," withString:@""];
+    
+    return convertedTime;
+}
 
++ (NSString *)convertTodaysTime:(id)time
+{
+    NSString *date = nil;
+    
+    NSLocale *locale = [NSLocale currentLocale];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    NSString *dateFormat = [NSDateFormatter dateFormatFromTemplate:@"h:mm" options:0 locale:locale];
+    [formatter setDateFormat:dateFormat];
+    [formatter setLocale:locale];
+    
+    date  = [formatter stringFromDate:time];
+    
+    return date;
+}
+
+
++ (BOOL)isDateThisWeek:(NSDate *)date
+{
+    NSDate *start;
+    NSTimeInterval extends;
+    NSCalendar *cal=[NSCalendar autoupdatingCurrentCalendar];
+    NSDate *today=[NSDate date];
+    BOOL success= [cal rangeOfUnit:NSCalendarUnitWeekOfMonth startDate:&start
+                          interval: &extends forDate:today];
+    if(!success)return NO;
+    NSTimeInterval dateInSecs = [date timeIntervalSinceReferenceDate];
+    NSTimeInterval dayStartInSecs= [start timeIntervalSinceReferenceDate];
+    if(dateInSecs > dayStartInSecs && dateInSecs < (dayStartInSecs+extends)){
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}
+
++ (BOOL)dateIsTwoToSixDaysAgo:(NSDate *)date {
+    for (int i = 2; i <= 6; i += 1)
+        if ([self date:date isDayWithTimeIntervalSinceNow:i*-86400])
+            return YES;
+    return NO;
+}
+
++ (BOOL)date:(NSDate *)date
+isDayWithTimeIntervalSinceNow:(NSTimeInterval)interval {
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDate *other_date;
+    other_date = [NSDate dateWithTimeIntervalSinceNow:interval];
+    
+    NSString *d1, *d2;
+    d1 = [df stringFromDate:date];
+    d2 = [df stringFromDate:other_date];
+    return [d1 isEqualToString:d2];
+}
+
+
+
+
+//----
 
 + (NSMutableArray *)filterPosts:(NSArray *)postObject
 {

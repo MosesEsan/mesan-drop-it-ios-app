@@ -47,19 +47,42 @@
     [query fromLocalDatastore];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (error) {
-                NSLog(@"error in geo query!");
-                completionBlock(NO, error);
-            } else {
+        BOOL reload = NO;
+        
+        if (!error)
+        {
+            reload = YES;
+            
+            //Create the conversations objects
+            for (PFObject *parseObject in objects)
+            {
+                //[self createConversationObject:conversationObject];
                 
-                for (PFObject *conversationObject in objects)
+                NSString *lastMessage = [NSString stringWithFormat:@"Started on %@",[Config convertDate:parseObject[@"date"]]];
+                NSArray *lastMessageObject = [ChatDataModel getLastMessageWithConversationId:parseObject[@"conversationId"]];
+                
+                if([lastMessageObject count] > 0)
                 {
-                    [self createConversationObject:conversationObject];
+                    PFObject *messageObject = objects[0];
+                    lastMessage = messageObject[@"message"];
                 }
                 
-                completionBlock(YES, nil);
+                NSDictionary *conversationObject = @{
+                                                     @"conversationId" : parseObject[@"conversationId"],
+                                                     @"postId" : parseObject[@"postId"],
+                                                     @"senderId" : parseObject[@"senderId"],
+                                                     @"receiverId" : parseObject[@"receiverId"],
+                                                     @"receiverName" : parseObject[@"receiverName"],
+                                                     @"date" : parseObject[@"date"],
+                                                     @"lastMessage" : lastMessage
+                                                     };
+                [self.conversations addObject:conversationObject.mutableCopy];
             }
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            completionBlock(reload, error);
         });
     }];
 }
@@ -85,26 +108,15 @@
 }
 
 //Called when Chat View Controller is opened
-+ (void)getLastMessageWithConversationId:(NSString *)conversationId
-                            withBlock:(void (^)(NSArray *objects, NSError *error))completionBlock
-
++ (NSArray *)getLastMessageWithConversationId:(NSString *)conversationId
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
     [query whereKey:@"conversationId" equalTo:conversationId];
     [query orderByDescending:@"date"];
     [query fromLocalDatastore];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            if (error) {
-                NSLog(@"error in geo query!");
-                completionBlock(nil, error);
-            }else{
-                completionBlock(objects, nil);
-            }
-        });
-    }];
+    NSArray *objects = [query findObjects];
+    
+    return objects;
 }
 
 
@@ -322,7 +334,7 @@ withCompletionBlock:(void (^)(NSString *objectId, BOOL succeeed))completionBlock
                                                                                    @"senderId" : parseObject[@"senderId"],
                                                                                    @"receiverId" : parseObject[@"receiverId"],
                                                                                    @"receiverName" : parseObject[@"receiverName"],
-                                                                                   @"date" : parseObject[@"date"],
+                                                                                   @"date" : [NSDate date],//parseObject[@"date"],
                                                                                    @"lastMessage" : lastMessage
                                                                                    };
                                               [self.conversations addObject:conversationObject.mutableCopy];

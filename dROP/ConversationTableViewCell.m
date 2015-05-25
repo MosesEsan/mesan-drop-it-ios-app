@@ -91,11 +91,11 @@
 - (void)setValues:(NSDictionary *)conversationObject
 {
     [self.imageV setImage:[UIImage imageNamed:@"man4"] forState:UIControlStateNormal];
-    self.username.text = @"Jenny O'Neill";
-    self.lastMessage.text = @"It was nice meeting you, hopefully we can catch up";
-    //conversationObject[@"text"];
-    self.date.text = @"Tuesday";
-    //[Config calculateTime:conversationObject[@"date"]];
+    
+    
+    self.username.text = conversationObject[@"receiverName"];
+    self.lastMessage.text = conversationObject[@"lastMessage"];
+    self.date.text = [Config convertDate:conversationObject[@"date"]];
 }
 
 + (CGFloat)getCellHeight

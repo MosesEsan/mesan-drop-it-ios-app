@@ -52,6 +52,7 @@
     [dataManager getConversationsWithBlock:^(BOOL reload, NSError *error) {
        
         if (!error && reload){
+            
             [self.tableView reloadData];
         }else if (error){
             UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Conversation Retrieval Failed!"
@@ -61,9 +62,17 @@
         }
     }];
     
+    /*
+    PFQuery *query = [PFQuery queryWithClassName:@"Conversations"];
+    [query whereKey:@"conversationId" equalTo:@"Post9h1k0WZHRNChatJENNY-KING-2017"];
+    [query fromLocalDatastore];
+    NSArray *delete = [query findObjects];
+    
+    [delete[0] unpin];*/
+    
     //2 - Start A new Conversation - Testing Purpose
     //JENNY-KING-2000 //Jenny //9h1k0WZHRN
-    
+    /*
     [dataManager startNewConversationWithSenderId:[Config deviceId]
                                    withReceiverId:@"SIOBHAN-SMITH-2000"
                                  withReceiverName:@"Siobhan"
@@ -79,7 +88,7 @@
                                                 [errorAlert show];
                                             }
                                         }];
-    
+    */
     
 }
 
@@ -108,7 +117,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 10;
+    return [dataManager.conversations count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -126,7 +135,7 @@
     
     // Configure the cell...
     
-    [cell setValues:nil];
+    [cell setValues:dataManager.conversations[indexPath.row]];
     
     return cell;
 }
