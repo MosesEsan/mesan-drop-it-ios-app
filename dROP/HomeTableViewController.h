@@ -14,5 +14,6 @@
 
 @interface HomeTableViewController : UITableViewController <MapViewControllerDataSource, CollegeViewControllerDelegate>
 
+- (void)switchCollege;
 
 @end

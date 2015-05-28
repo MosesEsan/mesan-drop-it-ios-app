@@ -32,9 +32,9 @@
         self.backgroundColor = [UIColor clearColor];
         
         self.mainContainer = [[UIView alloc] init];
-        self.mainContainer.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 0);
-        // self.mainContainer.backgroundColor = [UIColor whiteColor];
-       self.mainContainer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Hearts2"]];
+        self.mainContainer.frame = CGRectMake(0, 0, WIDTH, 0);
+        // self.mainContainer.backgroundColor = [UIColor greenColor];
+        self.mainContainer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Hearts2"]];
 
         self.mainContainer.clipsToBounds = YES;
         [self.contentView addSubview:self.mainContainer];

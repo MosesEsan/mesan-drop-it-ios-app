@@ -150,7 +150,8 @@
     
     if (success) {
         [self.delegate switchCollege];
-        [self.tableView reloadData];
+        //[self.tableView reloadData];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

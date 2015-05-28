@@ -72,11 +72,12 @@
     
     //2 - Start A new Conversation - Testing Purpose
     //JENNY-KING-2000 //Jenny //9h1k0WZHRN
+    //SIOBHAN-SMITH-2000 //Siobhan //ylRa7HhPcA
     /*
     [dataManager startNewConversationWithSenderId:[Config deviceId]
-                                   withReceiverId:@"SIOBHAN-SMITH-2000"
-                                 withReceiverName:@"Siobhan"
-                                       withPostId:@"ylRa7HhPcA"
+                                   withReceiverId:@"JENNY-KING-2000"
+                                 withReceiverName:@"Jenny"
+                                       withPostId:@"9h1k0WZHRN"
                                         withBlock:^(BOOL succeeded, NSError *error) {
                                             if (succeeded)
                                             {

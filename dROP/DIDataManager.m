@@ -8,6 +8,7 @@
 
 #import "DIDataManager.h"
 #import "Config.h"
+#import "HomeTableViewController.h"
 
 @implementation DIDataManager
 

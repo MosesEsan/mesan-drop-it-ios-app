@@ -108,7 +108,7 @@
     
     
     UIButton *collegeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    collegeButton.frame = CGRectMake(0, 0, 23, 23);
+    collegeButton.frame = CGRectMake(0, 0, 25, 25);
     [collegeButton setImage:[UIImage imageNamed:@"University"] forState:UIControlStateNormal];
     //collegeButton.imageEdgeInsets = UIEdgeInsetsMake(1.0f, 1.0f, 1.0f, 1.0f);
     [collegeButton setClipsToBounds:YES];
@@ -486,6 +486,7 @@
 - (void)changeCollege:(UIButton *)sender
 {
     CollegeTableViewController *collegeViewController = [[CollegeTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    collegeViewController.delegate = self;
     [self.navigationController pushViewController:collegeViewController animated:YES];
 }
 
@@ -601,13 +602,6 @@
     }else{
         layoutLabel.text = [Config college];
         layoutLabel.font = [UIFont fontWithName:@"AvenirNext-Medium" size:17.0f];
-    }
-    
-    if ([Config checkAddPermission:_currentLocation] == YES)
-    {
-        self.navigationItem.rightBarButtonItem = addNew;
-    }else{
-        self.navigationItem.rightBarButtonItem = nil;
     }
 }
 
