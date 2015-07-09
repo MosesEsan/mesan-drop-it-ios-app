@@ -44,7 +44,7 @@
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
     
     
-    self.showLoadEarlierMessagesHeader = YES;
+    //self.showLoadEarlierMessagesHeader = YES;
     
     /**
      *  Customize your toolbar buttons
@@ -65,8 +65,63 @@
     
     // Attach a block to read the data at our posts reference
     [chatRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-        [self receivedMessage:snapshot.value];
+        NSLog(@"Message Received -> %@",snapshot.value);
+        
+        NSDictionary *chatMessage = snapshot.value;
+        NSString *conversationId = chatMessage[@"conversationId"];
+        NSString *postId = chatMessage[@"postId"];
+        
+
+        //check if the user is the person that sent the message
+        //If the user is not the sender of the message
+        if (![chatMessage[@"userId"] isEqualToString:self.senderId])
+        {
+            //get the message id
+            NSString *messageId = chatMessage[@"messageId"];
+            
+            
+            //If the message is not currently in the database
+            [ChatDataModel checkIfMessageExist:messageId
+                                     WithBlock:^(BOOL exist, NSError *error){
+                                         
+                                         //if there is no erro and the message does not exist
+                                         //Add the message to the datastore
+                                         if (!error && !exist)
+                                         {
+                                             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                                             [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+                                             NSDate *date = [dateFormatter dateFromString:chatMessage[@"date"]];
+                                             
+                                             //Save in Local Datasore and requery and reload table
+                                             
+                                             [ChatDataModel saveMessage:chatMessage[@"message"]
+                                                     withConversationId:conversationId
+                                                             withPostId:postId
+                                                           withSenderId:chatMessage[@"userId"] //the person that sent the message, change to userId later
+                                                        withDisplayName:chatMessage[@"displayName"] //the senders name
+                                                             withStatus:@"Received"
+                                                               withDate:date
+                                                    withCompletionBlock:^(NSString *objectId, BOOL succeeed){
+                                                        
+                                                        if (succeeed){
+                                                            //refresh the conversation table view fully
+                                                            NSDictionary *dict =[NSDictionary dictionaryWithObject:FULL_REFRESH forKey:@"refresh"];
+                                                            [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_CONVERSATION object:nil userInfo:dict];
+                                                            
+                                                            //send out a message to indicate the message has been been received
+                                                            
+                                                            
+                                                            
+                                                            //reload collection view
+                                                            [self.collectionView reloadData];
+                                                        }
+                                                    }];
+                                         }
+                                         
+                                     }];
+        }
     }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,131 +195,16 @@
                                                    }
                                                    
                                                    //Finish
-                                                   //[self finishSendingMessageAnimated:YES];
+                                                   [self finishSendingMessageAnimated:YES];
                                                }
                                            }
      }];
 }
 
-
-- (void)receivedMessage:(NSDictionary *)chatMessage
-{
-    /*  Sending a message. Your implementation of this method should do *at least* the following:
-     *
-     *  1. Play sound (optional)
-     *  2. Add new id<JSQMessageData> object to your data source
-     *  3. Call `finishSendingMessage`
-     */
-    
-    //[JSQSystemSoundPlayer jsq_playMessageSentSound];
-    
-    //If the user is not the sender of the message
-    if (![chatMessage[@"userId"] isEqualToString:self.senderId])
-    {
-        
-        NSString *messageId = chatMessage[@"messageId"];
-        
-        
-        //If the message is not currently in the database
-        [ChatDataModel checkIfMessageExist:messageId
-                                 WithBlock:^(BOOL exist, NSError *error){
-                                     
-                                     if (!error){
-                                         if (!exist) {
-                                             
-                                             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                                             [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-                                             NSDate *date = [dateFormatter dateFromString:chatMessage[@"date"]];
-                                             
-                                             //Save in Local Datasore and requery and reload table
-                                             
-                                             [ChatDataModel saveMessage:chatMessage[@"message"]
-                                                     withConversationId:self.conversationId
-                                                             withPostId:self.postId
-                                                           withSenderId:chatMessage[@"message"]
-                                                        withDisplayName:chatMessage[@"message"]
-                                                             withStatus:@""
-                                                               withDate:date
-                                                    withCompletionBlock:^(NSString *objectId, BOOL succeeed){
-                                                        
-                                                        if (succeeed){
-                                                            //requery
-                                                            
-                                                            //reload collection view
-                                                            [self.collectionView reloadData];
-                                                        }
-                                                    }];
-                                         }
-                                     }
-                                         
-                                 }];
-        
-    }
-}
-
-- (void)saveMessage:(NSString *)text
-           senderId:(NSString *)senderId
-  senderDisplayName:(NSString *)senderDisplayName
-               date:(NSDate *)date
-{
-    //Save in Local Datasore first - use the returned objectId as the messageId
-    [ChatDataModel saveMessage:text
-            withConversationId:self.conversationId
-                    withPostId:self.postId
-                  withSenderId:self.senderId
-               withDisplayName:self.senderDisplayName
-                    withStatus:@"Delivered"
-                      withDate:date
-           withCompletionBlock:^(NSString *objectId, BOOL succeeed){
-               
-               if (succeeed){
-                   
-                   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                   [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-                   NSString *dateString = [dateFormatter stringFromDate:date];
-                   
-                   //This particular chat message - to be stored with a autoid
-                   NSDictionary *chatMessage = @{
-                                                 @"messageId" : objectId,
-                                                 @"userId" : self.senderId,
-                                                 @"name": self.senderDisplayName,
-                                                 @"message": text,
-                                                 @"date": dateString,
-                                                 @"status": @"Delivered"
-                                                 };
-                   // Write data to Firebase
-                   Firebase *chatMessageRef = [chatRef childByAutoId];
-                   
-                   [chatMessageRef setValue:chatMessage withCompletionBlock:^(NSError *error, Firebase *ref) {
-                       if (error) {
-                           NSLog(@"Data could not be saved.");
-                       } else {
-                           NSLog(@"Data saved successfully.");
-                           
-                           //Push notification
-                           
-                           JSQMessage *message =
-                           [ChatDataModel createTextMessage:text
-                                               withSenderId:senderId
-                                            withDisplayName:senderDisplayName
-                                                   withDate:date];
-                           
-                           //Add to array
-                           [self.chatMessages addObject:message];
-                           
-                           //Add new bubble
-                           [self finishSendingMessageAnimated:YES];
-                       }
-                   }];
-               }
-           }];
-}
-
-
 #pragma mark - JSQMessagesViewController method overrides
 
 - (void)didPressSendButton:(UIButton *)button
-           withMessageText:(NSString *)text
+           withMessageText:(NSString *)message
                   senderId:(NSString *)senderId
          senderDisplayName:(NSString *)senderDisplayName
                       date:(NSDate *)date
@@ -279,7 +219,51 @@
  
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
-    [self saveMessage:text senderId:senderId senderDisplayName:senderDisplayName date:date];
+    
+    //Save in Local Datasore first - use the returned objectId as the messageId
+    [ChatDataModel saveMessage:message
+            withConversationId:self.conversationId
+                    withPostId:self.postId
+                  withSenderId:self.senderId
+               withDisplayName:self.senderDisplayName
+                    withStatus:@"Sent"
+                      withDate:[NSDate date]
+           withCompletionBlock:^(NSString *messageId, BOOL succeeed){
+               
+               if (succeeed){
+                   
+                   //This particular chat message - to be stored with a autoid
+                   NSDictionary *chatMessage = [ChatDataModel createChatMessageWithId:messageId
+                                                                   withConversationId:_conversationId
+                                                                           withPostId:_postId
+                                                                         withSenderId:self.senderId
+                                                                      withDisplayName:self.senderDisplayName
+                                                                          withMessage:message
+                                                                             withDate:[NSDate date]];
+                   // Write data to Firebase
+                   Firebase *chatMessageRef = [chatRef childByAutoId];
+                   
+                   [chatMessageRef setValue:chatMessage withCompletionBlock:^(NSError *error, Firebase *ref) {
+                       if (error) {
+                           NSLog(@"Data could not be sent.");
+                       } else {
+                           NSLog(@"Data sent successfully.");
+                           
+                           JSQMessage *jsqMessage =
+                           [ChatDataModel createTextMessage:message
+                                               withSenderId:self.senderId
+                                            withDisplayName:self.senderDisplayName
+                                                   withDate:date];
+                           
+                           //Add to array
+                           [self.chatMessages addObject:jsqMessage];
+                           
+                           //Add new bubble
+                           [self finishSendingMessageAnimated:YES];
+                       }
+                   }];
+               }
+           }];
 }
 
 

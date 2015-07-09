@@ -18,6 +18,10 @@
 
 #import "ChatViewController.h"
 
+
+#import "ChatDataModel.h"
+
+
 #define SUB_CONTAINER_FRAME self.view.bounds
 
 @interface CommentsTableViewController ()<UITextViewDelegate>
@@ -39,6 +43,7 @@
     
     UIAlertView *reportPostAlertView;
     DIDataManager *shared;
+ChatDataModel *chatDataManager;
 }
 
 
@@ -71,6 +76,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     shared = [DIDataManager sharedManager];
+    chatDataManager = [ChatDataModel sharedManager];
 
     
     self.view.backgroundColor = [UIColor whiteColor];
@@ -126,7 +132,7 @@
             otherButton.frame = CGRectMake(0, 0, 25, 25);
             [otherButton setImage:[UIImage imageNamed:@"Chat"] forState:UIControlStateNormal];
             otherButton.imageEdgeInsets = UIEdgeInsetsMake(2, 0, -2, 0);
-            [otherButton addTarget:self action:@selector(chatWithOP) forControlEvents:UIControlEventTouchUpInside];
+            [otherButton addTarget:self action:@selector(sendChatInvitation) forControlEvents:UIControlEventTouchUpInside];
         }
         
         
@@ -1092,58 +1098,142 @@
     [allComments removeObjectAtIndex:tag];
 }
 
-- (void)chatWithOP
+- (void)sendChatInvitation
 {
+    
+    
+    //need an activity indicator that can be cancelled**
+    
     PFObject *parseObject = _postObject[@"parseObject"];
 
     //Check if a conversation exist in the local storage
     //If the conversation is not currently in the database
-    [ChatDataModel checkIfConversationExist:parseObject.objectId
-                               withSenderId:[Config deviceId]
-                             withReceiverId:parseObject[@"deviceId"]
+    //add it with status "pending"
+    
+    
+    NSString *postId = parseObject.objectId;
+    NSString *senderId = [Config deviceId];
+    NSString *receiverId = parseObject[@"deviceId"];
+    NSString *postText = parseObject[@"text"];
+    
+    //check if the conversation exist
+    [ChatDataModel checkIfConversationExist:postId
+                               withSenderId:senderId
+                             withReceiverId:receiverId
                                   withBlock:^(BOOL exist, PFObject *object, NSError *error) {
                                       if (!error && !exist) {
-                                          //send Request
                                           
-                                          [PFCloud callFunctionInBackground:@"requestChat"
-                                                             withParameters:@{@"requestBy": [Config deviceId], @"postId": parseObject.objectId}
-                                                                      block:^(NSString *result, NSError *error) {
-                                                                          
-                                                                          NSString *message;
-                                                                          
-                                                                          if (!error) {
-                                                                              message = result;
-                                                                              
-                                                                          }else{
-                                                                              message =  error.userInfo[@"error"];
-                                                                          }
-                                                                          
-                                                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
-                                                                                                                              message:message
-                                                                                                                             delegate:self
-                                                                                                                    cancelButtonTitle:@"Ok"
-                                                                                                                    otherButtonTitles:nil];
-                                                                          [alertView show];
-                                                                      }];
-                                
+                                          
+                                          //start a new conversation with status "pending"
+                                          [[ChatDataModel sharedManager] startNewConversationWithSenderId:[Config deviceId]
+                                                                                           withReceiverId:receiverId
+                                                                                         withReceiverName:@"John Smith" //Temp
+                                                                                               withPostId:postId
+                                                                                                withBlock:^(BOOL succeeded, NSError *error, NSString *conversationId) {
+                                                                                                    if (succeeded)
+                                                                                                    {
+                                                                                                        // 2.Create Invitation Parse Object
+                                                                                                        PFObject *invitationObject = [PFObject objectWithClassName:INVITATIONS_CLASS_NAME];
+                                                                                                        invitationObject[@"conversationId"] = conversationId;
+                                                                                                        invitationObject[@"postId"] = postId;
+                                                                                                        invitationObject[@"senderId"] = senderId;
+                                                                                                        invitationObject[@"senderName"] = @"Joanne Phillips"; //device owner name, should be in facebook info collected
+                                                                                                        invitationObject[@"receiverId"] = receiverId;
+                                                                                                        invitationObject[@"postText"] = postText;
+                                                                                                        
+                                                                                                        [invitationObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                                                                                            
+                                                                                                            NSString *message;
+                                                                                                            
+                                                                                                            if (error) {
+                                                                                                                message =  error.userInfo[@"error"];
+                                                                                                            }else if (succeeded) {
+                                                                                                                message =  @"Invitation Sent";
+                                                                                                                
+                                                                                                                //Create a conversation object and add it to the conversations array
+                                                                                                                NSDictionary *conversationObject = @{
+                                                                                                                                                     @"conversationId" : conversationId,
+                                                                                                                                                     @"postId" : postId,
+                                                                                                                                                     @"senderId" : senderId,
+                                                                                                                                                     @"receiverId" : receiverId,
+                                                                                                                                                     @"receiverName" : @"John Smith", //Temp
+                                                                                                                                                     @"date" : [NSDate date],
+                                                                                                                                                     @"lastMessage" : @"" //doesnt matter if currently blank because it wouldnt show up in conversdation table view because it currently has pending status
+                                                                                                                                                     };
+                                                                                                                
+                                                                                                                //add the conversation object to the shared array
+                                                                                                                [chatDataManager.requests addObject:conversationObject.mutableCopy];
+                                                                                                                
+                                                                                                                //open the connection
+                                                                                                                [chatDataManager.connections addObject:[ChatDataModel openChatConnection:conversationObject]];
+                                                                                                                
+//                                                                                                                //refresh the conversation table view fully
+//                                                                                                                NSDictionary *dict =[NSDictionary dictionaryWithObject:FULL_REFRESH forKey:@"refresh"];
+//                                                                                                                [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_CONVERSATION object:nil userInfo:dict];
+                                                                                                                
+                                                                                                            } else {
+                                                                                                                message = @"Failed to send invitation. Please Try again.";
+                                                                                                                //delete the conversation from the datastore
+                                                                                                                /**/
+                                                                                                                PFQuery *query = [PFQuery queryWithClassName:@"Conversations"];
+                                                                                                                [query whereKey:@"conversationId" equalTo:conversationId];
+                                                                                                                [query fromLocalDatastore];
+                                                                                                                NSArray *objects = [query findObjects];
+                                                                                                                
+                                                                                                                
+                                                                                                                if ([objects count] > 0) [objects[0] unpin];
+                                                                                                            }
+                                                                                                            
+                                                                                                            
+                                                                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                                                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                                                                                                                                    message:message
+                                                                                                                                                                   delegate:self
+                                                                                                                                                          cancelButtonTitle:@"Ok"
+                                                                                                                                                          otherButtonTitles:nil];
+                                                                                                                [alertView show];
+                                                                                                            });
+                                                                                                        }];
+                                                                                                        
+                                                                                                    }else if (error){
+                                                                                                        UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Conversation Failed!"
+                                                                                                                                                             message:@"We were unable to start a new conversation. Please try again."
+                                                                                                                                                            delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                                                                                                        [errorAlert show];
+                                                                                                    }
+                                                                                                }];
                                       }else if (!error && exist){
-                                          ChatViewController *chatView = [ChatViewController messagesViewController];
-                                          chatView.hidesBottomBarWhenPushed = YES;
+                                          //if a conversation exist already
+                                          //check the status
                                           
-                                          chatView.postId = parseObject.objectId;
-                                          chatView.conversationId = object[@"conversationId"];
                                           
-                                          chatView.senderId = object[@"senderId"];
-                                          chatView.senderDisplayName = @"ME";
-                                          chatView.sendersAvatar = [Config usersAvatar];
-                                          
-                                          chatView.recieversId = object[@"receiverId"];
-                                          chatView.recieversDisplayName = object[@"receiverName"];
-                                          chatView.sendersAvatar = [UIImage imageNamed:@"lady3"];
-                                          
-                                          self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-                                          
-                                          [self.navigationController pushViewController:chatView animated:YES];
+                                          //If the status is equal to accepted
+                                          //open the chat
+                                          if ([object[@"status"] isEqualToString:@"accepted"])
+                                          {
+                                              ChatViewController *chatView = [ChatViewController messagesViewController];
+                                              chatView.hidesBottomBarWhenPushed = YES;
+                                              
+                                              chatView.postId = parseObject.objectId;
+                                              chatView.conversationId = object[@"conversationId"];
+                                              
+                                              chatView.senderId = object[@"senderId"];
+                                              chatView.senderDisplayName = @"ME";
+                                              chatView.sendersAvatar = [Config usersAvatar];
+                                              
+                                              chatView.recieversId = object[@"receiverId"];
+                                              chatView.recieversDisplayName = object[@"receiverName"];
+                                              chatView.sendersAvatar = [UIImage imageNamed:@"lady3"];
+                                              
+                                              self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+                                              
+                                              [self.navigationController pushViewController:chatView animated:YES];
+                                          }else{
+                                              UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Waiting For Reply!"
+                                                                                                   message:@"Chat invitation pending..."
+                                                                                                  delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                                              [errorAlert show];
+                                          }
                                       }
                                   }];
 

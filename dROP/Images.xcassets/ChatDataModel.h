@@ -10,6 +10,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <Firebase/Firebase.h>
 
 #import "JSQMessages.h"
 #import "Config.h"
@@ -25,7 +26,19 @@
 @property (nonatomic, strong) NSString *currentConversation;
 
 @property (strong, nonatomic) NSMutableArray *conversations;
+@property (strong, nonatomic) NSMutableArray *requests;
+@property (strong, nonatomic) NSMutableArray *connections;
+@property (strong, nonatomic) NSMutableArray *invitations;
 
+- (void)getAllConversations:(BOOL)openConnections;
+
++ (Firebase *)openChatConnection:(NSDictionary *)conversationObject;
+
+//Gets all invitations from the remote datastore
+- (void)getInvitationsWithBlock:(void (^)(BOOL reload, NSError *error))completionBlock;
+
+//delete invitation
+- (void)deleteInvitationAtIndex:(NSInteger)index;
 
 //Gets all converstions from the local datastore
 //Return Block -> reload (if new data was retrieved, Conversation View Controller needs to be reloaded), error (if an error occcurred)
@@ -36,7 +49,13 @@
                           withReceiverId:(NSString *)receiverId
                         withReceiverName:(NSString *)receiverName
                               withPostId:(NSString *)postId
-                               withBlock:(void (^)(BOOL succeeded, NSError *error))completionBlock;
+                               withBlock:(void (^)(BOOL succeeded, NSError *error, NSString *conversationId))completionBlock;
+//Add a new conversation
+- (void)addNewConversationWithConversationId:(NSString *)conversationId
+                              withReceiverId:(NSString *)receiverId
+                            withReceiverName:(NSString *)receiverName
+                                  withPostId:(NSString *)postId
+                                   withBlock:(void (^)(BOOL succeeded, NSError *error))completionBlock;
 
 //Returns the last message for the conversationId passed
 + (void)getLastMessageWithConversationId:(NSString *)conversationId
@@ -66,6 +85,13 @@ withCompletionBlock:(void (^)(NSString *objectId, BOOL succeeed))completionBlock
                             withBlock:(void (^)(BOOL reload, NSArray *objects, NSError *error))completionBlock;
 
 
++ (NSDictionary *)createChatMessageWithId:(NSString *)messageId
+                 withConversationId:(NSString *)conversationId
+                         withPostId:(NSString *)postId
+                       withSenderId:(NSString *)senderId
+                    withDisplayName:(NSString *)senderName
+                        withMessage:(NSString *)message
+                           withDate:(NSDate *)date;
 
 + (JSQMessage *)createTextMessage:(NSString *)message
                      withSenderId:(NSString *)senderId

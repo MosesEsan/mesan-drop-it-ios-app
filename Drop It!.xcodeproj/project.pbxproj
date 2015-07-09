@@ -129,6 +129,8 @@
 		27DE0C301AB9D44000DA0D9C /* JPSThumbnailAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE0C2C1AB9D44000DA0D9C /* JPSThumbnailAnnotation.m */; };
 		27DE0C311AB9D44000DA0D9C /* JPSThumbnailAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE0C2E1AB9D44000DA0D9C /* JPSThumbnailAnnotationView.m */; };
 		27DE0C321AB9D44000DA0D9C /* JPSThumnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE0C2F1AB9D44000DA0D9C /* JPSThumnail.m */; };
+		27DE50D71B38868800018599 /* InvitationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE50D61B38868800018599 /* InvitationsTableViewController.m */; };
+		27DE50DA1B388B7500018599 /* InvitationsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE50D91B388B7500018599 /* InvitationsTableViewCell.m */; };
 		27E49C841B0BDB6E00DE45FE /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E49C831B0BDB6E00DE45FE /* ChatViewController.m */; };
 		27E49C8A1B0BEB1200DE45FE /* ChatDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E49C891B0BEB1200DE45FE /* ChatDataModel.m */; };
 		27E49C8C1B0C048600DE45FE /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E49C8B1B0C048600DE45FE /* libicucore.dylib */; };
@@ -137,6 +139,7 @@
 		27EC53A11AB3F68500CC2A10 /* Done.png in Resources */ = {isa = PBXBuildFile; fileRef = 27EC539E1AB3F68500CC2A10 /* Done.png */; };
 		27EC53A21AB3F68500CC2A10 /* Done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27EC539F1AB3F68500CC2A10 /* Done@2x.png */; };
 		27EFDB3C1ACDA45F00C13D94 /* BELSHAW_.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 27EFDB3B1ACDA45F00C13D94 /* BELSHAW_.TTF */; };
+		27F16F711B4EEBF300B6FA3F /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F16F701B4EEBF300B6FA3F /* ChatMessage.m */; };
 		27F655371ADAF2B4003AEB1B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F655341ADAF2B4003AEB1B /* Parse.framework */; };
 		27F655391ADAF2B4003AEB1B /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F655361ADAF2B4003AEB1B /* ParseUI.framework */; };
 		27FE30DD1B06334A009B394C /* AddFlirtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FE30DC1B06334A009B394C /* AddFlirtViewController.m */; };
@@ -350,6 +353,10 @@
 		27DE0C2D1AB9D44000DA0D9C /* JPSThumbnailAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPSThumbnailAnnotationView.h; sourceTree = "<group>"; };
 		27DE0C2E1AB9D44000DA0D9C /* JPSThumbnailAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPSThumbnailAnnotationView.m; sourceTree = "<group>"; };
 		27DE0C2F1AB9D44000DA0D9C /* JPSThumnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPSThumnail.m; sourceTree = "<group>"; };
+		27DE50D51B38868800018599 /* InvitationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationsTableViewController.h; sourceTree = "<group>"; };
+		27DE50D61B38868800018599 /* InvitationsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationsTableViewController.m; sourceTree = "<group>"; };
+		27DE50D81B388B7500018599 /* InvitationsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationsTableViewCell.h; sourceTree = "<group>"; };
+		27DE50D91B388B7500018599 /* InvitationsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationsTableViewCell.m; sourceTree = "<group>"; };
 		27E49C821B0BDB6E00DE45FE /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		27E49C831B0BDB6E00DE45FE /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		27E49C881B0BEB1200DE45FE /* ChatDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatDataModel.h; path = Images.xcassets/ChatDataModel.h; sourceTree = "<group>"; };
@@ -361,6 +368,8 @@
 		27EC539E1AB3F68500CC2A10 /* Done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Done.png; sourceTree = "<group>"; };
 		27EC539F1AB3F68500CC2A10 /* Done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Done@2x.png"; sourceTree = "<group>"; };
 		27EFDB3B1ACDA45F00C13D94 /* BELSHAW_.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = BELSHAW_.TTF; sourceTree = "<group>"; };
+		27F16F6F1B4EEBF300B6FA3F /* ChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessage.h; sourceTree = "<group>"; };
+		27F16F701B4EEBF300B6FA3F /* ChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessage.m; sourceTree = "<group>"; };
 		27F655341ADAF2B4003AEB1B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		27F655361ADAF2B4003AEB1B /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		27FE30DB1B06334A009B394C /* AddFlirtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFlirtViewController.h; sourceTree = "<group>"; };
@@ -834,6 +843,12 @@
 				27E49C831B0BDB6E00DE45FE /* ChatViewController.m */,
 				275776021B0F2C2E006CA373 /* ConversationTableViewCell.h */,
 				275776031B0F2C2E006CA373 /* ConversationTableViewCell.m */,
+				27DE50D51B38868800018599 /* InvitationsTableViewController.h */,
+				27DE50D61B38868800018599 /* InvitationsTableViewController.m */,
+				27DE50D81B388B7500018599 /* InvitationsTableViewCell.h */,
+				27DE50D91B388B7500018599 /* InvitationsTableViewCell.m */,
+				27F16F6F1B4EEBF300B6FA3F /* ChatMessage.h */,
+				27F16F701B4EEBF300B6FA3F /* ChatMessage.m */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -1127,6 +1142,7 @@
 				27A334991AA6367F008188FC /* HomeTableViewController.m in Sources */,
 				27B404D81AAB9570007DC137 /* LPlaceholderTextView.m in Sources */,
 				2729251D1ABC59AB00A271D4 /* ColouredTableViewCell.m in Sources */,
+				27DE50DA1B388B7500018599 /* InvitationsTableViewCell.m in Sources */,
 				27E49C8A1B0BEB1200DE45FE /* ChatDataModel.m in Sources */,
 				27131FDF1AB5C78100CF23DB /* MapViewController.m in Sources */,
 				2776AD661B016C4100449865 /* floatTableViewCell.m in Sources */,
@@ -1145,6 +1161,7 @@
 				276B55601B0E441C00B423BC /* CommentsTableViewController.m in Sources */,
 				27B96A941AAFBA4900AC4120 /* ABCIntroView.m in Sources */,
 				272925201ABC692A00A271D4 /* DITableViewCell.m in Sources */,
+				27DE50D71B38868800018599 /* InvitationsTableViewController.m in Sources */,
 				27E49C841B0BDB6E00DE45FE /* ChatViewController.m in Sources */,
 				277C9D7E1AF24F4500184365 /* FlirtTableViewCell.m in Sources */,
 				27A334741AA63525008188FC /* main.m in Sources */,
@@ -1160,6 +1177,7 @@
 				2775C4701AC3437A00B19772 /* ProfileTableViewCell.m in Sources */,
 				273E42301ACC36EA0048964B /* MenuTableViewController.m in Sources */,
 				27EC53A01AB3F68500CC2A10 /* MHFacebookImageViewer.m in Sources */,
+				27F16F711B4EEBF300B6FA3F /* ChatMessage.m in Sources */,
 				27173F8E1ADB01BE0087B29E /* DIDataManager.m in Sources */,
 				27B404DB1AABBEEC007DC137 /* CommentTableViewCell.m in Sources */,
 			);

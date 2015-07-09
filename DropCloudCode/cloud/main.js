@@ -218,6 +218,72 @@ Parse.Cloud.afterSave("Comments", function(request) {
 });
 
 
+Parse.Cloud.afterSave("Invitations", function(request) {
+
+    var receiverId = request.object.get('receiverId');
+    var postId = request.object.get('postId');
+
+    console.log("Receiver Id is "+receiverId);
+    console.log("Post Id is "+postId);
+
+    //get the post
+    var Post = Parse.Object.extend("Posts");
+    var query = new Parse.Query(Post);
+    query.equalTo("objectId", postId);
+    query.find({
+        success: function(post) {
+            // The object was retrieved successfully.
+
+            if (post.length > 0)
+            {
+                postObject = post[0];
+
+                var requestTo = postObject.get("deviceId");
+                var message = "Someone requested a chat conversation with you: " + postObject.get('text');
+
+                //send push notification
+                var pushQuery = new Parse.Query(Parse.Installation);
+                pushQuery.equalTo('deviceId', requestTo);
+
+                Parse.Push.send({
+                    where: pushQuery, // Set our Installation query
+                    data: {
+                        alert: message
+                    }
+                }, {
+                    success: function() {
+                        // Push was successful
+                        console.log("Chat Request Sent!")
+                        response.success("Chat Request Sent!");
+                    },
+                    error: function(error) {
+                        throw "Got an error " + error.code + " : " + error.message;
+                        console.log("Chat Request failed!")
+
+                        response.error("Chat Request Failed! Please try again.");
+                        //Delete the notification
+                    }
+                });
+            }else{
+                response.error("Chat Request Failed! Please try again.");
+            }
+        },
+        error: function(object, error) {
+            // The object was not retrieved successfully.
+            // error is a Parse.Error with an error code and message.
+            response.error("Chat Request Failed! Please try again.");
+        }
+    });
+
+
+
+
+});
+
+
+
+
+
 
 //request chat
 Parse.Cloud.define("requestChat", function(request, response) {

@@ -10,7 +10,9 @@
 #import "Config.h"
 
 #import "MenuTableViewController.h"
+
 #import "DIDataManager.h"
+#import "ChatDataModel.h"
 
 #import "HomeTableViewController.h"
 #import "ProfileViewController.h"
@@ -32,6 +34,7 @@
     
     
     DIDataManager *shared;
+    ChatDataModel *chatManager;
 }
 
 @property (strong, nonatomic) UITabBarController *tabBarController;
@@ -69,11 +72,13 @@
     
     
     shared = [DIDataManager sharedManager];
+    chatManager = [ChatDataModel sharedManager];
     
     _profileViewController = [[ProfileViewController alloc] initWithNibName:nil bundle:nil];
     _homeTableViewController = [[HomeTableViewController alloc] initWithStyle:UITableViewStylePlain];
     _conversationViewController = [[ConversationTableViewController alloc] initWithStyle:UITableViewStylePlain];
     _notificationViewController = [[NotificationsTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    
     
     
     

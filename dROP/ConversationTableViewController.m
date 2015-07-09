@@ -13,6 +13,9 @@
 
 #import "ConversationTableViewCell.h"
 
+#import "InvitationsTableViewController.h"
+#import "ChatViewController.h"
+
 @interface ConversationTableViewController ()
 {
     ChatDataModel *dataManager;
@@ -21,6 +24,22 @@
 @end
 
 @implementation ConversationTableViewController
+
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        
+        //Register For Notifications
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(refreshTableView:)
+                                                     name:REFRESH_CONVERSATION object:nil];
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,50 +65,37 @@
     
     //0 - Shared Data Manager
     dataManager = [ChatDataModel sharedManager];
-
-    
-    //1- Get all conversation
-    [dataManager getConversationsWithBlock:^(BOOL reload, NSError *error) {
-       
-        if (!error && reload){
-            
-            [self.tableView reloadData];
-        }else if (error){
-            UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Conversation Retrieval Failed!"
-                                                                 message:@"We were unable to retrieve your conversations. Make sure you are connected to the interenet."
-                                                                delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-            [errorAlert show];
-        }
-    }];
     
     /*
-    PFQuery *query = [PFQuery queryWithClassName:@"Conversations"];
-    [query whereKey:@"conversationId" equalTo:@"Post9h1k0WZHRNChatJENNY-KING-2017"];
-    [query fromLocalDatastore];
-    NSArray *delete = [query findObjects];
-    
-    [delete[0] unpin];*/
+     PFQuery *query = [PFQuery queryWithClassName:@"Conversations"];
+     //[query whereKey:@"conversationId" equalTo:@"Post9h1k0WZHRNChatJENNY-KING-2017"];
+     [query fromLocalDatastore];
+     NSArray *delete = [query findObjects];
+     
+     [delete[0] unpin];
+     [delete[1] unpin];
+     [delete[2] unpin];*/
     
     //2 - Start A new Conversation - Testing Purpose
     //JENNY-KING-2000 //Jenny //9h1k0WZHRN
     //SIOBHAN-SMITH-2000 //Siobhan //ylRa7HhPcA
     /*
-    [dataManager startNewConversationWithSenderId:[Config deviceId]
-                                   withReceiverId:@"JENNY-KING-2000"
-                                 withReceiverName:@"Jenny"
-                                       withPostId:@"9h1k0WZHRN"
-                                        withBlock:^(BOOL succeeded, NSError *error) {
-                                            if (succeeded)
-                                            {
-                                                //Open the chat view controller
-                                            }else if (error){
-                                                UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Conversation Failed!"
-                                                                                                     message:@"We were unable to start a new conversation. Make sure you are connected to the interenet."
-                                                                                                    delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-                                                [errorAlert show];
-                                            }
-                                        }];
-    */
+     [dataManager startNewConversationWithSenderId:[Config deviceId]
+     withReceiverId:@"JENNY-KING-2000"
+     withReceiverName:@"Jenny"
+     withPostId:@"9h1k0WZHRN"
+     withBlock:^(BOOL succeeded, NSError *error) {
+     if (succeeded)
+     {
+     //Open the chat view controller
+     }else if (error){
+     UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Conversation Failed!"
+     message:@"We were unable to start a new conversation. Make sure you are connected to the interenet."
+     delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+     [errorAlert show];
+     }
+     }];
+     */
     
 }
 
@@ -141,48 +147,97 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+#pragma mark - View Transitions
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *conversationObject = dataManager.conversations[indexPath.row];
+    
+    ChatViewController *chatView = [ChatViewController messagesViewController];
+    chatView.hidesBottomBarWhenPushed = YES;
+    
+    chatView.postId = conversationObject[@"postId"];
+    chatView.conversationId = conversationObject[@"conversationId"];
+    
+    //sender will always be the device owner
+    chatView.senderId = conversationObject[@"senderId"];
+    chatView.senderDisplayName = @"ME";
+    chatView.sendersAvatar = [Config usersAvatar];
+    
+    //receiver is the other user
+    chatView.recieversId = conversationObject[@"receiverId"];
+    chatView.recieversDisplayName = conversationObject[@"receiverName"];
+    chatView.recieversAvatar = [UIImage imageNamed:@"lady3"];
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    [self.navigationController pushViewController:chatView animated:YES];
 }
-*/
+
+- (void)viewInvitations:(UIButton *)sender
+{
+    InvitationsTableViewController *invitationsViewController = [[InvitationsTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:invitationsViewController animated:YES];
+}
+
+- (void)refreshTableView:(NSNotification*)notification
+{
+    NSDictionary * info = notification.userInfo;
+    
+    if ([[info objectForKey:@"refresh"] isEqualToString:FULL_REFRESH])
+    {
+        //means we need to requery the database but dont need to open the connections because they should be opened already
+        [dataManager getAllConversations:NO];
+        
+    }else{
+        [self.tableView reloadData];
+    }
+}
+
+
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-#pragma mark - Navigation
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

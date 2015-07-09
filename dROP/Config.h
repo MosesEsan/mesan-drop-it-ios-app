@@ -100,6 +100,18 @@ typedef NS_ENUM(NSInteger, PostCellType) {
 #define CONFIGURATION_CLASS_NAME @"Config"
 #define ADS_CLASS_NAME @"Ads"
 #define NOTIFICATIONS_CLASS_NAME @"Notifications"
+#define INVITATIONS_CLASS_NAME @"Invitations"
+
+
+#define REFRESH_CONVERSATION @"RefreshConversations"
+#define FULL_REFRESH @"FullRefresh"
+#define PARTIAL_REFRESH @"PartialRefresh"
+
+
+#define CONVERSATION_STATUS_PENDING @"pending"
+#define CONVERSATION_STATUS_ACCEPTED @"accepted"
+
+
 
 #define NEW_POST_TYPE @"New"
 #define LIKE_POST_TYPE @"Like"
