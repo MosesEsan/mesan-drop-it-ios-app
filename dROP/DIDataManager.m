@@ -292,14 +292,14 @@
 {
     NSDictionary *postObject = [self getPostAtIndex:index forView:viewType];
     
-    BOOL highlighted = [postObject[@"disliked"] boolValue];
+    BOOL highlighted = [postObject[@"disliked"] boolValue]; //get the cuirrent dislike value
     
     [postObject setValue:[NSNumber numberWithBool:!highlighted] forKey:@"disliked"];
     
     //get the Parse Object and Modify Local Object
     PFObject *parseObject = postObject[@"parseObject"];
-    if (highlighted == NO)
-    {
+    if (highlighted == NO){//if the post was not previously disliked
+        
         //Dislike Post
         [parseObject addUniqueObject:[Config deviceId] forKey:@"dislikes"];
         [parseObject removeObject:[Config deviceId] forKey:@"likes"];
@@ -307,18 +307,23 @@
         parseObject[@"type"] = DISLIKE_POST_TYPE;
         
         //If user had previously liked this photo
-        //decrement the likes numn=ber
-        BOOL liked = [postObject[@"liked"] boolValue];
-        if(liked == YES)
-        {
+        //decrement the likes number
+        if([postObject[@"liked"] boolValue] == YES){
             //decrement number
             NSInteger likesCount = [postObject[@"totalLikes"] integerValue];
-            likesCount--;
-            [postObject setValue:[NSNumber numberWithInteger:likesCount] forKey:@"totalLikes"];
+            [postObject setValue:[NSNumber numberWithInteger:likesCount--] forKey:@"totalLikes"];
             //attn set sender value
         }
         
-        [postObject setValue:[NSNumber numberWithBool:NO] forKey:@"liked"];
+        [postObject setValue:[NSNumber numberWithBool:NO] forKey:@"liked"]; //make sure the liked value for the object is null
+    }else{//if it was previously dislike, user is un disliking
+        
+        //unDislike Post
+        [parseObject removeObject:[Config deviceId] forKey:@"dislikes"];
+        
+        parseObject[@"type"] = UNDISLIKE_POST_TYPE;
+        
+        [postObject setValue:[NSNumber numberWithBool:NO] forKey:@"disliked"]; //make sure the disliked value for the object is null
     }
     
     //Update Remote Object

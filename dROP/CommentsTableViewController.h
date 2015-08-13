@@ -13,7 +13,7 @@
 #import "DIDataManager.h"
 
 
-@interface CommentsTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface CommentsTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSDictionary *postObject;
 

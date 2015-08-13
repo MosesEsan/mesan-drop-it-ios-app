@@ -142,7 +142,7 @@ ChatDataModel *chatDataManager;
         positveSpacer.width = 22;
         
         
-        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:otherButton], positveSpacer, [[UIBarButtonItem alloc] initWithCustomView:reportButton], nil]];
+//        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:otherButton], positveSpacer, [[UIBarButtonItem alloc] initWithCustomView:reportButton], nil]];
     }
     
     //Main View - Tableview, Textfield etc
@@ -413,7 +413,7 @@ ChatDataModel *chatDataManager;
     //They can like, dislike and report the post
     if (![Config isPostAuthor:_postObject])
     {
-        [_smiley addTarget:self action:@selector(likePost:) forControlEvents:UIControlEventTouchUpInside];
+        [_smiley addTarget:self action:@selector(likeOptions:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     if (![_postObject[@"disliked"] boolValue]){
@@ -888,33 +888,6 @@ ChatDataModel *chatDataManager;
     }
 }
 
-//Like Post
-- (void)likePost:(UIButton *)sender
-{
-    //figure out the new likes count value
-    if (sender.selected == YES) likesCount--;
-    else likesCount++;
-    
-    sender.selected = [shared likePostAtIndex:sender.tag forView:_viewType];
-    
-    //increment or decrement total likes
-    [sender setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
-}
-
-//Dislike Post
-- (void)dislikePost
-{
-    //If user previously liked the post
-    if (_smiley.selected == YES) likesCount--;
-    
-    [shared dislikePostAtIndex:self.view.tag forView:_viewType];
-    
-    //increment or decrement total likes
-    [_smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
-    _smiley.selected = NO;
-    _smiley.highlighted = YES;
-}
-
 //Report Post
 - (void)reportPost:(id)sender
 {
@@ -1238,6 +1211,97 @@ ChatDataModel *chatDataManager;
                                   }];
 
 }
+
+/*Review Later*/
+- (void)likeOptions:(UIButton *)sender
+{
+
+    //if the dislike value is not true, check the like value
+    
+    NSMutableArray *likeOptions = [[NSMutableArray alloc] init];
+    
+    
+    //if the dislike value is true
+    if ([_postObject[@"disliked"] boolValue]){
+        
+        [likeOptions addObject:[NSString stringWithFormat:@"Like"]];
+        [likeOptions addObject:[NSString stringWithFormat:@"Neutral"]];
+        
+    }else if ([_postObject[@"liked"] boolValue]){ //if the like value is true
+        [likeOptions addObject:[NSString stringWithFormat:@"Dislike"]];
+        [likeOptions addObject:[NSString stringWithFormat:@"Un-Like"]];
+    }else{
+        [likeOptions addObject:[NSString stringWithFormat:@"Like"]];
+        [likeOptions addObject:[NSString stringWithFormat:@"Dislike"]];
+    }
+    
+    //Create the action sheet
+    UIActionSheet* sheet = [[UIActionSheet alloc]
+                            initWithTitle:@"What would you like to do?"
+                            delegate:self
+                            cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
+                            otherButtonTitles:likeOptions[0], likeOptions[1], nil];
+    
+    //Display the action sheet
+    [sheet showInView: self.navigationController.view];
+}
+
+#pragma mark - UIActionSheet Delegate
+- (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)index
+{
+    NSString *title = [actionSheet buttonTitleAtIndex:index];
+    
+    if ([title isEqualToString:@"Like"]) [self likePost:YES];
+    else if ([title isEqualToString:@"Dislike"]) [self dislikePost:YES];
+    else if ([title isEqualToString:@"Un-Like"]) [self likePost:NO];
+    else if ([title isEqualToString:@"Neutral"]) [self dislikePost:NO];
+    else if ([title isEqualToString:@"Cancel"]) {
+        //if the user clicked cancel, return it to the state it was in
+        
+        //if the dislike calue is not true, set the selected state to the value of the liked value
+        if (![_postObject[@"disliked"] boolValue]){
+            _smiley.selected = [_postObject[@"liked"] boolValue];
+        }else{
+            //else set the highlited value to the disliked value
+            _smiley.highlighted = [_postObject[@"disliked"] boolValue];
+        }
+    }
+}
+
+//Like Post
+- (void)likePost:(BOOL)like
+{
+    //figure out the new likes count value
+    //if we are liking the post, increment
+    if (like == YES) likesCount++;
+    else likesCount--;
+    
+    [_smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
+    
+    _smiley.selected = [shared likePostAtIndex:self.view.tag forView:_viewType];
+}
+
+//Dislike Post
+- (void)dislikePost:(BOOL)dislike
+{
+    _smiley.selected = NO;
+    
+    if (dislike == YES){
+        //If user previously liked the post, decrement the likes count
+        if ([_postObject[@"liked"] boolValue]) likesCount--;
+        [_smiley setTitle:[Config likesCount:likesCount] forState:UIControlStateNormal];
+        
+        [shared dislikePostAtIndex:self.view.tag forView:_viewType];
+        _smiley.highlighted = YES;
+    }else{
+        [shared dislikePostAtIndex:self.view.tag forView:_viewType];
+        _smiley.highlighted = NO;
+    }
+    
+}
+
+
+
 
 /*
 // Override to support conditional editing of the table view.
