@@ -1,6 +1,8 @@
 # DropIt
 Anonymous Social Media App
 
+App Store: https://itunes.apple.com/us/app/drop-it!-join-conversation/id975681625?ls=1&mt=8
+
 <b>Description</b>
 
 Drop It is an anonymous social media app that allows you to anonymously find out what everyone around you is saying.
