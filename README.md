@@ -3,6 +3,8 @@ Anonymous Social Media App
 
 App Store: https://itunes.apple.com/us/app/drop-it!-join-conversation/id975681625?ls=1&mt=8
 
+<strong>This app was previously on the App Store but due to Facebook closing down Parse, I have removed it from sale and currently working on a new version using PHP and Laravel 5.3 as the backend.</strong>
+
 <b>Description</b>
 
 Drop It is an anonymous social media app that allows you to anonymously find out what everyone around you is saying.
